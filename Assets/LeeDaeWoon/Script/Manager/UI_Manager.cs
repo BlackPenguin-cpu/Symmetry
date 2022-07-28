@@ -22,6 +22,7 @@ public class UI_Manager : MonoBehaviour
 
     [Header("타이머")]
     public Text Timer_Text;
+    public bool Timer_Check;
     int Min;
     float Sec;
 
@@ -51,12 +52,13 @@ public class UI_Manager : MonoBehaviour
     void Start()
     {
         //Cursor.visible = false;
+        Timer_Check = true;
         Cursor.SetCursor(MousePointer, Vector2.zero, CursorMode.ForceSoftware);
     }
 
     void Update()
     {
-        Die_System();
+        StartCoroutine(Die_System());
 
         if (DarkPlayerGet_Check == true && SceneManager.GetActiveScene().name == "Main")
         {
@@ -91,11 +93,21 @@ public class UI_Manager : MonoBehaviour
             Once_Check = false;
             DarkPlayerGet_Check = true;
 
-            Player.Instance._hp = Player.Instance._maxHp;
-            Player.Instance.state = PlayerState.Idle;
-            WaveManager.Instance.m_WaveNum = 1;
+            Player.Instance._hp = Player.Instance._maxHp; // 체력 
+            Player.Instance.state = PlayerState.Idle; // 플레이어 행동
+            WaveManager.Instance.m_WaveNum = 1; // Wave 초기화
+
+            // 타이머 초기화 
             Sec = 0;
             Min = 0;
+
+            // 각 무기 레벨 초기화
+            //for(int i = 0; i < )
+
+
+            Player.Instance.stat._level[PlayerWeaponType.Sword] = 0;
+            Player.Instance.stat._level[PlayerWeaponType.Dagger] = 0;
+            Player.Instance.stat._level[PlayerWeaponType.Axe] = 0;
 
             FadeInOut_Die.color = new Color(0, 0, 0, 0);
             Die_Text.color = new Color(255, 255, 255, 0);
@@ -106,13 +118,20 @@ public class UI_Manager : MonoBehaviour
     #region 타이머
     public void Timer_System()
     {
-        Sec += Time.deltaTime;
-        Timer_Text.text = string.Format("{0:D2}:{1:D2}", Min, (int)Sec);
-
-        if ((int)Sec > 59)
+        if (Timer_Check == true)
         {
-            Sec = 0;
-            Min++;
+            Sec += Time.deltaTime;
+            Timer_Text.text = string.Format("{0:D2}:{1:D2}", Min, (int)Sec);
+
+            if ((int)Sec > 59)
+            {
+                Sec = 0;
+                Min++;
+            }
+        }
+        else
+        {
+
         }
     }
     #endregion
@@ -161,21 +180,23 @@ public class UI_Manager : MonoBehaviour
             Bar.transform.localScale = new Vector3(1, Mathf.Lerp(HP_Bar, HP, Time.deltaTime * 20), 1);
     }
 
-    public void Die_System()
+    public IEnumerator Die_System()
     {
-        if (SceneManager.GetActiveScene().name == "test")
+        if (Player.Instance.stat._hp == 0)
         {
             if (Input.anyKeyDown && Once_Check == true)
                 SceneManager.LoadScene("Main");
 
-            if (Once_Check == false && HP_Bar <= 0)
+            if (Once_Check == false)
             {
                 FadeInOut_Die.DOFade(0.5f, 1f);
                 Die_Text.DOFade(1f, 1f);
                 Any_Text.DOFade(1f, 1f);
+                yield return new WaitForSeconds(1f);
                 Once_Check = true;
             }
         }
+
     }
     #endregion
 
