@@ -69,9 +69,9 @@ public class Item_Window : MonoBehaviour
 
         while (Window_timer < 1)
         {
-            Left_RectMask.sizeDelta = new Vector2(559.2f, Mathf.Lerp(0, 859.05f, Window_timer));
-            Among_RectMask.sizeDelta = new Vector2(522.6044f, Mathf.Lerp(0, 841f, Window_timer));
-            Right_RectMask.sizeDelta = new Vector2(574.5f, Mathf.Lerp(0, 887.7f, Window_timer));
+            Left_RectMask.sizeDelta = new Vector2(559.2f, Mathf.Lerp(0, 890f, Window_timer));
+            Among_RectMask.sizeDelta = new Vector2(522.6044f, Mathf.Lerp(0, 890f, Window_timer));
+            Right_RectMask.sizeDelta = new Vector2(574.5f, Mathf.Lerp(0, 890f, Window_timer));
 
             Window_timer += Time.deltaTime * 3f;
             yield return null;

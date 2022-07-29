@@ -649,9 +649,6 @@ MonoBehaviour:
   Left_Light: {fileID: 4395482343802413563}
   Among_Light: {fileID: 7393044987876570912}
   Right_Light: {fileID: 8251208463909198636}
-  Left_Pick: 1
-  Among_Pick: 1
-  Right_Pick: 1
   Left_Window: {fileID: 196263142699776956}
   Among_Window: {fileID: 966359459737049938}
   Right_Window: {fileID: 1841103067523789101}
@@ -1322,9 +1319,6 @@ MonoBehaviour:
   Left_Light: {fileID: 4395482343802413563}
   Among_Light: {fileID: 7393044987876570912}
   Right_Light: {fileID: 8251208463909198636}
-  Left_Pick: 1
-  Among_Pick: 1
-  Right_Pick: 1
   Left_Window: {fileID: 196263142699776956}
   Among_Window: {fileID: 966359459737049938}
   Right_Window: {fileID: 1841103067523789101}
@@ -2676,9 +2670,6 @@ MonoBehaviour:
   Left_Light: {fileID: 4395482343802413563}
   Among_Light: {fileID: 7393044987876570912}
   Right_Light: {fileID: 8251208463909198636}
-  Left_Pick: 1
-  Among_Pick: 1
-  Right_Pick: 1
   Left_Window: {fileID: 196263142699776956}
   Among_Window: {fileID: 966359459737049938}
   Right_Window: {fileID: 1841103067523789101}
