@@ -651,7 +651,20 @@ public class Stop_Manager : MonoBehaviour
     #region 메인화면 버튼
     public void Main_Btn() => StartCoroutine(Main_Window_Coroutine01());
 
-    public void Main_Yes_Btn() => SceneManager.LoadScene("Main");
+    public void Main_Yes_Btn()
+    {
+        GameManager.Instance._coin = 0; // 골드 초기화
+        WaveManager.Instance.m_WaveNum = 0; // Wave 초기화
+        Player.Instance.stat._hp = Player.Instance.stat._maxHp; // 플레이어 HP 초기화
+
+
+        // 무기 강화수치 초기화
+        Player.Instance.stat._level[PlayerWeaponType.Sword] = 0;
+        Player.Instance.stat._level[PlayerWeaponType.Dagger] = 0;
+        Player.Instance.stat._level[PlayerWeaponType.Axe] = 0;
+
+        SceneManager.LoadScene("Main");
+    }
 
     public void Main_No_Btn()
     {

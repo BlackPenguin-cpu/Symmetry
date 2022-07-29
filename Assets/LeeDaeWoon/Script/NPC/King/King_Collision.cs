@@ -30,8 +30,8 @@ public class King_Collision : MonoBehaviour
 
     void Update()
     {
-        NextDialogue_F();
         StartCoroutine(DialogueBtn_FadeInOut());
+        NextDialogue_F();
 
         if (King.Inst.Magic_Creation == true)
             Foundation.Inst.MagicCircle_Rotation();
@@ -40,24 +40,27 @@ public class King_Collision : MonoBehaviour
     public void NextDialogue_F()
     {
         if (Input.GetKeyDown(KeyCode.F))
+        {
             StartCoroutine(NextDialogue());
+            King.Inst.F_Button.DOFade(0f, 0f);
+        }
     }
 
     public IEnumerator DialogueBtn_FadeInOut()
     {
-        if (King.Inst.Dialogue_Text.text == King.Inst.Dialogue[King.Inst.Sequence_Text] && King.Inst.FBtn_Check == false)
+        if (King.Inst.Dialogue_Text.text == King.Inst.Dialogue[King.Inst.Sequence_Text] && Dialogue_End == false)
         {
             yield return new WaitForSeconds(2f);
             King.Inst.F_Button.DOFade(1f, 1f);
             Debug.Log("asdfasdfas");
-            King.Inst.FBtn_Check = true;
         }
 
-        else if(King.Inst.Dialogue_Text.text != King.Inst.Dialogue[King.Inst.Sequence_Text] && King.Inst.FBtn_Check == true)
+        else
         {
-            King.Inst.FBtn_Check = false;
+            Debug.Log("a");
             King.Inst.F_Button.DOFade(0f, 0f);
         }
+
     }
 
     public IEnumerator NextDialogue()
@@ -97,6 +100,8 @@ public class King_Collision : MonoBehaviour
                                 King.Inst.Dialogue_Text.text = "";
                                 King.Inst.King_NPC.DOFade(1f, 0.1f);
                             }
+
+
                         }
 
                         else // 전문이 다 출력되기전 F키를 눌렀을 시

@@ -7695,7 +7695,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 70
+  m_SortingOrder: 90
   m_TargetDisplay: 0
 --- !u!224 &899310802
 RectTransform:
@@ -10092,7 +10092,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b948924b60a936469d49f9d4a2af80c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
+  PlayerObj: {fileID: 0}
   M_VectorCheck: 0
   I_VectorCheck: 0
   D_VectorCheck: 0
@@ -12912,10 +12912,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ManagerPackage
       objectReference: {fileID: 0}
-    - target: {fileID: 4992396103262175384, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
-      propertyPath: SkillShop_Collision
-      value: 
-      objectReference: {fileID: 332916617}
     - target: {fileID: 5025156722862097626, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -17408,6 +17404,10 @@ PrefabInstance:
     - target: {fileID: 3157611432992786235, guid: 3da9c3f6417b4694cb997564d60f2bb6, type: 3}
       propertyPath: m_Name
       value: UI_Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3157611432992786235, guid: 3da9c3f6417b4694cb997564d60f2bb6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7837968097333178697, guid: 3da9c3f6417b4694cb997564d60f2bb6, type: 3}
       propertyPath: m_RootOrder
