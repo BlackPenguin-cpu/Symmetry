@@ -35,13 +35,15 @@ public class Salesman : MonoBehaviour
         Different_Product_Text = GameObject.Find("Different_Product_Text").GetComponent<Text>();
         AfterObject = GameObject.Find("After_Purchase");
         #endregion
+
+        // 정상 웨이브 : 5 / 10 / 15
         switch(WaveManager.Instance.m_WaveNum)
         {
-            case 5:
+            case 3:
                 Gold_Num = 600;
                 break;
 
-            case 10:
+            case 5:
                 Gold_Num = 1052;
                 break;
             case 15:

@@ -63,9 +63,10 @@ public class Card_Manager : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.O))
-        {
             AddCard();
-        }
+
+        if (Input.GetKeyDown(KeyCode.Keypad2))
+            AddList();
 
         if (TimeItem_Count == 3)
         {
@@ -186,5 +187,30 @@ public class Card_Manager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void Item_Reset()
+    {
+        RandomMix = 0;
+        Item_Check = 0;
+        TimeItem_Count = 0;
+
+        DABuffer.Clear();
+        Time_Item_Limit.Clear();
+
+        Left_Pick = true;
+        Among_Pick = true;
+        Right_Pick = true;
+
+        DA_Left = true;
+        DA_Among = true;
+        DA_Right = true;
+
+        Item_Left = true;
+        Item_Among = true;
+        Item_Right = true;
+
+        Item_bool = true;
+        ItemCard_OpenCheck = true;
     }
 }

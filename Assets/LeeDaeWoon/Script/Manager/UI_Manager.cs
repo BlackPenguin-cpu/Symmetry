@@ -23,8 +23,8 @@ public class UI_Manager : MonoBehaviour
     [Header("타이머")]
     public Text Timer_Text;
     public bool Timer_Check;
-    int Min;
-    float Sec;
+    public int Min;
+    public float Sec;
 
     [Header("체력")]
     public float HP_Bar;
