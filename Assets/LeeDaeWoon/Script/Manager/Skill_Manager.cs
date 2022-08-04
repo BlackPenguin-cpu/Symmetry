@@ -11,6 +11,8 @@ public class Skill_Manager : MonoBehaviour
     public static Skill_Manager Inst { get; private set; }
     void Awake() => Inst = this;
 
+    public bool Instantiate_SkillCheck = false;
+
     [Header("A스킬, S스킬")]
     public RectTransform A_Skill = new RectTransform();
     public RectTransform S_Skill = new RectTransform();
@@ -40,7 +42,7 @@ public class Skill_Manager : MonoBehaviour
     public bool Limit = true;
     public bool Skill_PotalMove = false;
 
-    [Header("스클 획득 체크")]
+    [Header("스킬 획득 체크")]
     public Dictionary<SkillScript, bool> haveSkillInfo = new Dictionary<SkillScript, bool>();
 
     public int RandomTest;
@@ -63,11 +65,12 @@ public class Skill_Manager : MonoBehaviour
         skillManager = SkillManager.Instance;
         FillAmount_Skill_A.fillAmount = 0f;
         AddList();
-        AddSkill();
     }
 
     private void Update()
     {
+        AddSkill();
+
         Skill_CoolTime_A();
         Skill_CoolTime_S();
         SkillHave_Check();
@@ -154,10 +157,12 @@ public class Skill_Manager : MonoBehaviour
     #region 스킬 소환
     public void AddSkill()
     {
-        if (SceneManager.GetActiveScene().name == "Dimension")
+        if (SceneManager.GetActiveScene().name == "Dimension" && Instantiate_SkillCheck == false)
         {
-            int SkillIndex = 0;
             // 스킬 소환
+            Instantiate_SkillCheck = true;
+            int SkillIndex = 0;
+
             Skill.Clear();
             var SkillObject = Instantiate(SkillPrefab, this.transform.position, Quaternion.identity, GameObject.Find("SkillShop_Canvas").transform);
             var card = SkillObject.GetComponent<Skill_List>();
