@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class Card_Manager : MonoBehaviour
 {
     public static Card_Manager Inst { get; private set; }
-    void Awake() => Inst = this;
 
     public int RandomMix;
 
@@ -72,6 +71,19 @@ public class Card_Manager : MonoBehaviour
         {
             TimeItem_Count++;
             ItemBuffer.RemoveAt(4);
+        }
+    }
+
+    private void Awake()
+    {
+        if (Inst == null)
+        {
+            Inst = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 

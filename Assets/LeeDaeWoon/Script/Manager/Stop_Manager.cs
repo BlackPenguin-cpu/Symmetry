@@ -8,7 +8,6 @@ using DG.Tweening;
 public class Stop_Manager : MonoBehaviour
 {
     public static Stop_Manager Inst { get; private set; }
-    void Awake() => Inst = this;
 
     public float timer = 0f;
     public Image Fade_Background;
@@ -157,6 +156,19 @@ public class Stop_Manager : MonoBehaviour
             if (PlayerWindow_Open == true && PlayerWindow_Check == true)
                 Player_Close_Btn();
 
+        }
+    }
+
+    private void Awake()
+    {
+        if (Inst == null)
+        {
+            Inst = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 

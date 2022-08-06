@@ -21,16 +21,16 @@ public class King_Collision : MonoBehaviour
     public ScrambleMode scrambleMode;
 
     bool Range_Reach;
-    bool Dialogue_End;
+    public bool Dialogue_End;
 
     void Start()
     {
-
+        King.Inst.F_Button.gameObject.SetActive(false);
     }
 
     void Update()
     {
-        StartCoroutine(DialogueBtn_FadeInOut());
+        DialogueBtn_FadeInOut();
         NextDialogue_F();
 
         if (King.Inst.Magic_Creation == true)
@@ -41,26 +41,15 @@ public class King_Collision : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
+            King.Inst.F_Button.gameObject.SetActive(false);
             StartCoroutine(NextDialogue());
-            King.Inst.F_Button.DOFade(0f, 0f);
         }
     }
 
-    public IEnumerator DialogueBtn_FadeInOut()
+    public void DialogueBtn_FadeInOut()
     {
-        if (King.Inst.Dialogue_Text.text == King.Inst.Dialogue[King.Inst.Sequence_Text] && Dialogue_End == false)
-        {
-            yield return new WaitForSeconds(2f);
-            King.Inst.F_Button.DOFade(1f, 1f);
-            Debug.Log("asdfasdfas");
-        }
-
-        else
-        {
-            Debug.Log("a");
-            King.Inst.F_Button.DOFade(0f, 0f);
-        }
-
+        if ((King.Inst.Dialogue_Text.text == King.Inst.Dialogue[King.Inst.Sequence_Text] && Dialogue_End == false))
+            King.Inst.F_Button.gameObject.SetActive(true);
     }
 
     public IEnumerator NextDialogue()
@@ -74,7 +63,6 @@ public class King_Collision : MonoBehaviour
                         // 전문이 타이핑이 됬을 경우 && 대사가 7번 이하 나왔을 경우 && 대사가 아직 안 끝났을 경우
                         if (King.Inst.Dialogue_Text.text == King.Inst.Dialogue[King.Inst.Sequence_Text] && King.Inst.Sequence_Text <= 7 && Dialogue_End == false)
                         {
-
                             if (King.Inst.Sequence_Text < 7)
                             {
                                 King.Inst.Sequence_Text++;
@@ -121,7 +109,7 @@ public class King_Collision : MonoBehaviour
                     // 전문이 타이핑이 됬을 경우 && 대사가 7번 이하 나왔을 경우 && 대사가 아직 안 끝났을 경우
                     if (King.Inst.Dialogue_Text.text == King.Inst.Dialogue[King.Inst.Sequence_Text] && King.Inst.Sequence_Text <= 12 && Dialogue_End == false)
                     {
-
+                        
                         if (King.Inst.Sequence_Text < 12)
                         {
                             King.Inst.Sequence_Text++;
