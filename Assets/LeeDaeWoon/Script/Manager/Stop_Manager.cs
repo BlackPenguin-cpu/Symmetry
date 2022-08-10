@@ -128,6 +128,7 @@ public class Stop_Manager : MonoBehaviour
         Resolution_Size();
         Sound_Control();
 
+        Main_Reset();
 
         // ESC 키를 누르면 일시정지 창이 열린다.
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -172,9 +173,9 @@ public class Stop_Manager : MonoBehaviour
         }
     }
 
-    private void OnLevelWasLoaded(int level)
+    public void Main_Reset()
     {
-        if (Reset_Check == true)
+        if (Reset_Check == true && SceneManager.GetActiveScene().name == "Main")
         {
             Reset_Check = false;
 
@@ -690,6 +691,7 @@ public class Stop_Manager : MonoBehaviour
     public void Main_Yes_Btn()
     {
         Reset_Check = true;
+        Time.timeScale = 1f;
         SceneManager.LoadScene("Main");
     }
 
