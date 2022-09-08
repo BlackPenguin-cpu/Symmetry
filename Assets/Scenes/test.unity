@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  dimensionType: 1
+  dimensionType: -1
   maxHp: 0
   hp: 0
 --- !u!61 &26112608
@@ -3230,7 +3230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b948924b60a936469d49f9d4a2af80c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
+  PlayerObj: {fileID: 0}
   M_VectorCheck: 0
   I_VectorCheck: 0
   D_VectorCheck: 0
@@ -4205,7 +4205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  dimensionType: 0
+  dimensionType: 1
   maxHp: 100
   hp: 0
   DashShadow: {fileID: 6139106576006089876, guid: 97ca0f78f997ff14494060f2bfa2449f, type: 3}
