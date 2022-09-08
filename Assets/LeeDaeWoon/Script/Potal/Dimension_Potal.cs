@@ -27,9 +27,7 @@ public class Dimension_Potal : MonoBehaviour
     void F_Click()
     {
         if (collision_Check == true && Input.GetKeyDown(KeyCode.F))
-        {
             SceneManager.LoadScene("test");
-        }
     }
 
     public void OnTriggerStay2D(Collider2D collision)

@@ -109,18 +109,22 @@ public class Skill_Window : MonoBehaviour
 
                 SeletSkill = Skill_Manager.Inst.Skill[SkillNum];
                 AfterPurchase_Skill.GetComponent<Image>().sprite = SeletSkill.sprite;
-
-                //if (Wave가 5일 경우)
-                //{
                 GameManager.Instance._coin -= SeletSkill.price[0];
-                //}
-                //else if (Wave가 10일 경우)
+
+                // 정상작동 웨이브 : 5 / 10 / 15
+                //switch(WaveManager.Instance.m_WaveNum)
                 //{
-                //  UI_Manager.Inst.Gold -= SeletSkill.Gold_02;
-                //}
-                //else if (Wave가 15일 경우)
-                //{
-                //  UI_Manager.Inst.Gold -= SeletSkill.Gold_03;
+                //    case 3:
+                //        GameManager.Instance._coin -= SeletSkill.price[0];
+                //        break;
+
+                //    case 5:
+                //        GameManager.Instance._coin -= SeletSkill.price[1];
+                //        break;
+
+                //    case 15:
+                //        GameManager.Instance._coin -= SeletSkill.price[2];
+                //        break;
                 //}
 
                 Skill_Manager.Inst.Skill_Have.Add(SeletSkill);

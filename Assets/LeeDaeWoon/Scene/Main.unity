@@ -368,6 +368,7 @@ MonoBehaviour:
   scrambleChars_Tool: 
   richTextEnabled: 0
   scrambleMode: 0
+  Dialogue_End: 0
 --- !u!61 &98934828
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1417,6 +1418,7 @@ MonoBehaviour:
   scrambleChars_Tool: 
   richTextEnabled: 0
   scrambleMode: 0
+  Dialogue_End: 0
 --- !u!61 &349857122
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3032,6 +3034,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7631395407191935381, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
+      propertyPath: ItemDA_Have.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
 --- !u!1 &701829837
@@ -3145,7 +3151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b948924b60a936469d49f9d4a2af80c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
+  PlayerObj: {fileID: 0}
   M_VectorCheck: 0
   I_VectorCheck: 0
   D_VectorCheck: 0
@@ -3392,6 +3398,7 @@ MonoBehaviour:
   scrambleChars_Tool: 
   richTextEnabled: 0
   scrambleMode: 0
+  Dialogue_End: 0
 --- !u!61 &833574205
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4834,6 +4841,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI_Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 3547976952710852030, guid: 3da9c3f6417b4694cb997564d60f2bb6, type: 3}
+      propertyPath: King_Check
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7837968097333178697, guid: 3da9c3f6417b4694cb997564d60f2bb6, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -5478,6 +5489,7 @@ MonoBehaviour:
   scrambleChars_Tool: 
   richTextEnabled: 0
   scrambleMode: 0
+  Dialogue_End: 0
 --- !u!61 &1372057785
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6665,7 +6677,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7722,7 +7734,7 @@ MonoBehaviour:
   Credit_Bar01: {fileID: 1855006900}
   Credit_Bar02: {fileID: 747280152}
   F_Button: {fileID: 1570651355}
-  F_Button_Fade: 0
+  FBtn_Check: 0
   Dialogue_Exit: 0
   Dialogue:
   - "\uC77C\uC5B4\uB0AC\uB294\uAC00..."

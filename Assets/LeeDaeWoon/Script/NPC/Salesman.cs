@@ -36,23 +36,21 @@ public class Salesman : MonoBehaviour
         AfterObject = GameObject.Find("After_Purchase");
         #endregion
 
-        
-        //if (Wave가 5일 경우)
-        //{
-        Gold_Num = 600;
-        //}
+        // 정상 웨이브 : 5 / 10 / 15
+        switch(WaveManager.Instance.m_WaveNum)
+        {
+            case 3:
+                Gold_Num = 600;
+                break;
 
-        //else if (Wave가 10일 경우)
-        //{
-        //Gold_Num = 1052;
-        //}
-
-        //else if (Wave가 15일 경우)
-        //{
-        //Gold_Num = 2019;
-        //}
-
-        Gold_Text.text = "" + Gold_Num;
+            case 5:
+                Gold_Num = 1052;
+                break;
+            case 15:
+                Gold_Num = 2019;
+                break;
+        }
+        Gold_Text.text = Gold_Num.ToString();
     }
     void Update()
     {
@@ -70,7 +68,7 @@ public class Salesman : MonoBehaviour
                 Destroy(GameObject.Find("Skill_Shop(Clone)"));
                 Apply_Check = false;
                 GameManager.Instance._coin -= Gold_Num;
-                Gold_Text.text = "" + (Gold_Num += 200);
+                Gold_Text.text = (Gold_Num += 200).ToString();
 
 
                 for (int i = 0; i < Skill_Manager.Inst.Skill.Count; i++)

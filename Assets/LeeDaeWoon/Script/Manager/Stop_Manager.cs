@@ -8,7 +8,6 @@ using DG.Tweening;
 public class Stop_Manager : MonoBehaviour
 {
     public static Stop_Manager Inst { get; private set; }
-    void Awake() => Inst = this;
 
     public float timer = 0f;
     public Image Fade_Background;
@@ -107,6 +106,8 @@ public class Stop_Manager : MonoBehaviour
     public RectTransform Main_Window; // 메인 창의 중간 
     public GameObject Main_Window_Canvas; // 메인 창
 
+    bool Reset_Check; // 초기화 체크
+
     [Header("게임종료 창")]
     public GameObject Exit_Pole01; // 게임종료 창의 윗 봉
     public GameObject Exit_Pole02; // 게임종료 창의 아랫 봉 
@@ -127,6 +128,7 @@ public class Stop_Manager : MonoBehaviour
         Resolution_Size();
         Sound_Control();
 
+        Main_Reset();
 
         // ESC 키를 누르면 일시정지 창이 열린다.
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -158,13 +160,48 @@ public class Stop_Manager : MonoBehaviour
         }
     }
 
-    //private void OnLevelWasLoaded(int level)
-    //{
-    //    if (SceneManager.GetActiveScene().name == "Main")
-    //    {
+    private void Awake()
+    {
+        if (Inst == null)
+        {
+            Inst = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
-    //    }
-    //}
+    public void Main_Reset()
+    {
+        if (Reset_Check == true && SceneManager.GetActiveScene().name == "Main")
+        {
+            Reset_Check = false;
+
+            Card_Manager.Inst.Item_Reset(); // 방어구 및 장신구 , 마정석 정보 초기화
+
+            ItemDA_Have.Clear(); // 소지한 아이템 초기화
+            GameManager.Instance._coin = 0; // 골드 초기화
+            WaveManager.Instance.m_WaveNum = 0; // Wave 초기화
+            Player.Instance.stat._hp = Player.Instance.stat._maxHp; // 플레이어 HP 초기화
+
+            // 타이머 초기화
+            UI_Manager.Inst.Sec = 0;
+            UI_Manager.Inst.Min = 0;
+
+            // 무기 강화수치 초기화
+            Player.Instance.stat._level[PlayerWeaponType.Sword] = 0;
+            Player.Instance.stat._level[PlayerWeaponType.Dagger] = 0;
+            Player.Instance.stat._level[PlayerWeaponType.Axe] = 0;
+
+            // 기본 스킬로 초기화
+            Skill_Manager.Inst.Skill_Up.Add(SkillManager.Instance.SkillScriptList[6]);
+            Skill_Manager.Inst.Skill_Down.Add(SkillManager.Instance.SkillScriptList[8]);
+
+            Card_Manager.Inst.AddList();
+        }
+    }
 
     #region 일시정지 창
     public IEnumerator Pause_Window_Open()
@@ -651,7 +688,12 @@ public class Stop_Manager : MonoBehaviour
     #region 메인화면 버튼
     public void Main_Btn() => StartCoroutine(Main_Window_Coroutine01());
 
-    public void Main_Yes_Btn() => SceneManager.LoadScene("Main");
+    public void Main_Yes_Btn()
+    {
+        Reset_Check = true;
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Main");
+    }
 
     public void Main_No_Btn()
     {

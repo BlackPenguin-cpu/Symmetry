@@ -21,8 +21,7 @@ public class King : MonoBehaviour
     public GameObject Credit_Bar01;
     public GameObject Credit_Bar02;
     public Image F_Button;
-
-    public bool F_Button_Fade;
+    public bool FBtn_Check;
     public bool Dialogue_Exit;
 
     [Header("대화")]
@@ -44,7 +43,6 @@ public class King : MonoBehaviour
 
     void Start()
     {
-
     }
 
     void Update()
@@ -53,7 +51,9 @@ public class King : MonoBehaviour
             Zoom_Expansion();
         if (Input.GetKeyDown(KeyCode.Keypad2))
             Zoom_Shrinking();
+
     }
+
     #region 카메라 확대 / 축소
     public void Zoom_Expansion() => StartCoroutine(Expansion());
     public void Zoom_Shrinking() => StartCoroutine(Shrinking());

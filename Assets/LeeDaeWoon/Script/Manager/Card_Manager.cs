@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class Card_Manager : MonoBehaviour
 {
     public static Card_Manager Inst { get; private set; }
-    void Awake() => Inst = this;
 
     public int RandomMix;
 
@@ -63,14 +62,28 @@ public class Card_Manager : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.O))
-        {
             AddCard();
-        }
+
+        if (Input.GetKeyDown(KeyCode.Keypad2))
+            AddList();
 
         if (TimeItem_Count == 3)
         {
             TimeItem_Count++;
             ItemBuffer.RemoveAt(4);
+        }
+    }
+
+    private void Awake()
+    {
+        if (Inst == null)
+        {
+            Inst = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 
@@ -102,6 +115,7 @@ public class Card_Manager : MonoBehaviour
         // 아이템 카드 소환
         SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
 
+        UI_Manager.Inst.Timer_Check = false;
         int itemIndex = 0;
         List<Item> item = new List<Item>();
         var cardObject = Instantiate(CardPrefab, this.transform.position, Quaternion.identity, GameObject.Find("Item_Canvas").transform);
@@ -185,5 +199,30 @@ public class Card_Manager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void Item_Reset()
+    {
+        RandomMix = 0;
+        Item_Check = 0;
+        TimeItem_Count = 0;
+
+        DABuffer.Clear();
+        Time_Item_Limit.Clear();
+
+        Left_Pick = true;
+        Among_Pick = true;
+        Right_Pick = true;
+
+        DA_Left = true;
+        DA_Among = true;
+        DA_Right = true;
+
+        Item_Left = true;
+        Item_Among = true;
+        Item_Right = true;
+
+        Item_bool = true;
+        ItemCard_OpenCheck = true;
     }
 }

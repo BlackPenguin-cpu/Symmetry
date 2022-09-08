@@ -117,15 +117,15 @@ public class BlackSmith : MonoBehaviour
                 Sword_MaxEnhance.SetActive(true);
             }
             else
-                SwordLevel_Text.text = "" + Sword_Level;
+                SwordLevel_Text.text = Sword_Level.ToString();
 
-            Sword_AttackDamage.text = "" + (10 + (10 * Sword_Level));
-            Sword_AttackDamage_Upgrade.text = "" + (10 + (10 * (Sword_Level + 1)));
+            Sword_AttackDamage.text = (10 + (10 * Sword_Level)).ToString();
+            Sword_AttackDamage_Upgrade.text = (10 + (10 * (Sword_Level + 1))).ToString();
 
-            Sword_MaxHp.text = "" + (10 + (10 * Sword_Level));
-            Sword_MaxHp_Upgrade.text = "" + (10 + (10 * (Sword_Level + 1)));
+            Sword_MaxHp.text = (10 + (10 * Sword_Level)).ToString();
+            Sword_MaxHp_Upgrade.text = (10 + (10 * (Sword_Level + 1))).ToString();
 
-            Sword_Required_Gold_Price.text = "" + (400 + (200 * Sword_Level));
+            Sword_Required_Gold_Price.text = (400 + (200 * Sword_Level)).ToString();
 
             Purchase_Btn.SetActive(false);
             Enhance_Btn.SetActive(true);
@@ -190,15 +190,15 @@ public class BlackSmith : MonoBehaviour
                 Dagger_MaxEnhance.SetActive(true);
             }
             else
-                DaggerLevel_Text.text = "" + Dagger_Level;
+                DaggerLevel_Text.text = Dagger_Level.ToString();
 
-            Dagger_AttackDamage.text = "" + (8 + (8 * Dagger_Level));
-            Dagger_AttackDamage_Upgrade.text = "" + (8 + (8 * (Dagger_Level + 1)));
+            Dagger_AttackDamage.text = (8 + (8 * Dagger_Level)).ToString();
+            Dagger_AttackDamage_Upgrade.text = (8 + (8 * (Dagger_Level + 1))).ToString();
 
-            Dagger_Critical.text = "" + (0 + (2 * Dagger_Level));
-            Dagger_Critical_Upgrade.text = "" + (0 + (2 * (Dagger_Level + 1)));
+            Dagger_Critical.text = (0 + (2 * Dagger_Level)).ToString();
+            Dagger_Critical_Upgrade.text = (0 + (2 * (Dagger_Level + 1))).ToString();
 
-            Dagger_Required_Gold_Price.text = "" + (400 + (200 * Dagger_Level));
+            Dagger_Required_Gold_Price.text = (400 + (200 * Dagger_Level)).ToString();
 
             if (Dagger_Required_Gold.activeSelf == true || Dagger_MaxEnhance.activeSelf == true)
             {
@@ -276,15 +276,15 @@ public class BlackSmith : MonoBehaviour
                 Axe_MaxEnhance.SetActive(true);
             }
             else
-                AxeLevel_Text.text = "" + Axe_Level;
+                AxeLevel_Text.text = Axe_Level.ToString();
 
-            Axe_AttackDamage.text = "" + (20 + (15 * Axe_Level));
-            Axe_AttackDamage_Upgrade.text = "" + (20 + (15 * (Axe_Level + 1)));
+            Axe_AttackDamage.text = (20 + (15 * Axe_Level)).ToString();
+            Axe_AttackDamage_Upgrade.text = (20 + (15 * (Axe_Level + 1))).ToString();
 
-            Axe_Defense.text = "" + (400 + (200 * Axe_Level));
-            Axe_Defense_Upgrade.text = "" + (400 + (200 * (Axe_Level + 1)));
+            Axe_Defense.text = (400 + (200 * Axe_Level)).ToString();
+            Axe_Defense_Upgrade.text = (400 + (200 * (Axe_Level + 1))).ToString();
 
-            Axe_Required_Gold_Price.text = "" + (400 + (200 * Axe_Level));
+            Axe_Required_Gold_Price.text = (400 + (200 * Axe_Level)).ToString();
 
             if (Axe_Required_Gold.activeSelf == true || Axe_MaxEnhance.activeSelf == true)
             {

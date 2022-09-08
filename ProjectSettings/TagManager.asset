@@ -53,11 +53,11 @@ TagManager:
   - name: Tutorial_Key
     uniqueID: 692749607
     locked: 0
-  - name: NPC_Obj
-    uniqueID: 2912370271
-    locked: 0
   - name: DarkPlayer
     uniqueID: 2415723207
+    locked: 0
+  - name: NPC_Obj
+    uniqueID: 2912370271
     locked: 0
   - name: EnemyDie_Effect
     uniqueID: 1337113563
