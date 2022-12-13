@@ -20,6 +20,7 @@ public class SoundManager : MonoBehaviour
 
     public Dictionary<string, AudioClip> audioClips = new Dictionary<string, AudioClip>();
     public Dictionary<SoundType, AudioSourceClass> audioSourceClasses = new Dictionary<SoundType, AudioSourceClass>();
+
     private void Awake()
     {
         if (instance == null)
@@ -43,6 +44,7 @@ public class SoundManager : MonoBehaviour
         {
             GameObject AudioSourceObj = new GameObject(enumNames[i]);
             AudioSourceObj.transform.SetParent(transform);
+            // TODO : »ý¼ºÀÚ
             AudioSourceClass sourceClass
                 = new AudioSourceClass { audioSource = AudioSourceObj.AddComponent<AudioSource>(), audioVolume = 0.5f };
             audioSourceClasses[(SoundType)i] = sourceClass;
@@ -52,7 +54,7 @@ public class SoundManager : MonoBehaviour
         audioSourceClasses[SoundType.BGM].audioSource.loop = true;
     }
 
-    public AudioClip PlaySoundClip(string clipName, SoundType type, float volume = 0.5f, float pitch = 1)
+    public AudioClip PlaySoundClip(string clipName, SoundType type, float volume = 0.5f, float pitch = 1f)
     {
         AudioClip clip = audioClips[clipName];
         audioSourceClasses[type].audioSource.pitch = pitch;

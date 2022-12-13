@@ -47,6 +47,7 @@ public class Player_Vector : MonoBehaviour
             UI_Manager.Inst.FadeInOut.DOFade(0f, 0f);
         }
 
+        // TODO : ÀÏ°ü¼º.
         if (SceneManager.GetActiveScene().name == "Dimension")
         {
             Potal.Inst.Player.DOFade(1f, 0f);

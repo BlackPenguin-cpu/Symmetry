@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
+using System.Runtime.InteropServices;
 
 public class Foundation : MonoBehaviour
 {
@@ -50,21 +51,23 @@ public class Foundation : MonoBehaviour
     void Update()
     {
         Foundation_Click();
-
-        if (SceneManager.GetActiveScene().name == "Dimension")
+        // 나였으면 이거 함수만들어서 했음
+        if (SceneNameEquals("Dimension"))
             MagicCircle_Rotation();
 
         #region 월드 좌표를 스크린 좌표로 변경을 해준다.
-        if (SceneManager.GetActiveScene().name == "Dimension")
-            Upgrade.transform.localPosition = Camera.main.WorldToScreenPoint(this.gameObject.transform.localPosition + new Vector3(-5.2f, -4.4f, 0));
-        if (SceneManager.GetActiveScene().name == "Main")
-            Upgrade.transform.localPosition = Camera.main.WorldToScreenPoint(this.gameObject.transform.localPosition + new Vector3(-10.8f, -7f, 0));
+        if (SceneNameEquals("Dimension"))
+            UpgradeTransformChange(new Vector3(-5.2f, -4.4f, 0));
+        if (SceneNameEquals("Main"))
+            UpgradeTransformChange(new Vector3(-10.8f, -7f, 0));
         #endregion
     }
+    private void UpgradeTransformChange(Vector3 vec) => Upgrade.transform.localPosition = Camera.main.WorldToScreenPoint(gameObject.transform.localPosition + vec);
 
+    private bool SceneNameEquals(string name) => SceneManager.GetActiveScene().name.Equals(name);
     public void MagicCircle_Rotation()
     {
-        if (SceneManager.GetActiveScene().name == "Main")
+        if (SceneManager.GetActiveScene().name.Equals("Main"))
             Magic_Circle.DOFade(1f, 1f);
 
         Magic_Circle.transform.Rotate(new Vector3(0, 0, Speed * Time.deltaTime));
@@ -83,7 +86,7 @@ public class Foundation : MonoBehaviour
 
     #region 창 연출
     public void Close() => StartCoroutine(Close_Window());
-    
+
     public IEnumerator Open_Window()
     {
         SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX);
