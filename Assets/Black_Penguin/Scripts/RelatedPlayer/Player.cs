@@ -372,13 +372,14 @@ public class Player : Entity, ITypePlayer
 {
     public static Player Instance = null;
 
-    private Animator animator;
-    private new BoxCollider2D collider;
-    private PlayerHpView hpView;
     [SerializeField] private GameObject DashShadow;
     [HideInInspector] public SpriteRenderer sprite;
     [HideInInspector] public AttackCollision[] attackCollisions;
 
+    private float horizontal;
+    private Animator animator;
+    private new BoxCollider2D collider;
+    private PlayerHpView hpView;
     [SerializeField] public PlayerState state;
     PlayerState _state
     {
@@ -466,6 +467,10 @@ public class Player : Entity, ITypePlayer
             stat._curDashCount = stat._dashCount;
         }
     }
+    void FixedUpdate()
+    {
+        Move();
+    }
     void PlayerItemContoroller()
     {
         if (stat.PlayerDATypeList.CurseKnife && cursedKnifeCooldown < curCursedKnifeCooldown)
@@ -526,10 +531,11 @@ public class Player : Entity, ITypePlayer
     //플레이어 인풋
     void InputManager()
     {
+        horizontal = 0;
         if (UI_Manager.Inst != null && UI_Manager.Inst.PlayerMove_control == true) return;
-
         if (state == PlayerState.Die) return;
-        Move();
+
+        horizontal = Input.GetAxisRaw("Horizontal");
         if (Input.GetKeyDown(KeyCode.Z))
         {
             Dash();
@@ -638,23 +644,30 @@ public class Player : Entity, ITypePlayer
     }
     private void Move()
     {
-        if (_state == PlayerState.Dash || (_state == PlayerState.Attack && _stateOnAir != PlayerStateOnAir.JUMPATTACK))
-            return;
         if (stat.weaponType == PlayerWeaponType.Axe && _stateOnAir == PlayerStateOnAir.JUMPATTACK)
             return;
+        if (_state == PlayerState.Dash)
+            return;
+        if (_state == PlayerState.Attack && _stateOnAir != PlayerStateOnAir.JUMPATTACK)
+        {
+            PlayerDirFix();
+        }
         if (_stateOnAir == PlayerStateOnAir.NONE && state != PlayerState.Jump && _stateOnAir != PlayerStateOnAir.JUMPATTACK)
             _state = PlayerState.Walk;
 
-        float horizontal = Input.GetAxisRaw("Horizontal");
-
-        if (horizontal == 1) sprite.flipX = false;
-        if (horizontal == -1) sprite.flipX = true;
+        PlayerDirFix();
 
         Vector2 dir = new Vector2(horizontal, 0) * stat._speed * Time.deltaTime;
         transform.Translate(dir);
 
         if (dir == Vector2.zero && _state == PlayerState.Walk)
             _state = PlayerState.Idle;
+    }
+
+    private void PlayerDirFix()
+    {
+        if (horizontal == 1) sprite.flipX = false;
+        if (horizontal == -1) sprite.flipX = true;
     }
     #region 공격관련함수
     bool isAttack;
