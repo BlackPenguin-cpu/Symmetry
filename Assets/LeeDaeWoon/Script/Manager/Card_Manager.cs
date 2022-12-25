@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Card_Manager : MonoBehaviour
 {
-    public static Card_Manager Inst { get; private set; }
+    public static Card_Manager instance { get; private set; }
 
     public int RandomMix;
 
@@ -76,9 +76,9 @@ public class Card_Manager : MonoBehaviour
 
     private void Awake()
     {
-        if (Inst == null)
+        if (instance == null)
         {
-            Inst = this;
+            instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -115,7 +115,7 @@ public class Card_Manager : MonoBehaviour
         // 아이템 카드 소환
         SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
 
-        UI_Manager.Inst.Timer_Check = false;
+        UI_Manager.instance.Timer_Check = false;
         int itemIndex = 0;
         List<Item> item = new List<Item>();
         var cardObject = Instantiate(CardPrefab, this.transform.position, Quaternion.identity, GameObject.Find("Item_Canvas").transform);

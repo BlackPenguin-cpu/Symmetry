@@ -61,7 +61,7 @@ public class King : MonoBehaviour
 
     public IEnumerator Expansion() // 줌 확대 
     {
-        UI_Manager.Inst.PlayerMove_control = true; // 플레이어의 움직임을 멈춘다.
+        UI_Manager.instance.PlayerMove_control = true; // 플레이어의 움직임을 멈춘다.
         Player.Instance.state = PlayerState.Idle; // 플레이어의 움직임을 서있는 상태로 냅둔다.
         Camera_obj.GetComponent<CameraManager>().enabled = false; // CameraManager를 꺼둔다.
 
@@ -97,7 +97,7 @@ public class King : MonoBehaviour
         }
         Camera_obj.GetComponent<CameraManager>().enabled = true; // CameraManager를 켜둔다.
         yield return new WaitForSeconds(0.5f);
-        UI_Manager.Inst.PlayerMove_control = false; // 플레이어의 움직임을 정상작동 시킨다.
+        UI_Manager.instance.PlayerMove_control = false; // 플레이어의 움직임을 정상작동 시킨다.
 
     }
     #endregion

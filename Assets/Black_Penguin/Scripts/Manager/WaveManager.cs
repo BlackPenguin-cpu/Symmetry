@@ -82,7 +82,7 @@ public class WaveManager : MonoBehaviour
             }
             SummonedEnemies.Clear();
         }
-        Card_Manager.Inst.AddCard();
+        Card_Manager.instance.AddCard();
         m_WaveNum++;
     }
     IEnumerator WaveSpawn(List<EnemySpawnInfo> enemySpawnInfos)

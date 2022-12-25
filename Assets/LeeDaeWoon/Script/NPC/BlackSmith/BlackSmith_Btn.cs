@@ -34,12 +34,12 @@ public class BlackSmith_Btn : MonoBehaviour, IPointerEnterHandler
     {
         if (mouseover_UI == MouseOver_UI.MouseOver)
         {
-            int Save_BlackSmiths = BlackSmith.Inst.BlackSmiths.Count;
-            BlackSmith.Inst.BlackSmiths[0].SetActive(false);
+            int Save_BlackSmiths = BlackSmith.instnace.BlackSmiths.Count;
+            BlackSmith.instnace.BlackSmiths[0].SetActive(false);
 
-            BlackSmith.Inst.BlackSmiths.Insert(0, BlackSmith.Inst.BlackSmiths[Save_BlackSmiths - 1]);
-            BlackSmith.Inst.BlackSmiths.RemoveAt(Save_BlackSmiths);
-            BlackSmith.Inst.BlackSmiths[0].SetActive(true);
+            BlackSmith.instnace.BlackSmiths.Insert(0, BlackSmith.instnace.BlackSmiths[Save_BlackSmiths - 1]);
+            BlackSmith.instnace.BlackSmiths.RemoveAt(Save_BlackSmiths);
+            BlackSmith.instnace.BlackSmiths[0].SetActive(true);
         }
     }
 
@@ -47,11 +47,11 @@ public class BlackSmith_Btn : MonoBehaviour, IPointerEnterHandler
     {
         if (mouseover_UI == MouseOver_UI.MouseOver)
         {
-            BlackSmith.Inst.BlackSmiths[0].SetActive(false);
+            BlackSmith.instnace.BlackSmiths[0].SetActive(false);
 
-            BlackSmith.Inst.BlackSmiths.Add(BlackSmith.Inst.BlackSmiths[0]);
-            BlackSmith.Inst.BlackSmiths.RemoveAt(0);
-            BlackSmith.Inst.BlackSmiths[0].SetActive(true);
+            BlackSmith.instnace.BlackSmiths.Add(BlackSmith.instnace.BlackSmiths[0]);
+            BlackSmith.instnace.BlackSmiths.RemoveAt(0);
+            BlackSmith.instnace.BlackSmiths[0].SetActive(true);
         }
     }
 
@@ -61,30 +61,30 @@ public class BlackSmith_Btn : MonoBehaviour, IPointerEnterHandler
         if (mouseover_UI == MouseOver_UI.MouseOver)
         {
             //단검
-            if (BlackSmith.Inst.Weapon.transform.GetChild(1).gameObject.activeSelf == true && GameManager.Instance._coin >= Gold)
+            if (BlackSmith.instnace.Weapon.transform.GetChild(1).gameObject.activeSelf == true && GameManager.Instance._coin >= Gold)
             {
                 SoundManager.instance.PlaySoundClip("SFX_Buy", SoundType.SFX, 5f);
                 GameManager.Instance._coin -= Gold; // 골드 차감
-                BlackSmith.Inst.Dagger_Price.SetActive(false); // 구매가격 false
-                BlackSmith.Inst.Dagger_Required_Gold.SetActive(true); // 강화 가격 true
+                BlackSmith.instnace.Dagger_Price.SetActive(false); // 구매가격 false
+                BlackSmith.instnace.Dagger_Required_Gold.SetActive(true); // 강화 가격 true
                 Player.Instance.stat.weaponType = PlayerWeaponType.Dagger; // 무기 단검으로 바뀜
-                BlackSmith.Inst.Purchase_Btn.SetActive(false); // 구매 버튼 false
-                BlackSmith.Inst.Enhance_Btn.SetActive(true); // 강화 버튼 true
+                BlackSmith.instnace.Purchase_Btn.SetActive(false); // 구매 버튼 false
+                BlackSmith.instnace.Enhance_Btn.SetActive(true); // 강화 버튼 true
             }
             else if (GameManager.Instance._coin < Gold)
                 SoundManager.instance.PlaySoundClip("SFX_Error", SoundType.SFX);
 
 
             //도끼
-            if (BlackSmith.Inst.Weapon.transform.GetChild(2).gameObject.activeSelf == true && GameManager.Instance._coin >= Gold)
+            if (BlackSmith.instnace.Weapon.transform.GetChild(2).gameObject.activeSelf == true && GameManager.Instance._coin >= Gold)
             {
                 SoundManager.instance.PlaySoundClip("SFX_Buy", SoundType.SFX, 5f);
                 GameManager.Instance._coin -= Gold; // 골드 차감
-                BlackSmith.Inst.Axe_Price.SetActive(false); // 구매가격 false
-                BlackSmith.Inst.Axe_Required_Gold.SetActive(true); // 강화 가격 true
+                BlackSmith.instnace.Axe_Price.SetActive(false); // 구매가격 false
+                BlackSmith.instnace.Axe_Required_Gold.SetActive(true); // 강화 가격 true
                 Player.Instance.stat.weaponType = PlayerWeaponType.Axe; // 무기 도끼으로 바뀜
-                BlackSmith.Inst.Purchase_Btn.SetActive(false); // 구매 버튼 false
-                BlackSmith.Inst.Enhance_Btn.SetActive(true); // 강화 버튼 true
+                BlackSmith.instnace.Purchase_Btn.SetActive(false); // 구매 버튼 false
+                BlackSmith.instnace.Enhance_Btn.SetActive(true); // 강화 버튼 true
             }
             else if(GameManager.Instance._coin < Gold)
                 SoundManager.instance.PlaySoundClip("SFX_Error", SoundType.SFX);
@@ -96,11 +96,11 @@ public class BlackSmith_Btn : MonoBehaviour, IPointerEnterHandler
     {
         if (mouseover_UI == MouseOver_UI.MouseOver)
         {
-            if (BlackSmith.Inst.Weapon.transform.GetChild(0).gameObject.activeSelf == true)
+            if (BlackSmith.instnace.Weapon.transform.GetChild(0).gameObject.activeSelf == true)
                 Player.Instance.stat.weaponType = PlayerWeaponType.Sword;
-            else if (BlackSmith.Inst.Weapon.transform.GetChild(1).gameObject.activeSelf == true)
+            else if (BlackSmith.instnace.Weapon.transform.GetChild(1).gameObject.activeSelf == true)
                 Player.Instance.stat.weaponType = PlayerWeaponType.Dagger;
-            else if (BlackSmith.Inst.Weapon.transform.GetChild(2).gameObject.activeSelf == true)
+            else if (BlackSmith.instnace.Weapon.transform.GetChild(2).gameObject.activeSelf == true)
                 Player.Instance.stat.weaponType = PlayerWeaponType.Axe;
         }
 
@@ -116,7 +116,7 @@ public class BlackSmith_Btn : MonoBehaviour, IPointerEnterHandler
             switch (Player.Instance.stat.weaponType)
             {
                 case PlayerWeaponType.Sword:
-                    if (BlackSmith.Inst.Weapon.transform.GetChild(0).gameObject.activeSelf == true && GameManager.Instance._coin >= (400 + (200 * Sword_Level)))
+                    if (BlackSmith.instnace.Weapon.transform.GetChild(0).gameObject.activeSelf == true && GameManager.Instance._coin >= (400 + (200 * Sword_Level)))
                     {
                         if (Sword_Level < 5)
                         {
@@ -133,7 +133,7 @@ public class BlackSmith_Btn : MonoBehaviour, IPointerEnterHandler
                     break;
 
                 case PlayerWeaponType.Dagger:
-                    if (BlackSmith.Inst.Weapon.transform.GetChild(1).gameObject.activeSelf == true && GameManager.Instance._coin >= (400 + (200 * Dagger_Level)))
+                    if (BlackSmith.instnace.Weapon.transform.GetChild(1).gameObject.activeSelf == true && GameManager.Instance._coin >= (400 + (200 * Dagger_Level)))
                     {
                         if (Dagger_Level < 5)
                         {
@@ -149,7 +149,7 @@ public class BlackSmith_Btn : MonoBehaviour, IPointerEnterHandler
                     break;
 
                 case PlayerWeaponType.Axe:
-                    if (BlackSmith.Inst.Weapon.transform.GetChild(2).gameObject.activeSelf == true && GameManager.Instance._coin >= (400 + (200 * Axe_Level)))
+                    if (BlackSmith.instnace.Weapon.transform.GetChild(2).gameObject.activeSelf == true && GameManager.Instance._coin >= (400 + (200 * Axe_Level)))
                     {
                         if (Axe_Level < 5)
                         {
@@ -169,7 +169,7 @@ public class BlackSmith_Btn : MonoBehaviour, IPointerEnterHandler
     }
     #endregion
 
-    public void Close() => StartCoroutine(BlackSmith.Inst.Close_Window());
+    public void Close() => StartCoroutine(BlackSmith.instnace.Close_Window());
 
     public void OnPointerEnter(PointerEventData eventDatas)
     {

@@ -48,10 +48,10 @@ public class Item_Window : MonoBehaviour
 
     private IEnumerator itemWindow()
     {
-        Card_Manager.Inst.Fade.DOFade(0.5f, 0.5f);
-        UI_Manager.Inst.Cursor_Fade = true;
+        Card_Manager.instance.Fade.DOFade(0.5f, 0.5f);
+        UI_Manager.instance.Cursor_Fade = true;
 
-        Card_Manager.Inst.ItemCard_OpenCheck = true;
+        Card_Manager.instance.ItemCard_OpenCheck = true;
         Window_timer = 0;
 
         #region 창 연출(위, 아래 봉)
@@ -76,6 +76,6 @@ public class Item_Window : MonoBehaviour
             Window_timer += Time.deltaTime * 3f;
             yield return null;
         }
-        Card_Manager.Inst.ItemCard_OpenCheck = false;
+        Card_Manager.instance.ItemCard_OpenCheck = false;
     }
 }

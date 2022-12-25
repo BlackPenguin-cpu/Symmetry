@@ -7,21 +7,21 @@ using DG.Tweening;
 
 public class UI_Manager : MonoBehaviour
 {
-    public static UI_Manager Inst;
+    public static UI_Manager instance;
 
     public bool PlayerMove_control = false;
 
     [Header("재화")]
     public int Gold;
-    public Text Gold_Text;
     public int Dimensional;
-    public Text Dimensional_Text;
+    [SerializeField] Text Gold_Text;
+    [SerializeField] Text Dimensional_Text;
 
     [Header("웨이브")]
-    public Text Wave_Text;
+    [SerializeField] Text Wave_Text;
 
     [Header("타이머")]
-    public Text Timer_Text;
+    [SerializeField] Text Timer_Text;
     public bool Timer_Check;
     public int Min;
     public float Sec;
@@ -30,16 +30,16 @@ public class UI_Manager : MonoBehaviour
     public float HP_Bar;
 
     public float HP;
-    public GameObject Bar;
+    [SerializeField] GameObject Bar;
 
-    public Image FadeInOut_Die;
-    public Text Die_Text;
-    public Text Any_Text;
+    [SerializeField] Image FadeInOut_Die;
+    [SerializeField] Text Die_Text;
+    [SerializeField] Text Any_Text;
 
     public bool Once_Check = false;
 
     [Header("마우스 포인터")]
-    public Texture2D MousePointer;
+    [SerializeField] Texture2D MousePointer;
     public bool Cursor_Fade;
 
     [Header("페이드인아웃")]
@@ -75,15 +75,13 @@ public class UI_Manager : MonoBehaviour
 
     private void Awake()
     {
-        if (Inst == null)
+        if (instance == null)
         {
-            Inst = this;
+            instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
-        {
             Destroy(gameObject);
-        }
     }
 
     private void OnLevelWasLoaded(int level)

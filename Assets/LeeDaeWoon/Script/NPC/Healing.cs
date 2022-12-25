@@ -80,7 +80,7 @@ public class Healing : MonoBehaviour
             SoundManager.instance.PlaySoundClip("SFX_God_healling", SoundType.SFX);
 
             GameManager.Instance._coin -= Healing_Gold;
-            UI_Manager.Inst.PlayerMove_control = true;
+            UI_Manager.instance.PlayerMove_control = true;
             StartCoroutine(HealingWindow_Close_Coroutine());
 
             StartCoroutine(HealingEffect());
@@ -106,7 +106,7 @@ public class Healing : MonoBehaviour
         Healing_Effect.transform.localPosition = new Vector3(Player_Position.transform.localPosition.x, -0.18f, 0f);
         yield return new WaitForSeconds(2f);
         Healing_Effect.SetActive(false);
-        UI_Manager.Inst.PlayerMove_control = false;
+        UI_Manager.instance.PlayerMove_control = false;
     }
 
     #region ½Å¼º Ã¢

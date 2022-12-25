@@ -78,7 +78,7 @@ public class Foundation : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F) && Collision_Check == false && WindowOpen_Check == false)
         {
             FadeInout.DOFade(0.5f, 1f);
-            UI_Manager.Inst.PlayerMove_control = true;
+            UI_Manager.instance.PlayerMove_control = true;
             StartCoroutine(Open_Window());
             WindowOpen_Check = true;
         }
@@ -90,7 +90,7 @@ public class Foundation : MonoBehaviour
     public IEnumerator Open_Window()
     {
         SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX);
-        UI_Manager.Inst.Cursor_Fade = true;
+        UI_Manager.instance.Cursor_Fade = true;
         Malyeog_Window.SetActive(true);
         timer = 0f;
         Pole_01.transform.DOLocalMoveY(452, 0.5f);
@@ -107,7 +107,7 @@ public class Foundation : MonoBehaviour
     public IEnumerator Close_Window()
     {
         SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX);
-        UI_Manager.Inst.Cursor_Fade = false;
+        UI_Manager.instance.Cursor_Fade = false;
         timer = 0f;
         Pole_01.transform.DOLocalMoveY(30, 0.5f);
         Pole_02.transform.DOLocalMoveY(-30, 0.5f);
@@ -118,7 +118,7 @@ public class Foundation : MonoBehaviour
             timer += Time.deltaTime * 3f;
             yield return null;
         }
-        UI_Manager.Inst.PlayerMove_control = false;
+        UI_Manager.instance.PlayerMove_control = false;
         Malyeog_Window.SetActive(false);
         WindowOpen_Check = false;
     }

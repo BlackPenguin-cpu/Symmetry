@@ -6,26 +6,26 @@ using DG.Tweening;
 
 public class BlackSmith : MonoBehaviour
 {
-    public static BlackSmith Inst { get; private set; }
-    void Awake() => Inst = this;
+    public static BlackSmith instnace { get; private set; }
+    void Awake() => instnace = this;
 
 
     public bool BlackSmithWindow_Close = false;
 
     [Header("상호작용 버튼")]
-    public Image F_Button; // 상호작용 버튼
-    public GameObject Upgrade; // 상호작용 오브젝트
-    public Text Upgrade_Text; // 상호작용 텍스트
+    [SerializeField] Image F_Button; // 상호작용 버튼
+    [SerializeField] GameObject Upgrade; // 상호작용 오브젝트
+    [SerializeField] Text Upgrade_Text; // 상호작용 텍스트
     public bool Collision_Check = true; // 충돌 했는지 체크
 
     [Header("무기 구매 및 강화 창")]
     private float timer; // 창 열리는 속도
-    public GameObject Pole_01; // 봉_01
-    public GameObject Pole_02; // 봉_02
-    public GameObject Weapon_Purchase_Window; // 창 오브젝트
-    public RectTransform WeaponPurchase_RectWindow; // 창
+    [SerializeField] GameObject Pole_01; // 봉_01
+    [SerializeField] GameObject Pole_02; // 봉_02
+    [SerializeField] GameObject Weapon_Purchase_Window; // 창 오브젝트
+    [SerializeField] RectTransform WeaponPurchase_RectWindow; // 창
 
-    public Image FadeInout;
+    [SerializeField] Image FadeInout;
 
     public bool WindowOpen_Check = false;
 
@@ -34,57 +34,57 @@ public class BlackSmith : MonoBehaviour
     public GameObject Enhance_Btn;
 
     [Header("장착 확인")]
-    public GameObject Jang_cak_Btn;
-    public GameObject Jang_cak;
-    public GameObject No_Soyu;
+    [SerializeField] GameObject Jang_cak_Btn;
+    [SerializeField] GameObject Jang_cak;
+    [SerializeField] GameObject No_Soyu;
 
     public GameObject Weapon;
     public List<GameObject> BlackSmiths = new List<GameObject>();
 
     [Header("도끼 수칫값")]
-    public Text AxeLevel_Text;
-    public Text Axe_Skill_Text;
+    [SerializeField] Text AxeLevel_Text;
+    [SerializeField] Text Axe_Skill_Text;
 
-    public Text Axe_AttackDamage;
-    public Text Axe_AttackDamage_Upgrade;
-    public Text Axe_Defense;
-    public Text Axe_Defense_Upgrade;
+    [SerializeField] Text Axe_AttackDamage;
+    [SerializeField] Text Axe_AttackDamage_Upgrade;
+    [SerializeField] Text Axe_Defense;
+    [SerializeField] Text Axe_Defense_Upgrade;
 
     [Space(10)]
     public GameObject Axe_Price;
     public GameObject Axe_Required_Gold;
-    public Text Axe_Required_Gold_Price;
-    public GameObject Axe_MaxEnhance;
+    [SerializeField] Text Axe_Required_Gold_Price;
+    [SerializeField] GameObject Axe_MaxEnhance;
 
     [Header("검 수칫값")]
-    public Text SwordLevel_Text;
-    public Text Sword_Skill_Text;
+    [SerializeField] Text SwordLevel_Text;
+    [SerializeField] Text Sword_Skill_Text;
 
-    public Text Sword_AttackDamage;
-    public Text Sword_AttackDamage_Upgrade;
-    public Text Sword_MaxHp;
-    public Text Sword_MaxHp_Upgrade;
+    [SerializeField] Text Sword_AttackDamage;
+    [SerializeField] Text Sword_AttackDamage_Upgrade;
+    [SerializeField] Text Sword_MaxHp;
+    [SerializeField] Text Sword_MaxHp_Upgrade;
 
     [Space(10)]
-    public GameObject Sword_Required_Gold;
-    public Text Sword_Required_Gold_Price;
-    public GameObject Sword_MaxEnhance;
+    [SerializeField] GameObject Sword_Required_Gold;
+    [SerializeField] Text Sword_Required_Gold_Price;
+    [SerializeField] GameObject Sword_MaxEnhance;
 
 
     [Header("단검 수칫값")]
-    public Text DaggerLevel_Text;
-    public Text Dagger_Skill_Text;
+    [SerializeField] Text DaggerLevel_Text;
+    [SerializeField] Text Dagger_Skill_Text;
 
-    public Text Dagger_AttackDamage;
-    public Text Dagger_AttackDamage_Upgrade;
-    public Text Dagger_Critical;
-    public Text Dagger_Critical_Upgrade;
+    [SerializeField] Text Dagger_AttackDamage;
+    [SerializeField] Text Dagger_AttackDamage_Upgrade;
+    [SerializeField] Text Dagger_Critical;
+    [SerializeField] Text Dagger_Critical_Upgrade;
 
     [Space(10)]
     public GameObject Dagger_Price;
     public GameObject Dagger_Required_Gold;
-    public Text Dagger_Required_Gold_Price;
-    public GameObject Dagger_MaxEnhance;
+    [SerializeField] Text Dagger_Required_Gold_Price;
+    [SerializeField] GameObject Dagger_MaxEnhance;
 
     void Start()
     {
@@ -356,8 +356,8 @@ public class BlackSmith : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F) && Collision_Check == false && WindowOpen_Check == false)
         {
-            UI_Manager.Inst.Cursor_Fade = true;
-            UI_Manager.Inst.PlayerMove_control = true;
+            UI_Manager.instance.Cursor_Fade = true;
+            UI_Manager.instance.PlayerMove_control = true;
             FadeInout.DOFade(0.5f, 1f);
             StartCoroutine(Open_Window());
             WindowOpen_Check = true;
@@ -378,7 +378,7 @@ public class BlackSmith : MonoBehaviour
 
     public IEnumerator Open_Window()
     {
-        UI_Manager.Inst.Cursor_Fade = true;
+        UI_Manager.instance.Cursor_Fade = true;
         Weapon_Purchase_Window.SetActive(true);
         timer = 0f;
         Pole_01.transform.DOLocalMoveY(452, 0.5f);
@@ -397,7 +397,7 @@ public class BlackSmith : MonoBehaviour
     {
         if (BlackSmithWindow_Close == true)
         {
-            UI_Manager.Inst.Cursor_Fade = false;
+            UI_Manager.instance.Cursor_Fade = false;
             BlackSmithWindow_Close = false;
             FadeInout.DOFade(0f, 1f);
 
@@ -411,7 +411,7 @@ public class BlackSmith : MonoBehaviour
                 timer += Time.deltaTime * 3f;
                 yield return null;
             }
-            UI_Manager.Inst.PlayerMove_control = false;
+            UI_Manager.instance.PlayerMove_control = false;
             Weapon_Purchase_Window.SetActive(false);
             WindowOpen_Check = false;
         }

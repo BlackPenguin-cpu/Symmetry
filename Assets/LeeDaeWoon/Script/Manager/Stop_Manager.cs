@@ -138,7 +138,7 @@ public class Stop_Manager : MonoBehaviour
                 PauseWindow_Open = true;
                 Pause_Window_Canvas.SetActive(true);
                 Fade_Background.DOFade(0.5f, 0.5f);
-                UI_Manager.Inst.Cursor_Fade = true;
+                UI_Manager.instance.Cursor_Fade = true;
                 StartCoroutine(Pause_Window_Open());
             }
 
@@ -179,7 +179,7 @@ public class Stop_Manager : MonoBehaviour
         {
             Reset_Check = false;
 
-            Card_Manager.Inst.Item_Reset(); // 방어구 및 장신구 , 마정석 정보 초기화
+            Card_Manager.instance.Item_Reset(); // 방어구 및 장신구 , 마정석 정보 초기화
 
             ItemDA_Have.Clear(); // 소지한 아이템 초기화
             GameManager.Instance._coin = 0; // 골드 초기화
@@ -187,8 +187,8 @@ public class Stop_Manager : MonoBehaviour
             Player.Instance.stat._hp = Player.Instance.stat._maxHp; // 플레이어 HP 초기화
 
             // 타이머 초기화
-            UI_Manager.Inst.Sec = 0;
-            UI_Manager.Inst.Min = 0;
+            UI_Manager.instance.Sec = 0;
+            UI_Manager.instance.Min = 0;
 
             // 무기 강화수치 초기화
             Player.Instance.stat._level[PlayerWeaponType.Sword] = 0;
@@ -199,7 +199,7 @@ public class Stop_Manager : MonoBehaviour
             Skill_Manager.Inst.Skill_Up.Add(SkillManager.Instance.SkillScriptList[6]);
             Skill_Manager.Inst.Skill_Down.Add(SkillManager.Instance.SkillScriptList[8]);
 
-            Card_Manager.Inst.AddList();
+            Card_Manager.instance.AddList();
         }
     }
 
@@ -253,7 +253,7 @@ public class Stop_Manager : MonoBehaviour
                 timer += Time.unscaledDeltaTime * 2.5f;
                 yield return null;
             }
-            UI_Manager.Inst.Cursor_Fade = false;
+            UI_Manager.instance.Cursor_Fade = false;
             yield return new WaitForSecondsRealtime(0.1f);
             Pause_Window_Canvas.SetActive(false);
             PauseWindow_Open = false;
@@ -335,7 +335,7 @@ public class Stop_Manager : MonoBehaviour
             Setting_Window_Canvas.SetActive(false);
             Time.timeScale = 1f;
             SettingWindow_Open = false;
-            UI_Manager.Inst.Cursor_Fade = false;
+            UI_Manager.instance.Cursor_Fade = false;
         }
     }
 
@@ -395,10 +395,10 @@ public class Stop_Manager : MonoBehaviour
 
     public void Item_Log()
     {
-        if (Card_Manager.Inst.Item_bool == false)
+        if (Card_Manager.instance.Item_bool == false)
         {
-            Player_Item_Log.transform.GetChild(Card_Manager.Inst.Item_Check).GetComponent<Image>().sprite = ItemDA_Have[Card_Manager.Inst.Item_Check].Item_Icon;
-            Player_Item_Log.transform.GetChild(Card_Manager.Inst.Item_Check).gameObject.SetActive(true);
+            Player_Item_Log.transform.GetChild(Card_Manager.instance.Item_Check).GetComponent<Image>().sprite = ItemDA_Have[Card_Manager.instance.Item_Check].Item_Icon;
+            Player_Item_Log.transform.GetChild(Card_Manager.instance.Item_Check).gameObject.SetActive(true);
 
             if (Icon_Check == true)
             {
@@ -473,7 +473,7 @@ public class Stop_Manager : MonoBehaviour
             PauseWindow_Open = true;
             Time.timeScale = 1f;
             PlayerWindow_Open = false;
-            UI_Manager.Inst.Cursor_Fade = false;
+            UI_Manager.instance.Cursor_Fade = false;
         }
     }
 
@@ -764,7 +764,7 @@ public class Stop_Manager : MonoBehaviour
             PauseWindow_Open = true;
             Time.timeScale = 1f;
             MainWindow_Open = false;
-            UI_Manager.Inst.Cursor_Fade = false;
+            UI_Manager.instance.Cursor_Fade = false;
         }
     }
     #endregion
@@ -847,7 +847,7 @@ public class Stop_Manager : MonoBehaviour
             PauseWindow_Open = true;
             Time.timeScale = 1f;
             GameExitWindow_Open = false;
-            UI_Manager.Inst.Cursor_Fade = false;
+            UI_Manager.instance.Cursor_Fade = false;
         }
     }
     #endregion

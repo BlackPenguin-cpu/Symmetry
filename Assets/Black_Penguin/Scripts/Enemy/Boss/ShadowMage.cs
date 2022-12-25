@@ -191,6 +191,6 @@ public class ShadowMage : BaseEnemy
     void OnDelete()
     {
         ObjectPool.Instance.DeleteObj(gameObject);
-        UI_Manager.Inst.Die_System();
+        UI_Manager.instance.Die_System();
     }
 }

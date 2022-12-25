@@ -532,7 +532,7 @@ public class Player : Entity, ITypePlayer
     void InputManager()
     {
         horizontal = 0;
-        if (UI_Manager.Inst != null && UI_Manager.Inst.PlayerMove_control == true) return;
+        if (UI_Manager.instance != null && UI_Manager.instance.PlayerMove_control == true) return;
         if (state == PlayerState.Die) return;
 
         horizontal = Input.GetAxisRaw("Horizontal");

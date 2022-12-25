@@ -215,7 +215,7 @@ public class King_Collision : MonoBehaviour
                             yield return new WaitForSeconds(1f);
                             King.Inst.Magic_Creation = true;
                             King.Inst.Zoom_Shrinking();
-                            UI_Manager.Inst.King_Check = true;
+                            UI_Manager.instance.King_Check = true;
                         }
                     }
 
@@ -235,7 +235,7 @@ public class King_Collision : MonoBehaviour
 
     public IEnumerator OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<ITypePlayer>() != null && UI_Manager.Inst.King_Check == false)
+        if (collision.GetComponent<ITypePlayer>() != null && UI_Manager.instance.King_Check == false)
         {
             King.Inst.Zoom_Expansion(); // 카메라 확대 시킨다.
             switch (area)
