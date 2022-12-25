@@ -71,28 +71,28 @@ public class Salesman : MonoBehaviour
                 Gold_Text.text = (Gold_Num += 200).ToString();
 
 
-                for (int i = 0; i < Skill_Manager.Inst.Skill.Count; i++)
+                for (int i = 0; i < Skill_Manager.instance.Skill.Count; i++)
                 {
-                    for (int j = 0; j < Skill_Manager.Inst.Skill_Shop.Count; j++)
+                    for (int j = 0; j < Skill_Manager.instance.Skill_Shop.Count; j++)
                     {
-                        if (Skill_Manager.Inst.Skill[i].name == Skill_Manager.Inst.Skill_Shop[j].name)
+                        if (Skill_Manager.instance.Skill[i].name == Skill_Manager.instance.Skill_Shop[j].name)
                         {
                             Re_Roll_Check = false;
-                            Skill_Manager.Inst.Skill.RemoveAt(i);
-                            Skill_Manager.Inst.Skill_Shop.RemoveAt(j--);
+                            Skill_Manager.instance.Skill.RemoveAt(i);
+                            Skill_Manager.instance.Skill_Shop.RemoveAt(j--);
                         }
                     }
                 }
 
                 if (Re_Roll_Check == false)
                 {
-                    for (int i = 0; i < Skill_Manager.Inst.Skill.Count; i++)
+                    for (int i = 0; i < Skill_Manager.instance.Skill.Count; i++)
                     {
-                        Skill_Manager.Inst.SkillBuffer.Add(Skill_Manager.Inst.Skill[i]);
-                        Skill_Manager.Inst.Skill.RemoveAt(i--);
+                        Skill_Manager.instance.SkillBuffer.Add(Skill_Manager.instance.Skill[i]);
+                        Skill_Manager.instance.Skill.RemoveAt(i--);
                     }
                 }
-                Skill_Manager.Inst.AddSkill();
+                Skill_Manager.instance.AddSkill();
             }
         }
     }

@@ -8,8 +8,8 @@ using UnityEngine.SceneManagement;
 
 public class Skill_Manager : MonoBehaviour
 {
-    public static Skill_Manager Inst { get; private set; }
-    void Awake() => Inst = this;
+    public static Skill_Manager instance { get; private set; }
+    void Awake() => instance = this;
 
     public bool Instantiate_SkillCheck = false;
 

@@ -28,7 +28,7 @@ public class SkillManager : MonoBehaviour
 
     private void Start()
     {
-        skillManager = Skill_Manager.Inst;
+        skillManager = Skill_Manager.instance;
         player = Player.Instance;
         BaseSkill[] Skills = Resources.LoadAll<BaseSkill>("Skills/SkillObj/");
 

@@ -19,23 +19,23 @@ public class Skill_Collision : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if ((collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null ) && Skill_Window.Inst.Purchase == true && Skill_Window.Inst.SkillWindow == true)
+        if ((collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null ) && Skill_Window.instance.Purchase == true && Skill_Window.instance.SkillWindow == true)
         {
             SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
-            Skill_Window.Inst.SkillColider_Check = true;
-            Skill_Window.Inst.SkillNum = LeftRight_Nun;
+            Skill_Window.instance.SkillColider_Check = true;
+            Skill_Window.instance.SkillNum = LeftRight_Nun;
             Skill_List.Inst.Skill_Num(LeftRight_Nun);
-            StartCoroutine(Skill_Window.Inst.SkillWindow_Coroutine());
+            StartCoroutine(Skill_Window.instance.SkillWindow_Coroutine());
         }
     }
     
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if ((collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null) && Skill_Window.Inst.Purchase == true && Skill_Window.Inst.SkillWindow == false)
+        if ((collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null) && Skill_Window.instance.Purchase == true && Skill_Window.instance.SkillWindow == false)
         {
             SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
-            Skill_Window.Inst.SkillColider_Check = false;
-            StartCoroutine(Skill_Window.Inst.SkillWindowClose_Coroutine());
+            Skill_Window.instance.SkillColider_Check = false;
+            StartCoroutine(Skill_Window.instance.SkillWindowClose_Coroutine());
         }
     }
 

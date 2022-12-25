@@ -196,8 +196,8 @@ public class Stop_Manager : MonoBehaviour
             Player.Instance.stat._level[PlayerWeaponType.Axe] = 0;
 
             // 기본 스킬로 초기화
-            Skill_Manager.Inst.Skill_Up.Add(SkillManager.Instance.SkillScriptList[6]);
-            Skill_Manager.Inst.Skill_Down.Add(SkillManager.Instance.SkillScriptList[8]);
+            Skill_Manager.instance.Skill_Up.Add(SkillManager.Instance.SkillScriptList[6]);
+            Skill_Manager.instance.Skill_Down.Add(SkillManager.Instance.SkillScriptList[8]);
 
             Card_Manager.instance.AddList();
         }

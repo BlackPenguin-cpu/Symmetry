@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class Skill_Window : MonoBehaviour
 {
-    public static Skill_Window Inst { get; private set; }
-    void Awake() => Inst = this;
+    public static Skill_Window instance { get; private set; }
+    void Awake() => instance = this;
 
     [Header("스킬창 시간")]
     public float Timer = 0;
@@ -107,7 +107,7 @@ public class Skill_Window : MonoBehaviour
                 SoundManager.instance.PlaySoundClip("SFX_Buy", SoundType.SFX, 5f);
                 UI_Manager.instance.PlayerMove_control = true;
 
-                SeletSkill = Skill_Manager.Inst.Skill[SkillNum];
+                SeletSkill = Skill_Manager.instance.Skill[SkillNum];
                 AfterPurchase_Skill.GetComponent<Image>().sprite = SeletSkill.sprite;
                 GameManager.Instance._coin -= SeletSkill.price[0];
 
@@ -127,8 +127,8 @@ public class Skill_Window : MonoBehaviour
                 //        break;
                 //}
 
-                Skill_Manager.Inst.Skill_Have.Add(SeletSkill);
-                Skill_Manager.Inst.Skill_Shop.Add(SeletSkill);
+                Skill_Manager.instance.Skill_Have.Add(SeletSkill);
+                Skill_Manager.instance.Skill_Shop.Add(SeletSkill);
 
                 Purchase = false; // 이것을 통하여 스킬구매 -> 스킬적용으로 넘겨준다.
 
@@ -167,12 +167,12 @@ public class Skill_Window : MonoBehaviour
             UpDown_Limit = false;
 
             // 윗 부분에 있던 스킬은 상점에으로 보낸다.
-            Skill_Manager.Inst.SkillBuffer.Add(Skill_Manager.Inst.Skill_Up[0]);
-            Skill_Manager.Inst.Skill_Up.RemoveAt(0);
+            Skill_Manager.instance.SkillBuffer.Add(Skill_Manager.instance.Skill_Up[0]);
+            Skill_Manager.instance.Skill_Up.RemoveAt(0);
 
             // 구매한 스킬을 윗 부분에 넣어준다.
-            Skill_Manager.Inst.Skill_Up.Add(Skill_Manager.Inst.Skill_Have[0]);
-            Skill_Manager.Inst.Skill_Have.RemoveAt(0);
+            Skill_Manager.instance.Skill_Up.Add(Skill_Manager.instance.Skill_Have[0]);
+            Skill_Manager.instance.Skill_Have.RemoveAt(0);
 
             Vector3[] SaveSkillPos = new Vector3[2];
             SaveSkillPos[0] = AfterPurchase_Skill.transform.position;
@@ -185,7 +185,7 @@ public class Skill_Window : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
 
             // AS_Limit = Shift를 통한 스킬 전환 체크
-            if (Skill_Manager.Inst.AS_Limit == true) // true일 경우 A스킬에 구매한 스킬을 적용시킨다.
+            if (Skill_Manager.instance.AS_Limit == true) // true일 경우 A스킬에 구매한 스킬을 적용시킨다.
             {
                 Basics_Skill_A.sprite = SeletSkill.sprite;
             }
@@ -214,12 +214,12 @@ public class Skill_Window : MonoBehaviour
             UpDown_Limit = false;
 
             // 아랫 부분에 있던 스킬은 상점으로 보낸다.
-            Skill_Manager.Inst.SkillBuffer.Add(Skill_Manager.Inst.Skill_Down[0]);
-            Skill_Manager.Inst.Skill_Down.RemoveAt(0);
+            Skill_Manager.instance.SkillBuffer.Add(Skill_Manager.instance.Skill_Down[0]);
+            Skill_Manager.instance.Skill_Down.RemoveAt(0);
 
             // 구매한 스킬을 아랫 부분에 넣어준다.
-            Skill_Manager.Inst.Skill_Down.Add(Skill_Manager.Inst.Skill_Have[0]);
-            Skill_Manager.Inst.Skill_Have.RemoveAt(0);
+            Skill_Manager.instance.Skill_Down.Add(Skill_Manager.instance.Skill_Have[0]);
+            Skill_Manager.instance.Skill_Have.RemoveAt(0);
 
             Vector3[] SaveSkillPos = new Vector3[2];
             SaveSkillPos[0] = AfterPurchase_Skill.transform.position;
@@ -232,7 +232,7 @@ public class Skill_Window : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
 
             // AS_Limit = Shift를 통한 스킬 전환 체크
-            if (Skill_Manager.Inst.AS_Limit_02 == true) // true일 경우 S스킬에 구매한 스킬을 적용시킨다.
+            if (Skill_Manager.instance.AS_Limit_02 == true) // true일 경우 S스킬에 구매한 스킬을 적용시킨다.
                 Basics_Skill_S.sprite = SeletSkill.sprite;
             else
                 Basics_Skill_A.sprite = SeletSkill.sprite;

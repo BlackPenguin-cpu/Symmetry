@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class King : MonoBehaviour
 {
-    public static King Inst { get; private set; }
-    void Awake() => Inst = this;
+    public static King instance { get; private set; }
+    void Awake() => instance = this;
 
     [Header("ø’¿« ªÁ≥‰")]
     public SpriteRenderer King_NPC;

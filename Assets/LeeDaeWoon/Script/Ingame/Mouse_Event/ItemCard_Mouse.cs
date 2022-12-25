@@ -520,7 +520,7 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             if (WaveManager.Instance.m_WaveNum == 3 || WaveManager.Instance.m_WaveNum == 5)
                 Potal.Inst.Potal_M();
 
-            Skill_Manager.Inst.Instantiate_SkillCheck = false;
+            Skill_Manager.instance.Instantiate_SkillCheck = false;
         }
 
         if (direction == Direction.Among)
@@ -553,7 +553,7 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             if (WaveManager.Instance.m_WaveNum == 3 || WaveManager.Instance.m_WaveNum == 5)
                 Potal.Inst.Potal_M();
 
-            Skill_Manager.Inst.Instantiate_SkillCheck = false;
+            Skill_Manager.instance.Instantiate_SkillCheck = false;
         }
 
         if (direction == Direction.Right)
@@ -587,7 +587,7 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             if (WaveManager.Instance.m_WaveNum == 3 || WaveManager.Instance.m_WaveNum == 5)
                 Potal.Inst.Potal_M();
 
-            Skill_Manager.Inst.Instantiate_SkillCheck = false;
+            Skill_Manager.instance.Instantiate_SkillCheck = false;
         }
     }
 }

@@ -7,7 +7,7 @@ using DG.Tweening;
 
 public class Title_Manager : MonoBehaviour
 {
-    public static Title_Manager Inst { get; private set; }
+    public static Title_Manager instnace { get; private set; }
 
     [Header("≈∏¿Ã∆≤")]
     public GameObject Title_Logo;
@@ -37,15 +37,13 @@ public class Title_Manager : MonoBehaviour
                 Change_Scene();
 
             if (Skip_Check == true)
-            {
                 StartCoroutine(Credit_ESC());
-            }
         }
     }
 
     private void Awake()
     {
-        Inst = this;
+        instnace = this;
         Sart_Coroutine();
     }
 
