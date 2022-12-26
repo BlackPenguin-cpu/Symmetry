@@ -8,6 +8,7 @@ using DG.Tweening;
 public class Title_Manager : MonoBehaviour
 {
     public static Title_Manager instnace { get; private set; }
+    void Awake() => instnace = this;
 
     [Header("타이틀")]
     [SerializeField] GameObject circleBall;
@@ -26,39 +27,27 @@ public class Title_Manager : MonoBehaviour
 
     void Start()
     {
-        CircleBall();
-        StartCoroutine(TeamLogo_BackGround());
+        TitleDirector();
+        //StartCoroutine(TeamLogo_BackGround());
     }
 
     void Update()
     {
-        if (Input.anyKeyDown)
-        {
-            if (isMouseCheck == false && isSkipCheck != true)
-                Change_Scene();
+        //if (Input.anyKeyDown)
+        //{
+        //    if (isMouseCheck == false && isSkipCheck != true)
+        //        Change_Scene();
 
-            if (isSkipCheck == true)
-                StartCoroutine(Credit_ESC());
-        }
-    }
-
-    private void Awake()
-    {
-        instnace = this;
-        Sart_Coroutine();
-    }
-
-    public void Sart_Coroutine()
-    {
-        //StartCoroutine(Circle01());
-        StartCoroutine(FadeText_Full());
+        //    if (isSkipCheck == true)
+        //        StartCoroutine(Credit_ESC());
+        //}
     }
 
     public void Change_Scene()
     {
         if (isTeamBackGround == true)
         {
-            DOTween.PauseAll();
+            DOTween.KillAll();
             SceneManager.LoadScene("Main");
         }
 
@@ -78,30 +67,16 @@ public class Title_Manager : MonoBehaviour
         fadeInOut.DOFade(0f, 0.5f);
     }
 
-    void CircleBall()
+    void TitleDirector()
     {
-        int circlePos = 327;
         int timer = 3;
+        int circlePos = 327;
+
+        passAnyKey.DOFade(0, 1.5f).SetEase(Ease.Linear).SetLoops(-1, LoopType.Yoyo);
 
         circleBall.transform.GetChild(0).transform.DOLocalMoveY(circlePos, timer).SetEase(Ease.InOutCubic).SetLoops(-1, LoopType.Yoyo);
         circleBall.transform.GetChild(1).transform.DOLocalMoveY(-circlePos, timer).SetEase(Ease.InOutCubic).SetLoops(-1, LoopType.Yoyo);
     }
-
-    #region FadeInOut
-    public IEnumerator FadeText_Full()
-    {
-        passAnyKey.DOFade(0f, 1.5f);
-        yield return new WaitForSeconds(1.5f);
-        StartCoroutine(FadeText_Zero());
-    }
-
-    public IEnumerator FadeText_Zero()
-    {
-        passAnyKey.DOFade(1f, 1.5f);
-        yield return new WaitForSeconds(1.5f);
-        StartCoroutine(FadeText_Full());
-    }
-    #endregion
 
     #region 팀 배경
     public IEnumerator TeamLogo_BackGround()
