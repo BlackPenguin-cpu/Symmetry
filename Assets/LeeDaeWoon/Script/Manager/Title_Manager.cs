@@ -15,32 +15,35 @@ public class Title_Manager : MonoBehaviour
     [SerializeField] Text passAnyKey;
 
     [SerializeField] Image teamBackGround;
-    public bool isMouseCheck;
     bool isTeamBackGround = false;
 
     [Header("Å©·¹µ÷")]
+    [SerializeField] Button creditBtn;
     [SerializeField] Image fadeInOut;
     public Image creditBackGround;
     public GameObject creditText;
-    public bool isClickCheck;
-    public bool isSkipCheck;
+
+    public bool isCreditOut = false;
+    public bool isSkipCheck = false;
+    public bool isCreditCheck = false;
+
+    const int timer = 3;
 
     void Start()
     {
         TitleDirector();
-        //StartCoroutine(TeamLogo_BackGround());
+        StartCoroutine(TeamBackGround());
     }
 
     void Update()
     {
-        //if (Input.anyKeyDown)
-        //{
-        //    if (isMouseCheck == false && isSkipCheck != true)
-        //        Change_Scene();
-
-        //    if (isSkipCheck == true)
-        //        StartCoroutine(Credit_ESC());
-        //}
+        if (Input.anyKeyDown)
+        {
+            if (isCreditOut == false && isSkipCheck == false)
+                Change_Scene();
+            //else
+                //StartCoroutine(Credit_ESC());
+        }
     }
 
     public void Change_Scene()
@@ -60,8 +63,6 @@ public class Title_Manager : MonoBehaviour
         creditText.transform.DOPause();
         creditBackGround.DOFade(0f, 0f);
         creditText.transform.localPosition = new Vector3(0f, -4764f, 0f);
-        isMouseCheck = false;
-        isClickCheck = false;
         isSkipCheck = false;
         creditBackGround.raycastTarget = false;
         fadeInOut.DOFade(0f, 0.5f);
@@ -69,25 +70,23 @@ public class Title_Manager : MonoBehaviour
 
     void TitleDirector()
     {
-        int timer = 3;
         int circlePos = 327;
 
+        // passAnyKey Director
         passAnyKey.DOFade(0, 1.5f).SetEase(Ease.Linear).SetLoops(-1, LoopType.Yoyo);
 
+        // circleBall Director
         circleBall.transform.GetChild(0).transform.DOLocalMoveY(circlePos, timer).SetEase(Ease.InOutCubic).SetLoops(-1, LoopType.Yoyo);
         circleBall.transform.GetChild(1).transform.DOLocalMoveY(-circlePos, timer).SetEase(Ease.InOutCubic).SetLoops(-1, LoopType.Yoyo);
     }
 
-    #region ÆÀ ¹è°æ
-    public IEnumerator TeamLogo_BackGround()
+    IEnumerator TeamBackGround()
     {
-        creditBackGround.raycastTarget = true;
-        yield return new WaitForSeconds(3f);
-        teamBackGround.DOFade(0f, 3f);
-        yield return new WaitForSeconds(4f);
-        creditBackGround.raycastTarget = false;
-        isTeamBackGround = true;
+        yield return new WaitForSeconds(timer);
+        teamBackGround.DOFade(0, timer).OnComplete(() =>
+        {
+            teamBackGround.raycastTarget = false;
+            isTeamBackGround = true;
+        });
     }
-    #endregion
-
 }

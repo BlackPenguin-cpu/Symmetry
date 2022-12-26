@@ -2,15 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using DG.Tweening;
 
 public class Credit_Click : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    float timer;
+    Button creditBtn;
+
+    const float waitTime = 0.5f;
+    Title_Manager titleManager;
 
     void Start()
     {
+        titleManager = Title_Manager.instnace;
+        creditBtn = GetComponent<Button>();
 
+        CreditBtn();
     }
 
     void Update()
@@ -20,47 +27,43 @@ public class Credit_Click : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Title_Manager.instnace.isMouseCheck = true;
+        Title_Manager.instnace.isCreditOut = true;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (Title_Manager.instnace.isClickCheck == false)
-            Title_Manager.instnace.isMouseCheck = false;
+        Title_Manager.instnace.isCreditOut = false;
     }
 
-    #region Å©·¹µ÷ ¹öÆ°
-    public void LogoClick()
+    public void CreditBtn()
     {
-        SoundManager.instance.PlaySoundClip("SFX_Button_Click", SoundType.SFX);
-        StartCoroutine(Logo_Credit());
-    }
+        int creditTextPos = 4702;
 
-    public IEnumerator Logo_Credit()
-    {
-        if (Title_Manager.instnace.isMouseCheck == true)
+        creditBtn.onClick.AddListener(() =>
         {
+            titleManager.isCreditCheck = true;
+
+            SoundManager.instance.PlaySoundClip("SFX_Button_Click", SoundType.SFX);
             SoundManager.instance.PlaySoundClip("BGM_Editor", SoundType.BGM);
-            Title_Manager.instnace.isClickCheck = true;
-            Title_Manager.instnace.creditBackGround.DOFade(1f, 0.5f);
-            Title_Manager.instnace.creditBackGround.raycastTarget = true;
-            yield return new WaitForSeconds(0.5f);
 
-            Title_Manager.instnace.creditText.transform.DOLocalMoveY(4702f, 50f).SetEase(Ease.Linear);
+            titleManager.creditBackGround.raycastTarget = true;
+            titleManager.creditBackGround.DOFade(1, waitTime).OnComplete(() =>
+            {
+                titleManager.isSkipCheck = true;
+            });
 
-            yield return new WaitForSeconds(2.5f);
-            Title_Manager.instnace.isSkipCheck = true;
+            titleManager.creditText.transform.DOLocalMoveY(creditTextPos, waitTime * 100).SetEase(Ease.Linear).OnComplete(() =>
+            {
+                SoundManager.instance.PlaySoundClip(null , SoundType.BGM);
 
-            yield return new WaitForSeconds(50f);
-            Title_Manager.instnace.creditBackGround.DOFade(0f, 0.5f);
-            yield return new WaitForSeconds(0.5f);
+                titleManager.creditBackGround.DOFade(0f, waitTime);
+                titleManager.creditText.transform.localPosition = new Vector3(0f, -4764f, 0f);
 
-            Title_Manager.instnace.creditBackGround.raycastTarget = false;
-            Title_Manager.instnace.isMouseCheck = false;
-            Title_Manager.instnace.isClickCheck = false;
-            Title_Manager.instnace.isSkipCheck = false;
-            Title_Manager.instnace.creditText.transform.localPosition = new Vector3(0f, -4764f, 0f);
-        }
+                titleManager.isSkipCheck = false;
+                titleManager.isCreditCheck = false;
+                titleManager.creditBackGround.raycastTarget = false;
+            });
+
+        });
     }
-    #endregion
 }
