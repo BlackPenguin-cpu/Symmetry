@@ -20,13 +20,13 @@ public class Credit_Click : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Title_Manager.instnace.MouseCheck = true;
+        Title_Manager.instnace.isMouseCheck = true;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (Title_Manager.instnace.click_Check == false)
-            Title_Manager.instnace.MouseCheck = false;
+        if (Title_Manager.instnace.isClickCheck == false)
+            Title_Manager.instnace.isMouseCheck = false;
     }
 
     #region Å©·¹µ÷ ¹öÆ°
@@ -38,28 +38,28 @@ public class Credit_Click : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public IEnumerator Logo_Credit()
     {
-        if (Title_Manager.instnace.MouseCheck == true)
+        if (Title_Manager.instnace.isMouseCheck == true)
         {
             SoundManager.instance.PlaySoundClip("BGM_Editor", SoundType.BGM);
-            Title_Manager.instnace.click_Check = true;
-            Title_Manager.instnace.Credit_BackGround.DOFade(1f, 0.5f);
-            Title_Manager.instnace.Credit_BackGround.raycastTarget = true;
+            Title_Manager.instnace.isClickCheck = true;
+            Title_Manager.instnace.creditBackGround.DOFade(1f, 0.5f);
+            Title_Manager.instnace.creditBackGround.raycastTarget = true;
             yield return new WaitForSeconds(0.5f);
 
-            Title_Manager.instnace.Credit_Text.transform.DOLocalMoveY(4702f, 50f).SetEase(Ease.Linear);
+            Title_Manager.instnace.creditText.transform.DOLocalMoveY(4702f, 50f).SetEase(Ease.Linear);
 
             yield return new WaitForSeconds(2.5f);
-            Title_Manager.instnace.Skip_Check = true;
+            Title_Manager.instnace.isSkipCheck = true;
 
             yield return new WaitForSeconds(50f);
-            Title_Manager.instnace.Credit_BackGround.DOFade(0f, 0.5f);
+            Title_Manager.instnace.creditBackGround.DOFade(0f, 0.5f);
             yield return new WaitForSeconds(0.5f);
 
-            Title_Manager.instnace.Credit_BackGround.raycastTarget = false;
-            Title_Manager.instnace.MouseCheck = false;
-            Title_Manager.instnace.click_Check = false;
-            Title_Manager.instnace.Skip_Check = false;
-            Title_Manager.instnace.Credit_Text.transform.localPosition = new Vector3(0f, -4764f, 0f);
+            Title_Manager.instnace.creditBackGround.raycastTarget = false;
+            Title_Manager.instnace.isMouseCheck = false;
+            Title_Manager.instnace.isClickCheck = false;
+            Title_Manager.instnace.isSkipCheck = false;
+            Title_Manager.instnace.creditText.transform.localPosition = new Vector3(0f, -4764f, 0f);
         }
     }
     #endregion

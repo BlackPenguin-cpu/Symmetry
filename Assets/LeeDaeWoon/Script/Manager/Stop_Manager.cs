@@ -67,30 +67,30 @@ public class Stop_Manager : MonoBehaviour
     [SerializeField] Text AxeLevel_Text;
     [SerializeField] Text Axe_Skill_Text;
 
-    public Text Axe_AttackDamage;
-    public Text Axe_AttackDamage_Upgrade;
-    public Text Axe_Defense;
-    public Text Axe_Defense_Upgrade;
+    [SerializeField] Text Axe_AttackDamage;
+    [SerializeField] Text Axe_AttackDamage_Upgrade;
+    [SerializeField] Text Axe_Defense;
+    [SerializeField] Text Axe_Defense_Upgrade;
 
     [Space(10f)]
-    public GameObject Sword_Window; // 검
-    public Text SwordLevel_Text;
-    public Text Sword_Skill_Text;
+    [SerializeField] GameObject Sword_Window; // 검
+    [SerializeField] Text SwordLevel_Text;
+    [SerializeField] Text Sword_Skill_Text;
 
-    public Text Sword_AttackDamage;
-    public Text Sword_AttackDamage_Upgrade;
-    public Text Sword_MaxHp;
-    public Text Sword_MaxHp_Upgrade;
+    [SerializeField] Text Sword_AttackDamage;
+    [SerializeField] Text Sword_AttackDamage_Upgrade;
+    [SerializeField] Text Sword_MaxHp;
+    [SerializeField] Text Sword_MaxHp_Upgrade;
 
     [Space(10f)]
-    public GameObject Dagger_Window; // 단검
-    public Text DaggerLevel_Text;
-    public Text Dagger_Skill_Text;
+    [SerializeField] GameObject Dagger_Window; // 단검
+    [SerializeField] Text DaggerLevel_Text;
+    [SerializeField] Text Dagger_Skill_Text;
 
-    public Text Dagger_AttackDamage;
-    public Text Dagger_AttackDamage_Upgrade;
-    public Text Dagger_Critical;
-    public Text Dagger_Critical_Upgrade;
+    [SerializeField] Text Dagger_AttackDamage;
+    [SerializeField] Text Dagger_AttackDamage_Upgrade;
+    [SerializeField] Text Dagger_Critical;
+    [SerializeField] Text Dagger_Critical_Upgrade;
 
     [Header("플레이어_아이템 창")]
     public Image Player_Item_Log; // 아이템 로그
@@ -98,13 +98,13 @@ public class Stop_Manager : MonoBehaviour
     public Image Player_Item_Icon; // 아이템 아이콘
     public Text Player_Item_Explanation; // 아이템 설명
 
-    private bool Icon_Check = true;
+    bool Icon_Check = true;
 
     [Header("메인화면 창")]
-    public GameObject Main_Pole01; // 메인 창의 윗 봉
-    public GameObject Main_Pole02; // 메인 창의 아랫 봉 
-    public RectTransform Main_Window; // 메인 창의 중간 
-    public GameObject Main_Window_Canvas; // 메인 창
+    [SerializeField] GameObject Main_Pole01; // 메인 창의 윗 봉
+    [SerializeField] GameObject Main_Pole02; // 메인 창의 아랫 봉 
+    [SerializeField] RectTransform Main_Window; // 메인 창의 중간 
+    [SerializeField] GameObject Main_Window_Canvas; // 메인 창
 
     bool Reset_Check; // 초기화 체크
 
@@ -156,7 +156,6 @@ public class Stop_Manager : MonoBehaviour
 
             if (PlayerWindow_Open == true && PlayerWindow_Check == true)
                 Player_Close_Btn();
-
         }
     }
 
@@ -168,9 +167,7 @@ public class Stop_Manager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         else
-        {
             Destroy(gameObject);
-        }
     }
 
     public void Main_Reset()
