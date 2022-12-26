@@ -513,7 +513,7 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
                 DOTween.PauseAll();
                 Destroy(GameObject.Find("Item_Window(Clone)"));
             }
-            UI_Manager.instance.Timer_Check = true;
+            UI_Manager.instance.timerCheck = true;
 
             WaveManager.Instance.StartCoroutine(WaveManager.Instance.WaveProcessing(WaveManager.Instance.m_WaveNum - 1));
 
@@ -546,7 +546,7 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
                 DOTween.PauseAll();
                 Destroy(GameObject.Find("Item_Window(Clone)"));
             }
-            UI_Manager.instance.Timer_Check = true;
+            UI_Manager.instance.timerCheck = true;
 
             WaveManager.Instance.StartCoroutine(WaveManager.Instance.WaveProcessing(WaveManager.Instance.m_WaveNum - 1));
 
@@ -579,7 +579,7 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
                 DOTween.PauseAll();
                 Destroy(GameObject.Find("Item_Window(Clone)"));
             }
-            UI_Manager.instance.Timer_Check = true;
+            UI_Manager.instance.timerCheck = true;
 
             //TODO: ¿¿æ÷
             WaveManager.Instance.StartCoroutine(WaveManager.Instance.WaveProcessing(WaveManager.Instance.m_WaveNum - 1));

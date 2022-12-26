@@ -12,19 +12,19 @@ public class UI_Manager : MonoBehaviour
     public bool PlayerMove_control = false;
 
     [Header("재화")]
-    public int Gold;
-    public int Dimensional;
-    [SerializeField] Text Gold_Text;
-    [SerializeField] Text Dimensional_Text;
+    public int gold;
+    public int dimensional;
+    [SerializeField] Text goldText;
+    [SerializeField] Text dimensionalText;
 
     [Header("웨이브")]
-    [SerializeField] Text Wave_Text;
+    [SerializeField] Text waveText;
 
     [Header("타이머")]
-    [SerializeField] Text Timer_Text;
-    public bool Timer_Check;
-    public int Min;
-    public float Sec;
+    [SerializeField] Text timerText;
+    public bool timerCheck;
+    public int min;
+    public float sec;
 
     [Header("체력")]
     public float HP_Bar;
@@ -52,7 +52,7 @@ public class UI_Manager : MonoBehaviour
     void Start()
     {
         //Cursor.visible = false;
-        Timer_Check = true;
+        timerCheck = true;
         Cursor.SetCursor(MousePointer, Vector2.zero, CursorMode.ForceSoftware);
     }
 
@@ -96,8 +96,8 @@ public class UI_Manager : MonoBehaviour
             WaveManager.Instance.m_WaveNum = 1; // Wave 초기화
 
             // 타이머 초기화 
-            Sec = 0;
-            Min = 0;
+            sec = 0;
+            min = 0;
 
             // 각 무기 레벨 초기화
             //for(int i = 0; i < )
@@ -116,15 +116,15 @@ public class UI_Manager : MonoBehaviour
     #region 타이머
     public void Timer_System()
     {
-        if (Timer_Check == true)
+        if (timerCheck == true)
         {
-            Sec += Time.deltaTime;
-            Timer_Text.text = string.Format("{0:D2}:{1:D2}", Min, (int)Sec);
+            sec += Time.deltaTime;
+            timerText.text = string.Format("{0:D2}:{1:D2}", min, (int)sec);
 
-            if ((int)Sec > 59)
+            if ((int)sec > 59)
             {
-                Sec = 0;
-                Min++;
+                sec = 0;
+                min++;
             }
         }
         else
@@ -137,8 +137,8 @@ public class UI_Manager : MonoBehaviour
     #region 재화
     public void Money_System()
     {
-        Gold_Text.text = GameManager.Instance._coin.ToString();
-        Dimensional_Text.text = GameManager.Instance.crystal.ToString();
+        goldText.text = GameManager.Instance._coin.ToString();
+        dimensionalText.text = GameManager.Instance.crystal.ToString();
 
         if (Input.GetKeyDown(KeyCode.G))
             GameManager.Instance._coin += 1000;
@@ -153,15 +153,15 @@ public class UI_Manager : MonoBehaviour
     {
         // 인게임
         if (SceneManager.GetActiveScene().name == "test")
-            Wave_Text.text = "Wave." + WaveManager.Instance.m_WaveNum;
+            waveText.text = "Wave." + WaveManager.Instance.m_WaveNum;
 
         // 차원의 틈새
         else if (SceneManager.GetActiveScene().name == "Dimension")
-            Wave_Text.text = "차원의 틈새";
+            waveText.text = "차원의 틈새";
 
         // 폐허가된 성
         else if (SceneManager.GetActiveScene().name == "Main")
-            Wave_Text.text = "폐허가된 성";
+            waveText.text = "폐허가된 성";
     }
     #endregion
 

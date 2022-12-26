@@ -495,12 +495,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerMove_control: 0
-  Gold: 0
-  Gold_Text: {fileID: 1272140075250453603}
-  Dimensional: 0
-  Dimensional_Text: {fileID: 3974177440768734973}
-  Wave_Text: {fileID: 4129189006980683382}
+  gold: 0
+  dimensional: 0
+  goldText: {fileID: 1272140075250453603}
+  dimensionalText: {fileID: 3974177440768734973}
+  waveText: {fileID: 4129189006980683382}
   Timer_Text: {fileID: 296586128572278085}
+  Timer_Check: 0
+  Min: 0
+  Sec: 0
   HP_Bar: 1
   HP: 0
   Bar: {fileID: 8098893948647789191}

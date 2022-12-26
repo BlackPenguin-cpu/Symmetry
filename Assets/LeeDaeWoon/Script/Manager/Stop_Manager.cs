@@ -64,8 +64,8 @@ public class Stop_Manager : MonoBehaviour
 
     [Header("플레이어_무기 창")]
     public GameObject Axe_Window; // 도끼
-    public Text AxeLevel_Text;
-    public Text Axe_Skill_Text;
+    [SerializeField] Text AxeLevel_Text;
+    [SerializeField] Text Axe_Skill_Text;
 
     public Text Axe_AttackDamage;
     public Text Axe_AttackDamage_Upgrade;
@@ -187,8 +187,8 @@ public class Stop_Manager : MonoBehaviour
             Player.Instance.stat._hp = Player.Instance.stat._maxHp; // 플레이어 HP 초기화
 
             // 타이머 초기화
-            UI_Manager.instance.Sec = 0;
-            UI_Manager.instance.Min = 0;
+            UI_Manager.instance.sec = 0;
+            UI_Manager.instance.min = 0;
 
             // 무기 강화수치 초기화
             Player.Instance.stat._level[PlayerWeaponType.Sword] = 0;
