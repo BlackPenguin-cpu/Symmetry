@@ -19,7 +19,6 @@ public class Title_Manager : MonoBehaviour
 
     [Header("Å©·¹µ÷")]
     [SerializeField] Button creditBtn;
-    [SerializeField] Image fadeInOut;
     public Image creditBackGround;
     public GameObject creditText;
 
@@ -41,8 +40,8 @@ public class Title_Manager : MonoBehaviour
         {
             if (isCreditOut == false && isSkipCheck == false)
                 Change_Scene();
-            //else
-                //StartCoroutine(Credit_ESC());
+            else if(isSkipCheck == true)
+                Credit_ESC();
         }
     }
 
@@ -53,19 +52,21 @@ public class Title_Manager : MonoBehaviour
             DOTween.KillAll();
             SceneManager.LoadScene("Main");
         }
-
     }
 
-    public IEnumerator Credit_ESC()
+    public void Credit_ESC()
     {
-        fadeInOut.DOFade(1f, 0.5f);
-        yield return new WaitForSeconds(0.5f);
-        creditText.transform.DOPause();
-        creditBackGround.DOFade(0f, 0f);
-        creditText.transform.localPosition = new Vector3(0f, -4764f, 0f);
-        isSkipCheck = false;
-        creditBackGround.raycastTarget = false;
-        fadeInOut.DOFade(0f, 0.5f);
+        float waitTime = 0.5f;
+        int creditTextPos = 4764;
+
+        creditText.transform.DOKill();
+        creditText.transform.DOLocalMoveY(-creditTextPos, 0).SetEase(Ease.Linear);
+        creditBackGround.DOFade(0f, waitTime).OnComplete(() =>
+        {
+            Debug.Log("adfasdf");
+            isSkipCheck = false;
+            creditBackGround.raycastTarget = false;
+        });
     }
 
     void TitleDirector()
