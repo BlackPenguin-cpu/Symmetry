@@ -1033,7 +1033,7 @@ MonoBehaviour:
   pole02: {fileID: 1639259046}
   malyeogWindow: {fileID: 1887432763}
   malyeogRectWindow: {fileID: 337622492}
-  fadeInOut: {fileID: 0}
+  fadeInOut: {fileID: 1106004338}
   Title: {fileID: 1069232668}
   Explanation: {fileID: 648504052}
   Close_Btn: {fileID: 1368036020}
