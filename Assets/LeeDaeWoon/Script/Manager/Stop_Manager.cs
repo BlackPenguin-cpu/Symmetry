@@ -138,7 +138,7 @@ public class Stop_Manager : MonoBehaviour
                 PauseWindow_Open = true;
                 Pause_Window_Canvas.SetActive(true);
                 Fade_Background.DOFade(0.5f, 0.5f);
-                UI_Manager.instance.Cursor_Fade = true;
+                UI_Manager.instance.isCursorFade = true;
                 StartCoroutine(Pause_Window_Open());
             }
 
@@ -250,7 +250,7 @@ public class Stop_Manager : MonoBehaviour
                 timer += Time.unscaledDeltaTime * 2.5f;
                 yield return null;
             }
-            UI_Manager.instance.Cursor_Fade = false;
+            UI_Manager.instance.isCursorFade = false;
             yield return new WaitForSecondsRealtime(0.1f);
             Pause_Window_Canvas.SetActive(false);
             PauseWindow_Open = false;
@@ -332,7 +332,7 @@ public class Stop_Manager : MonoBehaviour
             Setting_Window_Canvas.SetActive(false);
             Time.timeScale = 1f;
             SettingWindow_Open = false;
-            UI_Manager.instance.Cursor_Fade = false;
+            UI_Manager.instance.isCursorFade = false;
         }
     }
 
@@ -470,7 +470,7 @@ public class Stop_Manager : MonoBehaviour
             PauseWindow_Open = true;
             Time.timeScale = 1f;
             PlayerWindow_Open = false;
-            UI_Manager.instance.Cursor_Fade = false;
+            UI_Manager.instance.isCursorFade = false;
         }
     }
 
@@ -761,7 +761,7 @@ public class Stop_Manager : MonoBehaviour
             PauseWindow_Open = true;
             Time.timeScale = 1f;
             MainWindow_Open = false;
-            UI_Manager.instance.Cursor_Fade = false;
+            UI_Manager.instance.isCursorFade = false;
         }
     }
     #endregion
@@ -844,7 +844,7 @@ public class Stop_Manager : MonoBehaviour
             PauseWindow_Open = true;
             Time.timeScale = 1f;
             GameExitWindow_Open = false;
-            UI_Manager.instance.Cursor_Fade = false;
+            UI_Manager.instance.isCursorFade = false;
         }
     }
     #endregion

@@ -44,7 +44,7 @@ public class Player_Vector : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name.Equals("title"))
         {
-            UI_Manager.instance.FadeInOut.DOFade(0f, 0f);
+            UI_Manager.instance.fadeInOut.DOFade(0f, 0f);
         }
 
         // TODO : ÀÏ°ü¼º.
@@ -56,7 +56,7 @@ public class Player_Vector : MonoBehaviour
             Skill_Manager.instance.Skill_PotalMove = false;
             UI_Manager.instance.PlayerMove_control = false;
 
-            UI_Manager.instance.FadeInOut.DOFade(0f, 0f);
+            UI_Manager.instance.fadeInOut.DOFade(0f, 0f);
         }
 
 

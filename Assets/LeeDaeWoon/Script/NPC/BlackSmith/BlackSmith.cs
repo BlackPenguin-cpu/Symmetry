@@ -356,7 +356,7 @@ public class BlackSmith : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F) && Collision_Check == false && WindowOpen_Check == false)
         {
-            UI_Manager.instance.Cursor_Fade = true;
+            UI_Manager.instance.isCursorFade = true;
             UI_Manager.instance.PlayerMove_control = true;
             FadeInout.DOFade(0.5f, 1f);
             StartCoroutine(Open_Window());
@@ -378,7 +378,7 @@ public class BlackSmith : MonoBehaviour
 
     public IEnumerator Open_Window()
     {
-        UI_Manager.instance.Cursor_Fade = true;
+        UI_Manager.instance.isCursorFade = true;
         Weapon_Purchase_Window.SetActive(true);
         timer = 0f;
         Pole_01.transform.DOLocalMoveY(452, 0.5f);
@@ -397,7 +397,7 @@ public class BlackSmith : MonoBehaviour
     {
         if (BlackSmithWindow_Close == true)
         {
-            UI_Manager.instance.Cursor_Fade = false;
+            UI_Manager.instance.isCursorFade = false;
             BlackSmithWindow_Close = false;
             FadeInout.DOFade(0f, 1f);
 

@@ -12,24 +12,24 @@ public class Foundation : MonoBehaviour
     void Awake() => Inst = this;
 
     [Header("제단")]
-    public float Speed; // 마법진 돌아가는 속도
-    public SpriteRenderer Magic_Circle; // 마법진
+    const float speed = -10; // 마법진 돌아가는 속도
+    [SerializeField] SpriteRenderer magicCircle; // 마법진
 
     [Header("업그레이드 버튼")]
-    public Image F_Button; // 상호작용 버튼
-    public GameObject Upgrade; // 상호작용 오브젝트
-    public Text Upgrade_Text; // 상호작용 텍스트
-    public bool Collision_Check = true; // 충돌 했는지 체크
-
+    [SerializeField] Image fBtn; // 상호작용 버튼
+    [SerializeField] GameObject upGrade; // 상호작용 오브젝트
+    [SerializeField] Text upGradeText; // 상호작용 텍스트
+    [SerializeField] bool isCollisionCheck = true; // 충돌 했는지 체크
+    
     [Header("마력강화 창")]
-    private float timer; // 창 열리는 속도
-    public GameObject Pole_01; // 봉_01
-    public GameObject Pole_02; // 봉_02
-    public GameObject Malyeog_Window; // 창 오브젝트
-    public RectTransform MalyeogRect_Window; // 창2
-    bool WindowOpen_Check = false;
+    float timer; // 창 열리는 속도
+    [SerializeField] GameObject pole01; // 봉_01
+    [SerializeField] GameObject pole02; // 봉_02
+    [SerializeField] GameObject malyeogWindow; // 창 오브젝트
+    [SerializeField] RectTransform malyeogRectWindow; // 창2
+    bool iswindowOpenCheck = false;
 
-    public Image FadeInout;
+    [SerializeField] Image fadeInOut;
 
     public Text Title; // 마력 이름
     public Text Explanation; // 마력 설명
@@ -42,10 +42,8 @@ public class Foundation : MonoBehaviour
 
     void Start()
     {
-        Upgrade_Text.DOFade(0f, 0f);
-        F_Button.DOFade(0f, 0f);
-
-
+        upGradeText.DOFade(0f, 0f);
+        fBtn.DOFade(0f, 0f);
     }
 
     void Update()
@@ -62,25 +60,26 @@ public class Foundation : MonoBehaviour
             UpgradeTransformChange(new Vector3(-10.8f, -7f, 0));
         #endregion
     }
-    private void UpgradeTransformChange(Vector3 vec) => Upgrade.transform.localPosition = Camera.main.WorldToScreenPoint(gameObject.transform.localPosition + vec);
+
+    private void UpgradeTransformChange(Vector3 vec) => upGrade.transform.localPosition = Camera.main.WorldToScreenPoint(gameObject.transform.localPosition + vec);
 
     private bool SceneNameEquals(string name) => SceneManager.GetActiveScene().name.Equals(name);
     public void MagicCircle_Rotation()
     {
         if (SceneManager.GetActiveScene().name.Equals("Main"))
-            Magic_Circle.DOFade(1f, 1f);
+            magicCircle.DOFade(1f, 1f);
 
-        Magic_Circle.transform.Rotate(new Vector3(0, 0, Speed * Time.deltaTime));
+        magicCircle.transform.Rotate(new Vector3(0, 0, speed * Time.deltaTime));
     }
 
     public void Foundation_Click()
     {
-        if (Input.GetKeyDown(KeyCode.F) && Collision_Check == false && WindowOpen_Check == false)
+        if (Input.GetKeyDown(KeyCode.F) && isCollisionCheck == false && iswindowOpenCheck == false)
         {
-            FadeInout.DOFade(0.5f, 1f);
+            fadeInOut.DOFade(0.5f, 1f);
             UI_Manager.instance.PlayerMove_control = true;
             StartCoroutine(Open_Window());
-            WindowOpen_Check = true;
+            iswindowOpenCheck = true;
         }
     }
 
@@ -90,15 +89,15 @@ public class Foundation : MonoBehaviour
     public IEnumerator Open_Window()
     {
         SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX);
-        UI_Manager.instance.Cursor_Fade = true;
-        Malyeog_Window.SetActive(true);
+        UI_Manager.instance.isCursorFade = true;
+        malyeogWindow.SetActive(true);
         timer = 0f;
-        Pole_01.transform.DOLocalMoveY(452, 0.5f);
-        Pole_02.transform.DOLocalMoveY(-452, 0.5f);
+        pole01.transform.DOLocalMoveY(452, 0.5f);
+        pole02.transform.DOLocalMoveY(-452, 0.5f);
 
         while (timer < 1)
         {
-            MalyeogRect_Window.sizeDelta = new Vector2(1696.425f, Mathf.Lerp(0, 931.6482f, timer));
+            malyeogRectWindow.sizeDelta = new Vector2(1696.425f, Mathf.Lerp(0, 931.6482f, timer));
             timer += Time.deltaTime * 3f;
             yield return null;
         }
@@ -107,20 +106,20 @@ public class Foundation : MonoBehaviour
     public IEnumerator Close_Window()
     {
         SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX);
-        UI_Manager.instance.Cursor_Fade = false;
+        UI_Manager.instance.isCursorFade = false;
         timer = 0f;
-        Pole_01.transform.DOLocalMoveY(30, 0.5f);
-        Pole_02.transform.DOLocalMoveY(-30, 0.5f);
-        FadeInout.DOFade(0f, 1f);
+        pole01.transform.DOLocalMoveY(30, 0.5f);
+        pole02.transform.DOLocalMoveY(-30, 0.5f);
+        fadeInOut.DOFade(0f, 1f);
         while (timer < 1)
         {
-            MalyeogRect_Window.sizeDelta = new Vector2(1696.425f, Mathf.Lerp(931.6482f, 0, timer));
+            malyeogRectWindow.sizeDelta = new Vector2(1696.425f, Mathf.Lerp(931.6482f, 0, timer));
             timer += Time.deltaTime * 3f;
             yield return null;
         }
         UI_Manager.instance.PlayerMove_control = false;
-        Malyeog_Window.SetActive(false);
-        WindowOpen_Check = false;
+        malyeogWindow.SetActive(false);
+        iswindowOpenCheck = false;
     }
     #endregion
 
@@ -129,9 +128,9 @@ public class Foundation : MonoBehaviour
     {
         if (collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null)
         {
-            Collision_Check = false;
-            Upgrade_Text.DOFade(1f, 0.5f);
-            F_Button.DOFade(1f, 0.5f);
+            isCollisionCheck = false;
+            upGradeText.DOFade(1f, 0.5f);
+            fBtn.DOFade(1f, 0.5f);
         }
     }
 
@@ -139,9 +138,9 @@ public class Foundation : MonoBehaviour
     {
         if (collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null)
         {
-            Collision_Check = true;
-            Upgrade_Text.DOFade(0f, 0.5f);
-            F_Button.DOFade(0f, 0.5f);
+            isCollisionCheck = true;
+            upGradeText.DOFade(0f, 0.5f);
+            fBtn.DOFade(0f, 0.5f);
         }
     }
     #endregion

@@ -27,42 +27,40 @@ public class UI_Manager : MonoBehaviour
     public float sec;
 
     [Header("체력")]
-    public float HP_Bar;
+    public float hpBar;
+    public float hp;
+    [SerializeField] GameObject bar;
 
-    public float HP;
-    [SerializeField] GameObject Bar;
+    [SerializeField] Image fadeInOutDie;
+    [SerializeField] Text dieText;
+    [SerializeField] Text anyText;
 
-    [SerializeField] Image FadeInOut_Die;
-    [SerializeField] Text Die_Text;
-    [SerializeField] Text Any_Text;
-
-    public bool Once_Check = false;
+    public bool isOnceCheck = false;
 
     [Header("마우스 포인터")]
-    [SerializeField] Texture2D MousePointer;
-    public bool Cursor_Fade;
+    [SerializeField] Texture2D mousePointer;
+    public bool isCursorFade = false;
 
     [Header("페이드인아웃")]
-    public Image FadeInOut;
+    public Image fadeInOut;
 
-    public bool King_Check = false;
-
-    public bool DarkPlayerGet_Check;
+    public bool isKingCheck = false;
+    public bool isDarkPlayerGetCheck = false;
 
     void Start()
     {
         //Cursor.visible = false;
         timerCheck = true;
-        Cursor.SetCursor(MousePointer, Vector2.zero, CursorMode.ForceSoftware);
+        Cursor.SetCursor(mousePointer, Vector2.zero, CursorMode.ForceSoftware);
     }
 
     void Update()
     {
         StartCoroutine(Die_System());
 
-        if (DarkPlayerGet_Check == true && SceneManager.GetActiveScene().name == "Main")
+        if (isDarkPlayerGetCheck == true && SceneManager.GetActiveScene().name == "Main")
         {
-            DarkPlayerGet_Check = false;
+            isDarkPlayerGetCheck = false;
             Destroy(GameObject.Find("DarkPlayer"));
         }
 
@@ -86,10 +84,10 @@ public class UI_Manager : MonoBehaviour
 
     private void OnLevelWasLoaded(int level)
     {
-        if (Once_Check == true && SceneManager.GetActiveScene().name == "Main")
+        if (isOnceCheck == true && SceneManager.GetActiveScene().name == "Main")
         {
-            Once_Check = false;
-            DarkPlayerGet_Check = true;
+            isOnceCheck = false;
+            isDarkPlayerGetCheck = true;
 
             Player.Instance._hp = Player.Instance._maxHp; // 체력 
             Player.Instance.state = PlayerState.Idle; // 플레이어 행동
@@ -102,14 +100,13 @@ public class UI_Manager : MonoBehaviour
             // 각 무기 레벨 초기화
             //for(int i = 0; i < )
 
-
             Player.Instance.stat._level[PlayerWeaponType.Sword] = 0;
             Player.Instance.stat._level[PlayerWeaponType.Dagger] = 0;
             Player.Instance.stat._level[PlayerWeaponType.Axe] = 0;
 
-            FadeInOut_Die.color = new Color(0, 0, 0, 0);
-            Die_Text.color = new Color(255, 255, 255, 0);
-            Any_Text.color = new Color(255, 255, 255, 0);
+            fadeInOutDie.color = new Color(0, 0, 0, 0);
+            dieText.color = new Color(255, 255, 255, 0);
+            anyText.color = new Color(255, 255, 255, 0);
         }
     }
 
@@ -126,10 +123,6 @@ public class UI_Manager : MonoBehaviour
                 sec = 0;
                 min++;
             }
-        }
-        else
-        {
-
         }
     }
     #endregion
@@ -168,30 +161,30 @@ public class UI_Manager : MonoBehaviour
     #region 체력
     public void HP_System()
     {
-        HP_Bar = Bar.transform.localScale.y;
-        HP = Player.Instance.stat._hp / Player.Instance.stat._maxHp;
+        hpBar = bar.transform.localScale.y;
+        hp = Player.Instance.stat._hp / Player.Instance.stat._maxHp;
 
 
-        if (HP_Bar > HP)
-            Bar.transform.localScale = new Vector3(1, Mathf.Lerp(HP_Bar, HP - 0.00001f, Time.deltaTime * 20), 1);
+        if (hpBar > hp)
+            bar.transform.localScale = new Vector3(1, Mathf.Lerp(hpBar, hp - 0.00001f, Time.deltaTime * 20), 1);
         else
-            Bar.transform.localScale = new Vector3(1, Mathf.Lerp(HP_Bar, HP, Time.deltaTime * 20), 1);
+            bar.transform.localScale = new Vector3(1, Mathf.Lerp(hpBar, hp, Time.deltaTime * 20), 1);
     }
 
     public IEnumerator Die_System()
     {
         if (Player.Instance.stat._hp == 0)
         {
-            if (Input.anyKeyDown && Once_Check == true)
+            if (Input.anyKeyDown && isOnceCheck == true)
                 SceneManager.LoadScene("Main");
 
-            if (Once_Check == false)
+            if (isOnceCheck == false)
             {
-                FadeInOut_Die.DOFade(0.5f, 1f);
-                Die_Text.DOFade(1f, 1f);
-                Any_Text.DOFade(1f, 1f);
+                fadeInOutDie.DOFade(0.5f, 1f);
+                dieText.DOFade(1f, 1f);
+                anyText.DOFade(1f, 1f);
                 yield return new WaitForSeconds(1f);
-                Once_Check = true;
+                isOnceCheck = true;
             }
         }
 

@@ -500,22 +500,22 @@ MonoBehaviour:
   goldText: {fileID: 1272140075250453603}
   dimensionalText: {fileID: 3974177440768734973}
   waveText: {fileID: 4129189006980683382}
-  Timer_Text: {fileID: 296586128572278085}
-  Timer_Check: 0
-  Min: 0
-  Sec: 0
-  HP_Bar: 1
-  HP: 0
-  Bar: {fileID: 8098893948647789191}
-  FadeInOut_Die: {fileID: 1096288433}
-  Die_Text: {fileID: 1175370936}
-  Any_Text: {fileID: 1166506531}
-  Once_Check: 0
-  MousePointer: {fileID: 2800000, guid: 868a7bab8939d2846999eba7d90f704f, type: 3}
-  Cursor_Fade: 0
-  FadeInOut: {fileID: 8430307368230653295}
-  King_Check: 0
-  DarkPlayerGet_Check: 0
+  timerText: {fileID: 0}
+  timerCheck: 0
+  min: 0
+  sec: 0
+  hpBar: 1
+  hp: 0
+  bar: {fileID: 8098893948647789191}
+  fadeInOutDie: {fileID: 1096288433}
+  dieText: {fileID: 1175370936}
+  anyText: {fileID: 1166506531}
+  isOnceCheck: 0
+  mousePointer: {fileID: 2800000, guid: 868a7bab8939d2846999eba7d90f704f, type: 3}
+  isCursorFade: 0
+  fadeInOut: {fileID: 8430307368230653295}
+  isKingCheck: 0
+  isDarkPlayerGetCheck: 0
 --- !u!1 &3183300900713566462
 GameObject:
   m_ObjectHideFlags: 0

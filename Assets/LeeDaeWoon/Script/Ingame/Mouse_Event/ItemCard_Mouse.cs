@@ -114,7 +114,7 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         {
 
             Card_Manager.instance.Fade.DOFade(0f, 0.5f);
-            UI_Manager.instance.Cursor_Fade = false;
+            UI_Manager.instance.isCursorFade = false;
 
             if (Card_Manager.instance.Left_Pick == true && Card_Manager.instance.ItemCard_OpenCheck == false)
             {
@@ -240,7 +240,7 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         if (direction == Direction.Among)
         {
             Card_Manager.instance.Fade.DOFade(0f, 0.5f);
-            UI_Manager.instance.Cursor_Fade = false;
+            UI_Manager.instance.isCursorFade = false;
 
             if (Card_Manager.instance.Among_Pick == true && Card_Manager.instance.ItemCard_OpenCheck == false)
             {
@@ -365,7 +365,7 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         if (direction == Direction.Right)
         {
             Card_Manager.instance.Fade.DOFade(0f, 0.5f);
-            UI_Manager.instance.Cursor_Fade = false;
+            UI_Manager.instance.isCursorFade = false;
 
             if (Card_Manager.instance.Right_Pick == true && Card_Manager.instance.ItemCard_OpenCheck == false)
             {

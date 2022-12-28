@@ -49,7 +49,7 @@ public class Item_Window : MonoBehaviour
     private IEnumerator itemWindow()
     {
         Card_Manager.instance.Fade.DOFade(0.5f, 0.5f);
-        UI_Manager.instance.Cursor_Fade = true;
+        UI_Manager.instance.isCursorFade = true;
 
         Card_Manager.instance.ItemCard_OpenCheck = true;
         Window_timer = 0;

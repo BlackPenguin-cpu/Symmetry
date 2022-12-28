@@ -249,7 +249,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1382597025
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -2212657167771709461, guid: 4bbed2233b1cdd14e881eac6400cf84d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1024,17 +1024,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ef4c340507288642babc8a69a957f69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: -10
-  Magic_Circle: {fileID: 1758603494}
-  F_Button: {fileID: 483930740}
-  Upgrade: {fileID: 1486527145}
-  Upgrade_Text: {fileID: 367366055}
-  Collision_Check: 1
-  Pole_01: {fileID: 2072984338}
-  Pole_02: {fileID: 1639259046}
-  Malyeog_Window: {fileID: 1887432763}
-  MalyeogRect_Window: {fileID: 337622492}
-  FadeInout: {fileID: 1106004338}
+  magicCircle: {fileID: 1758603494}
+  fBtn: {fileID: 483930740}
+  upGrade: {fileID: 1486527145}
+  upGradeText: {fileID: 367366055}
+  isCollisionCheck: 1
+  pole01: {fileID: 2072984338}
+  pole02: {fileID: 1639259046}
+  malyeogWindow: {fileID: 1887432763}
+  malyeogRectWindow: {fileID: 337622492}
+  fadeInOut: {fileID: 0}
   Title: {fileID: 1069232668}
   Explanation: {fileID: 648504052}
   Close_Btn: {fileID: 1368036020}
@@ -3898,7 +3897,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1382597025
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 7772545962944840671, guid: 3445078894d492341a3fe4ffdc60baf9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4839,11 +4838,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3157611432992786235, guid: 3da9c3f6417b4694cb997564d60f2bb6, type: 3}
       propertyPath: m_Name
-      value: UI_Manager
-      objectReference: {fileID: 0}
-    - target: {fileID: 3547976952710852030, guid: 3da9c3f6417b4694cb997564d60f2bb6, type: 3}
-      propertyPath: King_Check
-      value: 0
+      value: UIManager
       objectReference: {fileID: 0}
     - target: {fileID: 7837968097333178697, guid: 3da9c3f6417b4694cb997564d60f2bb6, type: 3}
       propertyPath: m_RootOrder
@@ -4887,10 +4882,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7837968097333178697, guid: 3da9c3f6417b4694cb997564d60f2bb6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8430307368230653295, guid: 3da9c3f6417b4694cb997564d60f2bb6, type: 3}
-      propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -6911,7 +6902,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1382597025
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: bdfecda8aa2dfe545aaaa8b8c15650e9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
@@ -7702,7 +7693,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1382597025
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -7132269430580976184, guid: 96c34f2f854343841a86f1684a7a561f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -7727,15 +7718,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0cdb6cbe74c63849b4e11f557a9cba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  King_NPC: {fileID: 1976985716}
-  Player_HP: {fileID: 1807762486}
-  Player_Skill: {fileID: 382121408}
-  Camera_obj: {fileID: 1198551566}
-  Credit_Bar01: {fileID: 1855006900}
-  Credit_Bar02: {fileID: 747280152}
-  F_Button: {fileID: 1570651355}
-  FBtn_Check: 0
-  Dialogue_Exit: 0
+  kingNPC: {fileID: 1976985716}
+  playerHP: {fileID: 1807762486}
+  playerSkill: {fileID: 382121408}
+  creditBar: {fileID: 980068956}
+  cameraObj: {fileID: 1198551566}
+  fBtn: {fileID: 1570651355}
+  isDialogueExit: 0
   Dialogue:
   - "\uC77C\uC5B4\uB0AC\uB294\uAC00..."
   - "\uC601\uBB38\uC744 \uBAA8\uB974\uACA0\uB2E8 \uC5BC\uAD74\uC774\uAD70..."
@@ -7782,14 +7771,14 @@ MonoBehaviour:
     \uC790\uC2E0\uC744 \uB9CC\uB4E4\uC5B4\uB0BC \uB9C8\uBC95\uC744 \uC804\uC218\uD560\uD14C\uB2C8
     \uBD80\uB514..."
   - "\uBD80\uB514... \uCE74\uB860\uC744 \uB9C9\uC544\uC8FC\uAC8C... "
-  Dialogue_Text: {fileID: 1107078732}
-  Sequence_Text: 0
-  Area01_Box: {fileID: 1372057785}
-  Area02_Box: {fileID: 833574205}
-  Area03_Box: {fileID: 349857122}
-  Area04_Box: {fileID: 98934828}
-  Magic_Creation: 0
-  Dialogue_Skip: 0
+  dialogueText: {fileID: 1107078732}
+  sequenceText: 0
+  area01Box: {fileID: 1372057785}
+  area02Box: {fileID: 833574205}
+  area03Box: {fileID: 349857122}
+  area04Box: {fileID: 98934828}
+  isMagicCreation: 0
+  isDialogueSkip: 0
 --- !u!1 &2072984338
 GameObject:
   m_ObjectHideFlags: 0
