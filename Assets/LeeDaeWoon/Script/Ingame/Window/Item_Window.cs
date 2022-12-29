@@ -11,29 +11,28 @@ public class Item_Window : MonoBehaviour
     public float Window_timer = 0f;
 
     [Header("왼쪽 창")]
-    public GameObject Left_Pole_01;
-    public GameObject Left_Pole_02;
-    public RectTransform Left_RectMask;
+    [SerializeField] GameObject leftBarUp;
+    [SerializeField] GameObject leftBarDown;
+    [SerializeField] RectTransform leftWindow;
 
     [Header("가운데 창")]
-    public GameObject Among_Pole_01;
-    public GameObject Among_Pole_02;
-    public RectTransform Among_RectMask;
+    [SerializeField] GameObject amongBarUp;
+    [SerializeField] GameObject amongBarDown;
+    [SerializeField] RectTransform amongWindow;
 
 
     [Header("오른쪽 창")]
-    public GameObject Right_Pole_01;
-    public GameObject Right_Pole_02;
-    public RectTransform Right_RectMask;
-
-
-    [Header("빛")]
-    public Image Left_Light;
-    public Image Among_Light;
-    public Image Right_Light;
+    [SerializeField] GameObject rightBarUp;
+    [SerializeField] GameObject rightBarDown;
+    [SerializeField] RectTransform rightWindow;
 
     public int Light_num;
 
+
+    const int barPos = 450;
+    const int windowPos = 890;
+
+    const float barSpeed = 0.55f;
 
     void Start()
     {
@@ -55,22 +54,22 @@ public class Item_Window : MonoBehaviour
 
         #region 창 연출(위, 아래 봉)
 
-        Left_Pole_01.transform.DOLocalMoveY(450, 0.55f);
-        Left_Pole_02.transform.DOLocalMoveY(-450, 0.55f);
+        leftBarUp.transform.DOLocalMoveY(barPos, barSpeed);
+        leftBarDown.transform.DOLocalMoveY(-barPos, barSpeed);
 
-        Among_Pole_01.transform.DOLocalMoveY(450, 0.55f);
-        Among_Pole_02.transform.DOLocalMoveY(-450, 0.55f);
+        amongBarUp.transform.DOLocalMoveY(barPos, barSpeed);
+        amongBarDown.transform.DOLocalMoveY(-barPos, barSpeed);
 
-        Right_Pole_01.transform.DOLocalMoveY(450, 0.55f);
-        Right_Pole_02.transform.DOLocalMoveY(-450, 0.55f);
+        rightBarUp.transform.DOLocalMoveY(barPos, barSpeed);
+        rightBarDown.transform.DOLocalMoveY(-barPos, barSpeed);
 
         #endregion
 
         while (Window_timer < 1)
         {
-            Left_RectMask.sizeDelta = new Vector2(559.2f, Mathf.Lerp(0, 890f, Window_timer));
-            Among_RectMask.sizeDelta = new Vector2(522.6044f, Mathf.Lerp(0, 890f, Window_timer));
-            Right_RectMask.sizeDelta = new Vector2(574.5f, Mathf.Lerp(0, 890f, Window_timer));
+            leftWindow.sizeDelta = new Vector2(0, Mathf.Lerp(0, windowPos, Window_timer));
+            amongWindow.sizeDelta = new Vector2(0, Mathf.Lerp(0, windowPos, Window_timer));
+            rightWindow.sizeDelta = new Vector2(0, Mathf.Lerp(0, windowPos, Window_timer));
 
             Window_timer += Time.deltaTime * 3f;
             yield return null;
