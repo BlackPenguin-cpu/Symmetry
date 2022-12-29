@@ -392,10 +392,10 @@ public class Stop_Manager : MonoBehaviour
 
     public void Item_Log()
     {
-        if (Card_Manager.instance.Item_bool == false)
+        if (Card_Manager.instance.isItemBool == false)
         {
-            Player_Item_Log.transform.GetChild(Card_Manager.instance.Item_Check).GetComponent<Image>().sprite = ItemDA_Have[Card_Manager.instance.Item_Check].Item_Icon;
-            Player_Item_Log.transform.GetChild(Card_Manager.instance.Item_Check).gameObject.SetActive(true);
+            Player_Item_Log.transform.GetChild(Card_Manager.instance.itemCheck).GetComponent<Image>().sprite = ItemDA_Have[Card_Manager.instance.itemCheck].Item_Icon;
+            Player_Item_Log.transform.GetChild(Card_Manager.instance.itemCheck).gameObject.SetActive(true);
 
             if (Icon_Check == true)
             {

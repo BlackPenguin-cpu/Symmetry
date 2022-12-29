@@ -7,14 +7,14 @@ using DG.Tweening;
 
 public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-    public enum Direction
+    public enum EDirection
     {
         Left,
         Among,
         Right
     }
 
-    public Direction direction;
+    public EDirection eDirection;
     float timer = 0;
 
     [Header("확인")]
@@ -55,9 +55,9 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     void Start()
     {
-        Card_Manager.instance.Left_Pick = true;
-        Card_Manager.instance.Among_Pick = true;
-        Card_Manager.instance.Right_Pick = true;
+        Card_Manager.instance.isLeftPick = true;
+        Card_Manager.instance.isAmongPick = true;
+        Card_Manager.instance.isRightPick = true;
     }
 
     void Update()
@@ -67,26 +67,26 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        switch (direction)
+        switch (eDirection)
         {
-            case Direction.Left:
-                if (Card_Manager.instance.Among_Pick == true && Card_Manager.instance.Right_Pick == true && Card_Manager.instance.ItemCard_OpenCheck == false)
+            case EDirection.Left:
+                if (Card_Manager.instance.isAmongPick == true && Card_Manager.instance.isRightPick == true && Card_Manager.instance.isItemCardOpenCheck == false)
                 {
                     SoundManager.instance.PlaySoundClip("SFX_Button_Over", SoundType.SFX);
                     Left_Light.DOFade(1f, 0.5f);
                 }
                 break;
 
-            case Direction.Among:
-                if (Card_Manager.instance.Left_Pick == true && Card_Manager.instance.Right_Pick == true && Card_Manager.instance.ItemCard_OpenCheck == false)
+            case EDirection.Among:
+                if (Card_Manager.instance.isLeftPick == true && Card_Manager.instance.isRightPick == true && Card_Manager.instance.isItemCardOpenCheck == false)
                 {
                     SoundManager.instance.PlaySoundClip("SFX_Button_Over", SoundType.SFX);
                     Among_Light.DOFade(1f, 0.5f);
                 }
                 break;
 
-            case Direction.Right:
-                if (Card_Manager.instance.Left_Pick == true && Card_Manager.instance.Among_Pick == true && Card_Manager.instance.ItemCard_OpenCheck == false)
+            case EDirection.Right:
+                if (Card_Manager.instance.isLeftPick == true && Card_Manager.instance.isAmongPick == true && Card_Manager.instance.isItemCardOpenCheck == false)
                 {
                     SoundManager.instance.PlaySoundClip("SFX_Button_Over", SoundType.SFX);
                     Right_Light.DOFade(1f, 0.5f);
@@ -97,44 +97,44 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (direction == Direction.Left)
+        if (eDirection == EDirection.Left)
             Left_Light.DOFade(0f, 0.5f);
 
-        if (direction == Direction.Among)
+        if (eDirection == EDirection.Among)
             Among_Light.DOFade(0f, 0.5f);
 
-        if (direction == Direction.Right)
+        if (eDirection == EDirection.Right)
             Right_Light.DOFade(0f, 0.5f);
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
         // 왼쪽 카드를 선택 했을 때
-        if (direction == Direction.Left)
+        if (eDirection == EDirection.Left)
         {
 
-            Card_Manager.instance.Fade.DOFade(0f, 0.5f);
+            Card_Manager.instance.fade.DOFade(0f, 0.5f);
             UI_Manager.instance.isCursorFade = false;
 
-            if (Card_Manager.instance.Left_Pick == true && Card_Manager.instance.ItemCard_OpenCheck == false)
+            if (Card_Manager.instance.isLeftPick == true && Card_Manager.instance.isItemCardOpenCheck == false)
             {
-                Card_Manager.instance.Left_Pick = false;
-                Card_Manager.instance.Right_Pick = false;
-                Card_Manager.instance.Among_Pick = false;
+                Card_Manager.instance.isLeftPick = false;
+                Card_Manager.instance.isRightPick = false;
+                Card_Manager.instance.isAmongPick = false;
 
                 // 방어구 및 장신구를 선택했을 때
-                if (Card_Manager.instance.DA_Left == false)
+                if (Card_Manager.instance.isDaLeft == false)
                 {
-                    for (int i = 0; i < Card_Manager.instance.DABuffer.Count; i++)
+                    for (int i = 0; i < Card_Manager.instance.daBuffer.Count; i++)
                     {
-                        if (Card_Manager.instance.DABuffer[i].Itme_Name == Card_Manager.instance.ItemDA_LeftCheck[0].Itme_Name)
+                        if (Card_Manager.instance.daBuffer[i].Itme_Name == Card_Manager.instance.itemDALeftCheck[0].Itme_Name)
                         {
-                            Stop_Manager.Inst.ItemDA_Have.Add(Card_Manager.instance.DABuffer[i]);
-                            Card_Manager.instance.DABuffer.RemoveAt(i);
+                            Stop_Manager.Inst.ItemDA_Have.Add(Card_Manager.instance.daBuffer[i]);
+                            Card_Manager.instance.daBuffer.RemoveAt(i);
                         }
                     }
 
-                    switch (Card_Manager.instance.ItemDA_LeftCheck[0].Itme_Name)
+                    switch (Card_Manager.instance.itemDALeftCheck[0].Itme_Name)
                     {
                         case "바람의 귀걸이":
                             Player.Instance.stat.PlayerDATypeList.WindEarRing = true;
@@ -176,9 +176,9 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
                 }
 
                 // 마정석을 선택했을 때
-                if (Card_Manager.instance.DA_Left == true)
+                if (Card_Manager.instance.isDaLeft == true)
                 {
-                    switch (Card_Manager.instance.ItemDA_LeftCheck[0].Itme_Name)
+                    switch (Card_Manager.instance.itemDALeftCheck[0].Itme_Name)
                     {
                         case "힘의 마정석":
                             Player.Instance.stat.Crystals[(int)CrystalsType.POWER]++;
@@ -207,25 +207,25 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
                 }
 
 
-                if (Card_Manager.instance.Item_Left == false)
-                    Stop_Manager.Inst.ItemDA_Have.Add(Card_Manager.instance.ItemDA_LeftCheck[0]);
+                if (Card_Manager.instance.isItemLeft == false)
+                    Stop_Manager.Inst.ItemDA_Have.Add(Card_Manager.instance.itemDALeftCheck[0]);
 
-                if (Card_Manager.instance.Item_bool == true)
-                    Card_Manager.instance.Item_bool = false;
+                if (Card_Manager.instance.isItemBool == true)
+                    Card_Manager.instance.isItemBool = false;
 
-                else if (Card_Manager.instance.Item_bool == false)
-                    Card_Manager.instance.Item_Check += LeftClick_Check;
+                else if (Card_Manager.instance.isItemBool == false)
+                    Card_Manager.instance.itemCheck += LeftClick_Check;
 
 
-                if (Card_Manager.instance.TimeItem_Count <= 2)
+                if (Card_Manager.instance.timeItemCount <= 2)
                 {
-                    Card_Manager.instance.Time_Item_Limit.Add(Card_Manager.instance.ItemDA_LeftCheck[0]);
-                    for (int i = 0; i < Card_Manager.instance.Time_Item_Limit.Count; i++)
+                    Card_Manager.instance.timeItemLimit.Add(Card_Manager.instance.itemDALeftCheck[0]);
+                    for (int i = 0; i < Card_Manager.instance.timeItemLimit.Count; i++)
                     {
-                        if (Card_Manager.instance.Time_Item_Limit[i].Itme_Name.Contains(Card_Manager.instance.ItemBuffer[4].Itme_Name))
+                        if (Card_Manager.instance.timeItemLimit[i].Itme_Name.Contains(Card_Manager.instance.itemBuffer[4].Itme_Name))
                         {
-                            Card_Manager.instance.TimeItem_Count++;
-                            Card_Manager.instance.Time_Item_Limit.Clear();
+                            Card_Manager.instance.timeItemCount++;
+                            Card_Manager.instance.timeItemLimit.Clear();
                         }
                     }
                 }
@@ -237,30 +237,30 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         }
 
         // 가운데 카드를 선택 했을 때
-        if (direction == Direction.Among)
+        if (eDirection == EDirection.Among)
         {
-            Card_Manager.instance.Fade.DOFade(0f, 0.5f);
+            Card_Manager.instance.fade.DOFade(0f, 0.5f);
             UI_Manager.instance.isCursorFade = false;
 
-            if (Card_Manager.instance.Among_Pick == true && Card_Manager.instance.ItemCard_OpenCheck == false)
+            if (Card_Manager.instance.isAmongPick == true && Card_Manager.instance.isItemCardOpenCheck == false)
             {
-                Card_Manager.instance.Among_Pick = false;
-                Card_Manager.instance.Left_Pick = false;
-                Card_Manager.instance.Right_Pick = false;
+                Card_Manager.instance.isAmongPick = false;
+                Card_Manager.instance.isLeftPick = false;
+                Card_Manager.instance.isRightPick = false;
 
                 // 방어구 및 장신구를 선택했을 때
-                if (Card_Manager.instance.DA_Among == false)
+                if (Card_Manager.instance.isDaAmong == false)
                 {
-                    for (int i = 0; i < Card_Manager.instance.DABuffer.Count; i++)
+                    for (int i = 0; i < Card_Manager.instance.daBuffer.Count; i++)
                     {
-                        if (Card_Manager.instance.DABuffer[i].Itme_Name == Card_Manager.instance.ItemDA_AmongCheck[0].Itme_Name)
+                        if (Card_Manager.instance.daBuffer[i].Itme_Name == Card_Manager.instance.itemDAAmongCheck[0].Itme_Name)
                         {
-                            Stop_Manager.Inst.ItemDA_Have.Add(Card_Manager.instance.DABuffer[i]);
-                            Card_Manager.instance.DABuffer.RemoveAt(i);
+                            Stop_Manager.Inst.ItemDA_Have.Add(Card_Manager.instance.daBuffer[i]);
+                            Card_Manager.instance.daBuffer.RemoveAt(i);
                         }
                     }
 
-                    switch (Card_Manager.instance.ItemDA_AmongCheck[0].Itme_Name)
+                    switch (Card_Manager.instance.itemDAAmongCheck[0].Itme_Name)
                     {
                         case "바람의 귀걸이":
                             Player.Instance.stat.PlayerDATypeList.WindEarRing = true;
@@ -301,9 +301,9 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
                 }
 
                 // 마정석을 선택했을 때
-                if (Card_Manager.instance.DA_Among == true)
+                if (Card_Manager.instance.isDaAmong == true)
                 {
-                    switch (Card_Manager.instance.ItemDA_AmongCheck[0].Itme_Name)
+                    switch (Card_Manager.instance.itemDAAmongCheck[0].Itme_Name)
                     {
                         case "힘의 마정석":
                             Player.Instance.stat.Crystals[(int)CrystalsType.POWER]++;
@@ -332,24 +332,24 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
                 }
 
 
-                if (Card_Manager.instance.Item_Among == false)
-                    Stop_Manager.Inst.ItemDA_Have.Add(Card_Manager.instance.ItemDA_AmongCheck[0]);
+                if (Card_Manager.instance.isItemAmong == false)
+                    Stop_Manager.Inst.ItemDA_Have.Add(Card_Manager.instance.itemDAAmongCheck[0]);
 
-                if (Card_Manager.instance.Item_bool == true)
-                    Card_Manager.instance.Item_bool = false;
+                if (Card_Manager.instance.isItemBool == true)
+                    Card_Manager.instance.isItemBool = false;
 
-                else if (Card_Manager.instance.Item_bool == false)
-                    Card_Manager.instance.Item_Check += AmongClick_Check;
+                else if (Card_Manager.instance.isItemBool == false)
+                    Card_Manager.instance.itemCheck += AmongClick_Check;
 
-                if (Card_Manager.instance.TimeItem_Count <= 2)
+                if (Card_Manager.instance.timeItemCount <= 2)
                 {
-                    Card_Manager.instance.Time_Item_Limit.Add(Card_Manager.instance.ItemDA_AmongCheck[0]);
-                    for (int i = 0; i < Card_Manager.instance.Time_Item_Limit.Count; i++)
+                    Card_Manager.instance.timeItemLimit.Add(Card_Manager.instance.itemDAAmongCheck[0]);
+                    for (int i = 0; i < Card_Manager.instance.timeItemLimit.Count; i++)
                     {
-                        if (Card_Manager.instance.Time_Item_Limit[i].Itme_Name.Contains(Card_Manager.instance.ItemBuffer[4].Itme_Name))
+                        if (Card_Manager.instance.timeItemLimit[i].Itme_Name.Contains(Card_Manager.instance.itemBuffer[4].Itme_Name))
                         {
-                            Card_Manager.instance.TimeItem_Count++;
-                            Card_Manager.instance.Time_Item_Limit.Clear();
+                            Card_Manager.instance.timeItemCount++;
+                            Card_Manager.instance.timeItemLimit.Clear();
                         }
                     }
                 }
@@ -362,30 +362,30 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         }
 
         // 오른쪽 카드를 선택 했을 때
-        if (direction == Direction.Right)
+        if (eDirection == EDirection.Right)
         {
-            Card_Manager.instance.Fade.DOFade(0f, 0.5f);
+            Card_Manager.instance.fade.DOFade(0f, 0.5f);
             UI_Manager.instance.isCursorFade = false;
 
-            if (Card_Manager.instance.Right_Pick == true && Card_Manager.instance.ItemCard_OpenCheck == false)
+            if (Card_Manager.instance.isRightPick == true && Card_Manager.instance.isItemCardOpenCheck == false)
             {
-                Card_Manager.instance.Right_Pick = false;
-                Card_Manager.instance.Left_Pick = false;
-                Card_Manager.instance.Among_Pick = false;
+                Card_Manager.instance.isRightPick = false;
+                Card_Manager.instance.isLeftPick = false;
+                Card_Manager.instance.isAmongPick = false;
 
                 // 방어구 및 장신구를 선택했을 때
-                if (Card_Manager.instance.DA_Right == false)
+                if (Card_Manager.instance.isDaRight == false)
                 {
-                    for (int i = 0; i < Card_Manager.instance.DABuffer.Count; i++)
+                    for (int i = 0; i < Card_Manager.instance.daBuffer.Count; i++)
                     {
-                        if (Card_Manager.instance.DABuffer[i].Itme_Name == Card_Manager.instance.ItemDA_RightCheck[0].Itme_Name)
+                        if (Card_Manager.instance.daBuffer[i].Itme_Name == Card_Manager.instance.itemDARightCheck[0].Itme_Name)
                         {
-                            Stop_Manager.Inst.ItemDA_Have.Add(Card_Manager.instance.DABuffer[i]);
-                            Card_Manager.instance.DABuffer.RemoveAt(i);
+                            Stop_Manager.Inst.ItemDA_Have.Add(Card_Manager.instance.daBuffer[i]);
+                            Card_Manager.instance.daBuffer.RemoveAt(i);
                         }
                     }
 
-                    switch (Card_Manager.instance.ItemDA_RightCheck[0].Itme_Name)
+                    switch (Card_Manager.instance.itemDARightCheck[0].Itme_Name)
                     {
                         case "바람의 귀걸이":
                             Player.Instance.stat.PlayerDATypeList.WindEarRing = true;
@@ -426,9 +426,9 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
                 }
 
                 // 마정석을 선택했을 때
-                if (Card_Manager.instance.DA_Right == true)
+                if (Card_Manager.instance.isDaRight == true)
                 {
-                    switch (Card_Manager.instance.ItemDA_RightCheck[0].Itme_Name)
+                    switch (Card_Manager.instance.itemDARightCheck[0].Itme_Name)
                     {
                         case "힘의 마정석":
                             Player.Instance.stat.Crystals[(int)CrystalsType.POWER]++;
@@ -456,24 +456,24 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
                     }
                 }
 
-                if (Card_Manager.instance.Item_Right == false)
-                    Stop_Manager.Inst.ItemDA_Have.Add(Card_Manager.instance.ItemDA_RightCheck[0]);
+                if (Card_Manager.instance.isItemRight == false)
+                    Stop_Manager.Inst.ItemDA_Have.Add(Card_Manager.instance.itemDARightCheck[0]);
 
-                if (Card_Manager.instance.Item_bool == true)
-                    Card_Manager.instance.Item_bool = false;
+                if (Card_Manager.instance.isItemBool == true)
+                    Card_Manager.instance.isItemBool = false;
 
-                else if (Card_Manager.instance.Item_bool == false)
-                    Card_Manager.instance.Item_Check += RightClick_Check;
+                else if (Card_Manager.instance.isItemBool == false)
+                    Card_Manager.instance.itemCheck += RightClick_Check;
 
-                if (Card_Manager.instance.TimeItem_Count <= 2)
+                if (Card_Manager.instance.timeItemCount <= 2)
                 {
-                    Card_Manager.instance.Time_Item_Limit.Add(Card_Manager.instance.ItemDA_RightCheck[0]);
-                    for (int i = 0; i < Card_Manager.instance.Time_Item_Limit.Count; i++)
+                    Card_Manager.instance.timeItemLimit.Add(Card_Manager.instance.itemDARightCheck[0]);
+                    for (int i = 0; i < Card_Manager.instance.timeItemLimit.Count; i++)
                     {
-                        if (Card_Manager.instance.Time_Item_Limit[i].Itme_Name.Contains(Card_Manager.instance.ItemBuffer[4].Itme_Name))
+                        if (Card_Manager.instance.timeItemLimit[i].Itme_Name.Contains(Card_Manager.instance.itemBuffer[4].Itme_Name))
                         {
-                            Card_Manager.instance.TimeItem_Count++;
-                            Card_Manager.instance.Time_Item_Limit.Clear();
+                            Card_Manager.instance.timeItemCount++;
+                            Card_Manager.instance.timeItemLimit.Clear();
                         }
                     }
                 }
@@ -490,7 +490,7 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX);
 
         timer = 0;
-        if (direction == Direction.Left)
+        if (eDirection == EDirection.Left)
         {
             Among_Pole_01.transform.DOLocalMoveY(-53f, 0.5f);
             Among_Pole_02.transform.DOLocalMoveY(-125f, 0.5f);
@@ -523,7 +523,7 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             Skill_Manager.instance.Instantiate_SkillCheck = false;
         }
 
-        if (direction == Direction.Among)
+        if (eDirection == EDirection.Among)
         {
             Left_Pole_01.transform.DOLocalMoveY(50f, 0.5f);
             Left_Pole_02.transform.DOLocalMoveY(-26f, 0.5f);
@@ -556,7 +556,7 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             Skill_Manager.instance.Instantiate_SkillCheck = false;
         }
 
-        if (direction == Direction.Right)
+        if (eDirection == EDirection.Right)
         {
             Left_Pole_01.transform.DOLocalMoveY(50f, 0.5f);
             Left_Pole_02.transform.DOLocalMoveY(-26f, 0.5f);

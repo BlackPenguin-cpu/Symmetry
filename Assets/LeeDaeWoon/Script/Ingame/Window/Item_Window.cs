@@ -7,7 +7,6 @@ using UnityEngine.EventSystems;
 
 public class Item_Window : MonoBehaviour
 {
-
     [Header("속도")]
     public float Window_timer = 0f;
 
@@ -48,22 +47,22 @@ public class Item_Window : MonoBehaviour
 
     private IEnumerator itemWindow()
     {
-        Card_Manager.instance.Fade.DOFade(0.5f, 0.5f);
+        Card_Manager.instance.fade.DOFade(0.5f, 0.5f);
         UI_Manager.instance.isCursorFade = true;
 
-        Card_Manager.instance.ItemCard_OpenCheck = true;
+        Card_Manager.instance.isItemCardOpenCheck = true;
         Window_timer = 0;
 
         #region 창 연출(위, 아래 봉)
 
-        Left_Pole_01.transform.DOLocalMoveY(460.9912f, 0.55f);
-        Left_Pole_02.transform.DOLocalMoveY(-457f, 0.55f);
+        Left_Pole_01.transform.DOLocalMoveY(450, 0.55f);
+        Left_Pole_02.transform.DOLocalMoveY(-450, 0.55f);
 
-        Among_Pole_01.transform.DOLocalMoveY(361f, 0.55f);
-        Among_Pole_02.transform.DOLocalMoveY(-554f, 0.55f);
+        Among_Pole_01.transform.DOLocalMoveY(450, 0.55f);
+        Among_Pole_02.transform.DOLocalMoveY(-450, 0.55f);
 
-        Right_Pole_01.transform.DOLocalMoveY(384f, 0.55f);
-        Right_Pole_02.transform.DOLocalMoveY(-538f, 0.55f);
+        Right_Pole_01.transform.DOLocalMoveY(450, 0.55f);
+        Right_Pole_02.transform.DOLocalMoveY(-450, 0.55f);
 
         #endregion
 
@@ -76,6 +75,6 @@ public class Item_Window : MonoBehaviour
             Window_timer += Time.deltaTime * 3f;
             yield return null;
         }
-        Card_Manager.instance.ItemCard_OpenCheck = false;
+        Card_Manager.instance.isItemCardOpenCheck = false;
     }
 }
