@@ -5,9 +5,9 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 
-public class Stop_Manager : MonoBehaviour
+public class StopManager : MonoBehaviour
 {
-    public static Stop_Manager Inst { get; private set; }
+    public static StopManager instnace { get; private set; }
 
     public float timer = 0f;
     public Image Fade_Background;
@@ -34,32 +34,49 @@ public class Stop_Manager : MonoBehaviour
 
     public List<Item> ItemDA_Have = new List<Item>();
 
+    [Header("버튼")]
+    [SerializeField] Button backBtn;
+    [SerializeField] Button settingBtn;
+    [SerializeField] Button playerBtn;
+    [SerializeField] Button mainWindowBtn;
+    [SerializeField] Button exitBtn;
+
+    [SerializeField] Button settingCloseBtn;
+
     [Header("일시정지 창")]
-    public GameObject Pause_Pole01; // 일시정지 창의 윗 봉
-    public GameObject Pause_Pole02; // 일시정지 창의 아랫 봉 
-    public RectTransform Pause_Window; // 일시정지 창의 중간
-    public GameObject Pause_Window_Canvas; // 일시정지 창
+    [SerializeField] GameObject pauseBarUp; // 일시정지 창의 윗 봉
+    [SerializeField] GameObject pauseBarDown; // 일시정지 창의 아랫 봉 
+    [SerializeField] RectTransform pauseRect; // 일시정지 창의 중간
+    [SerializeField] GameObject pauseWindow; // 일시정지 창
+
+    const int pauseBar = 40;
+    const int pauseBarClose = 370;
+    const int pauseWidth = 566;
+    const int pauseHeight = 700;
+    const float pauseBarSpeed = 0.38f;
 
     [Header("설정 창")]
-    public GameObject Setting_Pole01; // 설정 창의 윗 봉
-    public GameObject Setting_Pole02; // 설정 창의 아랫 봉 
-    public RectTransform Setting_Window; // 설정 창의 중간 
-    public GameObject Setting_Window_Canvas; // 설정 창
-    public Slider Effect_Slider;
-    public Slider BGM_Slider;
-
-    public Text Resolution;
+    [SerializeField] GameObject settingBarUp; // 설정 창의 윗 봉
+    [SerializeField] GameObject settingBarDown; // 설정 창의 아랫 봉 
+    [SerializeField] RectTransform settingRect; // 설정 창의 중간 
+    [SerializeField] GameObject settingWindow; // 설정 창
+    [SerializeField] Slider Effect_Slider;
+    [SerializeField] Slider BGM_Slider;
+    [SerializeField] Text Resolution;
     public int Resolution_Num;
 
+    const int settingWidth = 1675;
+    const int settingHeigh = 885;
+
     [Header("플레이어 창")]
-    public GameObject Player_Pole01; // 플레이어 창의 윗 봉
-    public GameObject Player_Pole02; // 플레이어 창의 아랫 봉 
-    public RectTransform Player_Window; // 플레이어 창의 중간 
+    [SerializeField] GameObject Player_Pole01; // 플레이어 창의 윗 봉
+    [SerializeField] GameObject Player_Pole02; // 플레이어 창의 아랫 봉 
+    [SerializeField] RectTransform Player_Window; // 플레이어 창의 중간 
 
     [Space(10f)]
-    public GameObject Player_Item_Window; // 아이템 창
-    public GameObject Player_Weapon_Window; // 무기 창
-    public GameObject Player_Window_Canvas; // 플레이어 창
+    [SerializeField] GameObject Player_Item_Window; // 아이템 창
+    [SerializeField] GameObject Player_Weapon_Window; // 무기 창
+    [SerializeField] GameObject Player_Window_Canvas; // 플레이어 창
     public bool WI_Check = true; // 현재 무기창이 열려져 있는지 아이템 창이 열려져 있는지 확인한다.
 
     [Header("플레이어_무기 창")]
@@ -114,11 +131,14 @@ public class Stop_Manager : MonoBehaviour
     public RectTransform Exit_Window; // 게임종료 창의 중간 
     public GameObject Exit_Window_Canvas; // 게임종료 창
 
+    const float waitTime = 0.5f;
+
     void Start()
     {
         WI_Check = true;
         InPause = false;
         Start_Sound();
+        Btns();
     }
 
     void Update()
@@ -133,37 +153,15 @@ public class Stop_Manager : MonoBehaviour
         // ESC 키를 누르면 일시정지 창이 열린다.
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (PauseWindow_Open == false && SettingWindow_Open == false && MainWindow_Open == false && GameExitWindow_Open == false && PlayerWindow_Open == false)
-            {
-                PauseWindow_Open = true;
-                Pause_Window_Canvas.SetActive(true);
-                Fade_Background.DOFade(0.5f, 0.5f);
-                UI_Manager.instance.isCursorFade = true;
-                StartCoroutine(Pause_Window_Open());
-            }
-
-            if (PauseWindow_Close == true && SettingWindow_Open == false && MainWindow_Open == false && GameExitWindow_Open == false && PlayerWindow_Open == false)
-                StartCoroutine(Back_Window_Coroutine());
-
-            if (SettingWindow_Open == true)
-                Setting_Close_Btn();
-
-            if (MainWindow_Open == true)
-                Main_No_Btn();
-
-            if (GameExitWindow_Open == true)
-                Exit_No_Btn();
-
-            if (PlayerWindow_Open == true && PlayerWindow_Check == true)
-                Player_Close_Btn();
+            StartCoroutine(PauseWindow());
         }
     }
 
     private void Awake()
     {
-        if (Inst == null)
+        if (instnace == null)
         {
-            Inst = this;
+            instnace = this;
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -200,64 +198,118 @@ public class Stop_Manager : MonoBehaviour
         }
     }
 
-    #region 일시정지 창
-    public IEnumerator Pause_Window_Open()
+    void Btns()
     {
-        SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
+        // 뒤로가기 버튼을 눌렀을 떄
+        backBtn.onClick.AddListener(() =>
+        {
+            SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
+            Fade_Background.DOFade(0, waitTime).SetEase(Ease.Linear).SetUpdate(true);
+
+            pauseBarUp.transform.DOLocalMoveY(pauseBar, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
+            pauseBarDown.transform.DOLocalMoveY(-pauseBar, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
+            {
+                pauseWindow.SetActive(false);
+                Time.timeScale = 1f;
+            });
+
+            StartCoroutine(PauseWindowClose());
+        });
+
+        // 설정 버튼을 눌렀을 때
+        settingBtn.onClick.AddListener(() =>
+        {
+            SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
+
+            pauseBarUp.transform.DOLocalMoveY(pauseBar, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
+            pauseBarDown.transform.DOLocalMoveY(-pauseBar, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
+            {
+                pauseWindow.SetActive(false);
+                settingWindow.SetActive(true);
+
+                StartCoroutine(SettingWindow());
+            });
+            StartCoroutine(PauseWindowClose());
+        });
+
+        // 플레이어 버튼을 눌렀을 때
+        playerBtn.onClick.AddListener(() =>
+        {
+            SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
+
+        });
+
+        // 메인화면 버튼을 눌렀을 때
+        mainWindowBtn.onClick.AddListener(() =>
+        {
+            SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
+
+        });
+
+        // 나가기 버튼을 눌렀을 때
+        exitBtn.onClick.AddListener(() =>
+        {
+            SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
+
+        });
+    }
+
+    // 일시정지 창
+    IEnumerator PauseWindow()
+    {
+        Time.timeScale = 0f;
         timer = 0;
-        // 일시정지 창 봉
-        Pause_Pole01.transform.DOLocalMoveY(374f, 0.5f);
-        Pause_Pole02.transform.DOLocalMoveY(-385.76f, 0.5f);
+        SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
+
+        pauseBarUp.transform.DOLocalMoveY(pauseBarClose, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
+        pauseBarDown.transform.DOLocalMoveY(-pauseBarClose, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
 
         while (timer < 1)
         {
-            Pause_Window.sizeDelta = new Vector2(610f, Mathf.Lerp(0, 772.4f, timer));
+            pauseRect.sizeDelta = new Vector2(pauseWidth, Mathf.Lerp(0, pauseHeight, timer));
 
-            timer += Time.deltaTime * 3.3f;
+            timer += Time.unscaledDeltaTime * 3.3f;
             yield return null;
         }
-        yield return new WaitForSeconds(0.2f);
-        Time.timeScale = 0f;
-
-        PauseWindow_Close = true;
-        BackBtn_Check = true;
-    }
-    #endregion
-
-    #region 돌아가기 버튼
-    public void Back_Btn()
-    {
-        SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
-        StartCoroutine(Back_Window_Coroutine());
     }
 
-    public IEnumerator Back_Window_Coroutine() // 돌아가기 버튼
+    // 일시정지 창 닫기
+    IEnumerator PauseWindowClose()
     {
-        if (BackBtn_Check == true)
+        timer = 0;
+
+        while (timer < 1)
         {
-            SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
-            BackBtn_Check = false;
-            PauseWindow_Close = false;
-            timer = 0;
-            Fade_Background.DOFade(0, 0.5f).SetUpdate(true);
-            Pause_Pole01.transform.DOLocalMoveY(48f, 0.5f).SetUpdate(true);
-            Pause_Pole02.transform.DOLocalMoveY(-36, 0.5f).SetUpdate(true);
+            pauseRect.sizeDelta = new Vector2(pauseWidth, Mathf.Lerp(pauseHeight, 0, timer));
 
-            while (timer < 1)
-            {
-                Pause_Window.sizeDelta = new Vector2(610f, Mathf.Lerp(772.4f, 5f, timer));
-
-                timer += Time.unscaledDeltaTime * 2.5f;
-                yield return null;
-            }
-            UI_Manager.instance.isCursorFade = false;
-            yield return new WaitForSecondsRealtime(0.1f);
-            Pause_Window_Canvas.SetActive(false);
-            PauseWindow_Open = false;
-            Time.timeScale = 1f;
+            timer += Time.unscaledDeltaTime * 2.8f;
+            yield return null;
         }
     }
-    #endregion
+
+    IEnumerator SettingWindow()
+    {
+        timer = 0;
+
+        while (timer < 1)
+        {
+            settingRect.sizeDelta = new Vector2(settingWidth, Mathf.Lerp(0, settingHeigh, timer));
+            timer += Time.unscaledDeltaTime * 3f;
+            yield return null;
+        }
+    }
+
+    IEnumerator SettingWindowClose()
+    {
+        timer = 0;
+
+        while (timer < 1)
+        {
+            settingRect.sizeDelta = new Vector2(settingWidth, Mathf.Lerp(settingHeigh, 0, timer));
+            timer += Time.unscaledDeltaTime * 3f;
+            yield return null;
+        }
+    }
 
     #region 설정 버튼
     public void Setting_Btn() => StartCoroutine(Setting_Window_Coroutine01());
@@ -276,20 +328,20 @@ public class Stop_Manager : MonoBehaviour
         {
             SettingWindow_Open = true;
             timer = 0;
-            Pause_Pole01.transform.DOLocalMoveY(48f, 0.5f).SetUpdate(true);
-            Pause_Pole02.transform.DOLocalMoveY(-36, 0.5f).SetUpdate(true);
+            pauseBarUp.transform.DOLocalMoveY(48f, 0.5f).SetUpdate(true);
+            pauseBarDown.transform.DOLocalMoveY(-36, 0.5f).SetUpdate(true);
 
             while (timer < 1)
             {
-                Pause_Window.sizeDelta = new Vector2(557.1f, Mathf.Lerp(772.4f, 5f, timer));
+                pauseRect.sizeDelta = new Vector2(557.1f, Mathf.Lerp(772.4f, 5f, timer));
 
                 timer += Time.unscaledDeltaTime * 2.5f;
                 yield return null;
             }
             yield return new WaitForSecondsRealtime(0.1f);
-            Pause_Window_Canvas.SetActive(false);
+            pauseWindow.SetActive(false);
             yield return new WaitForSecondsRealtime(0.1f);
-            Setting_Window_Canvas.SetActive(true);
+            settingWindow.SetActive(true);
             StartCoroutine(Setting_Window_Coroutine02());
         }
     }
@@ -299,12 +351,12 @@ public class Stop_Manager : MonoBehaviour
         SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
 
         timer = 0;
-        Setting_Pole01.transform.DOLocalMoveY(447.5388f, 0.48f).SetUpdate(true);
-        Setting_Pole02.transform.DOLocalMoveY(-428f, 0.48f).SetUpdate(true);
+        settingBarUp.transform.DOLocalMoveY(447.5388f, 0.48f).SetUpdate(true);
+        settingBarDown.transform.DOLocalMoveY(-428f, 0.48f).SetUpdate(true);
 
         while (timer < 1)
         {
-            Setting_Window.sizeDelta = new Vector2(1732.5f, Mathf.Lerp(0f, 916.9f, timer));
+            settingRect.sizeDelta = new Vector2(1732.5f, Mathf.Lerp(0f, 916.9f, timer));
             timer += Time.unscaledDeltaTime * 3f;
             yield return null;
         }
@@ -318,18 +370,18 @@ public class Stop_Manager : MonoBehaviour
             SettingWindow_Close = false;
             timer = 0;
             Fade_Background.DOFade(0, 0.5f).SetUpdate(true);
-            Setting_Pole01.transform.DOLocalMoveY(30, 0.48f).SetUpdate(true);
-            Setting_Pole02.transform.DOLocalMoveY(-30, 0.48f).SetUpdate(true);
+            settingBarUp.transform.DOLocalMoveY(30, 0.48f).SetUpdate(true);
+            settingBarDown.transform.DOLocalMoveY(-30, 0.48f).SetUpdate(true);
 
             while (timer < 1)
             {
-                Setting_Window.sizeDelta = new Vector2(1732.5f, Mathf.Lerp(916.9f, 0f, timer));
+                settingRect.sizeDelta = new Vector2(1732.5f, Mathf.Lerp(916.9f, 0f, timer));
 
                 timer += Time.unscaledDeltaTime * 3f;
                 yield return null;
             }
             yield return new WaitForSecondsRealtime(0.1f);
-            Setting_Window_Canvas.SetActive(false);
+            settingWindow.SetActive(false);
             Time.timeScale = 1f;
             SettingWindow_Open = false;
             UI_Manager.instance.isCursorFade = false;
@@ -414,18 +466,18 @@ public class Stop_Manager : MonoBehaviour
         {
             PlayerWindow_Open = true;
             timer = 0;
-            Pause_Pole01.transform.DOLocalMoveY(48f, 0.5f).SetUpdate(true);
-            Pause_Pole02.transform.DOLocalMoveY(-36, 0.5f).SetUpdate(true);
+            pauseBarUp.transform.DOLocalMoveY(48f, 0.5f).SetUpdate(true);
+            pauseBarDown.transform.DOLocalMoveY(-36, 0.5f).SetUpdate(true);
 
             while (timer < 1)
             {
-                Pause_Window.sizeDelta = new Vector2(557.1f, Mathf.Lerp(772.4f, 5f, timer));
+                pauseRect.sizeDelta = new Vector2(557.1f, Mathf.Lerp(772.4f, 5f, timer));
 
                 timer += Time.unscaledDeltaTime * 2.5f;
                 yield return null;
             }
             yield return new WaitForSecondsRealtime(0.1f);
-            Pause_Window_Canvas.SetActive(false);
+            pauseWindow.SetActive(false);
             yield return new WaitForSecondsRealtime(0.1f);
             Player_Window_Canvas.SetActive(true);
             StartCoroutine(Player_Window_Coroutine02());
@@ -705,18 +757,18 @@ public class Stop_Manager : MonoBehaviour
             SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
             MainWindow_Open = true;
             timer = 0;
-            Pause_Pole01.transform.DOLocalMoveY(48f, 0.5f).SetUpdate(true);
-            Pause_Pole02.transform.DOLocalMoveY(-36, 0.5f).SetUpdate(true);
+            pauseBarUp.transform.DOLocalMoveY(48f, 0.5f).SetUpdate(true);
+            pauseBarDown.transform.DOLocalMoveY(-36, 0.5f).SetUpdate(true);
 
             while (timer < 1)
             {
-                Pause_Window.sizeDelta = new Vector2(557.1f, Mathf.Lerp(772.4f, 5f, timer));
+                pauseRect.sizeDelta = new Vector2(557.1f, Mathf.Lerp(772.4f, 5f, timer));
 
                 timer += Time.unscaledDeltaTime * 2.5f;
                 yield return null;
             }
             yield return new WaitForSecondsRealtime(0.1f);
-            Pause_Window_Canvas.SetActive(false);
+            pauseWindow.SetActive(false);
             yield return new WaitForSecondsRealtime(0.1f);
             Main_Window_Canvas.SetActive(true);
             StartCoroutine(Main_Window_Coroutine02());
@@ -788,18 +840,18 @@ public class Stop_Manager : MonoBehaviour
             SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
             GameExitWindow_Open = true;
             timer = 0;
-            Pause_Pole01.transform.DOLocalMoveY(48f, 0.5f).SetUpdate(true);
-            Pause_Pole02.transform.DOLocalMoveY(-36, 0.5f).SetUpdate(true);
+            pauseBarUp.transform.DOLocalMoveY(48f, 0.5f).SetUpdate(true);
+            pauseBarDown.transform.DOLocalMoveY(-36, 0.5f).SetUpdate(true);
 
             while (timer < 1)
             {
-                Pause_Window.sizeDelta = new Vector2(557.1f, Mathf.Lerp(772.4f, 5f, timer));
+                pauseRect.sizeDelta = new Vector2(557.1f, Mathf.Lerp(772.4f, 5f, timer));
 
                 timer += Time.unscaledDeltaTime * 2.5f;
                 yield return null;
             }
             yield return new WaitForSecondsRealtime(0.1f);
-            Pause_Window_Canvas.SetActive(false);
+            pauseWindow.SetActive(false);
             yield return new WaitForSecondsRealtime(0.1f);
             Exit_Window_Canvas.SetActive(true);
             StartCoroutine(Exit_Window_Coroutine02());

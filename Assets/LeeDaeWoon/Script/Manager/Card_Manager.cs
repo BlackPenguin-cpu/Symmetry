@@ -79,9 +79,7 @@ public class Card_Manager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         else
-        {
             Destroy(gameObject);
-        }
     }
 
     public void AddList()

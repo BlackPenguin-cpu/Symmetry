@@ -116,7 +116,7 @@ public class UI_Manager : MonoBehaviour
         if (timerCheck == true)
         {
             sec += Time.deltaTime;
-            timerText.text = string.Format("{0:D2}:{1:D2}", min, (int)sec);
+            //timerText.text = string.Format("{0:D2}:{1:D2}", min, (int)sec);
 
             if ((int)sec > 59)
             {

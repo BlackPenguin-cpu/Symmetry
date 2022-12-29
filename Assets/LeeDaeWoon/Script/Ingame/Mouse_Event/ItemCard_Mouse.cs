@@ -5,6 +5,9 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using DG.Tweening;
 
+[System.Serializable]
+
+
 public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public enum EDirection
@@ -13,7 +16,6 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         Among,
         Right
     }
-
     public EDirection eDirection;
     float timer = 0;
 
@@ -28,33 +30,39 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     bool RightCloseWindow_Check = true;
 
     [Header("빛")]
-    public Image Left_Light;
-    public Image Among_Light;
-    public Image Right_Light;
+    public Image leftLight;
+    public Image amongLight;
+    public Image rightLight;
 
-    [Header("아이템 창")]
-    public GameObject Left_Window;
-    public GameObject Among_Window;
-    public GameObject Right_Window;
+    const float lightTimer = 0.5f;
 
-    [Header("아이템 봉 / 배경")]
-    //왼쪽
-    public GameObject Left_Pole_01;
-    public GameObject Left_Pole_02;
-    public RectTransform Left_Rect;
+    [Header("창")]
+    [SerializeField] GameObject leftWindow;
+    [SerializeField] GameObject amongWindow;
+    [SerializeField] GameObject rightWindow;
+    [SerializeField] RectTransform leftRect;
+    [SerializeField] RectTransform amongRect;
+    [SerializeField] RectTransform rightRect;
 
-    // 가운데
-    public GameObject Among_Pole_01;
-    public GameObject Among_Pole_02;
-    public RectTransform Among_Rect;
+    const int windowWidth = 545;
+    const int windowHeight = 890;
 
-    // 오른쪽
-    public GameObject Right_Pole_01;
-    public GameObject Right_Pole_02;
-    public RectTransform Right_Rect;
+    [Header("봉")]
+    [SerializeField] GameObject leftBarUp;
+    [SerializeField] GameObject leftBarDown;
+    [SerializeField] GameObject amongBarUp;
+    [SerializeField] GameObject amongBarDown;
+    [SerializeField] GameObject rightBarUp;
+    [SerializeField] GameObject rightBarDown;
+
+    const int barPos = 450;
+    const float barSpeed = 0.38f;
 
     void Start()
     {
+        BarMove();
+        StartCoroutine(itemWindow());
+
         Card_Manager.instance.isLeftPick = true;
         Card_Manager.instance.isAmongPick = true;
         Card_Manager.instance.isRightPick = true;
@@ -65,46 +73,72 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     }
 
+    void BarMove()
+    {
+        leftBarUp.transform.DOLocalMoveY(barPos, barSpeed).SetEase(Ease.Linear);
+        leftBarDown.transform.DOLocalMoveY(-barPos, barSpeed).SetEase(Ease.Linear);
+
+        amongBarUp.transform.DOLocalMoveY(barPos, barSpeed).SetEase(Ease.Linear);
+        amongBarDown.transform.DOLocalMoveY(-barPos, barSpeed).SetEase(Ease.Linear);
+
+        rightBarUp.transform.DOLocalMoveY(barPos, barSpeed).SetEase(Ease.Linear);
+        rightBarDown.transform.DOLocalMoveY(-barPos, barSpeed).SetEase(Ease.Linear);
+    }
+
+    IEnumerator itemWindow()
+    {
+        float windowTimer = 0;
+
+        Card_Manager.instance.fade.DOFade(0.5f, 0.5f);
+        UI_Manager.instance.isCursorFade = true;
+        Card_Manager.instance.isItemCardOpenCheck = true;
+
+        while (windowTimer < 1)
+        {
+            leftRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(0, windowHeight, windowTimer));
+            amongRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(0, windowHeight, windowTimer));
+            rightRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(0, windowHeight, windowTimer));
+
+            windowTimer += Time.deltaTime * 3f;
+            yield return null;
+        }
+        Card_Manager.instance.isItemCardOpenCheck = false;
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
+        SoundManager.instance.PlaySoundClip("SFX_Button_Over", SoundType.SFX);
+
         switch (eDirection)
         {
             case EDirection.Left:
-                if (Card_Manager.instance.isAmongPick == true && Card_Manager.instance.isRightPick == true && Card_Manager.instance.isItemCardOpenCheck == false)
-                {
-                    SoundManager.instance.PlaySoundClip("SFX_Button_Over", SoundType.SFX);
-                    Left_Light.DOFade(1f, 0.5f);
-                }
+                leftLight.DOFade(1f, lightTimer);
                 break;
 
             case EDirection.Among:
-                if (Card_Manager.instance.isLeftPick == true && Card_Manager.instance.isRightPick == true && Card_Manager.instance.isItemCardOpenCheck == false)
-                {
-                    SoundManager.instance.PlaySoundClip("SFX_Button_Over", SoundType.SFX);
-                    Among_Light.DOFade(1f, 0.5f);
-                }
+                amongLight.DOFade(1f, lightTimer);
                 break;
 
             case EDirection.Right:
-                if (Card_Manager.instance.isLeftPick == true && Card_Manager.instance.isAmongPick == true && Card_Manager.instance.isItemCardOpenCheck == false)
-                {
-                    SoundManager.instance.PlaySoundClip("SFX_Button_Over", SoundType.SFX);
-                    Right_Light.DOFade(1f, 0.5f);
-                }
+                rightLight.DOFade(1f, lightTimer);
                 break;
         }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (eDirection == EDirection.Left)
-            Left_Light.DOFade(0f, 0.5f);
-
-        if (eDirection == EDirection.Among)
-            Among_Light.DOFade(0f, 0.5f);
-
-        if (eDirection == EDirection.Right)
-            Right_Light.DOFade(0f, 0.5f);
+        switch (eDirection)
+        {
+            case EDirection.Left:
+                leftLight.DOFade(0, lightTimer);
+                break;
+            case EDirection.Among:
+                amongLight.DOFade(0, lightTimer);
+                break;
+            case EDirection.Right:
+                rightLight.DOFade(0, lightTimer);
+                break;
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -112,7 +146,6 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         // 왼쪽 카드를 선택 했을 때
         if (eDirection == EDirection.Left)
         {
-
             Card_Manager.instance.fade.DOFade(0f, 0.5f);
             UI_Manager.instance.isCursorFade = false;
 
@@ -129,7 +162,7 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
                     {
                         if (Card_Manager.instance.daBuffer[i].Itme_Name == Card_Manager.instance.itemDALeftCheck[0].Itme_Name)
                         {
-                            Stop_Manager.Inst.ItemDA_Have.Add(Card_Manager.instance.daBuffer[i]);
+                            StopManager.instnace.ItemDA_Have.Add(Card_Manager.instance.daBuffer[i]);
                             Card_Manager.instance.daBuffer.RemoveAt(i);
                         }
                     }
@@ -208,7 +241,7 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
 
                 if (Card_Manager.instance.isItemLeft == false)
-                    Stop_Manager.Inst.ItemDA_Have.Add(Card_Manager.instance.itemDALeftCheck[0]);
+                    StopManager.instnace.ItemDA_Have.Add(Card_Manager.instance.itemDALeftCheck[0]);
 
                 if (Card_Manager.instance.isItemBool == true)
                     Card_Manager.instance.isItemBool = false;
@@ -230,8 +263,8 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
                     }
                 }
 
-                Left_Light.DOFade(1f, 0.1f);
-                Left_Window.transform.DOLocalMoveY(1100, 0.5f).SetEase(Ease.InQuad);
+                leftLight.DOFade(1f, 0.1f);
+                leftWindow.transform.DOLocalMoveY(1100, 0.5f).SetEase(Ease.InQuad);
                 StartCoroutine(Close_Dot());
             }
         }
@@ -255,7 +288,7 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
                     {
                         if (Card_Manager.instance.daBuffer[i].Itme_Name == Card_Manager.instance.itemDAAmongCheck[0].Itme_Name)
                         {
-                            Stop_Manager.Inst.ItemDA_Have.Add(Card_Manager.instance.daBuffer[i]);
+                            StopManager.instnace.ItemDA_Have.Add(Card_Manager.instance.daBuffer[i]);
                             Card_Manager.instance.daBuffer.RemoveAt(i);
                         }
                     }
@@ -333,7 +366,7 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
 
                 if (Card_Manager.instance.isItemAmong == false)
-                    Stop_Manager.Inst.ItemDA_Have.Add(Card_Manager.instance.itemDAAmongCheck[0]);
+                    StopManager.instnace.ItemDA_Have.Add(Card_Manager.instance.itemDAAmongCheck[0]);
 
                 if (Card_Manager.instance.isItemBool == true)
                     Card_Manager.instance.isItemBool = false;
@@ -354,8 +387,8 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
                     }
                 }
 
-                Among_Light.DOFade(1f, 0.1f);
-                Among_Window.transform.DOLocalMoveY(1150, 0.5f).SetEase(Ease.InQuad);
+                amongLight.DOFade(1f, 0.1f);
+                amongWindow.transform.DOLocalMoveY(1150, 0.5f).SetEase(Ease.InQuad);
                 StartCoroutine(Close_Dot());
             }
 
@@ -380,7 +413,7 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
                     {
                         if (Card_Manager.instance.daBuffer[i].Itme_Name == Card_Manager.instance.itemDARightCheck[0].Itme_Name)
                         {
-                            Stop_Manager.Inst.ItemDA_Have.Add(Card_Manager.instance.daBuffer[i]);
+                            StopManager.instnace.ItemDA_Have.Add(Card_Manager.instance.daBuffer[i]);
                             Card_Manager.instance.daBuffer.RemoveAt(i);
                         }
                     }
@@ -457,7 +490,7 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
                 }
 
                 if (Card_Manager.instance.isItemRight == false)
-                    Stop_Manager.Inst.ItemDA_Have.Add(Card_Manager.instance.itemDARightCheck[0]);
+                    StopManager.instnace.ItemDA_Have.Add(Card_Manager.instance.itemDARightCheck[0]);
 
                 if (Card_Manager.instance.isItemBool == true)
                     Card_Manager.instance.isItemBool = false;
@@ -478,8 +511,8 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
                     }
                 }
 
-                Right_Light.DOFade(1f, 0.1f);
-                Right_Window.transform.DOLocalMoveY(1150, 0.5f).SetEase(Ease.InQuad);
+                rightLight.DOFade(1f, 0.1f);
+                rightWindow.transform.DOLocalMoveY(1150, 0.5f).SetEase(Ease.InQuad);
                 StartCoroutine(Close_Dot());
             }
         }
@@ -492,16 +525,16 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         timer = 0;
         if (eDirection == EDirection.Left)
         {
-            Among_Pole_01.transform.DOLocalMoveY(-53f, 0.5f);
-            Among_Pole_02.transform.DOLocalMoveY(-125f, 0.5f);
+            amongBarUp.transform.DOLocalMoveY(-53f, 0.5f);
+            amongBarDown.transform.DOLocalMoveY(-125f, 0.5f);
 
-            Right_Pole_01.transform.DOLocalMoveY(-32f, 0.5f);
-            Right_Pole_02.transform.DOLocalMoveY(-108f, 0.5f);
+            rightBarUp.transform.DOLocalMoveY(-32f, 0.5f);
+            rightBarDown.transform.DOLocalMoveY(-108f, 0.5f);
 
             while (timer < 1)
             {
-                Among_Rect.sizeDelta = new Vector2(522.6044f, Mathf.Lerp(824.77f, -20, timer));
-                Right_Rect.sizeDelta = new Vector2(522.6044f, Mathf.Lerp(824.77f, -20, timer));
+                amongRect.sizeDelta = new Vector2(522.6044f, Mathf.Lerp(824.77f, -20, timer));
+                rightRect.sizeDelta = new Vector2(522.6044f, Mathf.Lerp(824.77f, -20, timer));
                 timer += Time.deltaTime * 3f;
                 yield return null;
             }
@@ -525,16 +558,16 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
         if (eDirection == EDirection.Among)
         {
-            Left_Pole_01.transform.DOLocalMoveY(50f, 0.5f);
-            Left_Pole_02.transform.DOLocalMoveY(-26f, 0.5f);
+            leftBarUp.transform.DOLocalMoveY(50f, 0.5f);
+            leftBarDown.transform.DOLocalMoveY(-26f, 0.5f);
 
-            Right_Pole_01.transform.DOLocalMoveY(-32f, 0.5f);
-            Right_Pole_02.transform.DOLocalMoveY(-108f, 0.5f);
+            rightBarUp.transform.DOLocalMoveY(-32f, 0.5f);
+            rightBarDown.transform.DOLocalMoveY(-108f, 0.5f);
 
             while (timer < 1)
             {
-                Left_Rect.sizeDelta = new Vector2(522.6044f, Mathf.Lerp(824.77f, -20, timer));
-                Right_Rect.sizeDelta = new Vector2(522.6044f, Mathf.Lerp(824.77f, -20, timer));
+                leftRect.sizeDelta = new Vector2(522.6044f, Mathf.Lerp(824.77f, -20, timer));
+                rightRect.sizeDelta = new Vector2(522.6044f, Mathf.Lerp(824.77f, -20, timer));
                 timer += Time.deltaTime * 3f;
                 yield return null;
             }
@@ -558,16 +591,16 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
         if (eDirection == EDirection.Right)
         {
-            Left_Pole_01.transform.DOLocalMoveY(50f, 0.5f);
-            Left_Pole_02.transform.DOLocalMoveY(-26f, 0.5f);
+            leftBarUp.transform.DOLocalMoveY(50f, 0.5f);
+            leftBarDown.transform.DOLocalMoveY(-26f, 0.5f);
 
-            Among_Pole_01.transform.DOLocalMoveY(-53f, 0.5f);
-            Among_Pole_02.transform.DOLocalMoveY(-125f, 0.5f);
+            amongBarUp.transform.DOLocalMoveY(-53f, 0.5f);
+            amongBarDown.transform.DOLocalMoveY(-125f, 0.5f);
 
             while (timer < 1)
             {
-                Left_Rect.sizeDelta = new Vector2(522.6044f, Mathf.Lerp(824.77f, -20, timer));
-                Among_Rect.sizeDelta = new Vector2(522.6044f, Mathf.Lerp(824.77f, -20, timer));
+                leftRect.sizeDelta = new Vector2(522.6044f, Mathf.Lerp(824.77f, -20, timer));
+                amongRect.sizeDelta = new Vector2(522.6044f, Mathf.Lerp(824.77f, -20, timer));
                 timer += Time.deltaTime * 3f;
                 yield return null;
             }
