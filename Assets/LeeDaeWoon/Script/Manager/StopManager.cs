@@ -49,11 +49,12 @@ public class StopManager : MonoBehaviour
     [SerializeField] RectTransform pauseRect; // 일시정지 창의 중간
     [SerializeField] GameObject pauseWindow; // 일시정지 창
 
-    const int pauseBar = 40;
-    const int pauseBarClose = 370;
+    const int pauseBar = 370;
+    const int pauseBarClose = 40;
+    const float pauseBarSpeed = 0.38f;
+
     const int pauseWidth = 566;
     const int pauseHeight = 700;
-    const float pauseBarSpeed = 0.38f;
 
     [Header("설정 창")]
     [SerializeField] GameObject settingBarUp; // 설정 창의 윗 봉
@@ -64,6 +65,10 @@ public class StopManager : MonoBehaviour
     [SerializeField] Slider BGM_Slider;
     [SerializeField] Text Resolution;
     public int Resolution_Num;
+
+    const int settingBar = 440;
+    const int settingBarClose = 30;
+    const float settingBarSpeed = 0.35f;
 
     const int settingWidth = 1675;
     const int settingHeigh = 885;
@@ -137,7 +142,6 @@ public class StopManager : MonoBehaviour
     {
         WI_Check = true;
         InPause = false;
-        Start_Sound();
         Btns();
     }
 
@@ -145,16 +149,13 @@ public class StopManager : MonoBehaviour
     {
         Item_Log();
         WeaponType();
-        Resolution_Size();
-        Sound_Control();
+
 
         Main_Reset();
 
         // ESC 키를 누르면 일시정지 창이 열린다.
         if (Input.GetKeyDown(KeyCode.Escape))
-        {
             StartCoroutine(PauseWindow());
-        }
     }
 
     private void Awake()
@@ -206,8 +207,8 @@ public class StopManager : MonoBehaviour
             SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
             Fade_Background.DOFade(0, waitTime).SetEase(Ease.Linear).SetUpdate(true);
 
-            pauseBarUp.transform.DOLocalMoveY(pauseBar, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
-            pauseBarDown.transform.DOLocalMoveY(-pauseBar, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
+            pauseBarUp.transform.DOLocalMoveY(pauseBarClose, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
+            pauseBarDown.transform.DOLocalMoveY(-pauseBarClose, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
             {
                 pauseWindow.SetActive(false);
                 Time.timeScale = 1f;
@@ -221,15 +222,30 @@ public class StopManager : MonoBehaviour
         {
             SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
 
-            pauseBarUp.transform.DOLocalMoveY(pauseBar, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
-            pauseBarDown.transform.DOLocalMoveY(-pauseBar, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
+            pauseBarUp.transform.DOLocalMoveY(pauseBarClose, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
+            pauseBarDown.transform.DOLocalMoveY(-pauseBarClose, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
             {
                 pauseWindow.SetActive(false);
                 settingWindow.SetActive(true);
 
+                settingBarUp.transform.DOLocalMoveY(settingBar, settingBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
+                settingBarDown.transform.DOLocalMoveY(-settingBar, settingBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
                 StartCoroutine(SettingWindow());
             });
             StartCoroutine(PauseWindowClose());
+        });
+
+        // 설정닫기 버튼을 눌렀을 때
+        settingCloseBtn.onClick.AddListener(() =>
+        {
+            SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
+
+            settingBarUp.transform.DOLocalMoveY(settingBarClose, settingBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
+            settingBarDown.transform.DOLocalMoveY(-settingBarClose, settingBarSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
+            {
+                settingWindow.SetActive(false);
+            });
+            StartCoroutine(SettingWindowClose());
         });
 
         // 플레이어 버튼을 눌렀을 때
@@ -254,15 +270,18 @@ public class StopManager : MonoBehaviour
         });
     }
 
-    // 일시정지 창
+    #region 일시정지 창
+    // 일시정지 창 열기
     IEnumerator PauseWindow()
     {
         Time.timeScale = 0f;
+
         timer = 0;
+        pauseWindow.SetActive(true);
         SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
 
-        pauseBarUp.transform.DOLocalMoveY(pauseBarClose, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
-        pauseBarDown.transform.DOLocalMoveY(-pauseBarClose, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
+        pauseBarUp.transform.DOLocalMoveY(pauseBar, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
+        pauseBarDown.transform.DOLocalMoveY(-pauseBar, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
 
         while (timer < 1)
         {
@@ -286,7 +305,10 @@ public class StopManager : MonoBehaviour
             yield return null;
         }
     }
+    #endregion
 
+    #region 설정 창
+    // 설정 창 열기
     IEnumerator SettingWindow()
     {
         timer = 0;
@@ -299,6 +321,7 @@ public class StopManager : MonoBehaviour
         }
     }
 
+    // 설정 창 닫기
     IEnumerator SettingWindowClose()
     {
         timer = 0;
@@ -310,128 +333,9 @@ public class StopManager : MonoBehaviour
             yield return null;
         }
     }
-
-    #region 설정 버튼
-    public void Setting_Btn() => StartCoroutine(Setting_Window_Coroutine01());
-
-    public void Setting_Close_Btn()
-    {
-        SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
-        StartCoroutine(Setting_Window_Close());
-    }
-
-    public IEnumerator Setting_Window_Coroutine01() // 설정버튼을 클릭했을 떄
-    {
-        SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
-
-        if (SettingWindow_Open == false)
-        {
-            SettingWindow_Open = true;
-            timer = 0;
-            pauseBarUp.transform.DOLocalMoveY(48f, 0.5f).SetUpdate(true);
-            pauseBarDown.transform.DOLocalMoveY(-36, 0.5f).SetUpdate(true);
-
-            while (timer < 1)
-            {
-                pauseRect.sizeDelta = new Vector2(557.1f, Mathf.Lerp(772.4f, 5f, timer));
-
-                timer += Time.unscaledDeltaTime * 2.5f;
-                yield return null;
-            }
-            yield return new WaitForSecondsRealtime(0.1f);
-            pauseWindow.SetActive(false);
-            yield return new WaitForSecondsRealtime(0.1f);
-            settingWindow.SetActive(true);
-            StartCoroutine(Setting_Window_Coroutine02());
-        }
-    }
-
-    public IEnumerator Setting_Window_Coroutine02() // 설정 창 열림
-    {
-        SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
-
-        timer = 0;
-        settingBarUp.transform.DOLocalMoveY(447.5388f, 0.48f).SetUpdate(true);
-        settingBarDown.transform.DOLocalMoveY(-428f, 0.48f).SetUpdate(true);
-
-        while (timer < 1)
-        {
-            settingRect.sizeDelta = new Vector2(1732.5f, Mathf.Lerp(0f, 916.9f, timer));
-            timer += Time.unscaledDeltaTime * 3f;
-            yield return null;
-        }
-        SettingWindow_Close = true;
-    }
-
-    public IEnumerator Setting_Window_Close() // 설정 창 닫힘
-    {
-        if (SettingWindow_Close == true)
-        {
-            SettingWindow_Close = false;
-            timer = 0;
-            Fade_Background.DOFade(0, 0.5f).SetUpdate(true);
-            settingBarUp.transform.DOLocalMoveY(30, 0.48f).SetUpdate(true);
-            settingBarDown.transform.DOLocalMoveY(-30, 0.48f).SetUpdate(true);
-
-            while (timer < 1)
-            {
-                settingRect.sizeDelta = new Vector2(1732.5f, Mathf.Lerp(916.9f, 0f, timer));
-
-                timer += Time.unscaledDeltaTime * 3f;
-                yield return null;
-            }
-            yield return new WaitForSecondsRealtime(0.1f);
-            settingWindow.SetActive(false);
-            Time.timeScale = 1f;
-            SettingWindow_Open = false;
-            UI_Manager.instance.isCursorFade = false;
-        }
-    }
-
-    public void Resolution_Size()
-    {
-        switch (Resolution_Num)
-        {
-            case 0:
-                Resolution.text = "1920 * 1080";
-                Screen.SetResolution(1920, 1080, true);
-                break;
-            case 1:
-                Resolution.text = "1680 * 1050";
-                Screen.SetResolution(1680, 1050, true);
-                break;
-            case 2:
-                Resolution.text = "1400 * 1050";
-                Screen.SetResolution(1400, 1050, true);
-                break;
-            case 3:
-                Resolution.text = "1280 * 600";
-                Screen.SetResolution(1280, 600, true);
-                break;
-
-        }
-    }
-
-    public void ResolutionSize_Left()
-    {
-        if (Resolution_Num > 0)
-            Resolution_Num--;
-    }
-
-    public void ResolutionSize_Right()
-    {
-        if (Resolution_Num < 3)
-            Resolution_Num++;
-    }
-
-    public void Start_Sound() =>
-        BGM_Slider.value = SoundManager.instance.audioSourceClasses[SoundType.BGM].audioVolume;
-
-    public void Sound_Control()
-    {
-        SoundManager.instance.audioSourceClasses[SoundType.BGM].audioVolume = BGM_Slider.value;
-    }
     #endregion
+
+
 
     #region 플레이어 버튼
     public void Player_Btn() => StartCoroutine(Player_Window_Coroutine01());

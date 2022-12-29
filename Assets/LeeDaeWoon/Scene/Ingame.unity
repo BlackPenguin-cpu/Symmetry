@@ -1567,6 +1567,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1415853103}
   m_CullTransparentMesh: 1
+--- !u!114 &1433220051 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1319136106197776282, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
+  m_PrefabInstance: {fileID: 7631395407849369554}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1596793746
 GameObject:
   m_ObjectHideFlags: 0
@@ -2415,7 +2426,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1319136106129565307, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 885
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319136106160871129, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319136106160871129, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319136106379654012, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319136106379654012, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1319136106392510499, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
       propertyPath: m_SizeDelta.x
@@ -2461,6 +2488,22 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1319136106710939714, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319136106710939714, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319136106748547111, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319136106748547111, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1319136106762892666, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
       propertyPath: m_SizeDelta.x
       value: 1675
@@ -2479,7 +2522,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1319136107114793829, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1319136107233996027, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
       propertyPath: m_SizeDelta.x
@@ -2503,6 +2546,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1319136107240411181, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319136107353553563, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319136107353553563, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1319136107378256036, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
@@ -2613,6 +2664,10 @@ PrefabInstance:
       propertyPath: settingBarDown
       value: 
       objectReference: {fileID: 47399713}
+    - target: {fileID: 7631395407191935381, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
+      propertyPath: settingCloseBtn
+      value: 
+      objectReference: {fileID: 1433220051}
     - target: {fileID: 7631395408150755461, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
       propertyPath: cardPrefab
       value: 
