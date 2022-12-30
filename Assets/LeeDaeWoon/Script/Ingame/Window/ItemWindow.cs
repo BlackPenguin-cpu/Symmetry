@@ -7,6 +7,8 @@ using UnityEngine.EventSystems;
 
 public class ItemWindow : MonoBehaviour
 {
+    float timer = 0;
+
     [Header("â")]
     [SerializeField] RectTransform leftWindow;
     [SerializeField] RectTransform amongWindow;
@@ -51,21 +53,14 @@ public class ItemWindow : MonoBehaviour
 
     IEnumerator itemWindow()
     {
-        float windowTimer = 0;
-
-        CardManager.instance.fade.DOFade(0.5f, 0.5f);
-        UI_Manager.instance.isCursorFade = true;
-        CardManager.instance.isItemCardOpenCheck = true;
-
-        while (windowTimer < 1)
+        while (timer < 1)
         {
-            leftWindow.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(0, windowHeight, windowTimer));
-            amongWindow.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(0, windowHeight, windowTimer));
-            rightWindow.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(0, windowHeight, windowTimer));
+            leftWindow.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(0, windowHeight, timer));
+            amongWindow.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(0, windowHeight, timer));
+            rightWindow.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(0, windowHeight, timer));
 
-            windowTimer += Time.deltaTime * 3f;
+            timer += Time.deltaTime * 3f;
             yield return null;
         }
-        CardManager.instance.isItemCardOpenCheck = false;
     }
 }

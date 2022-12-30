@@ -46,6 +46,7 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     const int windowWidth = 545;
     const int windowHeight = 890;
+    const int windowClickPos = 1200;
 
     [Header("ºÀ")]
     [SerializeField] GameObject leftBarUp;
@@ -55,15 +56,11 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     [SerializeField] GameObject rightBarUp;
     [SerializeField] GameObject rightBarDown;
 
-    const int barOpen = 450;
     const int barClose = 40;
     const float barSpeed = 0.38f;
 
     void Start()
     {
-        BarOpen();
-        StartCoroutine(itemWindow());
-
         CardManager.instance.isLeftPick = true;
         CardManager.instance.isAmongPick = true;
         CardManager.instance.isRightPick = true;
@@ -74,55 +71,97 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     }
 
-    void BarOpen()
+    void LightDoKill()
     {
-        leftBarUp.transform.DOLocalMoveY(barOpen, barSpeed).SetEase(Ease.Linear);
-        leftBarDown.transform.DOLocalMoveY(-barOpen, barSpeed).SetEase(Ease.Linear);
-
-        amongBarUp.transform.DOLocalMoveY(barOpen, barSpeed).SetEase(Ease.Linear);
-        amongBarDown.transform.DOLocalMoveY(-barOpen, barSpeed).SetEase(Ease.Linear);
-
-        rightBarUp.transform.DOLocalMoveY(barOpen, barSpeed).SetEase(Ease.Linear);
-        rightBarDown.transform.DOLocalMoveY(-barOpen, barSpeed).SetEase(Ease.Linear);
+        leftLight.DOKill();
+        amongLight.DOKill();
+        rightLight.DOKill();
     }
 
-    void BarClose()
+    IEnumerator LeftClickWindow()
     {
-        leftBarUp.transform.DOLocalMoveY(barClose, barSpeed).SetEase(Ease.Linear);
-        leftBarDown.transform.DOLocalMoveY(-barClose, barSpeed).SetEase(Ease.Linear);
+        leftWindow.transform.DOLocalMoveY(windowClickPos, barSpeed).SetEase(Ease.Linear).OnComplete(() =>
+        {
+            leftWindow.transform.DOKill();
+            amongBarUp.transform.DOKill();
+            amongBarDown.transform.DOKill();
+            rightBarUp.transform.DOKill();
+            rightBarDown.transform.DOKill();
+            LightDoKill();
+
+            Destroy(transform.parent.gameObject);
+        });
 
         amongBarUp.transform.DOLocalMoveY(barClose, barSpeed).SetEase(Ease.Linear);
         amongBarDown.transform.DOLocalMoveY(-barClose, barSpeed).SetEase(Ease.Linear);
 
         rightBarUp.transform.DOLocalMoveY(barClose, barSpeed).SetEase(Ease.Linear);
         rightBarDown.transform.DOLocalMoveY(-barClose, barSpeed).SetEase(Ease.Linear);
-    }
-
-    IEnumerator itemWindow()
-    {
-        CardManager.instance.fade.DOFade(0.5f, 0.5f);
-        UI_Manager.instance.isCursorFade = true;
-        CardManager.instance.isItemCardOpenCheck = true;
 
         while (timer < 1)
         {
-            leftRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(0, windowHeight, timer));
-            amongRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(0, windowHeight, timer));
-            rightRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(0, windowHeight, timer));
+            amongRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(windowHeight, 0, timer));
+            rightRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(windowHeight, 0, timer));
+
+            timer += Time.deltaTime * 2.8f;
+            yield return null;
+        }
+    }
+
+    IEnumerator AmongClickWindow()
+    {
+        amongWindow.transform.DOLocalMoveY(windowClickPos, barSpeed).SetEase(Ease.Linear).OnComplete(() =>
+        {
+            amongWindow.transform.DOKill();
+            leftBarUp.transform.DOKill();
+            leftBarDown.transform.DOKill();
+            rightBarUp.transform.DOKill();
+            rightBarDown.transform.DOKill();
+            LightDoKill();
+
+            Destroy(transform.parent.gameObject);
+        });
+
+        leftBarUp.transform.DOLocalMoveY(barClose, barSpeed).SetEase(Ease.Linear);
+        leftBarDown.transform.DOLocalMoveY(-barClose, barSpeed).SetEase(Ease.Linear);
+
+        rightBarUp.transform.DOLocalMoveY(barClose, barSpeed).SetEase(Ease.Linear);
+        rightBarDown.transform.DOLocalMoveY(-barClose, barSpeed).SetEase(Ease.Linear);
+
+        while (timer < 1)
+        {
+            leftRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(windowHeight, 0, timer));
+            rightRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(windowHeight, 0, timer));
 
             timer += Time.deltaTime * 3f;
             yield return null;
         }
-        CardManager.instance.isItemCardOpenCheck = false;
     }
 
-    IEnumerator itemWindowClose()
+    IEnumerator RightClickWindow()
     {
+        rightWindow.transform.DOLocalMoveY(windowClickPos, barSpeed).SetEase(Ease.Linear).OnComplete(() =>
+        {
+            rightWindow.transform.DOKill();
+            leftBarUp.transform.DOKill();
+            leftBarDown.transform.DOKill();
+            amongBarUp.transform.DOKill();
+            amongBarDown.transform.DOKill();
+            LightDoKill();
+
+            Destroy(transform.parent.gameObject);
+        });
+
+        leftBarUp.transform.DOLocalMoveY(barClose, barSpeed).SetEase(Ease.Linear);
+        leftBarDown.transform.DOLocalMoveY(-barClose, barSpeed).SetEase(Ease.Linear);
+
+        amongBarUp.transform.DOLocalMoveY(barClose, barSpeed).SetEase(Ease.Linear);
+        amongBarDown.transform.DOLocalMoveY(-barClose, barSpeed).SetEase(Ease.Linear);
+
         while (timer < 1)
         {
             leftRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(windowHeight, 0, timer));
             amongRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(windowHeight, 0, timer));
-            rightRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(windowHeight, 0, timer));
 
             timer += Time.deltaTime * 3f;
             yield return null;
@@ -167,16 +206,29 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        switch(eDirection)
+        switch (eDirection)
         {
             case EDirection.Left:
+
+
+
+                StartCoroutine(LeftClickWindow());
 
                 break;
 
             case EDirection.Among:
+
+
+                StartCoroutine(AmongClickWindow());
+
                 break;
 
             case EDirection.Right:
+
+
+
+                StartCoroutine(RightClickWindow());
+
                 break;
         }
 
@@ -553,111 +605,5 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         //        StartCoroutine(Close_Dot());
         //    }
         //}
-    }
-
-    public IEnumerator Close_Dot()
-    {
-        SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX);
-
-        timer = 0;
-        if (eDirection == EDirection.Left)
-        {
-            amongBarUp.transform.DOLocalMoveY(-53f, 0.5f);
-            amongBarDown.transform.DOLocalMoveY(-125f, 0.5f);
-
-            rightBarUp.transform.DOLocalMoveY(-32f, 0.5f);
-            rightBarDown.transform.DOLocalMoveY(-108f, 0.5f);
-
-            while (timer < 1)
-            {
-                amongRect.sizeDelta = new Vector2(522.6044f, Mathf.Lerp(824.77f, -20, timer));
-                rightRect.sizeDelta = new Vector2(522.6044f, Mathf.Lerp(824.77f, -20, timer));
-                timer += Time.deltaTime * 3f;
-                yield return null;
-            }
-
-            LeftCloseWindow_Check = false;
-            if (LeftCloseWindow_Check == false)
-            {
-                yield return new WaitForSeconds(0.2f);
-                DOTween.PauseAll();
-                Destroy(GameObject.Find("Item_Window(Clone)"));
-            }
-            UI_Manager.instance.timerCheck = true;
-
-            WaveManager.instnace.StartCoroutine(WaveManager.instnace.WaveProcessing(WaveManager.instnace.m_WaveNum - 1));
-
-            if (WaveManager.instnace.m_WaveNum == 3 || WaveManager.instnace.m_WaveNum == 5)
-                Potal.Inst.Potal_M();
-
-            Skill_Manager.instance.Instantiate_SkillCheck = false;
-        }
-
-        if (eDirection == EDirection.Among)
-        {
-            leftBarUp.transform.DOLocalMoveY(50f, 0.5f);
-            leftBarDown.transform.DOLocalMoveY(-26f, 0.5f);
-
-            rightBarUp.transform.DOLocalMoveY(-32f, 0.5f);
-            rightBarDown.transform.DOLocalMoveY(-108f, 0.5f);
-
-            while (timer < 1)
-            {
-                leftRect.sizeDelta = new Vector2(522.6044f, Mathf.Lerp(824.77f, -20, timer));
-                rightRect.sizeDelta = new Vector2(522.6044f, Mathf.Lerp(824.77f, -20, timer));
-                timer += Time.deltaTime * 3f;
-                yield return null;
-            }
-
-            AmongCloseWindow_Check = false;
-            if (AmongCloseWindow_Check == false)
-            {
-                yield return new WaitForSeconds(0.2f);
-                DOTween.PauseAll();
-                Destroy(GameObject.Find("Item_Window(Clone)"));
-            }
-            UI_Manager.instance.timerCheck = true;
-
-            WaveManager.instnace.StartCoroutine(WaveManager.instnace.WaveProcessing(WaveManager.instnace.m_WaveNum - 1));
-
-            if (WaveManager.instnace.m_WaveNum == 3 || WaveManager.instnace.m_WaveNum == 5)
-                Potal.Inst.Potal_M();
-
-            Skill_Manager.instance.Instantiate_SkillCheck = false;
-        }
-
-        if (eDirection == EDirection.Right)
-        {
-            leftBarUp.transform.DOLocalMoveY(50f, 0.5f);
-            leftBarDown.transform.DOLocalMoveY(-26f, 0.5f);
-
-            amongBarUp.transform.DOLocalMoveY(-53f, 0.5f);
-            amongBarDown.transform.DOLocalMoveY(-125f, 0.5f);
-
-            while (timer < 1)
-            {
-                leftRect.sizeDelta = new Vector2(522.6044f, Mathf.Lerp(824.77f, -20, timer));
-                amongRect.sizeDelta = new Vector2(522.6044f, Mathf.Lerp(824.77f, -20, timer));
-                timer += Time.deltaTime * 3f;
-                yield return null;
-            }
-
-            RightCloseWindow_Check = false;
-            if (RightCloseWindow_Check == false)
-            {
-                yield return new WaitForSeconds(0.2f);
-                DOTween.PauseAll();
-                Destroy(GameObject.Find("Item_Window(Clone)"));
-            }
-            UI_Manager.instance.timerCheck = true;
-
-            //TODO: ÀÀ¾Ö
-            WaveManager.instnace.StartCoroutine(WaveManager.instnace.WaveProcessing(WaveManager.instnace.m_WaveNum - 1));
-
-            if (WaveManager.instnace.m_WaveNum == 3 || WaveManager.instnace.m_WaveNum == 5)
-                Potal.Inst.Potal_M();
-
-            Skill_Manager.instance.Instantiate_SkillCheck = false;
-        }
     }
 }

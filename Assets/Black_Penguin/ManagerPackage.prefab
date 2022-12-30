@@ -1021,6 +1021,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7486971746282662758, guid: e5ba82db2e014a945bd3c556604dbb88, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486971746282662758, guid: e5ba82db2e014a945bd3c556604dbb88, type: 3}
       propertyPath: cardPrefab
       value: 
       objectReference: {fileID: 6711820591797814597, guid: eba2a774be07be9448f54aba063df576, type: 3}
