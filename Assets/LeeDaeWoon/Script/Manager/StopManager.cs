@@ -46,6 +46,10 @@ public class StopManager : MonoBehaviour
     [SerializeField] Button playerWeaponBtn;
     [SerializeField] Button settingCloseBtn;
     [SerializeField] Button playerCloseBtn;
+    [SerializeField] Button mainWindowYesBtn;
+    [SerializeField] Button mainWindowNoBtn;
+    [SerializeField] Button exitWindowYesBtn;
+    [SerializeField] Button exitWindowNoBtn;
 
     [Header("일시정지 창")]
     [SerializeField] GameObject pauseBarUp; // 일시정지 창의 윗 봉
@@ -134,18 +138,31 @@ public class StopManager : MonoBehaviour
     bool Icon_Check = true;
 
     [Header("메인화면 창")]
-    [SerializeField] GameObject Main_Pole01; // 메인 창의 윗 봉
-    [SerializeField] GameObject Main_Pole02; // 메인 창의 아랫 봉 
-    [SerializeField] RectTransform Main_Window; // 메인 창의 중간 
-    [SerializeField] GameObject Main_Window_Canvas; // 메인 창
-
+    [SerializeField] GameObject mainBarUp; // 메인 창의 윗 봉
+    [SerializeField] GameObject mainBarDown; // 메인 창의 아랫 봉 
+    [SerializeField] RectTransform mainRect; // 메인 창의 중간 
+    [SerializeField] GameObject mainWindow; // 메인 창
     bool Reset_Check; // 초기화 체크
 
+    const int mainBar = 220;
+    const int mainBarClose = 30;
+    const float mainBarSpeed = 0.35f;
+
+    const int mainWidth = 1585;
+    const int mainHeigh = 395;
+
     [Header("게임종료 창")]
-    public GameObject Exit_Pole01; // 게임종료 창의 윗 봉
-    public GameObject Exit_Pole02; // 게임종료 창의 아랫 봉 
-    public RectTransform Exit_Window; // 게임종료 창의 중간 
-    public GameObject Exit_Window_Canvas; // 게임종료 창
+    public GameObject exitBarUp; // 게임종료 창의 윗 봉
+    public GameObject exitBarDown; // 게임종료 창의 아랫 봉 
+    public RectTransform exitRect; // 게임종료 창의 중간 
+    public GameObject exitWindow; // 게임종료 창
+
+    const int exitBar = 220;
+    const int exitBarClose = 30;
+    const float exitBarSpeed = 0.35f;
+
+    const int exitWidth = 1585;
+    const int exitHeigh = 395;
 
     const float waitTime = 0.5f;
 
@@ -158,8 +175,8 @@ public class StopManager : MonoBehaviour
 
     void Update()
     {
-        Item_Log();
-        WeaponType();
+        //Item_Log();
+        //WeaponType();
 
 
         Main_Reset();
@@ -333,6 +350,36 @@ public class StopManager : MonoBehaviour
         {
             SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
 
+            pauseBarUp.transform.DOLocalMoveY(pauseBarClose, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
+            pauseBarDown.transform.DOLocalMoveY(-pauseBarClose, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
+            {
+                pauseWindow.SetActive(false);
+                mainWindow.SetActive(true);
+
+                mainBarUp.transform.DOLocalMoveY(mainBar, mainBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
+                mainBarDown.transform.DOLocalMoveY(-mainBar, mainBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
+                StartCoroutine(MainWindow());
+            });
+            StartCoroutine(PauseWindowClose());
+        });
+
+        // 메인화면에서 예 버튼을 눌렀을 때
+        mainWindowYesBtn.onClick.AddListener(() =>
+        {
+            
+        });
+
+        // 메인화면에서 아니요 버튼을 누렀을 때
+        mainWindowNoBtn.onClick.AddListener(() =>
+        {
+            SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
+
+            mainBarUp.transform.DOLocalMoveY(mainBarClose, mainBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
+            mainBarDown.transform.DOLocalMoveY(-mainBarClose, mainBarSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
+            {
+                mainWindow.SetActive(false);
+            });
+            StartCoroutine(MainWindowClose());
         });
 
         // 나가기 버튼을 눌렀을 때
@@ -340,6 +387,37 @@ public class StopManager : MonoBehaviour
         {
             SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
 
+            pauseBarUp.transform.DOLocalMoveY(pauseBarClose, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
+            pauseBarDown.transform.DOLocalMoveY(-pauseBarClose, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
+            {
+                pauseWindow.SetActive(false);
+                exitWindow.SetActive(true);
+
+                exitBarUp.transform.DOLocalMoveY(exitBar, exitBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
+                exitBarDown.transform.DOLocalMoveY(-exitBar, exitBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
+                StartCoroutine(ExitWindow());
+            });
+            StartCoroutine(PauseWindowClose());
+        });
+
+        // 메인화면에서 예 버튼을 눌렀을 때
+        exitWindowYesBtn.onClick.AddListener(() =>
+        {
+            DOTween.KillAll();
+            Application.Quit();
+        });
+
+        // 메인화면에서 아니요 버튼을 누렀을 때
+        exitWindowNoBtn.onClick.AddListener(() =>
+        {
+            SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
+
+            exitBarUp.transform.DOLocalMoveY(exitBarClose, exitBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
+            exitBarDown.transform.DOLocalMoveY(-exitBarClose, exitBarSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
+            {
+                exitWindow.SetActive(false);
+            });
+            StartCoroutine(ExitWindowClose());
         });
     }
 
@@ -408,6 +486,8 @@ public class StopManager : MonoBehaviour
     }
     #endregion
 
+    #region 플레이어 창
+    // 플레이어 창 열기
     IEnumerator PlayerWindow()
     {
         timer = 0;
@@ -420,6 +500,7 @@ public class StopManager : MonoBehaviour
         }
     }
 
+    // 플레이어 창 닫기
     IEnumerator PlayerWindowClose()
     {
         timer = 0;
@@ -431,473 +512,446 @@ public class StopManager : MonoBehaviour
             yield return null;
         }
     }
+    #endregion
 
-
-    #region 플레이어 버튼
-    public void Player_Btn() => StartCoroutine(Player_Window_Coroutine01());
-
-    public void Player_Close_Btn()
+    #region 메인 창
+    // 메인 창 열기
+    IEnumerator MainWindow()
     {
-        SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
-        StartCoroutine(Player_Window_Close());
-    }
-
-    public void Item_Log()
-    {
-        if (Card_Manager.instance.isItemBool == false)
-        {
-            Player_Item_Log.transform.GetChild(Card_Manager.instance.itemCheck).GetComponent<Image>().sprite = ItemDA_Have[Card_Manager.instance.itemCheck].Item_Icon;
-            Player_Item_Log.transform.GetChild(Card_Manager.instance.itemCheck).gameObject.SetActive(true);
-
-            if (Icon_Check == true)
-            {
-                Icon_Check = false;
-                Player_Item_Icon.sprite = ItemDA_Have[0].Item_Icon;
-                Player_Item_Name.text = ItemDA_Have[0].Itme_Name;
-                Player_Item_Explanation.text = ItemDA_Have[0].Item_Explanation;
-            }
-        }
-    }
-
-    public IEnumerator Player_Window_Coroutine01() // 플레이어버튼을 클릭했을 떄
-    {
-        SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
-        if (PlayerWindow_Open == false)
-        {
-            PlayerWindow_Open = true;
-            timer = 0;
-            pauseBarUp.transform.DOLocalMoveY(48f, 0.5f).SetUpdate(true);
-            pauseBarDown.transform.DOLocalMoveY(-36, 0.5f).SetUpdate(true);
-
-            while (timer < 1)
-            {
-                pauseRect.sizeDelta = new Vector2(557.1f, Mathf.Lerp(772.4f, 5f, timer));
-
-                timer += Time.unscaledDeltaTime * 2.5f;
-                yield return null;
-            }
-            yield return new WaitForSecondsRealtime(0.1f);
-            pauseWindow.SetActive(false);
-            yield return new WaitForSecondsRealtime(0.1f);
-            playerWindow.SetActive(true);
-            StartCoroutine(Player_Window_Coroutine02());
-        }
-    }
-
-    public IEnumerator Player_Window_Coroutine02() // 플레이어 창 열림
-    {
-        SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
         timer = 0;
-        playerBarUp.transform.DOLocalMoveY(447.5388f, 0.48f).SetUpdate(true);
-        playerBarDown.transform.DOLocalMoveY(-445.16f, 0.48f).SetUpdate(true);
 
         while (timer < 1)
         {
-            playerRect.sizeDelta = new Vector2(1732.5f, Mathf.Lerp(0f, 916.9f, timer));
+            mainRect.sizeDelta = new Vector2(mainWidth, Mathf.Lerp(0, mainHeigh, timer));
             timer += Time.unscaledDeltaTime * 3f;
             yield return null;
         }
-        PlayerWindow_Close = true;
     }
 
-    public IEnumerator Player_Window_Close() // 플레이어 창 닫힘
+    // 메인 창 닫기
+    IEnumerator MainWindowClose()
     {
-        if (PlayerWindow_Close == true)
-        {
-            PlayerWindow_Close = false;
-            timer = 0;
-            Fade_Background.DOFade(0, 0.5f).SetUpdate(true);
-            playerBarUp.transform.DOLocalMoveY(30, 0.48f).SetUpdate(true);
-            playerBarDown.transform.DOLocalMoveY(-30, 0.48f).SetUpdate(true);
-
-            while (timer < 1)
-            {
-                playerRect.sizeDelta = new Vector2(1732.5f, Mathf.Lerp(916.9f, 0f, timer));
-
-                timer += Time.unscaledDeltaTime * 3f;
-                yield return null;
-            }
-            yield return new WaitForSecondsRealtime(0.1f);
-            playerWindow.SetActive(false);
-            PauseWindow_Open = true;
-            Time.timeScale = 1f;
-            PlayerWindow_Open = false;
-            UI_Manager.instance.isCursorFade = false;
-        }
-    }
-
-    #region 플레이어 -> 무기 창 & 아이템 창
-
-    public void Player_WeaPon_Btn() // 무기 버튼을 눌렀을 떄
-    {
-        if (WI_Check == false)
-        {
-            PlayerWindow_Check = false;
-            StartCoroutine(Player_Weapon_Open01());
-        }
-    }
-
-    public void Player_Item_Btn() // 아이템 버튼을 눌렀을 때
-    {
-        if (WI_Check == true)
-        {
-            PlayerWindow_Check = false;
-            StartCoroutine(Player_Item_Open01());
-        }
-    }
-
-    public IEnumerator Player_Weapon_Open01()
-    {
-        if (PlayerWindow_Check == false)
-        {
-            SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
-            WI_Check = true;
-            timer = 0;
-            Fade_Background.DOFade(0, 0.5f).SetUpdate(true);
-            playerBarUp.transform.DOLocalMoveY(30, 0.48f).SetUpdate(true);
-            playerBarDown.transform.DOLocalMoveY(-30, 0.48f).SetUpdate(true);
-
-            while (timer < 1)
-            {
-                playerRect.sizeDelta = new Vector2(1732.5f, Mathf.Lerp(916.9f, 0f, timer));
-
-                timer += Time.unscaledDeltaTime * 3f;
-                yield return null;
-            }
-            yield return new WaitForSecondsRealtime(0.1f);
-            playerWeaponWindow.SetActive(true);
-            playerItemWindow.SetActive(false);
-            yield return new WaitForSecondsRealtime(0.1f);
-            StartCoroutine(Player_Weapon_Open02());
-        }
-    }
-
-    public IEnumerator Player_Weapon_Open02()
-    {
-        SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
         timer = 0;
-        Fade_Background.DOFade(0.5f, 0.5f).SetUpdate(true);
-        playerBarUp.transform.DOLocalMoveY(447.5388f, 0.48f).SetUpdate(true);
-        playerBarDown.transform.DOLocalMoveY(-445.16f, 0.48f).SetUpdate(true);
 
         while (timer < 1)
         {
-            playerRect.sizeDelta = new Vector2(1732.5f, Mathf.Lerp(0f, 916.9f, timer));
+            mainRect.sizeDelta = new Vector2(mainWidth, Mathf.Lerp(mainHeigh, 0, timer));
             timer += Time.unscaledDeltaTime * 3f;
             yield return null;
         }
-        PlayerWindow_Check = true;
     }
+    #endregion
 
-    public IEnumerator Player_Item_Open01()
+    #region 나가기 창
+    // 나가기 창 열기
+    IEnumerator ExitWindow()
     {
-        if (PlayerWindow_Check == false)
-        {
-            SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
-            WI_Check = false;
-            timer = 0;
-            Fade_Background.DOFade(0, 0.5f).SetUpdate(true);
-            playerBarUp.transform.DOLocalMoveY(30, 0.48f).SetUpdate(true);
-            playerBarDown.transform.DOLocalMoveY(-30, 0.48f).SetUpdate(true);
-
-            while (timer < 1)
-            {
-                playerRect.sizeDelta = new Vector2(1732.5f, Mathf.Lerp(916.9f, 0f, timer));
-
-                timer += Time.unscaledDeltaTime * 3f;
-                yield return null;
-            }
-            yield return new WaitForSecondsRealtime(0.1f);
-            playerWeaponWindow.SetActive(false);
-            playerItemWindow.SetActive(true);
-            yield return new WaitForSecondsRealtime(0.1f);
-            StartCoroutine(Player_Item_Open02());
-        }
-    }
-
-    public IEnumerator Player_Item_Open02()
-    {
-        SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
         timer = 0;
-        Fade_Background.DOFade(0.5f, 0.5f).SetUpdate(true);
-        playerBarUp.transform.DOLocalMoveY(447.5388f, 0.48f).SetUpdate(true);
-        playerBarDown.transform.DOLocalMoveY(-445.16f, 0.48f).SetUpdate(true);
 
         while (timer < 1)
         {
-            playerRect.sizeDelta = new Vector2(1732.5f, Mathf.Lerp(0f, 916.9f, timer));
+            exitRect.sizeDelta = new Vector2(exitWidth, Mathf.Lerp(0, exitHeigh, timer));
             timer += Time.unscaledDeltaTime * 3f;
             yield return null;
         }
-        PlayerWindow_Check = true;
-    }
-    #endregion
-
-    #region 무기 창
-    public void WeaponType()
-    {
-        int Sword_Level = Player.Instance.stat._level[PlayerWeaponType.Sword];
-        int Dagger_Level = Player.Instance.stat._level[PlayerWeaponType.Dagger];
-        int Axe_Level = Player.Instance.stat._level[PlayerWeaponType.Axe];
-
-        switch (Player.Instance.stat.weaponType)
-        {
-            case PlayerWeaponType.Sword:
-                SwordLevel_Text.text = "" + Sword_Level;
-
-                Sword_AttackDamage.text = "" + (10 + (10 * Sword_Level));
-                Sword_AttackDamage_Upgrade.text = "" + (10 + (10 * (Sword_Level + 1)));
-
-                Sword_MaxHp.text = "" + (10 + (10 * Sword_Level));
-                Sword_MaxHp_Upgrade.text = "" + (10 + (10 * (Sword_Level + 1)));
-
-                switch (Sword_Level)
-                {
-                    case 1:
-                        Sword_Skill_Text.transform.GetChild(0).gameObject.SetActive(false);
-                        break;
-
-                    case 3:
-                        Sword_Skill_Text.transform.GetChild(1).gameObject.SetActive(false);
-                        break;
-
-                    case 5:
-                        Sword_Skill_Text.transform.GetChild(2).gameObject.SetActive(false);
-                        break;
-                }
-
-                Sword_Window.SetActive(true);
-                Dagger_Window.SetActive(false);
-                Axe_Window.SetActive(false);
-                break;
-
-            case PlayerWeaponType.Dagger:
-                DaggerLevel_Text.text = "" + Dagger_Level;
-
-                Dagger_AttackDamage.text = "" + (8 + (8 * Dagger_Level));
-                Dagger_AttackDamage_Upgrade.text = "" + (8 + (8 * (Dagger_Level + 1)));
-
-                Dagger_Critical.text = "" + (0 + (2 * Dagger_Level));
-                Dagger_Critical_Upgrade.text = "" + (0 + (2 * (Dagger_Level + 1)));
-
-                switch (Dagger_Level)
-                {
-                    case 1:
-                        Dagger_Skill_Text.transform.GetChild(0).gameObject.SetActive(false);
-                        break;
-
-                    case 3:
-                        Dagger_Skill_Text.transform.GetChild(1).gameObject.SetActive(false);
-                        break;
-
-                    case 5:
-                        Dagger_Skill_Text.transform.GetChild(2).gameObject.SetActive(false);
-                        break;
-                }
-
-                Sword_Window.SetActive(false);
-                Dagger_Window.SetActive(true);
-                Axe_Window.SetActive(false);
-                break;
-
-            case PlayerWeaponType.Axe:
-                AxeLevel_Text.text = "" + Axe_Level;
-
-                Axe_AttackDamage.text = "" + (20 + (15 * Axe_Level));
-                Axe_AttackDamage_Upgrade.text = "" + (20 + (15 * (Axe_Level + 1)));
-
-                Axe_Defense.text = "" + (400 + (200 * Axe_Level));
-                Axe_Defense_Upgrade.text = "" + (400 + (200 * (Axe_Level + 1)));
-
-                switch (Axe_Level)
-                {
-                    case 1:
-                        Axe_Skill_Text.transform.GetChild(0).gameObject.SetActive(false);
-                        break;
-
-                    case 3:
-                        Axe_Skill_Text.transform.GetChild(1).gameObject.SetActive(false);
-                        break;
-
-                    case 5:
-                        Axe_Skill_Text.transform.GetChild(2).gameObject.SetActive(false);
-                        break;
-                }
-
-                Sword_Window.SetActive(false);
-                Dagger_Window.SetActive(false);
-                Axe_Window.SetActive(true);
-                break;
-        }
-    }
-    #endregion
-
-    #endregion
-
-    #region 메인화면 버튼
-    public void Main_Btn() => StartCoroutine(Main_Window_Coroutine01());
-
-    public void Main_Yes_Btn()
-    {
-        Reset_Check = true;
-        Time.timeScale = 1f;
-        SceneManager.LoadScene("Main");
     }
 
-    public void Main_No_Btn()
+    // 나가기 창 닫기
+    IEnumerator ExitWindowClose()
     {
-        SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
-        StartCoroutine(Main_Window_Close());
-    }
-
-    public IEnumerator Main_Window_Coroutine01() // 메인버튼을 클릭했을 떄
-    {
-        if (MainWindow_Open == false)
-        {
-            SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
-            MainWindow_Open = true;
-            timer = 0;
-            pauseBarUp.transform.DOLocalMoveY(48f, 0.5f).SetUpdate(true);
-            pauseBarDown.transform.DOLocalMoveY(-36, 0.5f).SetUpdate(true);
-
-            while (timer < 1)
-            {
-                pauseRect.sizeDelta = new Vector2(557.1f, Mathf.Lerp(772.4f, 5f, timer));
-
-                timer += Time.unscaledDeltaTime * 2.5f;
-                yield return null;
-            }
-            yield return new WaitForSecondsRealtime(0.1f);
-            pauseWindow.SetActive(false);
-            yield return new WaitForSecondsRealtime(0.1f);
-            Main_Window_Canvas.SetActive(true);
-            StartCoroutine(Main_Window_Coroutine02());
-        }
-    }
-
-    public IEnumerator Main_Window_Coroutine02() // 메인 창 열림
-    {
-        SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
         timer = 0;
-        Main_Pole01.transform.DOLocalMoveY(222f, 0.42f).SetUpdate(true);
-        Main_Pole02.transform.DOLocalMoveY(-194f, 0.3f).SetUpdate(true);
 
         while (timer < 1)
         {
-            Main_Window.sizeDelta = new Vector2(1730f, Mathf.Lerp(0f, 520f, timer));
-            timer += Time.unscaledDeltaTime * 4f;
+            exitRect.sizeDelta = new Vector2(exitWidth, Mathf.Lerp(exitHeigh, 0, timer));
+            timer += Time.unscaledDeltaTime * 3f;
             yield return null;
-        }
-        MainWindow_Close = true;
-    }
-
-    public IEnumerator Main_Window_Close()
-    {
-        if (MainWindow_Close == true)
-        {
-            MainWindow_Close = false;
-            timer = 0;
-            Fade_Background.DOFade(0, 0.5f).SetUpdate(true);
-            Main_Pole01.transform.DOLocalMoveY(30f, 0.42f).SetUpdate(true);
-            Main_Pole02.transform.DOLocalMoveY(-30f, 0.3f).SetUpdate(true);
-
-            while (timer < 1)
-            {
-                Main_Window.sizeDelta = new Vector2(1730f, Mathf.Lerp(520f, 0f, timer));
-
-                timer += Time.unscaledDeltaTime * 4.5f;
-                yield return null;
-            }
-            yield return new WaitForSecondsRealtime(0.1f);
-            Main_Window_Canvas.SetActive(false);
-            PauseWindow_Open = true;
-            Time.timeScale = 1f;
-            MainWindow_Open = false;
-            UI_Manager.instance.isCursorFade = false;
         }
     }
     #endregion
 
-    #region 게임종료 버튼
-    public void Exit_Btn() => StartCoroutine(Exit_Window_Coroutine01());
+    //#region 플레이어 버튼
+    //public void Player_Btn() => StartCoroutine(Player_Window_Coroutine01());
 
-    public void Exit_Yes_Btn()
-    {
-        Debug.Log("앱이 졸료 됩니다.");
-        Application.Quit();
-    }
+    //public void Player_Close_Btn()
+    //{
+    //    SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
+    //    StartCoroutine(Player_Window_Close());
+    //}
 
-    public void Exit_No_Btn()
-    {
-        SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
-        StartCoroutine(Exit_Window_Close());
-    }
+    //public void Item_Log()
+    //{
+    //    if (Card_Manager.instance.isItemBool == false)
+    //    {
+    //        Player_Item_Log.transform.GetChild(Card_Manager.instance.itemCheck).GetComponent<Image>().sprite = ItemDA_Have[Card_Manager.instance.itemCheck].Item_Icon;
+    //        Player_Item_Log.transform.GetChild(Card_Manager.instance.itemCheck).gameObject.SetActive(true);
 
-    public IEnumerator Exit_Window_Coroutine01() //게임종료 버튼을 클릭했을 떄
-    {
-        if (GameExitWindow_Open == false)
-        {
-            SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
-            GameExitWindow_Open = true;
-            timer = 0;
-            pauseBarUp.transform.DOLocalMoveY(48f, 0.5f).SetUpdate(true);
-            pauseBarDown.transform.DOLocalMoveY(-36, 0.5f).SetUpdate(true);
+    //        if (Icon_Check == true)
+    //        {
+    //            Icon_Check = false;
+    //            Player_Item_Icon.sprite = ItemDA_Have[0].Item_Icon;
+    //            Player_Item_Name.text = ItemDA_Have[0].Itme_Name;
+    //            Player_Item_Explanation.text = ItemDA_Have[0].Item_Explanation;
+    //        }
+    //    }
+    //}
 
-            while (timer < 1)
-            {
-                pauseRect.sizeDelta = new Vector2(557.1f, Mathf.Lerp(772.4f, 5f, timer));
+    //public IEnumerator Player_Window_Coroutine01() // 플레이어버튼을 클릭했을 떄
+    //{
+    //    SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
+    //    if (PlayerWindow_Open == false)
+    //    {
+    //        PlayerWindow_Open = true;
+    //        timer = 0;
+    //        pauseBarUp.transform.DOLocalMoveY(48f, 0.5f).SetUpdate(true);
+    //        pauseBarDown.transform.DOLocalMoveY(-36, 0.5f).SetUpdate(true);
 
-                timer += Time.unscaledDeltaTime * 2.5f;
-                yield return null;
-            }
-            yield return new WaitForSecondsRealtime(0.1f);
-            pauseWindow.SetActive(false);
-            yield return new WaitForSecondsRealtime(0.1f);
-            Exit_Window_Canvas.SetActive(true);
-            StartCoroutine(Exit_Window_Coroutine02());
-        }
-    }
+    //        while (timer < 1)
+    //        {
+    //            pauseRect.sizeDelta = new Vector2(557.1f, Mathf.Lerp(772.4f, 5f, timer));
 
-    public IEnumerator Exit_Window_Coroutine02() //게임종료 창 열림
-    {
-        SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
-        timer = 0;
-        Exit_Pole01.transform.DOLocalMoveY(222f, 0.3f).SetUpdate(true);
-        Exit_Pole02.transform.DOLocalMoveY(-211, 0.3f).SetUpdate(true);
+    //            timer += Time.unscaledDeltaTime * 2.5f;
+    //            yield return null;
+    //        }
+    //        yield return new WaitForSecondsRealtime(0.1f);
+    //        pauseWindow.SetActive(false);
+    //        yield return new WaitForSecondsRealtime(0.1f);
+    //        playerWindow.SetActive(true);
+    //        StartCoroutine(Player_Window_Coroutine02());
+    //    }
+    //}
 
-        while (timer < 1)
-        {
-            Exit_Window.sizeDelta = new Vector2(1730f, Mathf.Lerp(0f, 520f, timer));
-            timer += Time.unscaledDeltaTime * 4f;
-            yield return null;
-        }
-        GameExitWindow_Close = true;
-    }
+    //public IEnumerator Player_Window_Coroutine02() // 플레이어 창 열림
+    //{
+    //    SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
+    //    timer = 0;
+    //    playerBarUp.transform.DOLocalMoveY(447.5388f, 0.48f).SetUpdate(true);
+    //    playerBarDown.transform.DOLocalMoveY(-445.16f, 0.48f).SetUpdate(true);
 
-    public IEnumerator Exit_Window_Close()
-    {
-        if (GameExitWindow_Close == true)
-        {
-            GameExitWindow_Close = false;
-            timer = 0;
-            Fade_Background.DOFade(0, 0.5f).SetUpdate(true);
-            Exit_Pole01.transform.DOLocalMoveY(30f, 0.42f).SetUpdate(true);
-            Exit_Pole02.transform.DOLocalMoveY(-30f, 0.3f).SetUpdate(true);
+    //    while (timer < 1)
+    //    {
+    //        playerRect.sizeDelta = new Vector2(1732.5f, Mathf.Lerp(0f, 916.9f, timer));
+    //        timer += Time.unscaledDeltaTime * 3f;
+    //        yield return null;
+    //    }
+    //    PlayerWindow_Close = true;
+    //}
 
-            while (timer < 1)
-            {
-                Exit_Window.sizeDelta = new Vector2(1730f, Mathf.Lerp(520f, 0f, timer));
+    //public IEnumerator Player_Window_Close() // 플레이어 창 닫힘
+    //{
+    //    if (PlayerWindow_Close == true)
+    //    {
+    //        PlayerWindow_Close = false;
+    //        timer = 0;
+    //        Fade_Background.DOFade(0, 0.5f).SetUpdate(true);
+    //        playerBarUp.transform.DOLocalMoveY(30, 0.48f).SetUpdate(true);
+    //        playerBarDown.transform.DOLocalMoveY(-30, 0.48f).SetUpdate(true);
 
-                timer += Time.unscaledDeltaTime * 4.5f;
-                yield return null;
-            }
-            yield return new WaitForSecondsRealtime(0.1f);
-            Exit_Window_Canvas.SetActive(false);
-            PauseWindow_Open = true;
-            Time.timeScale = 1f;
-            GameExitWindow_Open = false;
-            UI_Manager.instance.isCursorFade = false;
-        }
-    }
-    #endregion
+    //        while (timer < 1)
+    //        {
+    //            playerRect.sizeDelta = new Vector2(1732.5f, Mathf.Lerp(916.9f, 0f, timer));
+
+    //            timer += Time.unscaledDeltaTime * 3f;
+    //            yield return null;
+    //        }
+    //        yield return new WaitForSecondsRealtime(0.1f);
+    //        playerWindow.SetActive(false);
+    //        PauseWindow_Open = true;
+    //        Time.timeScale = 1f;
+    //        PlayerWindow_Open = false;
+    //        UI_Manager.instance.isCursorFade = false;
+    //    }
+    //}
+
+    //#region 플레이어 -> 무기 창 & 아이템 창
+
+    //public void Player_WeaPon_Btn() // 무기 버튼을 눌렀을 떄
+    //{
+    //    if (WI_Check == false)
+    //    {
+    //        PlayerWindow_Check = false;
+    //        StartCoroutine(Player_Weapon_Open01());
+    //    }
+    //}
+
+    //public void Player_Item_Btn() // 아이템 버튼을 눌렀을 때
+    //{
+    //    if (WI_Check == true)
+    //    {
+    //        PlayerWindow_Check = false;
+    //        StartCoroutine(Player_Item_Open01());
+    //    }
+    //}
+
+    //public IEnumerator Player_Weapon_Open01()
+    //{
+    //    if (PlayerWindow_Check == false)
+    //    {
+    //        SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
+    //        WI_Check = true;
+    //        timer = 0;
+    //        Fade_Background.DOFade(0, 0.5f).SetUpdate(true);
+    //        playerBarUp.transform.DOLocalMoveY(30, 0.48f).SetUpdate(true);
+    //        playerBarDown.transform.DOLocalMoveY(-30, 0.48f).SetUpdate(true);
+
+    //        while (timer < 1)
+    //        {
+    //            playerRect.sizeDelta = new Vector2(1732.5f, Mathf.Lerp(916.9f, 0f, timer));
+
+    //            timer += Time.unscaledDeltaTime * 3f;
+    //            yield return null;
+    //        }
+    //        yield return new WaitForSecondsRealtime(0.1f);
+    //        playerWeaponWindow.SetActive(true);
+    //        playerItemWindow.SetActive(false);
+    //        yield return new WaitForSecondsRealtime(0.1f);
+    //        StartCoroutine(Player_Weapon_Open02());
+    //    }
+    //}
+
+    //public IEnumerator Player_Weapon_Open02()
+    //{
+    //    SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
+    //    timer = 0;
+    //    Fade_Background.DOFade(0.5f, 0.5f).SetUpdate(true);
+    //    playerBarUp.transform.DOLocalMoveY(447.5388f, 0.48f).SetUpdate(true);
+    //    playerBarDown.transform.DOLocalMoveY(-445.16f, 0.48f).SetUpdate(true);
+
+    //    while (timer < 1)
+    //    {
+    //        playerRect.sizeDelta = new Vector2(1732.5f, Mathf.Lerp(0f, 916.9f, timer));
+    //        timer += Time.unscaledDeltaTime * 3f;
+    //        yield return null;
+    //    }
+    //    PlayerWindow_Check = true;
+    //}
+
+    //public IEnumerator Player_Item_Open01()
+    //{
+    //    if (PlayerWindow_Check == false)
+    //    {
+    //        SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
+    //        WI_Check = false;
+    //        timer = 0;
+    //        Fade_Background.DOFade(0, 0.5f).SetUpdate(true);
+    //        playerBarUp.transform.DOLocalMoveY(30, 0.48f).SetUpdate(true);
+    //        playerBarDown.transform.DOLocalMoveY(-30, 0.48f).SetUpdate(true);
+
+    //        while (timer < 1)
+    //        {
+    //            playerRect.sizeDelta = new Vector2(1732.5f, Mathf.Lerp(916.9f, 0f, timer));
+
+    //            timer += Time.unscaledDeltaTime * 3f;
+    //            yield return null;
+    //        }
+    //        yield return new WaitForSecondsRealtime(0.1f);
+    //        playerWeaponWindow.SetActive(false);
+    //        playerItemWindow.SetActive(true);
+    //        yield return new WaitForSecondsRealtime(0.1f);
+    //        StartCoroutine(Player_Item_Open02());
+    //    }
+    //}
+
+    //public IEnumerator Player_Item_Open02()
+    //{
+    //    SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
+    //    timer = 0;
+    //    Fade_Background.DOFade(0.5f, 0.5f).SetUpdate(true);
+    //    playerBarUp.transform.DOLocalMoveY(447.5388f, 0.48f).SetUpdate(true);
+    //    playerBarDown.transform.DOLocalMoveY(-445.16f, 0.48f).SetUpdate(true);
+
+    //    while (timer < 1)
+    //    {
+    //        playerRect.sizeDelta = new Vector2(1732.5f, Mathf.Lerp(0f, 916.9f, timer));
+    //        timer += Time.unscaledDeltaTime * 3f;
+    //        yield return null;
+    //    }
+    //    PlayerWindow_Check = true;
+    //}
+    //#endregion
+
+    //#region 무기 창
+    //public void WeaponType()
+    //{
+    //    int Sword_Level = Player.Instance.stat._level[PlayerWeaponType.Sword];
+    //    int Dagger_Level = Player.Instance.stat._level[PlayerWeaponType.Dagger];
+    //    int Axe_Level = Player.Instance.stat._level[PlayerWeaponType.Axe];
+
+    //    switch (Player.Instance.stat.weaponType)
+    //    {
+    //        case PlayerWeaponType.Sword:
+    //            SwordLevel_Text.text = "" + Sword_Level;
+
+    //            Sword_AttackDamage.text = "" + (10 + (10 * Sword_Level));
+    //            Sword_AttackDamage_Upgrade.text = "" + (10 + (10 * (Sword_Level + 1)));
+
+    //            Sword_MaxHp.text = "" + (10 + (10 * Sword_Level));
+    //            Sword_MaxHp_Upgrade.text = "" + (10 + (10 * (Sword_Level + 1)));
+
+    //            switch (Sword_Level)
+    //            {
+    //                case 1:
+    //                    Sword_Skill_Text.transform.GetChild(0).gameObject.SetActive(false);
+    //                    break;
+
+    //                case 3:
+    //                    Sword_Skill_Text.transform.GetChild(1).gameObject.SetActive(false);
+    //                    break;
+
+    //                case 5:
+    //                    Sword_Skill_Text.transform.GetChild(2).gameObject.SetActive(false);
+    //                    break;
+    //            }
+
+    //            Sword_Window.SetActive(true);
+    //            Dagger_Window.SetActive(false);
+    //            Axe_Window.SetActive(false);
+    //            break;
+
+    //        case PlayerWeaponType.Dagger:
+    //            DaggerLevel_Text.text = "" + Dagger_Level;
+
+    //            Dagger_AttackDamage.text = "" + (8 + (8 * Dagger_Level));
+    //            Dagger_AttackDamage_Upgrade.text = "" + (8 + (8 * (Dagger_Level + 1)));
+
+    //            Dagger_Critical.text = "" + (0 + (2 * Dagger_Level));
+    //            Dagger_Critical_Upgrade.text = "" + (0 + (2 * (Dagger_Level + 1)));
+
+    //            switch (Dagger_Level)
+    //            {
+    //                case 1:
+    //                    Dagger_Skill_Text.transform.GetChild(0).gameObject.SetActive(false);
+    //                    break;
+
+    //                case 3:
+    //                    Dagger_Skill_Text.transform.GetChild(1).gameObject.SetActive(false);
+    //                    break;
+
+    //                case 5:
+    //                    Dagger_Skill_Text.transform.GetChild(2).gameObject.SetActive(false);
+    //                    break;
+    //            }
+
+    //            Sword_Window.SetActive(false);
+    //            Dagger_Window.SetActive(true);
+    //            Axe_Window.SetActive(false);
+    //            break;
+
+    //        case PlayerWeaponType.Axe:
+    //            AxeLevel_Text.text = "" + Axe_Level;
+
+    //            Axe_AttackDamage.text = "" + (20 + (15 * Axe_Level));
+    //            Axe_AttackDamage_Upgrade.text = "" + (20 + (15 * (Axe_Level + 1)));
+
+    //            Axe_Defense.text = "" + (400 + (200 * Axe_Level));
+    //            Axe_Defense_Upgrade.text = "" + (400 + (200 * (Axe_Level + 1)));
+
+    //            switch (Axe_Level)
+    //            {
+    //                case 1:
+    //                    Axe_Skill_Text.transform.GetChild(0).gameObject.SetActive(false);
+    //                    break;
+
+    //                case 3:
+    //                    Axe_Skill_Text.transform.GetChild(1).gameObject.SetActive(false);
+    //                    break;
+
+    //                case 5:
+    //                    Axe_Skill_Text.transform.GetChild(2).gameObject.SetActive(false);
+    //                    break;
+    //            }
+
+    //            Sword_Window.SetActive(false);
+    //            Dagger_Window.SetActive(false);
+    //            Axe_Window.SetActive(true);
+    //            break;
+    //    }
+    //}
+    //#endregion
+
+    //#endregion
+
+    //#region 메인화면 버튼
+    //public void Main_Btn() => StartCoroutine(Main_Window_Coroutine01());
+
+    //public void Main_Yes_Btn()
+    //{
+    //    Reset_Check = true;
+    //    Time.timeScale = 1f;
+    //    SceneManager.LoadScene("Main");
+    //}
+
+    //public void Main_No_Btn()
+    //{
+    //    SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
+    //    StartCoroutine(Main_Window_Close());
+    //}
+
+    //public IEnumerator Main_Window_Coroutine01() // 메인버튼을 클릭했을 떄
+    //{
+    //    if (MainWindow_Open == false)
+    //    {
+    //        SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
+    //        MainWindow_Open = true;
+    //        timer = 0;
+    //        pauseBarUp.transform.DOLocalMoveY(48f, 0.5f).SetUpdate(true);
+    //        pauseBarDown.transform.DOLocalMoveY(-36, 0.5f).SetUpdate(true);
+
+    //        while (timer < 1)
+    //        {
+    //            pauseRect.sizeDelta = new Vector2(557.1f, Mathf.Lerp(772.4f, 5f, timer));
+
+    //            timer += Time.unscaledDeltaTime * 2.5f;
+    //            yield return null;
+    //        }
+    //        yield return new WaitForSecondsRealtime(0.1f);
+    //        pauseWindow.SetActive(false);
+    //        yield return new WaitForSecondsRealtime(0.1f);
+    //        mainWindow.SetActive(true);
+    //        StartCoroutine(Main_Window_Coroutine02());
+    //    }
+    //}
+
+    //public IEnumerator Main_Window_Coroutine02() // 메인 창 열림
+    //{
+    //    SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
+    //    timer = 0;
+    //    mainBarUp.transform.DOLocalMoveY(222f, 0.42f).SetUpdate(true);
+    //    mainBarDown.transform.DOLocalMoveY(-194f, 0.3f).SetUpdate(true);
+
+    //    while (timer < 1)
+    //    {
+    //        mainRect.sizeDelta = new Vector2(1730f, Mathf.Lerp(0f, 520f, timer));
+    //        timer += Time.unscaledDeltaTime * 4f;
+    //        yield return null;
+    //    }
+    //    MainWindow_Close = true;
+    //}
+
+    //public IEnumerator Main_Window_Close()
+    //{
+    //    if (MainWindow_Close == true)
+    //    {
+    //        MainWindow_Close = false;
+    //        timer = 0;
+    //        Fade_Background.DOFade(0, 0.5f).SetUpdate(true);
+    //        mainBarUp.transform.DOLocalMoveY(30f, 0.42f).SetUpdate(true);
+    //        mainBarUp.transform.DOLocalMoveY(-30f, 0.3f).SetUpdate(true);
+
+    //        while (timer < 1)
+    //        {
+    //            mainRect.sizeDelta = new Vector2(1730f, Mathf.Lerp(520f, 0f, timer));
+
+    //            timer += Time.unscaledDeltaTime * 4.5f;
+    //            yield return null;
+    //        }
+    //        yield return new WaitForSecondsRealtime(0.1f);
+    //        mainWindow.SetActive(false);
+    //        PauseWindow_Open = true;
+    //        Time.timeScale = 1f;
+    //        MainWindow_Open = false;
+    //        UI_Manager.instance.isCursorFade = false;
+    //    }
+    //}
+    //#endregion
 }
