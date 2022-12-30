@@ -6,33 +6,31 @@ using DG.Tweening;
 
 public class Salesman : MonoBehaviour
 {
-    public static Salesman Inst { get; private set; }
-    void Awake() => Inst = this;
-
     [Header("다른 상품 보기")]
-    public GameObject Different_Product;
+    [SerializeField] GameObject differentProduct;
 
-    public Text Different_Product_Text;
-    public Text Gold_Text;
+    [SerializeField] Text differentProductText;
+    [SerializeField] Text goldText;
 
-    public Image Gold_Image;
-    public Image F_Button;
+    [SerializeField] Image goldImage;
+    [SerializeField] Image fBtn;
 
-    private int Gold_Num;
-    public bool Apply_Check = true;
-    private bool Re_Roll_Check = true;
-    private bool Collision_Check = true;
+    public bool isApplyCheck = true;
+
+    int goldNum;
+    bool isReRollCheck = true;
+    bool isCollisionCheck = true;
 
     private GameObject AfterObject;
     void Start()
     {
         #region 오브젝트 찾기
-        Different_Product = GameObject.Find("Salesman");
-        F_Button = GameObject.Find("F_Image").GetComponent<Image>();
-        Gold_Image = GameObject.Find("Salesman_Gold_Image").GetComponent<Image>();
+        differentProduct = GameObject.Find("Salesman");
+        fBtn = GameObject.Find("F_Image").GetComponent<Image>();
+        goldImage = GameObject.Find("Salesman_Gold_Image").GetComponent<Image>();
 
-        Gold_Text = GameObject.Find("Salesman_Gold_Text").GetComponent<Text>();
-        Different_Product_Text = GameObject.Find("Different_Product_Text").GetComponent<Text>();
+        goldText = GameObject.Find("Salesman_Gold_Text").GetComponent<Text>();
+        differentProductText = GameObject.Find("Different_Product_Text").GetComponent<Text>();
         AfterObject = GameObject.Find("After_Purchase");
         #endregion
 
@@ -40,35 +38,35 @@ public class Salesman : MonoBehaviour
         switch(WaveManager.instnace.m_WaveNum)
         {
             case 3:
-                Gold_Num = 600;
+                goldNum = 600;
                 break;
 
             case 5:
-                Gold_Num = 1052;
+                goldNum = 1052;
                 break;
             case 15:
-                Gold_Num = 2019;
+                goldNum = 2019;
                 break;
         }
-        Gold_Text.text = Gold_Num.ToString();
+        goldText.text = goldNum.ToString();
     }
     void Update()
     {
         Re_Roll();
-        Different_Product.transform.localPosition = Camera.main.WorldToScreenPoint(this.gameObject.transform.localPosition + new Vector3(-8, -4.9f, 0));
+        differentProduct.transform.localPosition = Camera.main.WorldToScreenPoint(this.gameObject.transform.localPosition + new Vector3(-8, -4.9f, 0));
     }
 
     private void Re_Roll()
     {
-        if (GameManager.Instance._coin >= Gold_Num)
+        if (GameManager.Instance._coin >= goldNum)
         {
-            if (Input.GetKeyDown(KeyCode.F) && Collision_Check == false)
+            if (Input.GetKeyDown(KeyCode.F) && isCollisionCheck == false)
             {
                 AfterObject.SetActive(true);
                 Destroy(GameObject.Find("Skill_Shop(Clone)"));
-                Apply_Check = false;
-                GameManager.Instance._coin -= Gold_Num;
-                Gold_Text.text = (Gold_Num += 200).ToString();
+                isApplyCheck = false;
+                GameManager.Instance._coin -= goldNum;
+                goldText.text = (goldNum += 200).ToString();
 
 
                 for (int i = 0; i < Skill_Manager.instance.Skill.Count; i++)
@@ -77,14 +75,14 @@ public class Salesman : MonoBehaviour
                     {
                         if (Skill_Manager.instance.Skill[i].name == Skill_Manager.instance.Skill_Shop[j].name)
                         {
-                            Re_Roll_Check = false;
+                            isReRollCheck = false;
                             Skill_Manager.instance.Skill.RemoveAt(i);
                             Skill_Manager.instance.Skill_Shop.RemoveAt(j--);
                         }
                     }
                 }
 
-                if (Re_Roll_Check == false)
+                if (isReRollCheck == false)
                 {
                     for (int i = 0; i < Skill_Manager.instance.Skill.Count; i++)
                     {
@@ -103,11 +101,11 @@ public class Salesman : MonoBehaviour
     {
         if (collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null)
         {
-            Collision_Check = false;
-            Different_Product_Text.DOFade(1f, 0.5f);
-            F_Button.DOFade(1f, 0.5f);
-            Gold_Text.DOFade(1f, 0.5f);
-            Gold_Image.DOFade(1f, 0.5f);
+            isCollisionCheck = false;
+            differentProductText.DOFade(1f, 0.5f);
+            fBtn.DOFade(1f, 0.5f);
+            goldText.DOFade(1f, 0.5f);
+            goldImage.DOFade(1f, 0.5f);
         }
     }
 
@@ -115,11 +113,11 @@ public class Salesman : MonoBehaviour
     {
         if (collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null)
         {
-            Collision_Check = true;
-            Different_Product_Text.DOFade(0f, 0.5f);
-            F_Button.DOFade(0f, 0.5f);
-            Gold_Text.DOFade(0f, 0.5f);
-            Gold_Image.DOFade(0f, 0.5f);
+            isCollisionCheck = true;
+            differentProductText.DOFade(0f, 0.5f);
+            fBtn.DOFade(0f, 0.5f);
+            goldText.DOFade(0f, 0.5f);
+            goldImage.DOFade(0f, 0.5f);
         }
     }
     #endregion

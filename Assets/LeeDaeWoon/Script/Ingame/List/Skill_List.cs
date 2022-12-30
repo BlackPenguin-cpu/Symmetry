@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class Skill_List : MonoBehaviour
 {
-    public static Skill_List Inst { get; private set; }
-    void Awake() => Inst = this;
+    public static Skill_List instance { get; private set; }
+    void Awake() => instance = this;
 
     [Header("¿ŞÂÊ ½ºÅ³")]
     public Image Left_Skill_Icon;

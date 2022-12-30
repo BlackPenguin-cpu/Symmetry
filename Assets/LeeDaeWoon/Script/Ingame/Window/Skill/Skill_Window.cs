@@ -102,7 +102,7 @@ public class Skill_Window : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             // 스킬구매
-            if (Purchase == true && SkillColider_Check == true && (GameManager.Instance._coin >= Skill_List.Inst.Left_Gold || GameManager.Instance._coin >= Skill_List.Inst.Among_Gold || GameManager.Instance._coin >= Skill_List.Inst.Right_Gold))
+            if (Purchase == true && SkillColider_Check == true && (GameManager.Instance._coin >= Skill_List.instance.Left_Gold || GameManager.Instance._coin >= Skill_List.instance.Among_Gold || GameManager.Instance._coin >= Skill_List.instance.Right_Gold))
             {
                 SoundManager.instance.PlaySoundClip("SFX_Buy", SoundType.SFX, 5f);
                 UI_Manager.instance.PlayerMove_control = true;

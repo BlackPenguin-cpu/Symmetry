@@ -24,7 +24,7 @@ public class Skill_Collision : MonoBehaviour
             SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
             Skill_Window.instance.SkillColider_Check = true;
             Skill_Window.instance.SkillNum = LeftRight_Nun;
-            Skill_List.Inst.Skill_Num(LeftRight_Nun);
+            Skill_List.instance.Skill_Num(LeftRight_Nun);
             StartCoroutine(Skill_Window.instance.SkillWindow_Coroutine());
         }
     }
