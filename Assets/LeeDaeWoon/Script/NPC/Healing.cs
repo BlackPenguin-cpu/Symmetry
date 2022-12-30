@@ -53,7 +53,7 @@ public class Healing : MonoBehaviour
     public void Healing_Price()
     {
         // 정상 웨이브 : 5 / 10 / 15
-        switch(WaveManager.Instance.m_WaveNum)
+        switch(WaveManager.instnace.m_WaveNum)
         {
             case 3:
                 Healing_Gold = 560;

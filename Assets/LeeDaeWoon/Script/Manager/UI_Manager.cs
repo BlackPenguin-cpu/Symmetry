@@ -91,7 +91,7 @@ public class UI_Manager : MonoBehaviour
 
             Player.Instance._hp = Player.Instance._maxHp; // 체력 
             Player.Instance.state = PlayerState.Idle; // 플레이어 행동
-            WaveManager.Instance.m_WaveNum = 1; // Wave 초기화
+            WaveManager.instnace.m_WaveNum = 1; // Wave 초기화
 
             // 타이머 초기화 
             sec = 0;
@@ -146,7 +146,7 @@ public class UI_Manager : MonoBehaviour
     {
         // 인게임
         if (SceneManager.GetActiveScene().name == "test")
-            waveText.text = "Wave." + WaveManager.Instance.m_WaveNum;
+            waveText.text = "Wave." + WaveManager.instnace.m_WaveNum;
 
         // 차원의 틈새
         else if (SceneManager.GetActiveScene().name == "Dimension")

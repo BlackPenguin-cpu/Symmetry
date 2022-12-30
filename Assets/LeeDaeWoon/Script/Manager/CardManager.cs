@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Card_Manager : MonoBehaviour
+public class CardManager : MonoBehaviour
 {
-    public static Card_Manager instance { get; private set; }
+    public static CardManager instance { get; private set; }
 
     public int randomMix = 0;
 
@@ -53,7 +53,6 @@ public class Card_Manager : MonoBehaviour
     void Start()
     {
         AddList();
-        isItemBool = true;
     }
 
     private void Update()

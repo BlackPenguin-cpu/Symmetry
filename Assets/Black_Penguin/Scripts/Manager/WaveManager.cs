@@ -48,8 +48,8 @@ public class WavePattern
 }
 public class WaveManager : MonoBehaviour
 {
-    public static WaveManager Instance { get; private set; }
-    void Awake() => Instance = this;
+    public static WaveManager instnace { get; private set; }
+    void Awake() => instnace = this;
 
     public List<WavePattern> wavePatterns;
     public int m_WaveNum = 1;
@@ -82,7 +82,7 @@ public class WaveManager : MonoBehaviour
             }
             SummonedEnemies.Clear();
         }
-        Card_Manager.instance.AddCard();
+        CardManager.instance.AddCard();
         m_WaveNum++;
     }
     IEnumerator WaveSpawn(List<EnemySpawnInfo> enemySpawnInfos)

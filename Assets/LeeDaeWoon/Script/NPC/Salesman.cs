@@ -37,7 +37,7 @@ public class Salesman : MonoBehaviour
         #endregion
 
         // 정상 웨이브 : 5 / 10 / 15
-        switch(WaveManager.Instance.m_WaveNum)
+        switch(WaveManager.instnace.m_WaveNum)
         {
             case 3:
                 Gold_Num = 600;

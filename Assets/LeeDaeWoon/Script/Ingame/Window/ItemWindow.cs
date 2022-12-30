@@ -53,9 +53,9 @@ public class ItemWindow : MonoBehaviour
     {
         float windowTimer = 0;
 
-        Card_Manager.instance.fade.DOFade(0.5f, 0.5f);
+        CardManager.instance.fade.DOFade(0.5f, 0.5f);
         UI_Manager.instance.isCursorFade = true;
-        Card_Manager.instance.isItemCardOpenCheck = true;
+        CardManager.instance.isItemCardOpenCheck = true;
 
         while (windowTimer < 1)
         {
@@ -66,6 +66,6 @@ public class ItemWindow : MonoBehaviour
             windowTimer += Time.deltaTime * 3f;
             yield return null;
         }
-        Card_Manager.instance.isItemCardOpenCheck = false;
+        CardManager.instance.isItemCardOpenCheck = false;
     }
 }
