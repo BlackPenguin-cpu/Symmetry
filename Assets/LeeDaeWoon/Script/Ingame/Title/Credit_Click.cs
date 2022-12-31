@@ -10,11 +10,11 @@ public class Credit_Click : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     Button creditBtn;
 
     const float waitTime = 0.5f;
-    Title_Manager titleManager;
+    TitleManager titleManager;
 
     void Start()
     {
-        titleManager = Title_Manager.instnace;
+        titleManager = TitleManager.instnace;
         creditBtn = GetComponent<Button>();
 
         CreditBtn();
@@ -27,12 +27,12 @@ public class Credit_Click : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Title_Manager.instnace.isCreditOut = true;
+        titleManager.isCreditOut = true;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Title_Manager.instnace.isCreditOut = false;
+        titleManager.isCreditOut = false;
     }
 
     public void CreditBtn()

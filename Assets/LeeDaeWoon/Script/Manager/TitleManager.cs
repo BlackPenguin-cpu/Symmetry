@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public class Title_Manager : MonoBehaviour
+public class TitleManager : MonoBehaviour
 {
-    public static Title_Manager instnace { get; private set; }
+    public static TitleManager instnace { get; private set; }
     void Awake() => instnace = this;
 
     [Header("≈∏¿Ã∆≤")]
