@@ -407,7 +407,7 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             leftRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(windowHeight, 0, timer));
             rightRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(windowHeight, 0, timer));
 
-            timer += Time.unscaledDeltaTime * 3f;
+            timer += Time.unscaledDeltaTime * 2.8f;
             yield return null;
         }
     }
@@ -437,7 +437,7 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             leftRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(windowHeight, 0, timer));
             amongRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(windowHeight, 0, timer));
 
-            timer += Time.unscaledDeltaTime * 3f;
+            timer += Time.unscaledDeltaTime * 2.8f;
             yield return null;
         }
     }

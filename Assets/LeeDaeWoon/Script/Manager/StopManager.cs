@@ -144,6 +144,8 @@ public class StopManager : MonoBehaviour
 
     const float waitTime = 0.5f;
 
+
+    public bool isESC = false;
     void Start()
     {
         inPause = false;
@@ -157,7 +159,21 @@ public class StopManager : MonoBehaviour
 
         // ESC 키를 누르면 일시정지 창이 열린다.
         if (Input.GetKeyDown(KeyCode.Escape))
-            StartCoroutine(PauseWindow());
+        {
+            if (isESC == false)
+                StartCoroutine(PauseWindow());
+            else
+            {
+                pauseBarUp.transform.DOLocalMoveY(pauseBarClose, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
+                pauseBarDown.transform.DOLocalMoveY(-pauseBarClose, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
+                {
+                    isESC = false;
+                });
+
+                StartCoroutine(PauseWindowClose());
+            }
+                
+        }
     }
 
     void Awake()
@@ -414,7 +430,10 @@ public class StopManager : MonoBehaviour
         SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
 
         pauseBarUp.transform.DOLocalMoveY(pauseBar, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
-        pauseBarDown.transform.DOLocalMoveY(-pauseBar, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
+        pauseBarDown.transform.DOLocalMoveY(-pauseBar, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
+        {
+            isESC = true;
+        });
 
         while (timer < 1)
         {
@@ -423,6 +442,7 @@ public class StopManager : MonoBehaviour
             timer += Time.unscaledDeltaTime * 3.3f;
             yield return null;
         }
+
     }
 
     // 일시정지 창 닫기
