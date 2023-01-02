@@ -156,15 +156,14 @@ public class StopManager : MonoBehaviour
         //Item_Log();
         //WeaponType();
 
-
-        Main_Reset();
+        MainReset();
 
         // ESC 키를 누르면 일시정지 창이 열린다.
         if (Input.GetKeyDown(KeyCode.Escape))
             StartCoroutine(PauseWindow());
     }
 
-    private void Awake()
+    void Awake()
     {
         if (instnace == null)
         {
@@ -175,7 +174,7 @@ public class StopManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-    public void Main_Reset()
+    void MainReset()
     {
         if (Reset_Check == true && SceneManager.GetActiveScene().name == "Main")
         {
@@ -487,12 +486,12 @@ public class StopManager : MonoBehaviour
     {
         if (CardManager.instance.isItemBool == false)
         {
-            itemLog.transform.GetChild(CardManager.instance.itemCheck).GetComponent<Image>().sprite = ItemDA_Have[CardManager.instance.itemCheck].Item_Icon;
+            itemLog.transform.GetChild(CardManager.instance.itemCheck).GetComponent<Image>().sprite = ItemDA_Have[CardManager.instance.itemCheck].icon;
             itemLog.transform.GetChild(CardManager.instance.itemCheck).gameObject.SetActive(true);
 
-            itemIcon.sprite = ItemDA_Have[0].Item_Icon;
-            itemName.text = ItemDA_Have[0].Itme_Name;
-            itemExplanation.text = ItemDA_Have[0].Item_Explanation;
+            itemIcon.sprite = ItemDA_Have[0].icon;
+            itemName.text = ItemDA_Have[0].name;
+            itemExplanation.text = ItemDA_Have[0].explanation;
         }
     }
 

@@ -41,14 +41,14 @@ public class ItemWindow : MonoBehaviour
 
     void BarMove()
     {
-        leftBarUp.transform.DOLocalMoveY(barPos, barSpeed).SetEase(Ease.Linear);
-        leftBarDown.transform.DOLocalMoveY(-barPos, barSpeed).SetEase(Ease.Linear);
+        leftBarUp.transform.DOLocalMoveY(barPos, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
+        leftBarDown.transform.DOLocalMoveY(-barPos, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
 
-        amongBarUp.transform.DOLocalMoveY(barPos, barSpeed).SetEase(Ease.Linear);
-        amongBarDown.transform.DOLocalMoveY(-barPos, barSpeed).SetEase(Ease.Linear);
+        amongBarUp.transform.DOLocalMoveY(barPos, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
+        amongBarDown.transform.DOLocalMoveY(-barPos, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
 
-        rightBarUp.transform.DOLocalMoveY(barPos, barSpeed).SetEase(Ease.Linear);
-        rightBarDown.transform.DOLocalMoveY(-barPos, barSpeed).SetEase(Ease.Linear);
+        rightBarUp.transform.DOLocalMoveY(barPos, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
+        rightBarDown.transform.DOLocalMoveY(-barPos, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
     }
 
     IEnumerator itemWindow()
@@ -59,7 +59,7 @@ public class ItemWindow : MonoBehaviour
             amongWindow.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(0, windowHeight, timer));
             rightWindow.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(0, windowHeight, timer));
 
-            timer += Time.deltaTime * 3f;
+            timer += Time.unscaledDeltaTime * 3f;
             yield return null;
         }
     }

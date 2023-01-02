@@ -19,16 +19,6 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public EDirection eDirection;
     float timer = 0;
 
-    [Header("È®ÀÎ")]
-    int LeftClick_Check = 1;
-    bool LeftCloseWindow_Check = true;
-
-    int AmongClick_Check = 1;
-    bool AmongCloseWindow_Check = true;
-
-    int RightClick_Check = 1;
-    bool RightCloseWindow_Check = true;
-
     [Header("ºû")]
     public Image leftLight;
     public Image amongLight;
@@ -61,9 +51,7 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     void Start()
     {
-        CardManager.instance.isLeftPick = true;
-        CardManager.instance.isAmongPick = true;
-        CardManager.instance.isRightPick = true;
+
     }
 
     void Update()
@@ -80,7 +68,7 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     IEnumerator LeftClickWindow()
     {
-        leftWindow.transform.DOLocalMoveY(windowClickPos, barSpeed).SetEase(Ease.Linear).OnComplete(() =>
+        leftWindow.transform.DOLocalMoveY(windowClickPos, barSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
         {
             leftWindow.transform.DOKill();
             amongBarUp.transform.DOKill();
@@ -92,25 +80,25 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             Destroy(transform.parent.gameObject);
         });
 
-        amongBarUp.transform.DOLocalMoveY(barClose, barSpeed).SetEase(Ease.Linear);
-        amongBarDown.transform.DOLocalMoveY(-barClose, barSpeed).SetEase(Ease.Linear);
+        amongBarUp.transform.DOLocalMoveY(barClose, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
+        amongBarDown.transform.DOLocalMoveY(-barClose, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
 
-        rightBarUp.transform.DOLocalMoveY(barClose, barSpeed).SetEase(Ease.Linear);
-        rightBarDown.transform.DOLocalMoveY(-barClose, barSpeed).SetEase(Ease.Linear);
+        rightBarUp.transform.DOLocalMoveY(barClose, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
+        rightBarDown.transform.DOLocalMoveY(-barClose, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
 
         while (timer < 1)
         {
             amongRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(windowHeight, 0, timer));
             rightRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(windowHeight, 0, timer));
 
-            timer += Time.deltaTime * 2.8f;
+            timer += Time.unscaledDeltaTime * 2.8f;
             yield return null;
         }
     }
 
     IEnumerator AmongClickWindow()
     {
-        amongWindow.transform.DOLocalMoveY(windowClickPos, barSpeed).SetEase(Ease.Linear).OnComplete(() =>
+        amongWindow.transform.DOLocalMoveY(windowClickPos, barSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
         {
             amongWindow.transform.DOKill();
             leftBarUp.transform.DOKill();
@@ -122,25 +110,25 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             Destroy(transform.parent.gameObject);
         });
 
-        leftBarUp.transform.DOLocalMoveY(barClose, barSpeed).SetEase(Ease.Linear);
-        leftBarDown.transform.DOLocalMoveY(-barClose, barSpeed).SetEase(Ease.Linear);
+        leftBarUp.transform.DOLocalMoveY(barClose, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
+        leftBarDown.transform.DOLocalMoveY(-barClose, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
 
-        rightBarUp.transform.DOLocalMoveY(barClose, barSpeed).SetEase(Ease.Linear);
-        rightBarDown.transform.DOLocalMoveY(-barClose, barSpeed).SetEase(Ease.Linear);
+        rightBarUp.transform.DOLocalMoveY(barClose, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
+        rightBarDown.transform.DOLocalMoveY(-barClose, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
 
         while (timer < 1)
         {
             leftRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(windowHeight, 0, timer));
             rightRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(windowHeight, 0, timer));
 
-            timer += Time.deltaTime * 3f;
+            timer += Time.unscaledDeltaTime * 3f;
             yield return null;
         }
     }
 
     IEnumerator RightClickWindow()
     {
-        rightWindow.transform.DOLocalMoveY(windowClickPos, barSpeed).SetEase(Ease.Linear).OnComplete(() =>
+        rightWindow.transform.DOLocalMoveY(windowClickPos, barSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
         {
             rightWindow.transform.DOKill();
             leftBarUp.transform.DOKill();
@@ -152,18 +140,18 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             Destroy(transform.parent.gameObject);
         });
 
-        leftBarUp.transform.DOLocalMoveY(barClose, barSpeed).SetEase(Ease.Linear);
-        leftBarDown.transform.DOLocalMoveY(-barClose, barSpeed).SetEase(Ease.Linear);
+        leftBarUp.transform.DOLocalMoveY(barClose, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
+        leftBarDown.transform.DOLocalMoveY(-barClose, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
 
-        amongBarUp.transform.DOLocalMoveY(barClose, barSpeed).SetEase(Ease.Linear);
-        amongBarDown.transform.DOLocalMoveY(-barClose, barSpeed).SetEase(Ease.Linear);
+        amongBarUp.transform.DOLocalMoveY(barClose, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
+        amongBarDown.transform.DOLocalMoveY(-barClose, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
 
         while (timer < 1)
         {
             leftRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(windowHeight, 0, timer));
             amongRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(windowHeight, 0, timer));
 
-            timer += Time.deltaTime * 3f;
+            timer += Time.unscaledDeltaTime * 3f;
             yield return null;
         }
     }
@@ -175,15 +163,15 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         switch (eDirection)
         {
             case EDirection.Left:
-                leftLight.DOFade(1f, lightTimer);
+                leftLight.DOFade(1, lightTimer).SetUpdate(true);
                 break;
 
             case EDirection.Among:
-                amongLight.DOFade(1f, lightTimer);
+                amongLight.DOFade(1, lightTimer).SetUpdate(true);
                 break;
 
             case EDirection.Right:
-                rightLight.DOFade(1f, lightTimer);
+                rightLight.DOFade(1, lightTimer).SetUpdate(true);
                 break;
         }
     }
@@ -193,13 +181,13 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         switch (eDirection)
         {
             case EDirection.Left:
-                leftLight.DOFade(0, lightTimer);
+                leftLight.DOFade(0, lightTimer).SetUpdate(true);
                 break;
             case EDirection.Among:
-                amongLight.DOFade(0, lightTimer);
+                amongLight.DOFade(0, lightTimer).SetUpdate(true);
                 break;
             case EDirection.Right:
-                rightLight.DOFade(0, lightTimer);
+                rightLight.DOFade(0, lightTimer).SetUpdate(true);
                 break;
         }
     }
@@ -209,10 +197,28 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         switch (eDirection)
         {
             case EDirection.Left:
-
-
-
                 StartCoroutine(LeftClickWindow());
+
+                //for (int i = 0; i < CardManager.instance.daBuffer.Count; i++)
+                //{
+                //    if (CardManager.instance.daBuffer[i].name == ItemCardList.instance.leftItem.name)
+                //    {
+                //        StopManager.instnace.ItemDA_Have.Add(CardManager.instance.daBuffer[i]);
+                //        CardManager.instance.daBuffer.RemoveAt(i);
+                //    }
+                //}
+
+                for (int i = 0; i < CardManager.instance.itemBuffer.Count; i++)
+                {
+                    if (CardManager.instance.itemBuffer[i].name.Contains(ItemCardList.instance.leftItem.name))
+                    {
+                        StopManager.instnace.ItemDA_Have.Add(CardManager.instance.itemBuffer[i]);
+                        CardManager.instance.itemBuffer.RemoveAt(i);
+
+                        //CardManager.instance.timeItemCount++;
+                        //CardManager.instance.timeItemLimit.Clear();
+                    }
+                }
 
                 break;
 

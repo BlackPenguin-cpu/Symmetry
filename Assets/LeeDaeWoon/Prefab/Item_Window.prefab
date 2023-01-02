@@ -1856,15 +1856,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c608ce1f41cc1a345810d57ac28fd521, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Left_Card_Icon: {fileID: 3495536973152576177}
-  Left_Name: {fileID: 6711820590433528905}
-  Left_Explanation: {fileID: 636799946253145305}
-  Among_Card_Icon: {fileID: 44944883124295648}
-  Among_Name: {fileID: 2428500679887948322}
-  Among_Explanation: {fileID: 3253203686874416337}
-  Right_Card_Icon: {fileID: 1508922922350572855}
-  Right_Name: {fileID: 2732593523486565093}
-  Right_Explanation: {fileID: 1149576734153182248}
+  leftIcon: {fileID: 3495536973152576177}
+  leftName: {fileID: 6711820590433528905}
+  leftExplanation: {fileID: 636799946253145305}
+  amongIcon: {fileID: 44944883124295648}
+  amongName: {fileID: 2428500679887948322}
+  amongExplanation: {fileID: 3253203686874416337}
+  rightIcon: {fileID: 1508922922350572855}
+  rightName: {fileID: 2732593523486565093}
+  rightExplanation: {fileID: 1149576734153182248}
   Left_Item:
     Itme_Name: 
     Item_Explanation: 

@@ -9,10 +9,6 @@ public class CardManager : MonoBehaviour
 
     public int randomMix = 0;
 
-    public bool isLeftPick = true;
-    public bool isAmongPick = true;
-    public bool isRightPick = true;
-
     [SerializeField] ItemSo itemSo;
     [SerializeField] GameObject cardPrefab;
 
@@ -20,23 +16,18 @@ public class CardManager : MonoBehaviour
     public List<Item> itemBuffer = new List<Item>();
     public List<Item> daBuffer = new List<Item>();
 
-    [Header("왼쪽카드 / 가운데카드 / 오른쪽 카드")]
-    public List<Item> itemDALeftCheck = new List<Item>();
-    public List<Item> itemDAAmongCheck = new List<Item>();
-    public List<Item> itemDARightCheck = new List<Item>();
-
     [Space(10)]
     public int itemCheck = 0;
 
     [Space(10)]
-    public bool isDaLeft = true;
-    public bool isDaAmong = true;
-    public bool isDaRight = true;
+    public bool isDaLeft = false;
+    public bool isDaAmong = false;
+    public bool isDaRight = false;
 
     [Space(10)]
-    public bool isItemLeft = true;
-    public bool isItemAmong = true;
-    public bool isItemRight = true;
+    public bool isItemLeft = false;
+    public bool isItemAmong = false;
+    public bool isItemRight = false;
 
     public Image fade;
 
@@ -95,11 +86,10 @@ public class CardManager : MonoBehaviour
         int percent = Random.Range(0, 101);
         for (int i = 0; i < Percent_Item.Count; i++)
         {
-            if (percent < Percent_Item[i].Item_Percent)
-            {
+            if (percent < Percent_Item[i].percent)
                 return i;
-            }
-            percent -= Percent_Item[i].Item_Percent;
+
+            percent -= Percent_Item[i].percent;
         }
         return 0;
     }
@@ -108,24 +98,12 @@ public class CardManager : MonoBehaviour
     {
         // 아이템 카드 소환
         SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
+        Time.timeScale = 0;
 
-        UI_Manager.instance.timerCheck = false;
         int itemIndex = 0;
         List<Item> item = new List<Item>();
-        var cardObject = Instantiate(cardPrefab, this.transform.position, Quaternion.identity, GameObject.Find("Item_Canvas").transform);
-        var card = cardObject.GetComponent<Item_CardList>();
-        itemDALeftCheck.Clear();
-        itemDAAmongCheck.Clear();
-        itemDARightCheck.Clear();
-
-        isDaLeft = true;
-        isDaAmong = true;
-        isDaRight = true;
-
-        isItemLeft = true;
-        isItemAmong = true;
-        isItemRight = true;
-
+        var cardObject = Instantiate(cardPrefab, transform.position, Quaternion.identity,transform.GetChild(0));
+        var card = cardObject.GetComponent<ItemCardList>();
 
         for (int i = 0; i < 3; i++)
         {
@@ -138,28 +116,27 @@ public class CardManager : MonoBehaviour
                 for (int j = 0; j < item.Count; j++)
                 {
                     while (item[j] == itemBuffer[itemRandomTest])
-                    {
                         itemRandomTest = Card_Percent(itemBuffer);
-                    }
                 }
+
                 item.Add(itemBuffer[itemRandomTest]);
                 card.ItemCard(itemBuffer[itemRandomTest], itemIndex++);
 
-                if (i == 0)
-                {
-                    isItemLeft = false;
-                    itemDALeftCheck.Add(itemBuffer[itemRandomTest]);
-                }
-                else if (i == 1)
-                {
-                    isItemAmong = false;
-                    itemDAAmongCheck.Add(itemBuffer[itemRandomTest]);
-                }
-                else if (i == 2)
-                {
-                    isItemRight = false;
-                    itemDARightCheck.Add(itemBuffer[itemRandomTest]);
-                }
+                //switch(i)
+                //{
+                //    case 0:
+                //        isItemLeft = true;
+                //        itemDALeftCheck.Add(itemBuffer[itemRandomTest]);
+                //        break;
+                //    case 1:
+                //        isItemAmong = true;
+                //        itemDAAmongCheck.Add(itemBuffer[itemRandomTest]);
+                //        break;
+                //    case 2:
+                //        isItemRight = true;
+                //        itemDARightCheck.Add(itemBuffer[itemRandomTest]);
+                //        break;
+                //}
             }
 
             // 방어구 및 장신구
@@ -169,28 +146,27 @@ public class CardManager : MonoBehaviour
                 for (int j = 0; j < item.Count; j++)
                 {
                     while (item[j] == daBuffer[dARandomTest])
-                    {
                         dARandomTest = Card_Percent(daBuffer);
-                    }
                 }
+
                 item.Add(daBuffer[dARandomTest]);
                 card.ItemCard(daBuffer[dARandomTest], itemIndex++);
 
-                if (i == 0)
-                {
-                    isDaLeft = false;
-                    itemDALeftCheck.Add(daBuffer[dARandomTest]);
-                }
-                else if (i == 1)
-                {
-                    isDaAmong = false;
-                    itemDAAmongCheck.Add(daBuffer[dARandomTest]);
-                }
-                else if (i == 2)
-                {
-                    isDaRight = false;
-                    itemDARightCheck.Add(daBuffer[dARandomTest]);
-                }
+                //switch (i)
+                //{
+                //    case 0:
+                //        isDaLeft = true;
+                //        itemDALeftCheck.Add(daBuffer[dARandomTest]);
+                //        break;
+                //    case 1:
+                //        isDaAmong = true;
+                //        itemDAAmongCheck.Add(daBuffer[dARandomTest]);
+                //        break;
+                //    case 2:
+                //        isDaRight = true;
+                //        itemDARightCheck.Add(daBuffer[dARandomTest]);
+                //        break;
+                //}
             }
         }
     }
@@ -204,17 +180,13 @@ public class CardManager : MonoBehaviour
         daBuffer.Clear();
         timeItemLimit.Clear();
 
-        isLeftPick = true;
-        isAmongPick = true;
-        isRightPick = true;
+        isDaLeft = false;
+        isDaAmong = false;
+        isDaRight = false;
 
-        isDaLeft = true;
-        isDaAmong = true;
-        isDaRight = true;
-
-        isItemLeft = true;
-        isItemAmong = true;
-        isItemRight = true;
+        isItemLeft = false;
+        isItemAmong = false;
+        isItemRight = false;
 
         isItemBool = true;
         isItemCardOpenCheck = true;

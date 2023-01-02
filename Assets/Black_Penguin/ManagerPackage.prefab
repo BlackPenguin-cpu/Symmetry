@@ -1021,6 +1021,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7486971746282662758, guid: e5ba82db2e014a945bd3c556604dbb88, type: 3}
+      propertyPath: isDaLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486971746282662758, guid: e5ba82db2e014a945bd3c556604dbb88, type: 3}
+      propertyPath: isDaAmong
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486971746282662758, guid: e5ba82db2e014a945bd3c556604dbb88, type: 3}
+      propertyPath: isDaRight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486971746282662758, guid: e5ba82db2e014a945bd3c556604dbb88, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -1028,9 +1040,21 @@ PrefabInstance:
       propertyPath: cardPrefab
       value: 
       objectReference: {fileID: 6711820591797814597, guid: eba2a774be07be9448f54aba063df576, type: 3}
+    - target: {fileID: 7486971746282662758, guid: e5ba82db2e014a945bd3c556604dbb88, type: 3}
+      propertyPath: isItemLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486971746282662758, guid: e5ba82db2e014a945bd3c556604dbb88, type: 3}
+      propertyPath: isItemAmong
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486971746282662758, guid: e5ba82db2e014a945bd3c556604dbb88, type: 3}
+      propertyPath: isItemRight
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7486971746282662759, guid: e5ba82db2e014a945bd3c556604dbb88, type: 3}
       propertyPath: m_Name
-      value: ItemCard_Manager
+      value: ItemCardManager
       objectReference: {fileID: 0}
     - target: {fileID: 7486971746282662761, guid: e5ba82db2e014a945bd3c556604dbb88, type: 3}
       propertyPath: m_RootOrder

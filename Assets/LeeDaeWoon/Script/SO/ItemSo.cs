@@ -5,10 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class Item
 {
-    public string Itme_Name;
-    public string Item_Explanation;
-    public Sprite Item_Icon;
-    public int Item_Percent;
+    public string name;
+    public string explanation;
+    public Sprite icon;
+    public int percent;
 }
 
 [CreateAssetMenu(fileName = "ItemSo", menuName = "Scriptable Object/ItemSo")]
