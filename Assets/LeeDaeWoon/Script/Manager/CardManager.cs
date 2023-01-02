@@ -18,6 +18,7 @@ public class CardManager : MonoBehaviour
 
     [Space(10)]
     public Image fade;
+    public bool isItemClick = false;
 
     [Header("시간의 마정석 제한")]
     public List<Item> timeItemLimit = new List<Item>();

@@ -65,19 +65,20 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     {
         SoundManager.instance.PlaySoundClip("SFX_Button_Over", SoundType.SFX);
 
-        switch (eDirection)
+        if (CardManager.instance.isItemClick == true)
         {
-            case EDirection.Left:
-                leftLight.DOFade(1, lightTimer).SetUpdate(true);
-                break;
-
-            case EDirection.Among:
-                amongLight.DOFade(1, lightTimer).SetUpdate(true);
-                break;
-
-            case EDirection.Right:
-                rightLight.DOFade(1, lightTimer).SetUpdate(true);
-                break;
+            switch (eDirection)
+            {
+                case EDirection.Left:
+                    leftLight.DOFade(1, lightTimer).SetUpdate(true);
+                    break;
+                case EDirection.Among:
+                    amongLight.DOFade(1, lightTimer).SetUpdate(true);
+                    break;
+                case EDirection.Right:
+                    rightLight.DOFade(1, lightTimer).SetUpdate(true);
+                    break;
+            }
         }
     }
 
@@ -99,6 +100,8 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        CardManager.instance.isItemClick = false;
+
         switch (eDirection)
         {
             case EDirection.Left:

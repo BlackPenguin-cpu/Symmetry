@@ -48,7 +48,10 @@ public class ItemWindow : MonoBehaviour
         amongBarDown.transform.DOLocalMoveY(-barPos, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
 
         rightBarUp.transform.DOLocalMoveY(barPos, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
-        rightBarDown.transform.DOLocalMoveY(-barPos, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
+        rightBarDown.transform.DOLocalMoveY(-barPos, barSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
+        {
+            CardManager.instance.isItemClick = true;
+        });
     }
 
     IEnumerator itemWindow()
