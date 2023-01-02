@@ -1865,21 +1865,24 @@ MonoBehaviour:
   rightIcon: {fileID: 1508922922350572855}
   rightName: {fileID: 2732593523486565093}
   rightExplanation: {fileID: 1149576734153182248}
-  Left_Item:
-    Itme_Name: 
-    Item_Explanation: 
-    Item_Icon: {fileID: 0}
-    Item_Percent: 0
-  Among_Item:
-    Itme_Name: 
-    Item_Explanation: 
-    Item_Icon: {fileID: 0}
-    Item_Percent: 0
-  Right_Item:
-    Itme_Name: 
-    Item_Explanation: 
-    Item_Icon: {fileID: 0}
-    Item_Percent: 0
+  leftItem:
+    eItem: 13
+    name: 
+    explanation: 
+    icon: {fileID: 0}
+    percent: 0
+  amongItem:
+    eItem: 13
+    name: 
+    explanation: 
+    icon: {fileID: 0}
+    percent: 0
+  rightItem:
+    eItem: 13
+    name: 
+    explanation: 
+    icon: {fileID: 0}
+    percent: 0
 --- !u!114 &4266806821761925897
 MonoBehaviour:
   m_ObjectHideFlags: 0

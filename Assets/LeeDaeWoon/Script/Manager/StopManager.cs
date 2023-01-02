@@ -13,7 +13,7 @@ public class StopManager : MonoBehaviour
     [SerializeField] Image fadeBackGround;
     public bool inPause = false;
 
-    public List<Item> ItemDA_Have = new List<Item>();
+    public List<Item> itemDaHave = new List<Item>();
 
     [Header("버튼")]
     [SerializeField] Button backBtn;
@@ -153,9 +153,6 @@ public class StopManager : MonoBehaviour
 
     void Update()
     {
-        //Item_Log();
-        //WeaponType();
-
         MainReset();
 
         // ESC 키를 누르면 일시정지 창이 열린다.
@@ -182,7 +179,7 @@ public class StopManager : MonoBehaviour
 
             CardManager.instance.Item_Reset(); // 방어구 및 장신구 , 마정석 정보 초기화
 
-            ItemDA_Have.Clear(); // 소지한 아이템 초기화
+            itemDaHave.Clear(); // 소지한 아이템 초기화
             GameManager.Instance._coin = 0; // 골드 초기화
             WaveManager.instnace.m_WaveNum = 0; // Wave 초기화
             Player.Instance.stat._hp = Player.Instance.stat._maxHp; // 플레이어 HP 초기화
@@ -222,7 +219,6 @@ public class StopManager : MonoBehaviour
             StartCoroutine(PauseWindowClose());
         });
 
-
         // 설정 버튼을 눌렀을 때
         settingBtn.onClick.AddListener(() =>
         {
@@ -255,7 +251,6 @@ public class StopManager : MonoBehaviour
             StartCoroutine(SettingWindowClose());
         });
 
-
         // 플레이어 버튼을 눌렀을 때
         playerBtn.onClick.AddListener(() =>
         {
@@ -266,6 +261,8 @@ public class StopManager : MonoBehaviour
             {
                 pauseWindow.SetActive(false);
                 playerWindow.SetActive(true);
+
+                WeaponType();
 
                 playerBarUp.transform.DOLocalMoveY(playerBar, playerBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
                 playerBarDown.transform.DOLocalMoveY(-playerBar, playerBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
@@ -298,7 +295,12 @@ public class StopManager : MonoBehaviour
             {
                 playerWeaponWindow.SetActive(false);
                 playerItemWindow.SetActive(true);
-                ItemLog();
+
+                for (int i = 0; i < itemDaHave.Count; i++)
+                {
+                    itemLog.transform.GetChild(i).GetComponent<Image>().sprite = itemDaHave[i].icon;
+                    itemLog.transform.GetChild(i).gameObject.SetActive(true);
+                }
 
                 playerBarUp.transform.DOLocalMoveY(playerBar, playerBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
                 playerBarDown.transform.DOLocalMoveY(-playerBar, playerBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
@@ -482,19 +484,6 @@ public class StopManager : MonoBehaviour
         }
     }
 
-    void ItemLog()
-    {
-        if (CardManager.instance.isItemBool == false)
-        {
-            itemLog.transform.GetChild(CardManager.instance.itemCheck).GetComponent<Image>().sprite = ItemDA_Have[CardManager.instance.itemCheck].icon;
-            itemLog.transform.GetChild(CardManager.instance.itemCheck).gameObject.SetActive(true);
-
-            itemIcon.sprite = ItemDA_Have[0].icon;
-            itemName.text = ItemDA_Have[0].name;
-            itemExplanation.text = ItemDA_Have[0].explanation;
-        }
-    }
-
     // 플레이어 창 닫기
     IEnumerator PlayerWindowClose()
     {
@@ -565,119 +554,104 @@ public class StopManager : MonoBehaviour
     }
     #endregion
 
-    //public void Item_Log()
-    //{
-    //    if (CardManager.instance.isItemBool == false)
-    //    {
-    //        Player_Item_Log.transform.GetChild(CardManager.instance.itemCheck).GetComponent<Image>().sprite = ItemDA_Have[CardManager.instance.itemCheck].Item_Icon;
-    //        Player_Item_Log.transform.GetChild(CardManager.instance.itemCheck).gameObject.SetActive(true);
+    public void WeaponType()
+    {
+        int swordStat = Player.Instance.stat._level[PlayerWeaponType.Sword];
+        int daggerStat = Player.Instance.stat._level[PlayerWeaponType.Dagger];
+        int axeStat = Player.Instance.stat._level[PlayerWeaponType.Axe];
 
-    //        if (Icon_Check == true)
-    //        {
-    //            Icon_Check = false;
-    //            Player_Item_Icon.sprite = ItemDA_Have[0].Item_Icon;
-    //            Player_Item_Name.text = ItemDA_Have[0].Itme_Name;
-    //            Player_Item_Explanation.text = ItemDA_Have[0].Item_Explanation;
-    //        }
-    //    }
-    //}
+        switch (Player.Instance.stat.weaponType)
+        {
+            case PlayerWeaponType.Sword:
+                Debug.Log("asdadsf");
 
-    //public void WeaponType()
-    //{
-    //    int Sword_Level = Player.Instance.stat._level[PlayerWeaponType.Sword];
-    //    int Dagger_Level = Player.Instance.stat._level[PlayerWeaponType.Dagger];
-    //    int Axe_Level = Player.Instance.stat._level[PlayerWeaponType.Axe];
+                swordWindow.SetActive(true);
+                daggerWindow.SetActive(false);
+                axeWindow.SetActive(false);
 
-    //    switch (Player.Instance.stat.weaponType)
-    //    {
-    //        case PlayerWeaponType.Sword:
-    //            SwordLevel_Text.text = Sword_Level.ToString();
+                swordLevel.text = swordStat.ToString();
 
-    //            Sword_AttackDamage.text = (10 + (10 * Sword_Level)).ToString(); ;
-    //            Sword_AttackDamage_Upgrade.text = (10 + (10 * (Sword_Level + 1))).ToString();
+                swordAttack.text = (10 + (10 * swordStat)).ToString(); ;
+                swordAttackUpgrade.text = (10 + (10 * (swordStat + 1))).ToString();
 
-    //            Sword_MaxHp.text = (10 + (10 * Sword_Level)).ToString();
-    //            Sword_MaxHp_Upgrade.text = (10 + (10 * (Sword_Level + 1))).ToString();
+                swordMaxHp.text = (10 + (10 * swordStat)).ToString();
+                swordMaxHpUpgrade.text = (10 + (10 * (swordStat + 1))).ToString();
 
-    //            switch (Sword_Level)
-    //            {
-    //                case 1:
-    //                    Sword_Skill_Text.transform.GetChild(0).gameObject.SetActive(false);
-    //                    break;
+                switch (swordStat)
+                {
+                    case 1:
+                        swordSkill.transform.GetChild(0).gameObject.SetActive(false);
+                        break;
 
-    //                case 3:
-    //                    Sword_Skill_Text.transform.GetChild(1).gameObject.SetActive(false);
-    //                    break;
+                    case 3:
+                        swordSkill.transform.GetChild(1).gameObject.SetActive(false);
+                        break;
 
-    //                case 5:
-    //                    Sword_Skill_Text.transform.GetChild(2).gameObject.SetActive(false);
-    //                    break;
-    //            }
+                    case 5:
+                        swordSkill.transform.GetChild(2).gameObject.SetActive(false);
+                        break;
+                }
+                break;
 
-    //            Sword_Window.SetActive(true);
-    //            Dagger_Window.SetActive(false);
-    //            Axe_Window.SetActive(false);
-    //            break;
+            case PlayerWeaponType.Dagger:
+                swordWindow.SetActive(false);
+                daggerWindow.SetActive(true);
+                axeWindow.SetActive(false);
 
-    //        case PlayerWeaponType.Dagger:
-    //            DaggerLevel_Text.text = Dagger_Level.ToString();
+                daggerLevel.text = daggerStat.ToString();
 
-    //            Dagger_AttackDamage.text = (8 + (8 * Dagger_Level)).ToString();
-    //            Dagger_AttackDamage_Upgrade.text = (8 + (8 * (Dagger_Level + 1))).ToString();
+                daggerAttack.text = (8 + (8 * daggerStat)).ToString();
+                daggerAttackUpgrade.text = (8 + (8 * (daggerStat + 1))).ToString();
 
-    //            Dagger_Critical.text = (0 + (2 * Dagger_Level)).ToString();
-    //            Dagger_Critical_Upgrade.text = (0 + (2 * (Dagger_Level + 1))).ToString();
+                daggerCritical.text = (0 + (2 * daggerStat)).ToString();
+                daggerCriticalUpgrade.text = (0 + (2 * (daggerStat + 1))).ToString();
 
-    //            switch (Dagger_Level)
-    //            {
-    //                case 1:
-    //                    Dagger_Skill_Text.transform.GetChild(0).gameObject.SetActive(false);
-    //                    break;
+                switch (daggerStat)
+                {
+                    case 1:
+                        daggerSkill.transform.GetChild(0).gameObject.SetActive(false);
+                        break;
 
-    //                case 3:
-    //                    Dagger_Skill_Text.transform.GetChild(1).gameObject.SetActive(false);
-    //                    break;
+                    case 3:
+                        daggerSkill.transform.GetChild(1).gameObject.SetActive(false);
+                        break;
 
-    //                case 5:
-    //                    Dagger_Skill_Text.transform.GetChild(2).gameObject.SetActive(false);
-    //                    break;
-    //            }
+                    case 5:
+                        daggerSkill.transform.GetChild(2).gameObject.SetActive(false);
+                        break;
+                }
+                break;
 
-    //            Sword_Window.SetActive(false);
-    //            Dagger_Window.SetActive(true);
-    //            Axe_Window.SetActive(false);
-    //            break;
+            case PlayerWeaponType.Axe:
+                swordWindow.SetActive(false);
+                daggerWindow.SetActive(false);
+                axeWindow.SetActive(true);
 
-    //        case PlayerWeaponType.Axe:
-    //            AxeLevel_Text.text = Axe_Level.ToString();
+                axeLevel.text = axeStat.ToString();
 
-    //            Axe_AttackDamage.text = (20 + (15 * Axe_Level)).ToString();
-    //            Axe_AttackDamage_Upgrade.text = (20 + (15 * (Axe_Level + 1))).ToString();
+                axeAttack.text = (20 + (15 * axeStat)).ToString();
+                axeAttackUpgrade.text = (20 + (15 * (axeStat + 1))).ToString();
 
-    //            Axe_Defense.text = (400 + (200 * Axe_Level)).ToString();
-    //            Axe_Defense_Upgrade.text = (400 + (200 * (Axe_Level + 1))).ToString();
+                axeDefense.text = (400 + (200 * axeStat)).ToString();
+                axeDefenseUpgrade.text = (400 + (200 * (axeStat + 1))).ToString();
 
-    //            switch (Axe_Level)
-    //            {
-    //                case 1:
-    //                    Axe_Skill_Text.transform.GetChild(0).gameObject.SetActive(false);
-    //                    break;
+                switch (axeStat)
+                {
+                    case 1:
+                        axeSkill.transform.GetChild(0).gameObject.SetActive(false);
+                        break;
 
-    //                case 3:
-    //                    Axe_Skill_Text.transform.GetChild(1).gameObject.SetActive(false);
-    //                    break;
+                    case 3:
+                        axeSkill.transform.GetChild(1).gameObject.SetActive(false);
+                        break;
 
-    //                case 5:
-    //                    Axe_Skill_Text.transform.GetChild(2).gameObject.SetActive(false);
-    //                    break;
-    //            }
-
-    //            Sword_Window.SetActive(false);
-    //            Dagger_Window.SetActive(false);
-    //            Axe_Window.SetActive(true);
-    //            break;
-    //    }
-    //}
+                    case 5:
+                        axeSkill.transform.GetChild(2).gameObject.SetActive(false);
+                        break;
+                }
+                break;
+        }
+    }
 
     public void Main_Yes_Btn()
     {

@@ -1158,6 +1158,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 3.9519653
       objectReference: {fileID: 0}
+    - target: {fileID: 197492838, guid: 47aa01e71bf14b4409c00008f07eb2bd, type: 3}
+      propertyPath: m_Text
+      value: "\uACF5\uACA9\uB825 :     \u25B6\n\uBC29\uC5B4\uB825 :      \u25B6"
+      objectReference: {fileID: 0}
     - target: {fileID: 221493312, guid: 47aa01e71bf14b4409c00008f07eb2bd, type: 3}
       propertyPath: m_Navigation.m_Mode
       value: 0
@@ -1397,6 +1401,14 @@ PrefabInstance:
     - target: {fileID: 1563773519, guid: 47aa01e71bf14b4409c00008f07eb2bd, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1565936295, guid: 47aa01e71bf14b4409c00008f07eb2bd, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1640700081, guid: 47aa01e71bf14b4409c00008f07eb2bd, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -9
       objectReference: {fileID: 0}
     - target: {fileID: 1653808004, guid: 47aa01e71bf14b4409c00008f07eb2bd, type: 3}
       propertyPath: m_IsActive

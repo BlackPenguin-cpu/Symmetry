@@ -18,17 +18,6 @@ public class CardManager : MonoBehaviour
 
     [Space(10)]
     public int itemCheck = 0;
-
-    [Space(10)]
-    public bool isDaLeft = false;
-    public bool isDaAmong = false;
-    public bool isDaRight = false;
-
-    [Space(10)]
-    public bool isItemLeft = false;
-    public bool isItemAmong = false;
-    public bool isItemRight = false;
-
     public Image fade;
 
     [Header("시간의 마정석 제한")]
@@ -48,7 +37,7 @@ public class CardManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.O))
+        if (Input.GetKeyDown(KeyCode.Keypad1))
             AddCard();
 
         if (Input.GetKeyDown(KeyCode.Keypad2))
@@ -121,22 +110,6 @@ public class CardManager : MonoBehaviour
 
                 item.Add(itemBuffer[itemRandomTest]);
                 card.ItemCard(itemBuffer[itemRandomTest], itemIndex++);
-
-                //switch(i)
-                //{
-                //    case 0:
-                //        isItemLeft = true;
-                //        itemDALeftCheck.Add(itemBuffer[itemRandomTest]);
-                //        break;
-                //    case 1:
-                //        isItemAmong = true;
-                //        itemDAAmongCheck.Add(itemBuffer[itemRandomTest]);
-                //        break;
-                //    case 2:
-                //        isItemRight = true;
-                //        itemDARightCheck.Add(itemBuffer[itemRandomTest]);
-                //        break;
-                //}
             }
 
             // 방어구 및 장신구
@@ -151,44 +124,20 @@ public class CardManager : MonoBehaviour
 
                 item.Add(daBuffer[dARandomTest]);
                 card.ItemCard(daBuffer[dARandomTest], itemIndex++);
-
-                //switch (i)
-                //{
-                //    case 0:
-                //        isDaLeft = true;
-                //        itemDALeftCheck.Add(daBuffer[dARandomTest]);
-                //        break;
-                //    case 1:
-                //        isDaAmong = true;
-                //        itemDAAmongCheck.Add(daBuffer[dARandomTest]);
-                //        break;
-                //    case 2:
-                //        isDaRight = true;
-                //        itemDARightCheck.Add(daBuffer[dARandomTest]);
-                //        break;
-                //}
             }
         }
     }
 
     public void Item_Reset()
     {
-        randomMix = 0;
-        itemCheck = 0;
-        timeItemCount = 0;
+        //randomMix = 0;
+        //itemCheck = 0;
+        //timeItemCount = 0;
 
-        daBuffer.Clear();
-        timeItemLimit.Clear();
+        //daBuffer.Clear();
+        //timeItemLimit.Clear();
 
-        isDaLeft = false;
-        isDaAmong = false;
-        isDaRight = false;
-
-        isItemLeft = false;
-        isItemAmong = false;
-        isItemRight = false;
-
-        isItemBool = true;
-        isItemCardOpenCheck = true;
+        //isItemBool = true;
+        //isItemCardOpenCheck = true;
     }
 }

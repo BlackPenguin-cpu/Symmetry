@@ -59,6 +59,289 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     }
 
+
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        SoundManager.instance.PlaySoundClip("SFX_Button_Over", SoundType.SFX);
+
+        switch (eDirection)
+        {
+            case EDirection.Left:
+                leftLight.DOFade(1, lightTimer).SetUpdate(true);
+                break;
+
+            case EDirection.Among:
+                amongLight.DOFade(1, lightTimer).SetUpdate(true);
+                break;
+
+            case EDirection.Right:
+                rightLight.DOFade(1, lightTimer).SetUpdate(true);
+                break;
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        switch (eDirection)
+        {
+            case EDirection.Left:
+                leftLight.DOFade(0, lightTimer).SetUpdate(true);
+                break;
+            case EDirection.Among:
+                amongLight.DOFade(0, lightTimer).SetUpdate(true);
+                break;
+            case EDirection.Right:
+                rightLight.DOFade(0, lightTimer).SetUpdate(true);
+                break;
+        }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        switch (eDirection)
+        {
+            case EDirection.Left:
+                StartCoroutine(LeftClickWindow());
+                DaItemClick();
+
+                switch (ItemCardList.instance.leftItem.eItem)
+                {
+                    case Item.EItem.WindEarRing:
+                        Player.Instance.stat.PlayerDATypeList.WindEarRing = true;
+                        Debug.Log(Player.Instance.stat.PlayerDATypeList.WindEarRing);
+                        break;
+
+                    case Item.EItem.NeedleArmour:
+                        Player.Instance.stat.PlayerDATypeList.NeedleArmour = true;
+                        Debug.Log(Player.Instance.stat.PlayerDATypeList.NeedleArmour);
+                        break;
+
+                    case Item.EItem.KnifeCape:
+                        Player.Instance.stat.PlayerDATypeList.KnifeCape = true;
+                        Debug.Log(Player.Instance.stat.PlayerDATypeList.KnifeCape);
+                        break;
+
+                    case Item.EItem.CurseKnife:
+                        Player.Instance.stat.PlayerDATypeList.CurseKnife = true;
+                        Debug.Log(Player.Instance.stat.PlayerDATypeList.CurseKnife);
+                        break;
+
+                    case Item.EItem.BloodGauntlet:
+                        Player.Instance.stat.PlayerDATypeList.BloodGauntlet = true;
+                        Debug.Log(Player.Instance.stat.PlayerDATypeList.BloodGauntlet);
+                        break;
+
+                    case Item.EItem.CrystalOrb:
+                        Player.Instance.stat.PlayerDATypeList.CrystalOrb = true;
+                        Debug.Log(Player.Instance.stat.PlayerDATypeList.CrystalOrb);
+                        break;
+
+                    case Item.EItem.TheOneRing:
+                        Player.Instance.stat.PlayerDATypeList.TheOneRing = true;
+                        Debug.Log(Player.Instance.stat.PlayerDATypeList.TheOneRing);
+                        break;
+                }
+
+                switch (ItemCardList.instance.leftItem.eItem)
+                {
+                    case Item.EItem.POWER:
+                        ++Player.Instance.stat.Crystals[(int)CrystalsType.POWER];
+                        break;
+
+                    case Item.EItem.SPEED:
+                        ++Player.Instance.stat.Crystals[(int)CrystalsType.SPEED];
+                        break;
+
+                    case Item.EItem.ATTACKSPEED:
+                        ++Player.Instance.stat.Crystals[(int)CrystalsType.ATTACKSPEED];
+                        break;
+
+                    case Item.EItem.HEALTH:
+                        ++Player.Instance.stat.Crystals[(int)CrystalsType.HEALTH];
+                        break;
+
+                    case Item.EItem.TIME:
+                        ++Player.Instance.stat.Crystals[(int)CrystalsType.TIME];
+                        break;
+
+                    case Item.EItem.DEFFENCE:
+                        ++Player.Instance.stat.Crystals[(int)CrystalsType.DEFFENCE];
+                        break;
+                }
+
+                break;
+
+            case EDirection.Among:
+                StartCoroutine(AmongClickWindow());
+                DaItemClick();
+
+                switch (ItemCardList.instance.amongItem.eItem)
+                {
+                    case Item.EItem.WindEarRing:
+                        Player.Instance.stat.PlayerDATypeList.WindEarRing = true;
+                        Debug.Log(Player.Instance.stat.PlayerDATypeList.WindEarRing);
+                        break;
+
+                    case Item.EItem.NeedleArmour:
+                        Player.Instance.stat.PlayerDATypeList.NeedleArmour = true;
+                        Debug.Log(Player.Instance.stat.PlayerDATypeList.NeedleArmour);
+                        break;
+
+                    case Item.EItem.KnifeCape:
+                        Player.Instance.stat.PlayerDATypeList.KnifeCape = true;
+                        Debug.Log(Player.Instance.stat.PlayerDATypeList.KnifeCape);
+                        break;
+
+                    case Item.EItem.CurseKnife:
+                        Player.Instance.stat.PlayerDATypeList.CurseKnife = true;
+                        Debug.Log(Player.Instance.stat.PlayerDATypeList.CurseKnife);
+                        break;
+
+                    case Item.EItem.BloodGauntlet:
+                        Player.Instance.stat.PlayerDATypeList.BloodGauntlet = true;
+                        Debug.Log(Player.Instance.stat.PlayerDATypeList.BloodGauntlet);
+                        break;
+
+                    case Item.EItem.CrystalOrb:
+                        Player.Instance.stat.PlayerDATypeList.CrystalOrb = true;
+                        Debug.Log(Player.Instance.stat.PlayerDATypeList.CrystalOrb);
+                        break;
+
+                    case Item.EItem.TheOneRing:
+                        Player.Instance.stat.PlayerDATypeList.TheOneRing = true;
+                        Debug.Log(Player.Instance.stat.PlayerDATypeList.TheOneRing);
+                        break;
+                }
+
+                switch (ItemCardList.instance.amongItem.eItem)
+                {
+                    case Item.EItem.POWER:
+                        ++Player.Instance.stat.Crystals[(int)CrystalsType.POWER];
+                        break;
+
+                    case Item.EItem.SPEED:
+                        ++Player.Instance.stat.Crystals[(int)CrystalsType.SPEED];
+                        break;
+
+                    case Item.EItem.ATTACKSPEED:
+                        ++Player.Instance.stat.Crystals[(int)CrystalsType.ATTACKSPEED];
+                        break;
+
+                    case Item.EItem.HEALTH:
+                        ++Player.Instance.stat.Crystals[(int)CrystalsType.HEALTH];
+                        break;
+
+                    case Item.EItem.TIME:
+                        ++Player.Instance.stat.Crystals[(int)CrystalsType.TIME];
+                        break;
+
+                    case Item.EItem.DEFFENCE:
+                        ++Player.Instance.stat.Crystals[(int)CrystalsType.DEFFENCE];
+                        break;
+                }
+
+                break;
+
+            case EDirection.Right:
+                StartCoroutine(RightClickWindow());
+                DaItemClick();
+
+                switch (ItemCardList.instance.rightItem.eItem)
+                {
+                    case Item.EItem.WindEarRing:
+                        Player.Instance.stat.PlayerDATypeList.WindEarRing = true;
+                        Debug.Log(Player.Instance.stat.PlayerDATypeList.WindEarRing);
+                        break;
+
+                    case Item.EItem.NeedleArmour:
+                        Player.Instance.stat.PlayerDATypeList.NeedleArmour = true;
+                        Debug.Log(Player.Instance.stat.PlayerDATypeList.NeedleArmour);
+                        break;
+
+                    case Item.EItem.KnifeCape:
+                        Player.Instance.stat.PlayerDATypeList.KnifeCape = true;
+                        Debug.Log(Player.Instance.stat.PlayerDATypeList.KnifeCape);
+                        break;
+
+                    case Item.EItem.CurseKnife:
+                        Player.Instance.stat.PlayerDATypeList.CurseKnife = true;
+                        Debug.Log(Player.Instance.stat.PlayerDATypeList.CurseKnife);
+                        break;
+
+                    case Item.EItem.BloodGauntlet:
+                        Player.Instance.stat.PlayerDATypeList.BloodGauntlet = true;
+                        Debug.Log(Player.Instance.stat.PlayerDATypeList.BloodGauntlet);
+                        break;
+
+                    case Item.EItem.CrystalOrb:
+                        Player.Instance.stat.PlayerDATypeList.CrystalOrb = true;
+                        Debug.Log(Player.Instance.stat.PlayerDATypeList.CrystalOrb);
+                        break;
+
+                    case Item.EItem.TheOneRing:
+                        Player.Instance.stat.PlayerDATypeList.TheOneRing = true;
+                        Debug.Log(Player.Instance.stat.PlayerDATypeList.TheOneRing);
+                        break;
+                }
+
+                switch (ItemCardList.instance.rightItem.eItem)
+                {
+                    case Item.EItem.POWER:
+                        ++Player.Instance.stat.Crystals[(int)CrystalsType.POWER];
+                        break;
+
+                    case Item.EItem.SPEED:
+                        ++Player.Instance.stat.Crystals[(int)CrystalsType.SPEED];
+                        break;
+
+                    case Item.EItem.ATTACKSPEED:
+                        ++Player.Instance.stat.Crystals[(int)CrystalsType.ATTACKSPEED];
+                        break;
+
+                    case Item.EItem.HEALTH:
+                        ++Player.Instance.stat.Crystals[(int)CrystalsType.HEALTH];
+                        break;
+
+                    case Item.EItem.TIME:
+                        ++Player.Instance.stat.Crystals[(int)CrystalsType.TIME];
+                        break;
+
+                    case Item.EItem.DEFFENCE:
+                        ++Player.Instance.stat.Crystals[(int)CrystalsType.DEFFENCE];
+                        break;
+                }
+
+                break;
+        }
+    }
+
+    #region 얻을 마정석과 장신구 선택
+    void DaItemClick()
+    {
+        // 장신구
+        for (int i = 0; i < CardManager.instance.daBuffer.Count; i++)
+        {
+            if (CardManager.instance.daBuffer[i].name.Contains(ItemCardList.instance.leftItem.name))
+            {
+                StopManager.instnace.itemDaHave.Add(CardManager.instance.daBuffer[i]);
+                CardManager.instance.daBuffer.RemoveAt(i);
+            }
+        }
+
+        // 마정석
+        for (int i = 0; i < CardManager.instance.itemBuffer.Count; i++)
+        {
+            if (CardManager.instance.itemBuffer[i].name.Contains(ItemCardList.instance.leftItem.name))
+            {
+                StopManager.instnace.itemDaHave.Add(CardManager.instance.itemBuffer[i]);
+                CardManager.instance.itemBuffer.RemoveAt(i);
+            }
+        }
+    }
+    #endregion
+
+    #region 클릭을 통한 창 움직임
     void LightDoKill()
     {
         leftLight.DOKill();
@@ -155,461 +438,5 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             yield return null;
         }
     }
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        SoundManager.instance.PlaySoundClip("SFX_Button_Over", SoundType.SFX);
-
-        switch (eDirection)
-        {
-            case EDirection.Left:
-                leftLight.DOFade(1, lightTimer).SetUpdate(true);
-                break;
-
-            case EDirection.Among:
-                amongLight.DOFade(1, lightTimer).SetUpdate(true);
-                break;
-
-            case EDirection.Right:
-                rightLight.DOFade(1, lightTimer).SetUpdate(true);
-                break;
-        }
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        switch (eDirection)
-        {
-            case EDirection.Left:
-                leftLight.DOFade(0, lightTimer).SetUpdate(true);
-                break;
-            case EDirection.Among:
-                amongLight.DOFade(0, lightTimer).SetUpdate(true);
-                break;
-            case EDirection.Right:
-                rightLight.DOFade(0, lightTimer).SetUpdate(true);
-                break;
-        }
-    }
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        switch (eDirection)
-        {
-            case EDirection.Left:
-                StartCoroutine(LeftClickWindow());
-
-                //for (int i = 0; i < CardManager.instance.daBuffer.Count; i++)
-                //{
-                //    if (CardManager.instance.daBuffer[i].name == ItemCardList.instance.leftItem.name)
-                //    {
-                //        StopManager.instnace.ItemDA_Have.Add(CardManager.instance.daBuffer[i]);
-                //        CardManager.instance.daBuffer.RemoveAt(i);
-                //    }
-                //}
-
-                for (int i = 0; i < CardManager.instance.itemBuffer.Count; i++)
-                {
-                    if (CardManager.instance.itemBuffer[i].name.Contains(ItemCardList.instance.leftItem.name))
-                    {
-                        StopManager.instnace.ItemDA_Have.Add(CardManager.instance.itemBuffer[i]);
-                        CardManager.instance.itemBuffer.RemoveAt(i);
-
-                        //CardManager.instance.timeItemCount++;
-                        //CardManager.instance.timeItemLimit.Clear();
-                    }
-                }
-
-                break;
-
-            case EDirection.Among:
-
-
-                StartCoroutine(AmongClickWindow());
-
-                break;
-
-            case EDirection.Right:
-
-
-
-                StartCoroutine(RightClickWindow());
-
-                break;
-        }
-
-        //// 왼쪽 카드를 선택 했을 때
-        //if (eDirection == EDirection.Left)
-        //{
-        //    CardManager.instance.fade.DOFade(0f, 0.5f);
-        //    UI_Manager.instance.isCursorFade = false;
-
-        //    if (CardManager.instance.isLeftPick == true && CardManager.instance.isItemCardOpenCheck == false)
-        //    {
-        //        CardManager.instance.isLeftPick = false;
-        //        CardManager.instance.isRightPick = false;
-        //        CardManager.instance.isAmongPick = false;
-
-        //        // 방어구 및 장신구를 선택했을 때
-        //        if (CardManager.instance.isDaLeft == false)
-        //        {
-        //            for (int i = 0; i < CardManager.instance.daBuffer.Count; i++)
-        //            {
-        //                if (CardManager.instance.daBuffer[i].Itme_Name == CardManager.instance.itemDALeftCheck[0].Itme_Name)
-        //                {
-        //                    StopManager.instnace.ItemDA_Have.Add(CardManager.instance.daBuffer[i]);
-        //                    CardManager.instance.daBuffer.RemoveAt(i);
-        //                }
-        //            }
-
-        //            switch (CardManager.instance.itemDALeftCheck[0].Itme_Name)
-        //            {
-        //                case "바람의 귀걸이":
-        //                    Player.Instance.stat.PlayerDATypeList.WindEarRing = true;
-        //                    Debug.Log(Player.Instance.stat.PlayerDATypeList.WindEarRing);
-        //                    break;
-
-        //                case "가시견갑":
-        //                    Player.Instance.stat.PlayerDATypeList.NeedleArmour = true;
-        //                    Debug.Log(Player.Instance.stat.PlayerDATypeList.NeedleArmour);
-        //                    break;
-
-        //                case "칼날망토":
-        //                    Player.Instance.stat.PlayerDATypeList.KnifeCape = true;
-        //                    Debug.Log(Player.Instance.stat.PlayerDATypeList.KnifeCape);
-        //                    break;
-
-        //                case "저주받은 단검":
-        //                    Player.Instance.stat.PlayerDATypeList.CurseKnife = true;
-        //                    Debug.Log(Player.Instance.stat.PlayerDATypeList.CurseKnife);
-        //                    break;
-
-        //                case "피의 장갑":
-        //                    Player.Instance.stat.PlayerDATypeList.BloodGauntlet = true;
-        //                    Debug.Log(Player.Instance.stat.PlayerDATypeList.BloodGauntlet);
-        //                    break;
-
-        //                case "수정구":
-        //                    Player.Instance.stat.PlayerDATypeList.CrystalOrb = true;
-        //                    Debug.Log(Player.Instance.stat.PlayerDATypeList.CrystalOrb);
-        //                    break;
-
-        //                case "절대반지":
-        //                    Player.Instance.stat.PlayerDATypeList.TheOneRing = true;
-        //                    Debug.Log(Player.Instance.stat.PlayerDATypeList.TheOneRing);
-        //                    break;
-
-        //            }
-
-        //        }
-
-        //        // 마정석을 선택했을 때
-        //        if (CardManager.instance.isDaLeft == true)
-        //        {
-        //            switch (CardManager.instance.itemDALeftCheck[0].Itme_Name)
-        //            {
-        //                case "힘의 마정석":
-        //                    Player.Instance.stat.Crystals[(int)CrystalsType.POWER]++;
-        //                    break;
-
-        //                case "신속의 마정석":
-        //                    Player.Instance.stat.Crystals[(int)CrystalsType.SPEED]++;
-        //                    break;
-
-        //                case "연속의 마정석":
-        //                    Player.Instance.stat.Crystals[(int)CrystalsType.ATTACKSPEED]++;
-        //                    break;
-
-        //                case "체력의 마정석":
-        //                    Player.Instance.stat.Crystals[(int)CrystalsType.HEALTH]++;
-        //                    break;
-
-        //                case "시간의 마정석":
-        //                    Player.Instance.stat.Crystals[(int)CrystalsType.TIME]++;
-        //                    break;
-
-        //                case "방어의 마정석":
-        //                    Player.Instance.stat.Crystals[(int)CrystalsType.DEFFENCE]++;
-        //                    break;
-        //            }
-        //        }
-
-
-        //        if (CardManager.instance.isItemLeft == false)
-        //            StopManager.instnace.ItemDA_Have.Add(CardManager.instance.itemDALeftCheck[0]);
-
-        //        if (CardManager.instance.isItemBool == true)
-        //            CardManager.instance.isItemBool = false;
-
-        //        else if (CardManager.instance.isItemBool == false)
-        //            CardManager.instance.itemCheck += LeftClick_Check;
-
-
-        //        if (CardManager.instance.timeItemCount <= 2)
-        //        {
-        //            CardManager.instance.timeItemLimit.Add(CardManager.instance.itemDALeftCheck[0]);
-        //            for (int i = 0; i < CardManager.instance.timeItemLimit.Count; i++)
-        //            {
-        //                if (CardManager.instance.timeItemLimit[i].Itme_Name.Contains(CardManager.instance.itemBuffer[4].Itme_Name))
-        //                {
-        //                    CardManager.instance.timeItemCount++;
-        //                    CardManager.instance.timeItemLimit.Clear();
-        //                }
-        //            }
-        //        }
-
-        //        leftLight.DOFade(1f, 0.1f);
-        //        leftWindow.transform.DOLocalMoveY(1100, 0.5f).SetEase(Ease.InQuad);
-        //        StartCoroutine(Close_Dot());
-        //    }
-        //}
-
-        //// 가운데 카드를 선택 했을 때
-        //if (eDirection == EDirection.Among)
-        //{
-        //    CardManager.instance.fade.DOFade(0f, 0.5f);
-        //    UI_Manager.instance.isCursorFade = false;
-
-        //    if (CardManager.instance.isAmongPick == true && CardManager.instance.isItemCardOpenCheck == false)
-        //    {
-        //        CardManager.instance.isAmongPick = false;
-        //        CardManager.instance.isLeftPick = false;
-        //        CardManager.instance.isRightPick = false;
-
-        //        // 방어구 및 장신구를 선택했을 때
-        //        if (CardManager.instance.isDaAmong == false)
-        //        {
-        //            for (int i = 0; i < CardManager.instance.daBuffer.Count; i++)
-        //            {
-        //                if (CardManager.instance.daBuffer[i].Itme_Name == CardManager.instance.itemDAAmongCheck[0].Itme_Name)
-        //                {
-        //                    StopManager.instnace.ItemDA_Have.Add(CardManager.instance.daBuffer[i]);
-        //                    CardManager.instance.daBuffer.RemoveAt(i);
-        //                }
-        //            }
-
-        //            switch (CardManager.instance.itemDAAmongCheck[0].Itme_Name)
-        //            {
-        //                case "바람의 귀걸이":
-        //                    Player.Instance.stat.PlayerDATypeList.WindEarRing = true;
-        //                    Debug.Log(Player.Instance.stat.PlayerDATypeList.WindEarRing);
-        //                    break;
-
-        //                case "가시견갑":
-        //                    Player.Instance.stat.PlayerDATypeList.NeedleArmour = true;
-        //                    Debug.Log(Player.Instance.stat.PlayerDATypeList.NeedleArmour);
-        //                    break;
-
-        //                case "칼날망토":
-        //                    Player.Instance.stat.PlayerDATypeList.KnifeCape = true;
-        //                    Debug.Log(Player.Instance.stat.PlayerDATypeList.KnifeCape);
-        //                    break;
-
-        //                case "저주받은 단검":
-        //                    Player.Instance.stat.PlayerDATypeList.CurseKnife = true;
-        //                    Debug.Log(Player.Instance.stat.PlayerDATypeList.CurseKnife);
-        //                    break;
-
-        //                case "피의 장갑":
-        //                    Player.Instance.stat.PlayerDATypeList.BloodGauntlet = true;
-        //                    Debug.Log(Player.Instance.stat.PlayerDATypeList.BloodGauntlet);
-        //                    break;
-
-        //                case "수정구":
-        //                    Player.Instance.stat.PlayerDATypeList.CrystalOrb = true;
-        //                    Debug.Log(Player.Instance.stat.PlayerDATypeList.CrystalOrb);
-        //                    break;
-
-        //                case "절대반지":
-        //                    Player.Instance.stat.PlayerDATypeList.TheOneRing = true;
-        //                    Debug.Log(Player.Instance.stat.PlayerDATypeList.TheOneRing);
-        //                    break;
-
-        //            }
-        //        }
-
-        //        // 마정석을 선택했을 때
-        //        if (CardManager.instance.isDaAmong == true)
-        //        {
-        //            switch (CardManager.instance.itemDAAmongCheck[0].Itme_Name)
-        //            {
-        //                case "힘의 마정석":
-        //                    Player.Instance.stat.Crystals[(int)CrystalsType.POWER]++;
-        //                    break;
-
-        //                case "신속의 마정석":
-        //                    Player.Instance.stat.Crystals[(int)CrystalsType.SPEED]++;
-        //                    break;
-
-        //                case "연속의 마정석":
-        //                    Player.Instance.stat.Crystals[(int)CrystalsType.ATTACKSPEED]++;
-        //                    break;
-
-        //                case "체력의 마정석":
-        //                    Player.Instance.stat.Crystals[(int)CrystalsType.HEALTH]++;
-        //                    break;
-
-        //                case "시간의 마정석":
-        //                    Player.Instance.stat.Crystals[(int)CrystalsType.TIME]++;
-        //                    break;
-
-        //                case "방어의 마정석":
-        //                    Player.Instance.stat.Crystals[(int)CrystalsType.DEFFENCE]++;
-        //                    break;
-        //            }
-        //        }
-
-
-        //        if (CardManager.instance.isItemAmong == false)
-        //            StopManager.instnace.ItemDA_Have.Add(CardManager.instance.itemDAAmongCheck[0]);
-
-        //        if (CardManager.instance.isItemBool == true)
-        //            CardManager.instance.isItemBool = false;
-
-        //        else if (CardManager.instance.isItemBool == false)
-        //            CardManager.instance.itemCheck += AmongClick_Check;
-
-        //        if (CardManager.instance.timeItemCount <= 2)
-        //        {
-        //            CardManager.instance.timeItemLimit.Add(CardManager.instance.itemDAAmongCheck[0]);
-        //            for (int i = 0; i < CardManager.instance.timeItemLimit.Count; i++)
-        //            {
-        //                if (CardManager.instance.timeItemLimit[i].Itme_Name.Contains(CardManager.instance.itemBuffer[4].Itme_Name))
-        //                {
-        //                    CardManager.instance.timeItemCount++;
-        //                    CardManager.instance.timeItemLimit.Clear();
-        //                }
-        //            }
-        //        }
-
-        //        amongLight.DOFade(1f, 0.1f);
-        //        amongWindow.transform.DOLocalMoveY(1150, 0.5f).SetEase(Ease.InQuad);
-        //        StartCoroutine(Close_Dot());
-        //    }
-
-        //}
-
-        //// 오른쪽 카드를 선택 했을 때
-        //if (eDirection == EDirection.Right)
-        //{
-        //    CardManager.instance.fade.DOFade(0f, 0.5f);
-        //    UI_Manager.instance.isCursorFade = false;
-
-        //    if (CardManager.instance.isRightPick == true && CardManager.instance.isItemCardOpenCheck == false)
-        //    {
-        //        CardManager.instance.isRightPick = false;
-        //        CardManager.instance.isLeftPick = false;
-        //        CardManager.instance.isAmongPick = false;
-
-        //        // 방어구 및 장신구를 선택했을 때
-        //        if (CardManager.instance.isDaRight == false)
-        //        {
-        //            for (int i = 0; i < CardManager.instance.daBuffer.Count; i++)
-        //            {
-        //                if (CardManager.instance.daBuffer[i].Itme_Name == CardManager.instance.itemDARightCheck[0].Itme_Name)
-        //                {
-        //                    StopManager.instnace.ItemDA_Have.Add(CardManager.instance.daBuffer[i]);
-        //                    CardManager.instance.daBuffer.RemoveAt(i);
-        //                }
-        //            }
-
-        //            switch (CardManager.instance.itemDARightCheck[0].Itme_Name)
-        //            {
-        //                case "바람의 귀걸이":
-        //                    Player.Instance.stat.PlayerDATypeList.WindEarRing = true;
-        //                    Debug.Log(Player.Instance.stat.PlayerDATypeList.WindEarRing);
-        //                    break;
-
-        //                case "가시견갑":
-        //                    Player.Instance.stat.PlayerDATypeList.NeedleArmour = true;
-        //                    Debug.Log(Player.Instance.stat.PlayerDATypeList.NeedleArmour);
-        //                    break;
-
-        //                case "칼날망토":
-        //                    Player.Instance.stat.PlayerDATypeList.KnifeCape = true;
-        //                    Debug.Log(Player.Instance.stat.PlayerDATypeList.KnifeCape);
-        //                    break;
-
-        //                case "저주받은 단검":
-        //                    Player.Instance.stat.PlayerDATypeList.CurseKnife = true;
-        //                    Debug.Log(Player.Instance.stat.PlayerDATypeList.CurseKnife);
-        //                    break;
-
-        //                case "피의 장갑":
-        //                    Player.Instance.stat.PlayerDATypeList.BloodGauntlet = true;
-        //                    Debug.Log(Player.Instance.stat.PlayerDATypeList.BloodGauntlet);
-        //                    break;
-
-        //                case "수정구":
-        //                    Player.Instance.stat.PlayerDATypeList.CrystalOrb = true;
-        //                    Debug.Log(Player.Instance.stat.PlayerDATypeList.CrystalOrb);
-        //                    break;
-
-        //                case "절대반지":
-        //                    Player.Instance.stat.PlayerDATypeList.TheOneRing = true;
-        //                    Debug.Log(Player.Instance.stat.PlayerDATypeList.TheOneRing);
-        //                    break;
-
-        //            }
-        //        }
-
-        //        // 마정석을 선택했을 때
-        //        if (CardManager.instance.isDaRight == true)
-        //        {
-        //            switch (CardManager.instance.itemDARightCheck[0].Itme_Name)
-        //            {
-        //                case "힘의 마정석":
-        //                    Player.Instance.stat.Crystals[(int)CrystalsType.POWER]++;
-        //                    break;
-
-        //                case "신속의 마정석":
-        //                    Player.Instance.stat.Crystals[(int)CrystalsType.SPEED]++;
-        //                    break;
-
-        //                case "연속의 마정석":
-        //                    Player.Instance.stat.Crystals[(int)CrystalsType.ATTACKSPEED]++;
-        //                    break;
-
-        //                case "체력의 마정석":
-        //                    Player.Instance.stat.Crystals[(int)CrystalsType.HEALTH]++;
-        //                    break;
-
-        //                case "시간의 마정석":
-        //                    Player.Instance.stat.Crystals[(int)CrystalsType.TIME]++;
-        //                    break;
-
-        //                case "방어의 마정석":
-        //                    Player.Instance.stat.Crystals[(int)CrystalsType.DEFFENCE]++;
-        //                    break;
-        //            }
-        //        }
-
-        //        if (CardManager.instance.isItemRight == false)
-        //            StopManager.instnace.ItemDA_Have.Add(CardManager.instance.itemDARightCheck[0]);
-
-        //        if (CardManager.instance.isItemBool == true)
-        //            CardManager.instance.isItemBool = false;
-
-        //        else if (CardManager.instance.isItemBool == false)
-        //            CardManager.instance.itemCheck += RightClick_Check;
-
-        //        if (CardManager.instance.timeItemCount <= 2)
-        //        {
-        //            CardManager.instance.timeItemLimit.Add(CardManager.instance.itemDARightCheck[0]);
-        //            for (int i = 0; i < CardManager.instance.timeItemLimit.Count; i++)
-        //            {
-        //                if (CardManager.instance.timeItemLimit[i].Itme_Name.Contains(CardManager.instance.itemBuffer[4].Itme_Name))
-        //                {
-        //                    CardManager.instance.timeItemCount++;
-        //                    CardManager.instance.timeItemLimit.Clear();
-        //                }
-        //            }
-        //        }
-
-        //        rightLight.DOFade(1f, 0.1f);
-        //        rightWindow.transform.DOLocalMoveY(1150, 0.5f).SetEase(Ease.InQuad);
-        //        StartCoroutine(Close_Dot());
-        //    }
-        //}
-    }
+    #endregion
 }

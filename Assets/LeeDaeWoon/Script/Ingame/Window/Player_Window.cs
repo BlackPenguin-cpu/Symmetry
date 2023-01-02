@@ -21,8 +21,8 @@ public class Player_Window : MonoBehaviour, IPointerEnterHandler
     public void OnPointerEnter(PointerEventData eventData)
     {
         SoundManager.instance.PlaySoundClip("SFX_Button_Over", SoundType.SFX, 1f);
-        StopManager.instnace.itemName.text = StopManager.instnace.ItemDA_Have[Item_Log].name;
-        StopManager.instnace.itemIcon.sprite = StopManager.instnace.ItemDA_Have[Item_Log].icon;
-        StopManager.instnace.itemExplanation.text = StopManager.instnace.ItemDA_Have[Item_Log].explanation;
+        StopManager.instnace.itemName.text = StopManager.instnace.itemDaHave[Item_Log].name;
+        StopManager.instnace.itemIcon.sprite = StopManager.instnace.itemDaHave[Item_Log].icon;
+        StopManager.instnace.itemExplanation.text = StopManager.instnace.itemDaHave[Item_Log].explanation;
     }
 }

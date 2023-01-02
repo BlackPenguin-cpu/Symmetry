@@ -13,60 +13,73 @@ MonoBehaviour:
   m_Name: ItemSo
   m_EditorClassIdentifier: 
   Items:
-  - name: "\uD798\uC758 \uB9C8\uC815\uC11D"
+  - eItem: 7
+    name: "\uD798\uC758 \uB9C8\uC815\uC11D"
     explanation: "\uACF5\uACA9\uB825\uC774 10 % \uC99D\uAC00\uD569\uB2C8\uB2E4."
     icon: {fileID: 21300000, guid: f60a77a8af8abc84aa0e8d311e9146cc, type: 3}
     percent: 20
-  - name: "\uC2E0\uC18D\uC758 \uB9C8\uC815\uC11D"
+  - eItem: 8
+    name: "\uC2E0\uC18D\uC758 \uB9C8\uC815\uC11D"
     explanation: "\uC774\uB3D9\uC18D\uB3C4\uAC00 10% \uC99D\uAC00\uD569\uB2C8\uB2E4."
     icon: {fileID: 21300000, guid: 9b6a6ffdd450e2b42bb105b1bf27c3d6, type: 3}
     percent: 20
-  - name: "\uC5F0\uC18D\uC758 \uB9C8\uC815\uC11D"
+  - eItem: 9
+    name: "\uC5F0\uC18D\uC758 \uB9C8\uC815"
     explanation: "\uACF5\uACA9 \uC18D\uB3C4\uAC00 10% \uC99D\uAC00\uD569\uB2C8\uB2E4."
     icon: {fileID: 21300000, guid: 398ead93bd1b6134ab8b6e32c161e2a6, type: 3}
     percent: 15
-  - name: "\uCCB4\uB825\uC758 \uB9C8\uC815\uC11D"
+  - eItem: 10
+    name: "\uCCB4\uB825\uC758 \uB9C8\uC815\uC11D"
     explanation: "\uCD5C\uB300 \uCCB4\uB825\uC774 10 \uC99D\uAC00\uD569\uB2C8\uB2E4."
     icon: {fileID: 21300000, guid: d7bc5d691182ec048b351617c81dd835, type: 3}
     percent: 15
-  - name: "\uC2DC\uAC04\uC758 \uB9C8\uC815\uC11D"
+  - eItem: 11
+    name: "\uC2DC\uAC04\uC758 \uB9C8\uC815\uC11D"
     explanation: "\uCFE8\uD0C0\uC784\uC774 \uAC10\uC18C\uD569\uB2C8\uB2E4."
     icon: {fileID: 21300000, guid: eb0dff5eb0d3ed940a9371ab3158e506, type: 3}
     percent: 15
-  - name: "\uBC29\uC5B4\uC758 \uB9C8\uC815\uC11D"
+  - eItem: 12
+    name: "\uBC29\uC5B4\uC758 \uB9C8\uC815\uC11D"
     explanation: "\uBC29\uC5B4\uB825\uC774 5 \uC99D\uAC00\uD569\uB2C8\uB2E4."
     icon: {fileID: 21300000, guid: a665febf528c92c49961b57e1a7b6fbc, type: 3}
     percent: 15
   DA:
-  - name: "\uBC14\uB78C\uC758 \uADC0\uAC78\uC774"
+  - eItem: 0
+    name: "\uBC14\uB78C\uC758 \uADC0\uAC78\uC774"
     explanation: "\uB300\uC26C \uD69F\uC218\uAC00 \uCD94\uAC00\uB41C\uB2E4."
     icon: {fileID: 21300000, guid: 0ac7291e223c29347b5492e818b6ea53, type: 3}
     percent: 20
-  - name: "\uAC00\uC2DC \uACAC\uAC11"
+  - eItem: 1
+    name: "\uAC00\uC2DC \uACAC\uAC11"
     explanation: "10%\uC758 \uD655\uB960\uB85C \uC790\uC2E0\uC744 \uD53C\uACA9\uD55C
       \uC801\uC5D0\uAC8C \uB370\uBBF8\uC9C0\uB97C \uC900\uB2E4."
     icon: {fileID: 21300000, guid: 7ae8247c834e56944a7da0902b886d6c, type: 3}
     percent: 15
-  - name: "\uCE7C\uB0A0\uB9DD\uD1A0"
+  - eItem: 2
+    name: "\uCE7C\uB0A0\uB9DD\uD1A0"
     explanation: "\uB300\uC26C\uACF5\uACA9\uC774 \uAC00\uB2A5\uD574\uC9C4\uB2E4."
     icon: {fileID: 21300000, guid: fa4ca7f2880bdfc49ad50063d2641493, type: 3}
     percent: 20
-  - name: "\uC800\uC8FC\uBC1B\uC740 \uB2E8\uAC80"
-    explanation: "10\uCD08\uB9C8\uB2E4 \uAC00\uC7A5 \uAC00\uAE4C\uC6B4 \uC801\uC774
-      \uACF5\uACA9\uC744 \uBC1B\uB294\uB2E4."
+  - eItem: 3
+    name: "\uC800\uC8FC\uBC1B\uC740 \uB2E8\uAC80"
+    explanation: "10\uB9C8\uB2E4 \uAC00\uC7A5 \uAC00\uAE4C\uC6B4 \uC801\uC774 \uACF5\uACA9\uC744
+      \uBC1B\uB294\uB2E4."
     icon: {fileID: 21300000, guid: 64e77e9c8f9ab1046a75fb9b8fc3138d, type: 3}
     percent: 15
-  - name: "\uD53C\uC758\uC7A5\uAC11"
+  - eItem: 4
+    name: "\uD53C\uC758 \uC7A5\uAC11"
     explanation: "\uC801 \uCC98\uCE58 \uC2DC 5\uCD08\uB3D9\uC548 \uACF5\uACA9\uC18D\uB3C4\uAC00
       \uC0C1\uC2B9\uD55C\uB2E4."
     icon: {fileID: 21300000, guid: d1cae6b131d054849aff5ba32f3966a3, type: 3}
     percent: 15
-  - name: "\uC218\uC815\uAD6C"
+  - eItem: 5
+    name: "\uC218\uC815\uAD6C"
     explanation: "40\uCD08\uB9C8\uB2E4 \uAC70\uB300\uD55C \uD3ED\uBC1C\uC744 \uC77C\uC73C\uD0A4\uB294
       \uC544\uD3EC\uCE7C\uB9BD\uC2A4\uAC00 \uBC1C\uB3D9\uD569\uB2C8\uB2E4."
     icon: {fileID: 21300000, guid: d0e3e4782ebdfbc448f1efee1b09ce48, type: 3}
     percent: 10
-  - name: "\uC808\uB300 \uBC18\uC9C0"
+  - eItem: 6
+    name: "\uC808\uB300 \uBC18\uC9C0"
     explanation: "\uACF5\uACA9\uB825 60% \uC99D\uAC00, \uAE30\uBCF8 \uACF5\uACA8
       \uBC0F \uB300\uC26C \uC2DC \uCC38\uACA9\uC774 \uBC1C\uC0DD\uD55C\uB2E4."
     icon: {fileID: 21300000, guid: 436c8bd3731a83c449d787d55801ca93, type: 3}
