@@ -7,7 +7,7 @@ public class CardManager : MonoBehaviour
 {
     public static CardManager instance { get; private set; }
 
-    public int randomMix = 0;
+    int randomMix = 0;
 
     [SerializeField] ItemSo itemSo;
     [SerializeField] GameObject cardPrefab;
@@ -17,7 +17,6 @@ public class CardManager : MonoBehaviour
     public List<Item> daBuffer = new List<Item>();
 
     [Space(10)]
-    public int itemCheck = 0;
     public Image fade;
 
     [Header("시간의 마정석 제한")]
@@ -39,9 +38,6 @@ public class CardManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Keypad1))
             AddCard();
-
-        if (Input.GetKeyDown(KeyCode.Keypad2))
-            AddList();
 
         if (timeItemCount == 3)
         {
@@ -126,18 +122,5 @@ public class CardManager : MonoBehaviour
                 card.ItemCard(daBuffer[dARandomTest], itemIndex++);
             }
         }
-    }
-
-    public void Item_Reset()
-    {
-        //randomMix = 0;
-        //itemCheck = 0;
-        //timeItemCount = 0;
-
-        //daBuffer.Clear();
-        //timeItemLimit.Clear();
-
-        //isItemBool = true;
-        //isItemCardOpenCheck = true;
     }
 }

@@ -177,8 +177,6 @@ public class StopManager : MonoBehaviour
         {
             Reset_Check = false;
 
-            CardManager.instance.Item_Reset(); // 방어구 및 장신구 , 마정석 정보 초기화
-
             itemDaHave.Clear(); // 소지한 아이템 초기화
             GameManager.Instance._coin = 0; // 골드 초기화
             WaveManager.instnace.m_WaveNum = 0; // Wave 초기화
@@ -563,7 +561,6 @@ public class StopManager : MonoBehaviour
         switch (Player.Instance.stat.weaponType)
         {
             case PlayerWeaponType.Sword:
-                Debug.Log("asdadsf");
 
                 swordWindow.SetActive(true);
                 daggerWindow.SetActive(false);
