@@ -109,7 +109,8 @@ public class Healing : MonoBehaviour
     IEnumerator HealingEffect()
     {
         healingEffect.SetActive(true);
-        healingEffect.transform.localPosition = new Vector3(Player.Instance.transform.localPosition.x, -0.18f, 0f);
+
+        healingEffect.transform.localPosition = new Vector3(Player.Instance.transform.position.x, 0, 0f);
         yield return new WaitForSeconds(2f);
         healingEffect.SetActive(false);
         UI_Manager.instance.PlayerMove_control = false;
@@ -135,7 +136,10 @@ public class Healing : MonoBehaviour
     {
         timer = 0;
         SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX);
-        downBar.transform.DOLocalMoveY(-closeBar, closeSpeed).SetEase(Ease.Linear);
+        downBar.transform.DOLocalMoveY(-closeBar, closeSpeed).SetEase(Ease.Linear).OnComplete(() =>
+        {
+            healingWindow.SetActive(false);
+        });
 
         while (timer < 1)
         {
@@ -164,7 +168,6 @@ public class Healing : MonoBehaviour
         if ((collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null) && isColiderCheck == false && isPurchaseCheck == true)
         {
             isColiderCheck = true;
-            healingWindow.SetActive(false);
             StartCoroutine(CloseHealingWindow());
         }
     }
