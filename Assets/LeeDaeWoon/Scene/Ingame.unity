@@ -866,8 +866,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3157611432992786235, guid: 3da9c3f6417b4694cb997564d60f2bb6, type: 3}
       propertyPath: m_Name
-      value: UI_Manager
+      value: UIManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3547976952710852030, guid: 3da9c3f6417b4694cb997564d60f2bb6, type: 3}
+      propertyPath: timerText
+      value: 
+      objectReference: {fileID: 1134544529}
     - target: {fileID: 7837968097333178697, guid: 3da9c3f6417b4694cb997564d60f2bb6, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -914,6 +918,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3da9c3f6417b4694cb997564d60f2bb6, type: 3}
+--- !u!114 &1134544529 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 296586128572278085, guid: 3da9c3f6417b4694cb997564d60f2bb6, type: 3}
+  m_PrefabInstance: {fileID: 1129241795}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1206366321
 GameObject:
   m_ObjectHideFlags: 0

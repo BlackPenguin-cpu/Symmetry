@@ -105,7 +105,7 @@ public class Skill_Window : MonoBehaviour
             if (Purchase == true && SkillColider_Check == true && (GameManager.Instance._coin >= Skill_List.instance.Left_Gold || GameManager.Instance._coin >= Skill_List.instance.Among_Gold || GameManager.Instance._coin >= Skill_List.instance.Right_Gold))
             {
                 SoundManager.instance.PlaySoundClip("SFX_Buy", SoundType.SFX, 5f);
-                UI_Manager.instance.PlayerMove_control = true;
+                UIManager.instance.PlayerMove_control = true;
 
                 SeletSkill = Skill_Manager.instance.Skill[SkillNum];
                 AfterPurchase_Skill.GetComponent<Image>().sprite = SeletSkill.sprite;
@@ -152,7 +152,7 @@ public class Skill_Window : MonoBehaviour
                 AfterPurchase_Key.gameObject.SetActive(false);
                 StartCoroutine(SkillHave()); // SkillHave 코루틴을 실행시킨다.
                 Purchase = true; // 이것을 통하여 스킬적용 -> 스킬구매로 넘겨준다.
-                UI_Manager.instance.PlayerMove_control = false;
+                UIManager.instance.PlayerMove_control = false;
             }
         }
     }

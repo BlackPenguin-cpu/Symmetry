@@ -175,6 +175,9 @@ public class StopManager : MonoBehaviour
                 {
                     isEscCheck = false;
                     isESC = false;
+
+                    pauseWindow.SetActive(false);
+                    Time.timeScale = 1f;
                 });
 
                 StartCoroutine(PauseWindowClose());
@@ -206,8 +209,8 @@ public class StopManager : MonoBehaviour
             Player.Instance.stat._hp = Player.Instance.stat._maxHp; // 플레이어 HP 초기화
 
             // 타이머 초기화
-            UI_Manager.instance.sec = 0;
-            UI_Manager.instance.min = 0;
+            UIManager.instance.sec = 0;
+            UIManager.instance.min = 0;
 
             // 무기 강화수치 초기화
             Player.Instance.stat._level[PlayerWeaponType.Sword] = 0;

@@ -5,9 +5,9 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 
-public class UI_Manager : MonoBehaviour
+public class UIManager : MonoBehaviour
 {
-    public static UI_Manager instance;
+    public static UIManager instance;
 
     public bool PlayerMove_control = false;
 
@@ -64,11 +64,10 @@ public class UI_Manager : MonoBehaviour
             Destroy(GameObject.Find("DarkPlayer"));
         }
 
-        Timer_System();
+        Timer();
         Money_System();
         HP_System();
         Wave();
-        Cheats();
     }
 
     private void Awake()
@@ -110,13 +109,12 @@ public class UI_Manager : MonoBehaviour
         }
     }
 
-    #region 타이머
-    public void Timer_System()
+    void Timer()
     {
         if (timerCheck == true)
         {
             sec += Time.deltaTime;
-            //timerText.text = string.Format("{0:D2}:{1:D2}", min, (int)sec);
+            timerText.text = string.Format("{0:D2}:{1:D2}", min, (int)sec);
 
             if ((int)sec > 59)
             {
@@ -125,10 +123,8 @@ public class UI_Manager : MonoBehaviour
             }
         }
     }
-    #endregion
 
-    #region 재화
-    public void Money_System()
+    void Money_System()
     {
         goldText.text = GameManager.Instance._coin.ToString();
         dimensionalText.text = GameManager.Instance.crystal.ToString();
@@ -139,10 +135,7 @@ public class UI_Manager : MonoBehaviour
             GameManager.Instance.crystal += 1000;
     }
 
-    #endregion
-
-    #region 웨이브
-    public void Wave()
+    void Wave()
     {
         // 인게임
         if (SceneManager.GetActiveScene().name == "test")
@@ -156,14 +149,13 @@ public class UI_Manager : MonoBehaviour
         else if (SceneManager.GetActiveScene().name == "Main")
             waveText.text = "폐허가된 성";
     }
-    #endregion
 
     #region 체력
-    public void HP_System()
+    
+    void HP_System()
     {
         hpBar = bar.transform.localScale.y;
         hp = Player.Instance.stat._hp / Player.Instance.stat._maxHp;
-
 
         if (hpBar > hp)
             bar.transform.localScale = new Vector3(1, Mathf.Lerp(hpBar, hp - 0.00001f, Time.deltaTime * 20), 1);
@@ -188,23 +180,6 @@ public class UI_Manager : MonoBehaviour
             }
         }
 
-    }
-    #endregion
-
-    #region Cheat
-    public void Cheats()
-    {
-        if (Input.GetKeyDown(KeyCode.Keypad7))
-        {
-            DOTween.PauseAll();
-            SceneManager.LoadScene("test");
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad8))
-        {
-            DOTween.PauseAll();
-            SceneManager.LoadScene("Dimension");
-
-        }
     }
     #endregion
 }
