@@ -10,6 +10,7 @@ public class StopManager : MonoBehaviour
     public static StopManager instnace { get; private set; }
 
     float timer = 0f;
+    [SerializeField] GameObject stopWindow;
     [SerializeField] Image fadeBackGround;
     public bool inPause = false;
 
@@ -155,29 +156,44 @@ public class StopManager : MonoBehaviour
 
     void Update()
     {
-        MainReset();
+        //MainReset();
 
         // ESC 키를 누르면 일시정지 창이 열린다.
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (isESC == false && isEscCheck == false)
+            for (int i = 2; i < stopWindow.transform.childCount; i++)
             {
-                isEscCheck = true;
-                StartCoroutine(PauseWindow());
+                if (stopWindow.transform.GetChild(i).gameObject.activeSelf == true)
+                {
+                    isEscCheck = true;
+                    break;
+                }
             }
 
-            else if (isESC == true && isEscCheck == false)
+            if (!isEscCheck)
             {
-                isEscCheck = true;
-
-                pauseBarUp.transform.DOLocalMoveY(pauseBarClose, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
-                pauseBarDown.transform.DOLocalMoveY(-pauseBarClose, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
+                if (!isESC)
                 {
-                    isEscCheck = false;
-                    isESC = false;
-                });
+                    isEscCheck = true;
+                    StartCoroutine(PauseWindow());
+                }
 
-                StartCoroutine(PauseWindowClose());
+                else
+                {
+                    isEscCheck = true;
+                    fadeBackGround.DOFade(0, waitTime).SetEase(Ease.Linear).SetUpdate(true);
+
+                    pauseBarUp.transform.DOLocalMoveY(pauseBarClose, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
+                    pauseBarDown.transform.DOLocalMoveY(-pauseBarClose, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
+                    {
+                        isEscCheck = false;
+                        isESC = false;
+                        pauseWindow.SetActive(false);
+                        Time.timeScale = 1f;
+                    });
+
+                    StartCoroutine(PauseWindowClose());
+                }
             }
 
         }
@@ -427,6 +443,7 @@ public class StopManager : MonoBehaviour
     }
 
     #region 일시정지 창
+
     // 일시정지 창 열기
     IEnumerator PauseWindow()
     {
