@@ -1667,6 +1667,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1319136106748547111}
     - target: {fileID: 8909996912513122985, guid: 47aa01e71bf14b4409c00008f07eb2bd, type: 3}
+      propertyPath: stopWindow
+      value: 
+      objectReference: {fileID: 1319136106818941647}
+    - target: {fileID: 8909996912513122985, guid: 47aa01e71bf14b4409c00008f07eb2bd, type: 3}
       propertyPath: swordLevel
       value: 
       objectReference: {fileID: 1319136106170287270}
@@ -1843,6 +1847,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cddd306a7c1e6b44684e12fac824f217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1319136106818941647 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1799404019, guid: 47aa01e71bf14b4409c00008f07eb2bd, type: 3}
+  m_PrefabInstance: {fileID: 1319136106428828476}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1319136106063056518 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 508741050, guid: 47aa01e71bf14b4409c00008f07eb2bd, type: 3}
