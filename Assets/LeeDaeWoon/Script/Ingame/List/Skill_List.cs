@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [System.Serializable]
-public class Skill
+public class SkillList
 {
     public string name;
     public string explanation;
@@ -20,6 +20,10 @@ public class Skill_List : MonoBehaviour
 {
     public static Skill_List instance { get; private set; }
     void Awake() => instance = this;
+
+    public SkillList leftSkill;
+    public SkillList amongSkill;
+    public SkillList rightSkill;
 
     [Header("¿ÞÂÊ ½ºÅ³")]
     public Image Left_Skill_Icon;
