@@ -357,7 +357,7 @@ public class BlackSmith : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F) && Collision_Check == false && WindowOpen_Check == false)
         {
             UIManager.instance.isCursorFade = true;
-            UIManager.instance.PlayerMove_control = true;
+            UIManager.instance.isPlayerControl = true;
             FadeInout.DOFade(0.5f, 1f);
             StartCoroutine(Open_Window());
             WindowOpen_Check = true;
@@ -411,7 +411,7 @@ public class BlackSmith : MonoBehaviour
                 timer += Time.deltaTime * 3f;
                 yield return null;
             }
-            UIManager.instance.PlayerMove_control = false;
+            UIManager.instance.isPlayerControl = false;
             Weapon_Purchase_Window.SetActive(false);
             WindowOpen_Check = false;
         }

@@ -37,7 +37,7 @@ public class Potal : MonoBehaviour
             Potal_Check = true;
 
             // 플레이어 이동 및 공격 과 스킬 전환을 멈추게 한다.
-            UIManager.instance.PlayerMove_control = true;
+            UIManager.instance.isPlayerControl = true;
             Skill_Manager.instance.Skill_PotalMove = true;
 
             Potal_obj.SetActive(true);

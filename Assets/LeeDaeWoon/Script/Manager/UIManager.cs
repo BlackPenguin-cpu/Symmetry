@@ -8,8 +8,7 @@ using DG.Tweening;
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
-
-    public bool PlayerMove_control = false;
+    public bool isPlayerControl = false;
 
     [Header("¿Á»≠")]
     public int gold;

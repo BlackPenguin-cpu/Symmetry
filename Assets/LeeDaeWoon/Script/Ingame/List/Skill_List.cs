@@ -3,6 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
+public class Skill
+{
+    public string name;
+    public string explanation;
+    public Sprite icon;
+    public Text coolTime;
+    public float gold;
+    public Text gold01;
+    public Text gold02;
+    public Text gold03;
+}
+
 public class Skill_List : MonoBehaviour
 {
     public static Skill_List instance { get; private set; }
@@ -48,29 +61,24 @@ public class Skill_List : MonoBehaviour
 
     public void Skill_Num(int i)
     {
-        //TODO: switch문을 써보도록 해요?
-        //2022-07-11 Black_Penguin
-        if (i == 0)
+        switch(i)
         {
-            Left_Name.text = this.Left_Skill.SkillName;
-            Left_CoolTime.text = this.Left_Skill.originalCooldown.ToString();
-            Left_Explanation.text = this.Left_Skill.Description;
+            case 0:
+                Left_Name.text = this.Left_Skill.SkillName;
+                Left_CoolTime.text = this.Left_Skill.originalCooldown.ToString();
+                Left_Explanation.text = this.Left_Skill.Description;
+                break;
+            case 1:
+                Among_Name.text = this.Among_Skill.SkillName;
+                Among_CoolTime.text = this.Among_Skill.originalCooldown.ToString();
+                Among_Explanation.text = this.Among_Skill.Description;
+                break;
+            case 2:
+                Right_Name.text = this.Right_Skill.SkillName;
+                Right_CoolTime.text = this.Right_Skill.originalCooldown.ToString();
+                Right_Explanation.text = this.Right_Skill.Description;
+                break;
         }
-
-        else if (i == 1)
-        {
-            Among_Name.text = this.Among_Skill.SkillName;
-            Among_CoolTime.text = this.Among_Skill.originalCooldown.ToString();
-            Among_Explanation.text = this.Among_Skill.Description;
-        }
-
-        else if (i == 2)
-        {
-            Right_Name.text = this.Right_Skill.SkillName;
-            Right_CoolTime.text = this.Right_Skill.originalCooldown.ToString();
-            Right_Explanation.text = this.Right_Skill.Description;
-        }
-
         return;
     }
     void Update()

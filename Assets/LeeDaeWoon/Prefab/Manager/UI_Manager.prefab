@@ -949,7 +949,7 @@ MonoBehaviour:
   goldText: {fileID: 1272140075250453603}
   dimensionalText: {fileID: 3974177440768734973}
   waveText: {fileID: 4129189006980683382}
-  timerText: {fileID: 0}
+  timerText: {fileID: 296586128572278085}
   timerCheck: 0
   min: 0
   sec: 0

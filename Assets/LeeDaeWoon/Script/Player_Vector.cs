@@ -54,7 +54,7 @@ public class Player_Vector : MonoBehaviour
             Potal.Inst.Dark_Player.DOFade(1f, 0f);
 
             Skill_Manager.instance.Skill_PotalMove = false;
-            UIManager.instance.PlayerMove_control = false;
+            UIManager.instance.isPlayerControl = false;
 
             UIManager.instance.fadeInOut.DOFade(0f, 0f);
         }

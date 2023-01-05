@@ -48,10 +48,6 @@ public class King : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Keypad1))
-            Zoom_Expansion();
-        if (Input.GetKeyDown(KeyCode.Keypad2))
-            Zoom_Shrinking();
 
     }
 
@@ -62,7 +58,7 @@ public class King : MonoBehaviour
 
     public IEnumerator Expansion() // 줌 확대 
     {
-        UIManager.instance.PlayerMove_control = true; // 플레이어의 움직임을 멈춘다.
+        UIManager.instance.isPlayerControl = true; // 플레이어의 움직임을 멈춘다.
         Player.Instance.state = PlayerState.Idle; // 플레이어의 움직임을 서있는 상태로 냅둔다.
         cameraObj.GetComponent<CameraManager>().enabled = false; // CameraManager를 꺼둔다.
 
@@ -98,7 +94,7 @@ public class King : MonoBehaviour
         }
         cameraObj.GetComponent<CameraManager>().enabled = true; // CameraManager를 켜둔다.
         yield return new WaitForSeconds(0.5f);
-        UIManager.instance.PlayerMove_control = false; // 플레이어의 움직임을 정상작동 시킨다.
+        UIManager.instance.isPlayerControl = false; // 플레이어의 움직임을 정상작동 시킨다.
 
     }
     #endregion

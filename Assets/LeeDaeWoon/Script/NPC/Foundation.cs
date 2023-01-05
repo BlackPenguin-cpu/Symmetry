@@ -77,7 +77,7 @@ public class Foundation : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F) && isCollisionCheck == false && iswindowOpenCheck == false)
         {
             fadeInOut.DOFade(0.5f, 1f);
-            UIManager.instance.PlayerMove_control = true;
+            UIManager.instance.isPlayerControl = true;
             StartCoroutine(Open_Window());
             iswindowOpenCheck = true;
         }
@@ -117,7 +117,7 @@ public class Foundation : MonoBehaviour
             timer += Time.deltaTime * 3f;
             yield return null;
         }
-        UIManager.instance.PlayerMove_control = false;
+        UIManager.instance.isPlayerControl = false;
         malyeogWindow.SetActive(false);
         iswindowOpenCheck = false;
     }
