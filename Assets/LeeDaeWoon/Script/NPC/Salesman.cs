@@ -8,6 +8,7 @@ public class Salesman : MonoBehaviour
 {
     [Header("다른 상품 보기")]
     [SerializeField] GameObject differentProduct;
+    [SerializeField] GameObject AfterObject;
 
     [SerializeField] Text differentProductText;
     [SerializeField] Text goldText;
@@ -21,26 +22,17 @@ public class Salesman : MonoBehaviour
     bool isReRollCheck = true;
     bool isCollisionCheck = true;
 
-    private GameObject AfterObject;
+
+    const float waitTime = 0.5f;
+
     void Start()
     {
-        #region 오브젝트 찾기
-        differentProduct = GameObject.Find("Salesman");
-        fBtn = GameObject.Find("F_Image").GetComponent<Image>();
-        goldImage = GameObject.Find("Salesman_Gold_Image").GetComponent<Image>();
-
-        goldText = GameObject.Find("Salesman_Gold_Text").GetComponent<Text>();
-        differentProductText = GameObject.Find("Different_Product_Text").GetComponent<Text>();
-        AfterObject = GameObject.Find("After_Purchase");
-        #endregion
-
         // 정상 웨이브 : 5 / 10 / 15
         switch(WaveManager.instnace.m_WaveNum)
         {
             case 3:
                 goldNum = 600;
                 break;
-
             case 5:
                 goldNum = 1052;
                 break;
@@ -53,7 +45,7 @@ public class Salesman : MonoBehaviour
     void Update()
     {
         Re_Roll();
-        differentProduct.transform.localPosition = Camera.main.WorldToScreenPoint(this.gameObject.transform.localPosition + new Vector3(-8, -4.9f, 0));
+        differentProduct.transform.localPosition = Camera.main.WorldToScreenPoint(transform.localPosition + new Vector3(-8, -4.9f, 0));
     }
 
     private void Re_Roll()
@@ -96,16 +88,16 @@ public class Salesman : MonoBehaviour
     }
 
     #region 충돌체크
-
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null)
         {
             isCollisionCheck = false;
-            differentProductText.DOFade(1f, 0.5f);
-            fBtn.DOFade(1f, 0.5f);
-            goldText.DOFade(1f, 0.5f);
-            goldImage.DOFade(1f, 0.5f);
+
+            differentProductText.DOFade(1, waitTime).SetEase(Ease.Linear);
+            fBtn.DOFade(1, waitTime).SetEase(Ease.Linear);
+            goldText.DOFade(1, waitTime).SetEase(Ease.Linear);
+            goldImage.DOFade(1, waitTime).SetEase(Ease.Linear);
         }
     }
 
@@ -114,10 +106,11 @@ public class Salesman : MonoBehaviour
         if (collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null)
         {
             isCollisionCheck = true;
-            differentProductText.DOFade(0f, 0.5f);
-            fBtn.DOFade(0f, 0.5f);
-            goldText.DOFade(0f, 0.5f);
-            goldImage.DOFade(0f, 0.5f);
+
+            differentProductText.DOFade(0, waitTime).SetEase(Ease.Linear);
+            fBtn.DOFade(0, waitTime).SetEase(Ease.Linear);
+            goldText.DOFade(0, waitTime).SetEase(Ease.Linear);
+            goldImage.DOFade(0, waitTime).SetEase(Ease.Linear);
         }
     }
     #endregion

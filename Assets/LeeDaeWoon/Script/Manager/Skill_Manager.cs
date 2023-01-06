@@ -164,8 +164,7 @@ public class Skill_Manager : MonoBehaviour
             int SkillIndex = 0;
 
             Skill.Clear();
-            var SkillObject = Instantiate(SkillPrefab, this.transform.position, Quaternion.identity, GameObject.Find("SkillShop_Canvas").transform);
-            var card = SkillObject.GetComponent<Skill_List>();
+            var card = SkillPrefab.GetComponent<Skill_List>();
 
             for (int i = 0; i < 3; i++)
             {

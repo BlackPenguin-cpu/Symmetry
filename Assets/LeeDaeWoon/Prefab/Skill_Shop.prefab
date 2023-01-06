@@ -1163,7 +1163,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2583938369495597277
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2436,7 +2436,6 @@ MonoBehaviour:
   SkillNum: 0
   UpDown: 1
   Purchase: 1
-  SkillWindow: 1
   UpDown_Limit: 1
   SkillColider_Check: 0
   Skill01_Purchase: 1

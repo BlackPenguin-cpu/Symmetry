@@ -21,7 +21,7 @@ public class Dimension_Potal : MonoBehaviour
     void Update()
     {
         F_Click();
-        Move.transform.localPosition = Camera.main.WorldToScreenPoint(this.gameObject.transform.localPosition + new Vector3(-3f, -4.5f, 0));
+        Move.transform.localPosition = Camera.main.WorldToScreenPoint(transform.localPosition + new Vector3(-3f, -4.5f, 0));
     }
 
     void F_Click()
