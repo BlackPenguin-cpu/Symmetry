@@ -150,7 +150,6 @@ public class Healing : MonoBehaviour
         {
             timer = 0;
             healingWindow.SetActive(true);
-
             OpenWindow();
         }
     }
@@ -160,7 +159,6 @@ public class Healing : MonoBehaviour
         if ((collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null) && isPurchaseCheck == true)
         {
             timer = 0;
-
             CloseWindow();
         }
     }

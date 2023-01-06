@@ -30,8 +30,7 @@ public class ItemWindow : MonoBehaviour
 
     void Start()
     {
-        BarMove();
-        StartCoroutine(itemWindow());
+        Move();
     }
 
     void Update()
@@ -39,7 +38,7 @@ public class ItemWindow : MonoBehaviour
 
     }
 
-    void BarMove()
+    void Move()
     {
         leftBarUp.transform.DOLocalMoveY(barPos, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
         leftBarDown.transform.DOLocalMoveY(-barPos, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
@@ -52,18 +51,9 @@ public class ItemWindow : MonoBehaviour
         {
             CardManager.instance.isItemClick = true;
         });
-    }
 
-    IEnumerator itemWindow()
-    {
-        while (timer < 1)
-        {
-            leftWindow.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(0, windowHeight, timer));
-            amongWindow.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(0, windowHeight, timer));
-            rightWindow.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(0, windowHeight, timer));
-
-            timer += Time.unscaledDeltaTime * 3f;
-            yield return null;
-        }
+        leftWindow.DOSizeDelta(new Vector2(leftWindow.rect.width, windowHeight), barSpeed);
+        amongWindow.DOSizeDelta(new Vector2(amongWindow.rect.width, windowHeight), barSpeed);
+        rightWindow.DOSizeDelta(new Vector2(rightWindow.rect.width, windowHeight), barSpeed);
     }
 }
