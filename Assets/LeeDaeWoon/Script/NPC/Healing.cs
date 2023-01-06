@@ -32,7 +32,6 @@ public class Healing : MonoBehaviour
     int healGold = 0;
     float heal = 0;
 
-    bool isColiderCheck = true;
     bool isPurchaseCheck = true;
 
 
@@ -82,13 +81,13 @@ public class Healing : MonoBehaviour
 
     IEnumerator Healing_Purchase()
     {
-        if (Input.GetKeyDown(KeyCode.F) && isColiderCheck == false && GameManager.Instance._coin >= healGold && isPurchaseCheck == true)
+        if (Input.GetKeyDown(KeyCode.F) && GameManager.Instance._coin >= healGold && isPurchaseCheck == true)
         {
             SoundManager.instance.PlaySoundClip("SFX_God_healling", SoundType.SFX);
 
             GameManager.Instance._coin -= healGold;
             UIManager.instance.isPlayerControl = true;
-            StartCoroutine(CloseWindow());
+            CloseWindow();
 
             StartCoroutine(HealingEffect());
             transform.GetChild(0).gameObject.SetActive(false);
@@ -118,61 +117,51 @@ public class Healing : MonoBehaviour
     }
 
     #region 신성 창
-    IEnumerator OpenWindow()
+    void OpenWindow()
     {
-        timer = 0;
         downBar.transform.DOKill();
+        healingRect.transform.DOKill();
 
         SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX);
+        healingRect.DOLocalMoveY(-windowOpen, openSpeed).SetEase(Ease.Linear);
+        healingRect.DOSizeDelta(new Vector2(healingRect.rect.width, windowHeight), openSpeed).SetEase(Ease.Linear);
         downBar.transform.DOLocalMoveY(-openBar, openSpeed).SetEase(Ease.Linear);
-
-        while (timer < 1)
-        {
-            healingRect.localPosition = new Vector2(0, Mathf.Lerp(-windowClose, -windowOpen, timer));
-            healingRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(0, windowHeight, timer));
-            timer += Time.deltaTime * 4f;
-            yield return null;
-        }
     }
 
-    IEnumerator CloseWindow()
+    void CloseWindow()
     {
-        timer = 0;
         downBar.transform.DOKill();
+        healingRect.transform.DOKill();
 
         SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX);
+        healingRect.DOLocalMoveY(-windowClose, closeSpeed).SetEase(Ease.Linear);
+        healingRect.DOSizeDelta(new Vector2(healingRect.rect.width, 0), closeSpeed).SetEase(Ease.Linear);
         downBar.transform.DOLocalMoveY(-closeBar, closeSpeed).SetEase(Ease.Linear).OnComplete(() =>
         {
             healingWindow.SetActive(false);
         });
-
-        while (timer < 1)
-        {
-            healingRect.localPosition = new Vector2(0, Mathf.Lerp(-windowOpen, -windowClose, timer));
-            healingRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(windowHeight, 0, timer));
-            timer += Time.deltaTime * 4f;
-            yield return null;
-        }
     }
     #endregion
 
     #region 충돌체크
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if ((collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null) && isColiderCheck == true && isPurchaseCheck == true)
+        if ((collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null) && isPurchaseCheck == true)
         {
-            isColiderCheck = false;
+            timer = 0;
             healingWindow.SetActive(true);
-            StartCoroutine(OpenWindow());
+
+            OpenWindow();
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if ((collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null) && isColiderCheck == false && isPurchaseCheck == true)
+        if ((collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null) && isPurchaseCheck == true)
         {
-            isColiderCheck = true;
-            StartCoroutine(CloseWindow());
+            timer = 0;
+
+            CloseWindow();
         }
     }
     #endregion
