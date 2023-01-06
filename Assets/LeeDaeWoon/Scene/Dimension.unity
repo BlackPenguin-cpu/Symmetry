@@ -532,7 +532,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -6.0306, y: 12.2031975}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1942.7756, y: 1105.5203}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &38998217
@@ -4579,7 +4579,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -150.73218, y: -56.784}
+  m_AnchoredPosition: {x: -543.7322, y: -56.784}
   m_SizeDelta: {x: 565.2495, y: 63.8838}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &575341125
@@ -10726,6 +10726,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1160573259}
   m_CullTransparentMesh: 1
+--- !u!114 &1162158979 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4992396103398851659, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
+  m_PrefabInstance: {fileID: 447989108}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1167779149
 GameObject:
   m_ObjectHideFlags: 0
@@ -12068,7 +12079,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -460, y: -57}
+  m_AnchoredPosition: {x: -853, y: -57}
   m_SizeDelta: {x: 96.0956, y: 64.316}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1413887920
@@ -16119,6 +16130,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2000841308}
   m_CullTransparentMesh: 1
+--- !u!114 &2012252222 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4992396104241665202, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
+  m_PrefabInstance: {fileID: 447989108}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2015391660
 GameObject:
   m_ObjectHideFlags: 0
@@ -16826,7 +16848,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -3.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -16837,7 +16859,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 12.84, y: 5.34}
+  m_Size: {x: 12.84, y: 1.1850519}
   m_EdgeRadius: 0
 --- !u!114 &2072263704
 MonoBehaviour:
@@ -17830,8 +17852,8 @@ MonoBehaviour:
   downBar: {fileID: 2583938368941100217}
   skillWindow: {fileID: 2583938370115246161}
   skillWindowRect: {fileID: 2583938368564297775}
-  Basics_Skill_A: {fileID: 0}
-  Basics_Skill_S: {fileID: 0}
+  basicsSkillA: {fileID: 2012252222}
+  basicsSkillS: {fileID: 1162158979}
   AfterPurchase_Window_Prefab: {fileID: 4912608567439538580, guid: 261fff62e50a8c74c83c18777936fbc2, type: 3}
   AfterPurchase_Key: {fileID: 0}
   AfterPurchase_Skill: {fileID: 0}

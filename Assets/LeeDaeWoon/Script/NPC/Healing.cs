@@ -31,7 +31,8 @@ public class Healing : MonoBehaviour
     int healGold = 0;
     float heal = 0;
 
-    bool isPurchaseCheck = true;
+    bool isColliderCheck = false;
+    bool isPurchaseCheck = false;
 
 
     void Start()
@@ -45,14 +46,11 @@ public class Healing : MonoBehaviour
 
     void Update()
     {
-        ScreentoWorld();
-        StartCoroutine(Healing_Purchase());
-    }
-
-    void ScreentoWorld()
-    {
-        // 월드 좌표를 스크린 좌표로 변경을 해준다.
+        #region 월드 좌표를 스크린 좌표로 변경을 해준다.
         healingRectPos.localPosition = Camera.main.WorldToScreenPoint(transform.localPosition + new Vector3(-8.7f, -5.3f, 0));
+        #endregion
+
+        StartCoroutine(Healing_Purchase());
     }
 
     public void Healing_Price()
@@ -80,12 +78,14 @@ public class Healing : MonoBehaviour
 
     IEnumerator Healing_Purchase()
     {
-        if (Input.GetKeyDown(KeyCode.F) && GameManager.Instance._coin >= healGold && isPurchaseCheck == true)
+        if (Input.GetKeyDown(KeyCode.F) && GameManager.Instance._coin >= healGold && !isPurchaseCheck && isColliderCheck)
         {
             SoundManager.instance.PlaySoundClip("SFX_God_healling", SoundType.SFX);
 
             GameManager.Instance._coin -= healGold;
             UIManager.instance.isPlayerControl = true;
+            isPurchaseCheck = true;
+
             CloseWindow();
 
             StartCoroutine(HealingEffect());
@@ -100,7 +100,6 @@ public class Healing : MonoBehaviour
             else
                 Player.Instance.stat._hp = Player.Instance.stat._maxHp;
 
-            isPurchaseCheck = false;
 
         }
     }
@@ -142,11 +141,11 @@ public class Healing : MonoBehaviour
     }
     #endregion
 
-    #region 충돌체크
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if ((collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null) && isPurchaseCheck == true)
+        if ((collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null) && !isPurchaseCheck)
         {
+            isColliderCheck = true;
             healingWindow.SetActive(true);
             OpenWindow();
         }
@@ -154,8 +153,10 @@ public class Healing : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if ((collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null) && isPurchaseCheck == true)
+        if ((collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null) && !isPurchaseCheck)
+        {
+            isColliderCheck = false;
             CloseWindow();
+        }
     }
-    #endregion
 }

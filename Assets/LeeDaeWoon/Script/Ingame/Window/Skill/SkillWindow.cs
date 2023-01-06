@@ -9,8 +9,6 @@ public class SkillWindow : MonoBehaviour
     public static SkillWindow instance { get; private set; }
     void Awake() => instance = this;
 
-    float timer = 0;
-
     [Header("스킬 창")]
     [SerializeField] GameObject downBar;
     [SerializeField] GameObject skillWindow;
@@ -28,8 +26,8 @@ public class SkillWindow : MonoBehaviour
     const int windowHeight = 360;
 
     [Header("기본 스킬 이미지")]
-    [SerializeField] Image Basics_Skill_A;
-    [SerializeField] Image Basics_Skill_S;
+    [SerializeField] Image basicsSkillA;
+    [SerializeField] Image basicsSkillS;
 
     [Header("구매 후 창")]
     [SerializeField] GameObject AfterPurchase_Window_Prefab; // 스킬 적용 창 프리팹
@@ -66,9 +64,6 @@ public class SkillWindow : MonoBehaviour
     void Start()
     {
         #region GameObject.Find
-        Basics_Skill_A = GameObject.Find("Basic_Skill01").GetComponent<Image>();
-        Basics_Skill_S = GameObject.Find("Basic_Skill02").GetComponent<Image>();
-
         AfterPurchase_Window = GameObject.Find("After_Purchase");
         AfterPurchase_Key = GameObject.Find("Direction_Key");
         AfterPurchase_Skill = GameObject.Find("After_Skill_Image");
@@ -87,11 +82,11 @@ public class SkillWindow : MonoBehaviour
         transform.localPosition = Camera.main.WorldToScreenPoint(Skill_Shop.gameObject.transform.position + new Vector3(-17.5f, -4.4f, 0));
         #endregion
 
-        Skill_Purchase();
+        SkillPurchase();
         AfterPurchase_UpDown();
     }
 
-    public void Skill_Purchase()
+    void SkillPurchase()
     {
         // F키를 통하여 구매 혹은 스킬적용을 할 수 있다.
         if (Input.GetKeyDown(KeyCode.F))
@@ -188,9 +183,9 @@ public class SkillWindow : MonoBehaviour
             // AS_Limit = Shift를 통한 스킬 전환 체크
             if (Skill_Manager.instance.AS_Limit == true) // true일 경우 A스킬에 구매한 스킬을 적용시킨다.
             {
-                Basics_Skill_A.sprite = SeletSkill.sprite;
+                basicsSkillA.sprite = SeletSkill.sprite;
             }
-            else Basics_Skill_S.sprite = SeletSkill.sprite; // false일 경우 S스킬에 구매한 스킬을 적용시킨다.
+            else basicsSkillS.sprite = SeletSkill.sprite; // false일 경우 S스킬에 구매한 스킬을 적용시킨다.
 
             // 한 번 미만 스킬을 적용시킬 시 실행시킨다.
             AfterPurchase_Skill.transform.position = SaveSkillPos[0];
@@ -234,9 +229,9 @@ public class SkillWindow : MonoBehaviour
 
             // AS_Limit = Shift를 통한 스킬 전환 체크
             if (Skill_Manager.instance.AS_Limit_02 == true) // true일 경우 S스킬에 구매한 스킬을 적용시킨다.
-                Basics_Skill_S.sprite = SeletSkill.sprite;
+                basicsSkillS.sprite = SeletSkill.sprite;
             else
-                Basics_Skill_A.sprite = SeletSkill.sprite;
+                basicsSkillA.sprite = SeletSkill.sprite;
 
             // 한 번 미만 스킬을 적용시킬 시 실행시킨다.
             AfterPurchase_Skill.transform.position = SaveSkillPos[0];
@@ -336,7 +331,6 @@ public class SkillWindow : MonoBehaviour
 
     public void CloseWindow(int skillNum)
     {
-        timer = 0;
         switch (skillNum)
         {
             case 0:
