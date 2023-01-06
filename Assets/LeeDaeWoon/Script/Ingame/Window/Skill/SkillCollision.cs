@@ -26,7 +26,7 @@ public class SkillCollision : MonoBehaviour
 
             SkillWindow.instance.SkillNum = distanceNum;
             Skill_List.instance.Skill_Num(distanceNum);
-            StartCoroutine(SkillWindow.instance.OpenWindow(distanceNum));
+            SkillWindow.instance.OpenWindow(distanceNum);
         }
     }
     
@@ -37,7 +37,7 @@ public class SkillCollision : MonoBehaviour
             SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
             SkillWindow.instance.SkillColider_Check = false;
 
-            StartCoroutine(SkillWindow.instance.CloseWindow(distanceNum));
+            SkillWindow.instance.CloseWindow(distanceNum);
         }
     }
 

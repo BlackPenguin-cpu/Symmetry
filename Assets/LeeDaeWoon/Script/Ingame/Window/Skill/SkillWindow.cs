@@ -131,7 +131,7 @@ public class SkillWindow : MonoBehaviour
                 transform.GetChild(SkillNum).GetChild(3).gameObject.SetActive(false);
 
                 // 스킬창을 닫아준다.
-                StartCoroutine(CloseWindow(SkillNum));
+                CloseWindow(SkillNum);
 
                 switch(SkillNum)
                 {
@@ -295,10 +295,12 @@ public class SkillWindow : MonoBehaviour
     #endregion
 
     #region 스킬 창
-    public IEnumerator OpenWindow(int skillNum)
+    public void OpenWindow(int skillNum)
     {
         // 스킬 창을 열어주는 코루틴
-        timer = 0;
+        downBar.transform.DOKill();
+        skillWindowRect.transform.DOKill();
+
         switch (skillNum)
         {
             case 0:
@@ -328,18 +330,11 @@ public class SkillWindow : MonoBehaviour
 
         skillWindow.SetActive(true);
         downBar.transform.DOLocalMoveY(-openBar, openSpeed).SetEase(Ease.Linear);
-
-        while (timer < 1)
-        {
-            skillWindowRect.localPosition = new Vector2(0, Mathf.Lerp(windowClose, windowOpen, timer));
-            skillWindowRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(0, windowHeight, timer));
-
-            timer += Time.deltaTime * 4f;
-            yield return null;
-        }
+        skillWindowRect.DOLocalMoveY(windowOpen, openSpeed).SetEase(Ease.Linear);
+        skillWindowRect.DOSizeDelta(new Vector2(windowWidth, windowHeight), openSpeed).SetEase(Ease.Linear);
     }
 
-    public IEnumerator CloseWindow(int skillNum)
+    public void CloseWindow(int skillNum)
     {
         timer = 0;
         switch (skillNum)
@@ -368,18 +363,12 @@ public class SkillWindow : MonoBehaviour
                 }
                 break;
         }
-        downBar.transform.DOLocalMoveY(closeBar, closeSpeed).SetEase(Ease.Linear);
-
-        while (timer < 1)
+        downBar.transform.DOLocalMoveY(closeBar, closeSpeed).SetEase(Ease.Linear).OnComplete(() =>
         {
-            skillWindowRect.localPosition = new Vector2(0, Mathf.Lerp(windowOpen, windowClose, timer));
-            skillWindowRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(windowHeight, 0, timer));
-
-            timer += Time.deltaTime * 4f;
-            yield return null;
-        }
-
-        transform.GetChild(3).gameObject.SetActive(false);
+            skillWindow.SetActive(false);
+        });
+        skillWindowRect.DOLocalMoveY(windowClose, closeSpeed).SetEase(Ease.Linear);
+        skillWindowRect.DOSizeDelta(new Vector2(windowWidth, 0), closeSpeed).SetEase(Ease.Linear);
 
         if (Purchase == false)
             AfterPurchase_Window.gameObject.SetActive(true);

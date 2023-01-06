@@ -7,7 +7,6 @@ using DG.Tweening;
 public class Healing : MonoBehaviour
 {
     RectTransform healingRectPos;
-    float timer = 0;
 
     [Header("½Å¼º Ã¢")]
     [SerializeField] GameObject healingWindow;
@@ -124,7 +123,7 @@ public class Healing : MonoBehaviour
 
         SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX);
         healingRect.DOLocalMoveY(-windowOpen, openSpeed).SetEase(Ease.Linear);
-        healingRect.DOSizeDelta(new Vector2(healingRect.rect.width, windowHeight), openSpeed).SetEase(Ease.Linear);
+        healingRect.DOSizeDelta(new Vector2(windowWidth, windowHeight), openSpeed).SetEase(Ease.Linear);
         downBar.transform.DOLocalMoveY(-openBar, openSpeed).SetEase(Ease.Linear);
     }
 
@@ -135,7 +134,7 @@ public class Healing : MonoBehaviour
 
         SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX);
         healingRect.DOLocalMoveY(-windowClose, closeSpeed).SetEase(Ease.Linear);
-        healingRect.DOSizeDelta(new Vector2(healingRect.rect.width, 0), closeSpeed).SetEase(Ease.Linear);
+        healingRect.DOSizeDelta(new Vector2(windowWidth, 0), closeSpeed).SetEase(Ease.Linear);
         downBar.transform.DOLocalMoveY(-closeBar, closeSpeed).SetEase(Ease.Linear).OnComplete(() =>
         {
             healingWindow.SetActive(false);
@@ -148,7 +147,6 @@ public class Healing : MonoBehaviour
     {
         if ((collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null) && isPurchaseCheck == true)
         {
-            timer = 0;
             healingWindow.SetActive(true);
             OpenWindow();
         }
@@ -157,10 +155,7 @@ public class Healing : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         if ((collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null) && isPurchaseCheck == true)
-        {
-            timer = 0;
             CloseWindow();
-        }
     }
     #endregion
 }

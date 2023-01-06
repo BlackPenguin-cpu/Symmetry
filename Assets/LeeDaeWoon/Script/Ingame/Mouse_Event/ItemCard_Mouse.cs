@@ -59,8 +59,6 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     }
 
-
-
     public void OnPointerEnter(PointerEventData eventData)
     {
         SoundManager.instance.PlaySoundClip("SFX_Button_Over", SoundType.SFX);
