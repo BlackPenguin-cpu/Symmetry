@@ -4,11 +4,27 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
+[System.Serializable]
+public class Weapon
+{
+    public string name;
+    public Text level;
+    public Text skill;
+    public Text attackDamage;
+    public Text attackDamageUpgrade;
+    public Text ability;
+    public Text abilityUpgrade;
+
+    [TextArea(5, 10)]
+    public List<string> skillUpgrade = new List<string>();
+}
+
 public class BlackSmith : MonoBehaviour
 {
     public static BlackSmith instnace { get; private set; }
     void Awake() => instnace = this;
 
+    public List<Weapon> weapon = new List<Weapon>();
 
     public bool BlackSmithWindow_Close = false;
 
@@ -19,15 +35,22 @@ public class BlackSmith : MonoBehaviour
     public bool Collision_Check = true; // 충돌 했는지 체크
 
     [Header("무기 구매 및 강화 창")]
-    private float timer; // 창 열리는 속도
-    [SerializeField] GameObject Pole_01; // 봉_01
-    [SerializeField] GameObject Pole_02; // 봉_02
-    [SerializeField] GameObject Weapon_Purchase_Window; // 창 오브젝트
-    [SerializeField] RectTransform WeaponPurchase_RectWindow; // 창
+    float timer;
+    [SerializeField] GameObject upBar;
+    [SerializeField] GameObject downBar;
+    [SerializeField] GameObject weaponWindow;
+    [SerializeField] RectTransform weaponRect; // 창
 
     [SerializeField] Image FadeInout;
 
     public bool WindowOpen_Check = false;
+
+    const int openBar = 447;
+    const int closeBar = 30;
+    const float barSpeed = 0.23f;
+
+    const int windowWidth = 1675;
+    const int windowHeight = 885;
 
     [Header("구매 및 강화 버튼")]
     public GameObject Purchase_Btn;
@@ -43,7 +66,7 @@ public class BlackSmith : MonoBehaviour
 
     [Header("도끼 수칫값")]
     [SerializeField] Text AxeLevel_Text;
-    [SerializeField] Text Axe_Skill_Text;
+    [SerializeField] Text axeSkill;
 
     [SerializeField] Text Axe_AttackDamage;
     [SerializeField] Text Axe_AttackDamage_Upgrade;
@@ -58,7 +81,7 @@ public class BlackSmith : MonoBehaviour
 
     [Header("검 수칫값")]
     [SerializeField] Text SwordLevel_Text;
-    [SerializeField] Text Sword_Skill_Text;
+    [SerializeField] Text swordSkill;
 
     [SerializeField] Text Sword_AttackDamage;
     [SerializeField] Text Sword_AttackDamage_Upgrade;
@@ -73,7 +96,7 @@ public class BlackSmith : MonoBehaviour
 
     [Header("단검 수칫값")]
     [SerializeField] Text DaggerLevel_Text;
-    [SerializeField] Text Dagger_Skill_Text;
+    [SerializeField] Text daggerSkill;
 
     [SerializeField] Text Dagger_AttackDamage;
     [SerializeField] Text Dagger_AttackDamage_Upgrade;
@@ -96,6 +119,7 @@ public class BlackSmith : MonoBehaviour
     {
         BlackSmith_Click();
         Weapon_Stat();
+
         #region 월드 좌표를 스크린 좌표로 변경을 해준다.
         Upgrade.transform.localPosition = Camera.main.WorldToScreenPoint(this.gameObject.transform.localPosition + new Vector3(-3f, 0.3f, 0));
         #endregion
@@ -145,38 +169,22 @@ public class BlackSmith : MonoBehaviour
             switch (Sword_Level)
             {
                 case 0:
-                    Sword_Skill_Text.text = "<color=#747474>강철의 마음: 고정적으로 데미지가 5감소한다. \n\n</color>" +
-                                            "<color=#747474>집념: 체력이 30%이하가 될 시 공격력, \n</color>" +
-                                            "<color=#747474>      방어력이 30% 상승한다. \n\n</color>" +
-                                            "<color=#747474>신의 가호: 체력이 0이 되는 공격을 받을 때 \n</color>" +
-                                            "<color=#747474>           한번 버틴다. (1만 남고 버팀)</color>";
+                    swordSkill.text = weapon[0].skillUpgrade[0];
                     break;
 
                 case 1:
-                    Sword_Skill_Text.text = "강철의 마음: 고정적으로 데미지가 5감소한다. \n\n" +
-                                            "<color=#747474>집념: 체력이 30%이하가 될 시 공격력, \n</color>" +
-                                            "<color=#747474>      방어력이 30% 상승한다. \n\n</color>" +
-                                            "<color=#747474>신의 가호: 체력이 0이 되는 공격을 받을 때 \n</color>" +
-                                            "<color=#747474>           한번 버틴다. (1만 남고 버팀)</color>";
-                    Sword_Skill_Text.transform.GetChild(0).gameObject.SetActive(false);
+                    swordSkill.text = weapon[0].skillUpgrade[1];
+                    swordSkill.transform.GetChild(0).gameObject.SetActive(false);
                     break;
 
                 case 3:
-                    Sword_Skill_Text.text = "강철의 마음: 고정적으로 데미지가 5감소한다. \n\n" +
-                                            "집념: 체력이 30%이하가 될 시 공격력, \n" +
-                                            "      방어력이 30% 상승한다. \n\n" +
-                                            "<color=#747474>신의 가호: 체력이 0이 되는 공격을 받을 때 \n</color>" +
-                                            "<color=#747474>           한번 버틴다. (1만 남고 버팀)</color>";
-                    Sword_Skill_Text.transform.GetChild(1).gameObject.SetActive(false);
+                    swordSkill.text = weapon[0].skillUpgrade[2];
+                    swordSkill.transform.GetChild(1).gameObject.SetActive(false);
                     break;
 
                 case 5:
-                    Sword_Skill_Text.text = "강철의 마음: 고정적으로 데미지가 5감소한다. \n\n" +
-                                            "집념: 체력이 30%이하가 될 시 공격력, \n" +
-                                            "      방어력이 30% 상승한다. \n\n" +
-                                            "신의 가호: 체력이 0이 되는 공격을 받을 때 \n" +
-                                            "           한번 버틴다. (1만 남고 버팀)";
-                    Sword_Skill_Text.transform.GetChild(2).gameObject.SetActive(false);
+                    swordSkill.text = weapon[0].skillUpgrade[3];
+                    swordSkill.transform.GetChild(2).gameObject.SetActive(false);
                     break;
             }
         }
@@ -229,40 +237,24 @@ public class BlackSmith : MonoBehaviour
             switch (Dagger_Level)
             {
                 case 0:
-                    Dagger_Skill_Text.text ="<color=#747474>신속: 이동속도가 10% 증가하고 대쉬 \n</color>" +
-                                            "<color=#747474>      횟수가 1회 추가된다. \n\n</color>" +
-                                            "<color=#747474>연쇄 공격: 적 처치 후 5초간 이동속도, \n</color>" +
-                                            "<color=#747474>           공격속도 5%증가(최대 5중첩) \n\n</color>"+
-                                            "<color=#747474>비장의 패: 3타에 한 번씩 수리검을 던진다.</color>";
+                    daggerSkill.text = weapon[1].skillUpgrade[0];
                     break;
 
                 case 1:
-                    Dagger_Skill_Text.text ="신속: 이동속도가 10% 증가하고 대쉬 \n" +
-                                            "      횟수가 1회 추가된다. \n\n" +
-                                            "<color=#747474>연쇄 공격: 적 처치 후 5초간 이동속도, \n</color>" +
-                                            "<color=#747474>           공격속도 5%증가(최대 5중첩) \n\n</color>" +
-                                            "<color=#747474>비장의 패: 3타에 한 번씩 수리검을 던진다.</color>";
+                    daggerSkill.text = weapon[1].skillUpgrade[1];
 
-                    Dagger_Skill_Text.transform.GetChild(0).gameObject.SetActive(false);
+                    daggerSkill.transform.GetChild(0).gameObject.SetActive(false);
                     break;
 
                 case 3:
-                    Dagger_Skill_Text.text ="신속: 이동속도가 10% 증가하고 대쉬 \n" +
-                                            "      횟수가 1회 추가된다. \n\n" +
-                                            "연쇄 공격: 적 처치 후 5초간 이동속도, \n" +
-                                            "           공격속도 5%증가(최대 5중첩) \n\n" +
-                                            "<color=#747474>비장의 패: 3타에 한 번씩 수리검을 던진다.</color>";
+                    daggerSkill.text = weapon[1].skillUpgrade[2];
 
-                    Dagger_Skill_Text.transform.GetChild(1).gameObject.SetActive(false);
+                    daggerSkill.transform.GetChild(1).gameObject.SetActive(false);
                     break;
 
                 case 5:
-                    Dagger_Skill_Text.text = "신속: 이동속도가 10% 증가하고 대쉬 \n" +
-                                            "      횟수가 1회 추가된다. \n\n" +
-                                            "연쇄 공격: 적 처치 후 5초간 이동속도, \n" +
-                                            "           공격속도 5%증가(최대 5중첩) \n\n" +
-                                            "비장의 패: 3타에 한 번씩 수리검을 던진다.";
-                    Dagger_Skill_Text.transform.GetChild(2).gameObject.SetActive(false);
+                    daggerSkill.text = weapon[1].skillUpgrade[3];
+                    daggerSkill.transform.GetChild(2).gameObject.SetActive(false);
                     break;
             }
         }
@@ -314,37 +306,25 @@ public class BlackSmith : MonoBehaviour
             switch (Axe_Level)
             {
                 case 0:
-                    Axe_Skill_Text.text = "<color=#747474>부딪히기: 대쉬에 공격판정이 생긴다. \n\n</color>" +
-                                            "<color=#747474>지진: 공격을 맞으면 2초동안 기절한다. \n\n</color>" +
-                                            "<color=#747474>분화 : 2번째타를 공격 시 화염구들이 \n</color>" +
-                                            "<color=#747474>       소환돼 모두를 공격</color>";
+                    axeSkill.text = weapon[2].skillUpgrade[0];
                     break;
 
                 case 1:
-                    Axe_Skill_Text.text = "부딪히기: 대쉬에 공격판정이 생긴다. \n\n" +
-                                            "<color=#747474>지진: 공격을 맞으면 2초동안 기절한다. \n\n</color>" +
-                                            "<color=#747474>분화 : 2번째타를 공격 시 화염구들이 \n</color>" +
-                                            "<color=#747474>       소환돼 모두를 공격</color>";
+                    axeSkill.text = weapon[2].skillUpgrade[1];
 
-                    Axe_Skill_Text.transform.GetChild(0).gameObject.SetActive(false);
+                    axeSkill.transform.GetChild(0).gameObject.SetActive(false);
                     break;
 
                 case 3:
-                    Axe_Skill_Text.text ="부딪히기: 대쉬에 공격판정이 생긴다. \n\n" +
-                                            "지진: 공격을 맞으면 2초동안 기절한다. \n\n" +
-                                            "<color=#747474>분화 : 2번째타를 공격 시 화염구들이 \n</color>" +
-                                            "<color=#747474>       소환돼 모두를 공격</color>";
+                    axeSkill.text = weapon[2].skillUpgrade[2];
 
-                    Axe_Skill_Text.transform.GetChild(1).gameObject.SetActive(false);
+                    axeSkill.transform.GetChild(1).gameObject.SetActive(false);
                     break;
 
                 case 5:
-                    Axe_Skill_Text.text ="부딪히기: 대쉬에 공격판정이 생긴다. \n\n" +
-                                            "지진: 공격을 맞으면 2초동안 기절한다. \n\n" +
-                                            "분화 : 2번째타를 공격 시 화염구들이 \n" +
-                                            "       소환돼 모두를 공격";
+                    axeSkill.text = weapon[2].skillUpgrade[3];
 
-                    Axe_Skill_Text.transform.GetChild(2).gameObject.SetActive(false);
+                    axeSkill.transform.GetChild(2).gameObject.SetActive(false);
                     break;
             }
         }
@@ -359,7 +339,7 @@ public class BlackSmith : MonoBehaviour
             UIManager.instance.isCursorFade = true;
             UIManager.instance.isPlayerControl = true;
             FadeInout.DOFade(0.5f, 1f);
-            StartCoroutine(Open_Window());
+            StartCoroutine(OpenWindow());
             WindowOpen_Check = true;
         }
 
@@ -373,47 +353,49 @@ public class BlackSmith : MonoBehaviour
     #region 창 연출
     public void Close()
     {
-        StartCoroutine(Close_Window());
+        StartCoroutine(CloseWindow());
     }
 
-    public IEnumerator Open_Window()
+    public IEnumerator OpenWindow()
     {
-        UIManager.instance.isCursorFade = true;
-        Weapon_Purchase_Window.SetActive(true);
         timer = 0f;
-        Pole_01.transform.DOLocalMoveY(452, 0.5f);
-        Pole_02.transform.DOLocalMoveY(-452, 0.5f);
+        UIManager.instance.isCursorFade = true;
+        weaponWindow.SetActive(true);
+        upBar.transform.DOLocalMoveY(openBar, barSpeed).SetEase(Ease.Linear);
+        downBar.transform.DOLocalMoveY(-openBar, barSpeed).SetEase(Ease.Linear);
 
         while (timer < 1)
         {
-            WeaponPurchase_RectWindow.sizeDelta = new Vector2(1696.425f, Mathf.Lerp(0, 931.6482f, timer));
-            timer += Time.deltaTime * 3f;
+            weaponRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(0, windowHeight, timer));
+            timer += Time.deltaTime * 4;
             yield return null;
         }
         BlackSmithWindow_Close = true;
     }
 
-    public IEnumerator Close_Window()
+    public IEnumerator CloseWindow()
     {
         if (BlackSmithWindow_Close == true)
         {
+            timer = 0f;
             UIManager.instance.isCursorFade = false;
             BlackSmithWindow_Close = false;
             FadeInout.DOFade(0f, 1f);
 
-            timer = 0f;
-            Pole_01.transform.DOLocalMoveY(30, 0.5f);
-            Pole_02.transform.DOLocalMoveY(-30, 0.5f);
+            upBar.transform.DOLocalMoveY(closeBar, barSpeed).SetEase(Ease.Linear);
+            downBar.transform.DOLocalMoveY(-closeBar, barSpeed).SetEase(Ease.Linear).OnComplete(() =>
+            {
+                UIManager.instance.isPlayerControl = false;
+                weaponWindow.SetActive(false);
+                WindowOpen_Check = false;
+            });
 
             while (timer < 1)
             {
-                WeaponPurchase_RectWindow.sizeDelta = new Vector2(1696.425f, Mathf.Lerp(931.6482f, 0, timer));
-                timer += Time.deltaTime * 3f;
+                weaponRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(windowHeight, 0, timer));
+                timer += Time.deltaTime * 4;
                 yield return null;
             }
-            UIManager.instance.isPlayerControl = false;
-            Weapon_Purchase_Window.SetActive(false);
-            WindowOpen_Check = false;
         }
     }
     #endregion

@@ -7,8 +7,6 @@ using DG.Tweening;
 
 public class BlackSmith_Btn : MonoBehaviour, IPointerEnterHandler
 {
-    float timer;
-
     public enum MouseOver_UI
     {
         MouseOver = 0,
@@ -169,7 +167,7 @@ public class BlackSmith_Btn : MonoBehaviour, IPointerEnterHandler
     }
     #endregion
 
-    public void Close() => StartCoroutine(BlackSmith.instnace.Close_Window());
+    public void Close() => StartCoroutine(BlackSmith.instnace.CloseWindow());
 
     public void OnPointerEnter(PointerEventData eventDatas)
     {

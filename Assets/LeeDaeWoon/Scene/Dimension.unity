@@ -3098,7 +3098,7 @@ GameObject:
   - component: {fileID: 372016082}
   - component: {fileID: 372016081}
   m_Layer: 5
-  m_Name: Pole_02
+  m_Name: DownBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3120,8 +3120,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1, y: -30}
-  m_SizeDelta: {x: 1791.4031, y: 72.4845}
+  m_AnchoredPosition: {x: 0, y: -30}
+  m_SizeDelta: {x: 1730, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &372016081
 MonoBehaviour:
@@ -3173,7 +3173,7 @@ GameObject:
   - component: {fileID: 382178495}
   - component: {fileID: 382178494}
   m_Layer: 5
-  m_Name: Skill
+  m_Name: AxeSkill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5874,7 +5874,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -2}
-  m_SizeDelta: {x: 1696.4246, y: 931.6482}
+  m_SizeDelta: {x: 1675, y: 885}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &729121013
 MonoBehaviour:
@@ -7099,7 +7099,7 @@ GameObject:
   - component: {fileID: 817273020}
   - component: {fileID: 817273019}
   m_Layer: 5
-  m_Name: Skill
+  m_Name: SwordSkill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9798,7 +9798,7 @@ GameObject:
   - component: {fileID: 1046403640}
   - component: {fileID: 1046403639}
   m_Layer: 5
-  m_Name: Pole_01
+  m_Name: UpBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9820,8 +9820,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1, y: 30}
-  m_SizeDelta: {x: 1791.4031, y: 72.4845}
+  m_AnchoredPosition: {x: 0, y: 30}
+  m_SizeDelta: {x: 1730, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1046403639
 MonoBehaviour:
@@ -10161,7 +10161,7 @@ GameObject:
   - component: {fileID: 1104221162}
   - component: {fileID: 1104221161}
   m_Layer: 5
-  m_Name: Skill
+  m_Name: DaggerSkill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16484,7 +16484,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1830, y: 1155}
+  m_SizeDelta: {x: 1675, y: 885}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2050953320
 MonoBehaviour:
@@ -16506,7 +16506,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7df2da05cbd11934fb615cd0cc2a18f4, type: 3}
+  m_Sprite: {fileID: 2766682866871981320, guid: 7df2da05cbd11934fb615cd0cc2a18f4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -16989,15 +16989,105 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d43da7818c133f04dbc50e84892d5bc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weapon:
+  - name: "\uC6A9\uC0AC\uC758 \uAC80"
+    level: {fileID: 2141256636}
+    skill: {fileID: 817273019}
+    attackDamage: {fileID: 868149130}
+    attackDamageUpgrade: {fileID: 248888141}
+    ability: {fileID: 982389767}
+    abilityUpgrade: {fileID: 1034493638}
+    skillUpgrade:
+    - "<color=#747474>\uAC15\uCCA0\uC758 \uB9C8\uC74C: \uACE0\uC815\uC801\uC73C\uB85C
+      \uB370\uBBF8\uC9C0\uAC00 5\uAC10\uC18C\uD55C\uB2E4.</color>\n\n<color=#747474>\uC9D1\uB150:
+      \uCCB4\uB825\uC774 30%\uC774\uD558\uAC00 \uB420 \uC2DC \uACF5\uACA9\uB825,</color>\n<color=#747474>     
+      \uBC29\uC5B4\uB825\uC774 30% \uC0C1\uC2B9\uD55C\uB2E4.</color>\n\n<color=#747474>\uC2E0\uC758
+      \uAC00\uD638: \uCCB4\uB825\uC774 0\uC774 \uB418\uB294 \uACF5\uACA9\uC744 \uBC1B\uC744
+      \uB54C</color>\n<color=#747474>           \uD55C\uBC88 \uBC84\uD2F4\uB2E4.
+      (1\uB9CC \uB0A8\uACE0 \uBC84\uD300)</color>"
+    - "\uAC15\uCCA0\uC758 \uB9C8\uC74C: \uACE0\uC815\uC801\uC73C\uB85C \uB370\uBBF8\uC9C0\uAC00
+      5\uAC10\uC18C\uD55C\uB2E4.\n\n<color=#747474>\uC9D1\uB150: \uCCB4\uB825\uC774
+      30%\uC774\uD558\uAC00 \uB420 \uC2DC \uACF5\uACA9\uB825,</color>\n<color=#747474>     
+      \uBC29\uC5B4\uB825\uC774 30% \uC0C1\uC2B9\uD55C\uB2E4.</color>\n\n<color=#747474>\uC2E0\uC758
+      \uAC00\uD638: \uCCB4\uB825\uC774 0\uC774 \uB418\uB294 \uACF5\uACA9\uC744 \uBC1B\uC744
+      \uB54C</color>\n<color=#747474>           \uD55C\uBC88 \uBC84\uD2F4\uB2E4.
+      (1\uB9CC \uB0A8\uACE0 \uBC84\uD300)</color>"
+    - "\uAC15\uCCA0\uC758 \uB9C8\uC74C: \uACE0\uC815\uC801\uC73C\uB85C \uB370\uBBF8\uC9C0\uAC00
+      5\uAC10\uC18C\uD55C\uB2E4.\n\n\uC9D1\uB150: \uCCB4\uB825\uC774 30%\uC774\uD558\uAC00
+      \uB420 \uC2DC \uACF5\uACA9\uB825,\n      \uBC29\uC5B4\uB825\uC774 30% \uC0C1\uC2B9\uD55C\uB2E4.\n\n<color=#747474>\uC2E0\uC758
+      \uAC00\uD638: \uCCB4\uB825\uC774 0\uC774 \uB418\uB294 \uACF5\uACA9\uC744 \uBC1B\uC744
+      \uB54C</color>\n<color=#747474>           \uD55C\uBC88 \uBC84\uD2F4\uB2E4.
+      (1\uB9CC \uB0A8\uACE0 \uBC84\uD300)</color>"
+    - "\uAC15\uCCA0\uC758 \uB9C8\uC74C: \uACE0\uC815\uC801\uC73C\uB85C \uB370\uBBF8\uC9C0\uAC00
+      5\uAC10\uC18C\uD55C\uB2E4.\n\n\uC9D1\uB150: \uCCB4\uB825\uC774 30%\uC774\uD558\uAC00
+      \uB420 \uC2DC \uACF5\uACA9\uB825,\n      \uBC29\uC5B4\uB825\uC774 30% \uC0C1\uC2B9\uD55C\uB2E4.\n\n\uC2E0\uC758
+      \uAC00\uD638: \uCCB4\uB825\uC774 0\uC774 \uB418\uB294 \uACF5\uACA9\uC744 \uBC1B\uC744
+      \uB54C\n           \uD55C\uBC88 \uBC84\uD2F4\uB2E4. (1\uB9CC \uB0A8\uACE0 \uBC84\uD300)"
+  - name: "\uD76C\uB9DD\uACFC \uC808\uB9DD"
+    level: {fileID: 542554188}
+    skill: {fileID: 1104221161}
+    attackDamage: {fileID: 354909859}
+    attackDamageUpgrade: {fileID: 1729992325}
+    ability: {fileID: 683288397}
+    abilityUpgrade: {fileID: 910124401}
+    skillUpgrade:
+    - "<color=#747474>\uC2E0\uC18D: \uC774\uB3D9\uC18D\uB3C4\uAC00 10% \uC99D\uAC00\uD558\uACE0
+      \uB300\uC26C</color>\r\n<color=#747474>      \uD69F\uC218\uAC00 1\uD68C \uCD94\uAC00\uB41C\uB2E4.</color>\n\n<color=#747474>\uC5F0\uC1C4
+      \uACF5\uACA9: \uC801 \uCC98\uCE58 \uD6C4 5\uCD08\uAC04 \uC774\uB3D9\uC18D\uB3C4,</color>\n<color=#747474>          
+      \uACF5\uACA9\uC18D\uB3C4 5%\uC99D\uAC00(\uCD5C\uB300 5\uC911\uCCA9)</color>\n\n<color=#747474>\uBE44\uC7A5\uC758
+      \uD328: 3\uD0C0\uC5D0 \uD55C \uBC88\uC529 \uC218\uB9AC\uAC80\uC744 \uB358\uC9C4\uB2E4.</color>"
+    - "\uC2E0\uC18D: \uC774\uB3D9\uC18D\uB3C4\uAC00 10% \uC99D\uAC00\uD558\uACE0
+      \uB300\uC26C\n      \uD69F\uC218\uAC00 1\uD68C \uCD94\uAC00\uB41C\uB2E4.\n\n<color=#747474>\uC5F0\uC1C4
+      \uACF5\uACA9: \uC801 \uCC98\uCE58 \uD6C4 5\uCD08\uAC04 \uC774\uB3D9\uC18D\uB3C4,</color>\n<color=#747474>          
+      \uACF5\uACA9\uC18D\uB3C4 5%\uC99D\uAC00(\uCD5C\uB300 5\uC911\uCCA9)</color>\n\n<color=#747474>\uBE44\uC7A5\uC758
+      \uD328: 3\uD0C0\uC5D0 \uD55C \uBC88\uC529 \uC218\uB9AC\uAC80\uC744 \uB358\uC9C4\uB2E4.</color>"
+    - "\uC2E0\uC18D: \uC774\uB3D9\uC18D\uB3C4\uAC00 10% \uC99D\uAC00\uD558\uACE0
+      \uB300\uC26C\n      \uD69F\uC218\uAC00 1\uD68C \uCD94\uAC00\uB41C\uB2E4.\n\n\uC5F0\uC1C4
+      \uACF5\uACA9: \uC801 \uCC98\uCE58 \uD6C4 5\uCD08\uAC04 \uC774\uB3D9\uC18D\uB3C4,\n          
+      \uACF5\uACA9\uC18D\uB3C4 5%\uC99D\uAC00(\uCD5C\uB300 5\uC911\uCCA9)\n\n<color=#747474>\uBE44\uC7A5\uC758
+      \uD328: 3\uD0C0\uC5D0 \uD55C \uBC88\uC529 \uC218\uB9AC\uAC80\uC744 \uB358\uC9C4\uB2E4.</color>"
+    - "\uC2E0\uC18D: \uC774\uB3D9\uC18D\uB3C4\uAC00 10% \uC99D\uAC00\uD558\uACE0
+      \uB300\uC26C\n      \uD69F\uC218\uAC00 1\uD68C \uCD94\uAC00\uB41C\uB2E4.\n\n\uC5F0\uC1C4
+      \uACF5\uACA9: \uC801 \uCC98\uCE58 \uD6C4 5\uCD08\uAC04 \uC774\uB3D9\uC18D\uB3C4,\n          
+      \uACF5\uACA9\uC18D\uB3C4 5%\uC99D\uAC00(\uCD5C\uB300 5\uC911\uCCA9)\n\n\uBE44\uC7A5\uC758
+      \uD328: 3\uD0C0\uC5D0 \uD55C \uBC88\uC529 \uC218\uB9AC\uAC80\uC744 \uB358\uC9C4\uB2E4."
+  - name: "\uC2EC\uD310\uC758 \uB0A0"
+    level: {fileID: 337700073}
+    skill: {fileID: 382178494}
+    attackDamage: {fileID: 260967654}
+    attackDamageUpgrade: {fileID: 1701240480}
+    ability: {fileID: 1449065466}
+    abilityUpgrade: {fileID: 1410590797}
+    skillUpgrade:
+    - "<color=#747474>\uBD80\uB52A\uD788\uAE30: \uB300\uC26C\uC5D0 \uACF5\uACA9\uD310\uC815\uC774
+      \uC0DD\uAE34\uB2E4.</color>\n\n<color=#747474>\uC9C0\uC9C4: \uACF5\uACA9\uC744
+      \uB9DE\uC73C\uBA74 2\uCD08\uB3D9\uC548 \uAE30\uC808\uD55C\uB2E4.</color>\n\n<color=#747474>\uBD84\uD654:
+      2\uBC88\uC9F8\uD0C0\uB97C \uACF5\uACA9 \uC2DC \uD654\uC5FC\uAD6C\uB4E4\uC774</color>\n<color=#747474>     
+      \uC18C\uD658\uB3FC \uBAA8\uB450\uB97C \uACF5\uACA9</color>"
+    - "\uBD80\uB52A\uD788\uAE30: \uB300\uC26C\uC5D0 \uACF5\uACA9\uD310\uC815\uC774
+      \uC0DD\uAE34\uB2E4.\n\n<color=#747474>\uC9C0\uC9C4: \uACF5\uACA9\uC744 \uB9DE\uC73C\uBA74
+      2\uCD08\uB3D9\uC548 \uAE30\uC808\uD55C\uB2E4.</color>\n\n<color=#747474>\uBD84\uD654:
+      2\uBC88\uC9F8\uD0C0\uB97C \uACF5\uACA9 \uC2DC \uD654\uC5FC\uAD6C\uB4E4\uC774</color>\n<color=#747474>     
+      \uC18C\uD658\uB3FC \uBAA8\uB450\uB97C \uACF5\uACA9</color>"
+    - "\uBD80\uB52A\uD788\uAE30: \uB300\uC26C\uC5D0 \uACF5\uACA9\uD310\uC815\uC774
+      \uC0DD\uAE34\uB2E4.\n\n\uC9C0\uC9C4: \uACF5\uACA9\uC744 \uB9DE\uC73C\uBA74
+      2\uCD08\uB3D9\uC548 \uAE30\uC808\uD55C\uB2E4.\n\n<color=#747474>\uBD84\uD654:
+      2\uBC88\uC9F8\uD0C0\uB97C \uACF5\uACA9 \uC2DC \uD654\uC5FC\uAD6C\uB4E4\uC774</color>\n<color=#747474>     
+      \uC18C\uD658\uB3FC \uBAA8\uB450\uB97C \uACF5\uACA9</color>"
+    - "\uBD80\uB52A\uD788\uAE30: \uB300\uC26C\uC5D0 \uACF5\uACA9\uD310\uC815\uC774
+      \uC0DD\uAE34\uB2E4.\n\n\uC9C0\uC9C4: \uACF5\uACA9\uC744 \uB9DE\uC73C\uBA74
+      2\uCD08\uB3D9\uC548 \uAE30\uC808\uD55C\uB2E4.\n\n\uBD84\uD654: 2\uBC88\uC9F8\uD0C0\uB97C
+      \uACF5\uACA9 \uC2DC \uD654\uC5FC\uAD6C\uB4E4\uC774\n      \uC18C\uD658\uB3FC
+      \uBAA8\uB450\uB97C \uACF5\uACA9"
   BlackSmithWindow_Close: 0
   F_Button: {fileID: 1413887920}
   Upgrade: {fileID: 2020451373}
   Upgrade_Text: {fileID: 575341125}
   Collision_Check: 1
-  Pole_01: {fileID: 1046403637}
-  Pole_02: {fileID: 372016079}
-  Weapon_Purchase_Window: {fileID: 634678596}
-  WeaponPurchase_RectWindow: {fileID: 729121012}
+  upBar: {fileID: 1046403637}
+  downBar: {fileID: 372016079}
+  weaponWindow: {fileID: 634678596}
+  weaponRect: {fileID: 729121012}
   FadeInout: {fileID: 38998217}
   WindowOpen_Check: 0
   Purchase_Btn: {fileID: 1013867143}
@@ -17011,7 +17101,7 @@ MonoBehaviour:
   - {fileID: 1012596856}
   - {fileID: 1768918590}
   AxeLevel_Text: {fileID: 337700073}
-  Axe_Skill_Text: {fileID: 382178494}
+  axeSkill: {fileID: 382178494}
   Axe_AttackDamage: {fileID: 260967654}
   Axe_AttackDamage_Upgrade: {fileID: 1701240480}
   Axe_Defense: {fileID: 1449065466}
@@ -17021,7 +17111,7 @@ MonoBehaviour:
   Axe_Required_Gold_Price: {fileID: 1346817732}
   Axe_MaxEnhance: {fileID: 1446957609}
   SwordLevel_Text: {fileID: 2141256636}
-  Sword_Skill_Text: {fileID: 817273019}
+  swordSkill: {fileID: 817273019}
   Sword_AttackDamage: {fileID: 868149130}
   Sword_AttackDamage_Upgrade: {fileID: 248888141}
   Sword_MaxHp: {fileID: 982389767}
@@ -17030,7 +17120,7 @@ MonoBehaviour:
   Sword_Required_Gold_Price: {fileID: 637711342}
   Sword_MaxEnhance: {fileID: 1875957470}
   DaggerLevel_Text: {fileID: 542554188}
-  Dagger_Skill_Text: {fileID: 1104221161}
+  daggerSkill: {fileID: 1104221161}
   Dagger_AttackDamage: {fileID: 354909859}
   Dagger_AttackDamage_Upgrade: {fileID: 1729992325}
   Dagger_Critical: {fileID: 683288397}
