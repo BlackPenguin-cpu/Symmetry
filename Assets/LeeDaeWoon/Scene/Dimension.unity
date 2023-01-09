@@ -6016,19 +6016,19 @@ MonoBehaviour:
     upgradeExplanation:
     - "\uB208\uC73C\uB85C \uC0C1\uB300\uC758 \uC57D\uC810\uC744 \uAFF0\uB6AB\uC5B4\uBD10
       \uCE58\uBA85\uD0C0 \uD655\uB960\uC774\n<color=#877D78>3%</color> / <color=#877D78>5%</color>
-      / <color=#877D78>7%</color> /  <color=#877D78>10%</color> \uC0C1\uC2B9\uD55C\uB2E4."
+      / <color=#877D78>7%</color> / <color=#877D78>10%</color> \uC0C1\uC2B9\uD55C\uB2E4."
     - "\uB208\uC73C\uB85C \uC0C1\uB300\uC758 \uC57D\uC810\uC744 \uAFF0\uB6AB\uC5B4\uBD10
-      \uCE58\uBA85\uD0C0 \uD655\uB960\uC774\n3% / <color=#877D78>5%</color> /  <color=#877D78>7%</color>
+      \uCE58\uBA85\uD0C0 \uD655\uB960\uC774\n3% / <color=#877D78>5%</color> / <color=#877D78>7%</color>
       / <color=#877D78>10%</color> \uC0C1\uC2B9\uD55C\uB2E4."
     - "\uB208\uC73C\uB85C \uC0C1\uB300\uC758 \uC57D\uC810\uC744 \uAFF0\uB6AB\uC5B4\uBD10
-      \uCE58\uBA85\uD0C0 \uD655\uB960\uC774\n<color=#877D78>3%</color> / 5% /  <color=#877D78>7%</color>
-      /  <color=#877D78>10%</color> \uC0C1\uC2B9\uD55C\uB2E4."
+      \uCE58\uBA85\uD0C0 \uD655\uB960\uC774\n<color=#877D78>3%</color> / 5% / <color=#877D78>7%</color>
+      / <color=#877D78>10%</color> \uC0C1\uC2B9\uD55C\uB2E4."
     - "\uB208\uC73C\uB85C \uC0C1\uB300\uC758 \uC57D\uC810\uC744 \uAFF0\uB6AB\uC5B4\uBD10
-      \uCE58\uBA85\uD0C0 \uD655\uB960\uC774\n<color=#877D78>3%</color> /  <color=#877D78>5%</color>
+      \uCE58\uBA85\uD0C0 \uD655\uB960\uC774\n<color=#877D78>3%</color> / <color=#877D78>5%</color>
       / 7% / <color=#877D78>10%</color> \uC0C1\uC2B9\uD55C\uB2E4."
     - "\uB208\uC73C\uB85C \uC0C1\uB300\uC758 \uC57D\uC810\uC744 \uAFF0\uB6AB\uC5B4\uBD10
-      \uCE58\uBA85\uD0C0 \uD655\uB960\uC774\n<color=#877D78>3%</color> /  <color=#877D78>5%</color>
-      /  <color=#877D78>7%</color> / 10% \uC0C1\uC2B9\uD55C\uB2E4."
+      \uCE58\uBA85\uD0C0 \uD655\uB960\uC774\n<color=#877D78>3%</color> / <color=#877D78>5%</color>
+      / <color=#877D78>7%</color> / 10% \uC0C1\uC2B9\uD55C\uB2E4."
   - name: "\uC2DC\uAC04\uAC00\uC18D"
     upgradeExplanation:
     - "\uC2DC\uAC04\uC744 \uAC00\uC18D \uC2DC\uCF1C\uC11C \uCFE8\uD0C0\uC784\uC774\n<color=#877D78>5%</color>
@@ -6051,7 +6051,7 @@ MonoBehaviour:
     - "\uAE08\uB2E8\uC758 \uC5F0\uAE08\uC220\uC744 \uC0AC\uC6A9\uD574 \uD68D\uB4DD\uD558\uB294
       \uACE8\uB4DC\uC758 \uC591\uC774 \n5% / <color=#877D78>10%</color> \uAC10\uC18C\uD55C\uB2E4."
     - "\uAE08\uB2E8\uC758 \uC5F0\uAE08\uC220\uC744 \uC0AC\uC6A9\uD574 \uD68D\uB4DD\uD558\uB294
-      \uACE8\uB4DC\uC758 \uC591\uC774 <color=#877D78>5%</color> / 10% \uAC10\uC18C\uD55C\uB2E4."
+      \uACE8\uB4DC\uC758 \uC591\uC774\n<color=#877D78>5%</color> / 10% \uAC10\uC18C\uD55C\uB2E4."
   magicCircle: {fileID: 717887002}
   fBtn: {fileID: 806538701}
   upGrade: {fileID: 225275279}
