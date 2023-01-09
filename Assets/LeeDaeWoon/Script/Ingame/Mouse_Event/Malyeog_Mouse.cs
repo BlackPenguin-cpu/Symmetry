@@ -106,6 +106,62 @@ public class Malyeog_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         switch (malyeogNum)
         {
+            case 0:
+                if (GameManager.Instance.crystal >= (600 + malyeogUpgrade * 150) && foundation.dimensionalPrice.text != "Max")
+                {
+                    SoundManager.instance.PlaySoundClip("SFX_Enforce", SoundType.SFX);
+
+                    malyeogUpgrade++;
+                    ++Player.Instance.stat.magicPower.silpidLeap;
+
+                    GameManager.Instance.crystal -= (600 + malyeogUpgrade * 150);
+                }
+                else
+                    SoundManager.instance.PlaySoundClip("SFX_Error", SoundType.SFX);
+                break;
+
+            case 1:
+                if (GameManager.Instance.crystal >= (1000 + malyeogUpgrade * 200) && foundation.dimensionalPrice.text != "Max" && foundation.Body_Open >= malyeogNum)
+                {
+                    SoundManager.instance.PlaySoundClip("SFX_Enforce", SoundType.SFX);
+
+                    malyeogUpgrade++;
+                    ++Player.Instance.stat.magicPower.giantPower;
+
+                    GameManager.Instance.crystal -= (1000 + malyeogUpgrade * 200);
+                }
+                else
+                    SoundManager.instance.PlaySoundClip("SFX_Error", SoundType.SFX);
+                break;
+
+            case 2:
+                if (GameManager.Instance.crystal >= (1500 + malyeogUpgrade * 250) && foundation.dimensionalPrice.text != "Max" && foundation.Body_Open >= malyeogNum)
+                {
+                    SoundManager.instance.PlaySoundClip("SFX_Enforce", SoundType.SFX);
+
+                    malyeogUpgrade++;
+                    ++Player.Instance.stat.magicPower.ironSkin;
+
+                    GameManager.Instance.crystal -= (1500 + malyeogUpgrade * 250);
+                }
+                else
+                    SoundManager.instance.PlaySoundClip("SFX_Error", SoundType.SFX);
+                break;
+
+            case 3:
+                if (GameManager.Instance.crystal >= (3000 + malyeogUpgrade * 3000) && foundation.dimensionalPrice.text != "Max" && foundation.Body_Open >= malyeogNum)
+                {
+                    SoundManager.instance.PlaySoundClip("SFX_Enforce", SoundType.SFX);
+
+                    malyeogUpgrade++;
+                    ++Player.Instance.stat.magicPower.magicHeart;
+
+                    GameManager.Instance.crystal -= (3000 + malyeogUpgrade * 3000);
+                }
+                else
+                    SoundManager.instance.PlaySoundClip("SFX_Error", SoundType.SFX);
+                break;
+
             case 4:
                 if (GameManager.Instance.crystal >= (700 + malyeogUpgrade * 150) && foundation.dimensionalPrice.text != "Max")
                 {
@@ -157,106 +213,6 @@ public class Malyeog_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                     ++Player.Instance.stat.magicPower.thaumcraft;
 
                     GameManager.Instance.crystal -= (3300 + malyeogUpgrade * 3000);
-                }
-                else
-                    SoundManager.instance.PlaySoundClip("SFX_Error", SoundType.SFX);
-                break;
-        }
-
-        switch (malyeogNum)
-        {
-            case 0:
-                if (GameManager.Instance.crystal >= (600 + malyeogUpgrade * 150) && foundation.dimensionalPrice.text != "Max")
-                {
-                    SoundManager.instance.PlaySoundClip("SFX_Enforce", SoundType.SFX);
-
-                    malyeogUpgrade++;
-                    ++Player.Instance.stat.magicPower.silpidLeap;
-
-                    GameManager.Instance.crystal -= (600 + malyeogUpgrade * 150);
-                }
-                else
-                    SoundManager.instance.PlaySoundClip("SFX_Error", SoundType.SFX);
-                break;
-
-            case 1:
-                if (GameManager.Instance.crystal >= (1000 + malyeogUpgrade * 200) && foundation.dimensionalPrice.text != "Max" && foundation.Body_Open >= malyeogNum)
-                {
-                    SoundManager.instance.PlaySoundClip("SFX_Enforce", SoundType.SFX);
-
-                    malyeogUpgrade++;
-                    ++Player.Instance.stat.magicPower.giantPower;
-
-                    GameManager.Instance.crystal -= (1000 + malyeogUpgrade * 200);
-                }
-                else
-                    SoundManager.instance.PlaySoundClip("SFX_Error", SoundType.SFX);
-                break;
-
-            case 2:
-                if (GameManager.Instance.crystal >= (1500 + malyeogUpgrade * 250) && foundation.dimensionalPrice.text != "Max" && foundation.Body_Open >= malyeogNum)
-                {
-                    SoundManager.instance.PlaySoundClip("SFX_Enforce", SoundType.SFX);
-
-                    GameManager.Instance.crystal -= (1500 + malyeogUpgrade * 250);
-
-                    malyeogUpgrade++;
-                    malyeogUpgradeText.text = malyeogUpgrade + "/4";
-                    Player.Instance.stat.magicPower.ironSkin++;
-                    switch (malyeogUpgrade)
-                    {
-                        case 1:
-                            foundation.dimensionalPrice.text = (1500 + malyeogUpgrade * 250).ToString();
-                            foundation.explanation.text = "강철같은 피부를 얻어 방어력이 5 / " + "<color=#877D78>" + "10" + "</color>" + " / " + "<color=#877D78>" + "15" + "</color>" + " / " + "<color=#877D78>" + "20" + "</color>" + " 상승한다.";
-                            break;
-
-                        case 2:
-                            foundation.dimensionalPrice.text = (1500 + malyeogUpgrade * 250).ToString();
-                            foundation.explanation.text = "강철같은 피부를 얻어 방어력이 " + "<color=#877D78>" + "5" + "</color>" + " / " + "10 / " + "<color=#877D78>" + "15" + "</color>" + " / " + "<color=#877D78>" + "20" + "</color>" + " 상승한다.";
-                            break;
-
-                        case 3:
-                            foundation.dimensionalPrice.text = (1500 + malyeogUpgrade * 250).ToString();
-                            foundation.explanation.text = "강철같은 피부를 얻어 방어력이 " + "<color=#877D78>" + "5" + "</color>" + " / " + "<color=#877D78>" + "10" + "</color>" + " / " + "15 / " + "<color=#877D78>" + "20" + "</color>" + " 상승한다.";
-                            break;
-
-                        case 4:
-                            foundation.dimensionalPrice.text = "Max";
-                            foundation.explanation.text = "강철같은 피부를 얻어 방어력이 " + "<color=#877D78>" + "5" + "</color>" + " / " + "<color=#877D78>" + "10" + "</color>" + " / " + "<color=#877D78>" + "15" + "</color>" + " / " + "20" + " 상승한다.";
-                            break;
-                    }
-
-                    isBodyOpenCheck = true;
-                    if (isBodyOpenCheck == true && foundation.Body_Open == malyeogNum)
-                        foundation.Body_Open++;
-                }
-                else
-                    SoundManager.instance.PlaySoundClip("SFX_Error", SoundType.SFX);
-                break;
-
-            case 3:
-                if (GameManager.Instance.crystal >= (3000 + malyeogUpgrade * 3000) && foundation.dimensionalPrice.text != "Max" && foundation.Body_Open >= malyeogNum)
-                {
-                    SoundManager.instance.PlaySoundClip("SFX_Enforce", SoundType.SFX);
-
-                    GameManager.Instance.crystal -= (3000 + malyeogUpgrade * 3000);
-
-                    malyeogUpgrade++;
-                    malyeogUpgradeText.text = malyeogUpgrade + "/2";
-                    switch (malyeogUpgrade)
-                    {
-                        case 1:
-                            Player.Instance.stat.magicPower.magicHeart++;
-                            foundation.dimensionalPrice.text = (3000 + malyeogUpgrade * 3000).ToString();
-                            foundation.explanation.text = "마정석 심장이 두번째 기회를 줘 최대체력의 20% / " + "<color=#877D78>" + "50%" + "</color>" + " 상승한다.";
-                            break;
-
-                        case 2:
-                            Player.Instance.stat.magicPower.magicHeart++;
-                            foundation.dimensionalPrice.text = "Max";
-                            foundation.explanation.text = "마정석 심장이 두번째 기회를 줘 최대체력의 " + "<color=#877D78>" + "20%" + "</color>" + " / " + "50%" + " 상승한다.";
-                            break;
-                    }
                 }
                 else
                     SoundManager.instance.PlaySoundClip("SFX_Error", SoundType.SFX);
