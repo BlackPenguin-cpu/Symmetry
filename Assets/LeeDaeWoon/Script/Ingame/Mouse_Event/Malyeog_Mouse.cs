@@ -103,121 +103,154 @@ public class Malyeog_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        foundation.explanation.text = foundation.malyeog[malyeogNum].upgradeExplanation[malyeogUpgrade + 1];
 
-        switch (malyeogNum)
+        if (malyeogUpgrade == foundation.malyeog[malyeogNum].upgradeExplanation.Count - 1)
+            foundation.dimensionalPrice.text = "Max";
+        else
         {
-            case 0:
-                if (GameManager.Instance.crystal >= (600 + malyeogUpgrade * 150) && foundation.dimensionalPrice.text != "Max")
-                {
-                    SoundManager.instance.PlaySoundClip("SFX_Enforce", SoundType.SFX);
+            switch (malyeogNum)
+            {
+                case 0:
 
-                    malyeogUpgrade++;
-                    ++Player.Instance.stat.magicPower.silpidLeap;
+                    if (GameManager.Instance.crystal >= (600 + malyeogUpgrade * 150) && foundation.dimensionalPrice.text != "Max")
+                    {
+                        Debug.Log("asdfasdf");
+                        SoundManager.instance.PlaySoundClip("SFX_Enforce", SoundType.SFX);
 
-                    GameManager.Instance.crystal -= (600 + malyeogUpgrade * 150);
-                }
-                else
-                    SoundManager.instance.PlaySoundClip("SFX_Error", SoundType.SFX);
-                break;
+                        malyeogUpgrade++;
+                        ++Player.Instance.stat.magicPower.silpidLeap;
 
-            case 1:
-                if (GameManager.Instance.crystal >= (1000 + malyeogUpgrade * 200) && foundation.dimensionalPrice.text != "Max" && foundation.Body_Open >= malyeogNum)
-                {
-                    SoundManager.instance.PlaySoundClip("SFX_Enforce", SoundType.SFX);
+                        malyeogUpgradeText.text = malyeogUpgrade + "/4";
+                        foundation.dimensionalPrice.text = (600 + malyeogUpgrade * 150).ToString();
 
-                    malyeogUpgrade++;
-                    ++Player.Instance.stat.magicPower.giantPower;
+                        GameManager.Instance.crystal -= (600 + malyeogUpgrade * 150);
+                    }
+                    else
+                        SoundManager.instance.PlaySoundClip("SFX_Error", SoundType.SFX);
+                    break;
 
-                    GameManager.Instance.crystal -= (1000 + malyeogUpgrade * 200);
-                }
-                else
-                    SoundManager.instance.PlaySoundClip("SFX_Error", SoundType.SFX);
-                break;
+                case 1:
+                    if (GameManager.Instance.crystal >= (1000 + malyeogUpgrade * 200) && foundation.dimensionalPrice.text != "Max")
+                    {
+                        SoundManager.instance.PlaySoundClip("SFX_Enforce", SoundType.SFX);
 
-            case 2:
-                if (GameManager.Instance.crystal >= (1500 + malyeogUpgrade * 250) && foundation.dimensionalPrice.text != "Max" && foundation.Body_Open >= malyeogNum)
-                {
-                    SoundManager.instance.PlaySoundClip("SFX_Enforce", SoundType.SFX);
+                        malyeogUpgrade++;
+                        ++Player.Instance.stat.magicPower.giantPower;
 
-                    malyeogUpgrade++;
-                    ++Player.Instance.stat.magicPower.ironSkin;
+                        malyeogUpgradeText.text = malyeogUpgrade + "/4";
+                        foundation.dimensionalPrice.text = (1000 + malyeogUpgrade * 200).ToString();
 
-                    GameManager.Instance.crystal -= (1500 + malyeogUpgrade * 250);
-                }
-                else
-                    SoundManager.instance.PlaySoundClip("SFX_Error", SoundType.SFX);
-                break;
+                        GameManager.Instance.crystal -= (1000 + malyeogUpgrade * 200);
+                    }
+                    else
+                        SoundManager.instance.PlaySoundClip("SFX_Error", SoundType.SFX);
+                    break;
 
-            case 3:
-                if (GameManager.Instance.crystal >= (3000 + malyeogUpgrade * 3000) && foundation.dimensionalPrice.text != "Max" && foundation.Body_Open >= malyeogNum)
-                {
-                    SoundManager.instance.PlaySoundClip("SFX_Enforce", SoundType.SFX);
+                case 2:
+                    if (GameManager.Instance.crystal >= (1500 + malyeogUpgrade * 250) && foundation.dimensionalPrice.text != "Max")
+                    {
+                        SoundManager.instance.PlaySoundClip("SFX_Enforce", SoundType.SFX);
 
-                    malyeogUpgrade++;
-                    ++Player.Instance.stat.magicPower.magicHeart;
+                        malyeogUpgrade++;
+                        ++Player.Instance.stat.magicPower.ironSkin;
 
-                    GameManager.Instance.crystal -= (3000 + malyeogUpgrade * 3000);
-                }
-                else
-                    SoundManager.instance.PlaySoundClip("SFX_Error", SoundType.SFX);
-                break;
+                        malyeogUpgradeText.text = malyeogUpgrade + "/4";
+                        foundation.dimensionalPrice.text = (1500 + malyeogUpgrade * 250).ToString();
 
-            case 4:
-                if (GameManager.Instance.crystal >= (700 + malyeogUpgrade * 150) && foundation.dimensionalPrice.text != "Max")
-                {
-                    SoundManager.instance.PlaySoundClip("SFX_Enforce", SoundType.SFX);
+                        GameManager.Instance.crystal -= (1500 + malyeogUpgrade * 250);
+                    }
+                    else
+                        SoundManager.instance.PlaySoundClip("SFX_Error", SoundType.SFX);
+                    break;
 
-                    malyeogUpgrade++;
-                    ++Player.Instance.stat.magicPower.invisibleHand;
+                case 3:
+                    if (GameManager.Instance.crystal >= (3000 + malyeogUpgrade * 3000) && foundation.dimensionalPrice.text != "Max")
+                    {
+                        SoundManager.instance.PlaySoundClip("SFX_Enforce", SoundType.SFX);
 
-                    GameManager.Instance.crystal -= (700 + malyeogUpgrade * 150);
-                }
-                else
-                    SoundManager.instance.PlaySoundClip("SFX_Error", SoundType.SFX);
-                break;
+                        malyeogUpgrade++;
+                        ++Player.Instance.stat.magicPower.magicHeart;
 
-            case 5:
-                if (GameManager.Instance.crystal >= (1100 + malyeogUpgrade * 200) && foundation.dimensionalPrice.text != "Max" && foundation.Magic_Open >= malyeogNum)
-                {
-                    SoundManager.instance.PlaySoundClip("SFX_Enforce", SoundType.SFX);
+                        malyeogUpgradeText.text = malyeogUpgrade + "/2";
+                        foundation.dimensionalPrice.text = (3000 + malyeogUpgrade * 3000).ToString();
 
-                    malyeogUpgrade++;
-                    ++Player.Instance.stat.magicPower.sharpEye;
+                        GameManager.Instance.crystal -= (3000 + malyeogUpgrade * 3000);
+                    }
+                    else
+                        SoundManager.instance.PlaySoundClip("SFX_Error", SoundType.SFX);
+                    break;
 
-                    GameManager.Instance.crystal -= (1100 + malyeogUpgrade * 200);
-                }
-                else
-                    SoundManager.instance.PlaySoundClip("SFX_Error", SoundType.SFX);
-                break;
+                case 4:
+                    if (GameManager.Instance.crystal >= (700 + malyeogUpgrade * 150) && foundation.dimensionalPrice.text != "Max")
+                    {
+                        SoundManager.instance.PlaySoundClip("SFX_Enforce", SoundType.SFX);
 
-            case 6:
-                if (GameManager.Instance.crystal >= (1700 + malyeogUpgrade * 250) && foundation.dimensionalPrice.text != "Max" && foundation.Magic_Open >= malyeogNum)
-                {
-                    SoundManager.instance.PlaySoundClip("SFX_Enforce", SoundType.SFX);
+                        malyeogUpgrade++;
+                        ++Player.Instance.stat.magicPower.invisibleHand;
 
-                    malyeogUpgrade++;
-                    ++Player.Instance.stat.magicPower.timeQuick;
+                        malyeogUpgradeText.text = malyeogUpgrade + "/4";
+                        foundation.dimensionalPrice.text = (700 + malyeogUpgrade * 150).ToString();
 
-                    GameManager.Instance.crystal -= (1700 + malyeogUpgrade * 250);
-                }
-                else
-                    SoundManager.instance.PlaySoundClip("SFX_Error", SoundType.SFX);
-                break;
+                        GameManager.Instance.crystal -= (700 + malyeogUpgrade * 150);
+                    }
+                    else
+                        SoundManager.instance.PlaySoundClip("SFX_Error", SoundType.SFX);
+                    break;
 
-            case 7:
-                if (GameManager.Instance.crystal >= (3300 + malyeogUpgrade * 3000) && foundation.dimensionalPrice.text != "Max" && foundation.Magic_Open >= malyeogNum)
-                {
-                    SoundManager.instance.PlaySoundClip("SFX_Enforce", SoundType.SFX);
+                case 5:
+                    if (GameManager.Instance.crystal >= (1100 + malyeogUpgrade * 200) && foundation.dimensionalPrice.text != "Max")
+                    {
+                        SoundManager.instance.PlaySoundClip("SFX_Enforce", SoundType.SFX);
 
-                    malyeogUpgrade++;
-                    ++Player.Instance.stat.magicPower.thaumcraft;
+                        malyeogUpgrade++;
+                        ++Player.Instance.stat.magicPower.sharpEye;
 
-                    GameManager.Instance.crystal -= (3300 + malyeogUpgrade * 3000);
-                }
-                else
-                    SoundManager.instance.PlaySoundClip("SFX_Error", SoundType.SFX);
-                break;
+                        malyeogUpgradeText.text = malyeogUpgrade + "/4";
+                        foundation.dimensionalPrice.text = (1100 + malyeogUpgrade * 200).ToString();
+
+                        GameManager.Instance.crystal -= (1100 + malyeogUpgrade * 200);
+                    }
+                    else
+                        SoundManager.instance.PlaySoundClip("SFX_Error", SoundType.SFX);
+                    break;
+
+                case 6:
+                    if (GameManager.Instance.crystal >= (1700 + malyeogUpgrade * 250) && foundation.dimensionalPrice.text != "Max")
+                    {
+                        SoundManager.instance.PlaySoundClip("SFX_Enforce", SoundType.SFX);
+
+                        malyeogUpgrade++;
+                        ++Player.Instance.stat.magicPower.timeQuick;
+
+                        malyeogUpgradeText.text = malyeogUpgrade + "/4";
+                        foundation.dimensionalPrice.text = (1700 + malyeogUpgrade * 250).ToString();
+
+                        GameManager.Instance.crystal -= (1700 + malyeogUpgrade * 250);
+                    }
+                    else
+                        SoundManager.instance.PlaySoundClip("SFX_Error", SoundType.SFX);
+                    break;
+
+                case 7:
+                    if (GameManager.Instance.crystal >= (3300 + malyeogUpgrade * 3000) && foundation.dimensionalPrice.text != "Max")
+                    {
+                        SoundManager.instance.PlaySoundClip("SFX_Enforce", SoundType.SFX);
+
+                        malyeogUpgrade++;
+                        ++Player.Instance.stat.magicPower.thaumcraft;
+
+                        malyeogUpgradeText.text = malyeogUpgrade + "/2";
+                        foundation.dimensionalPrice.text = (3300 + malyeogUpgrade * 3000).ToString();
+
+                        GameManager.Instance.crystal -= (3300 + malyeogUpgrade * 3000);
+                    }
+                    else
+                        SoundManager.instance.PlaySoundClip("SFX_Error", SoundType.SFX);
+                    break;
+            }
         }
     }
+
 
 }
