@@ -1453,9 +1453,9 @@ MonoBehaviour:
   malyeog: 1
   malyeogNum: 1
   malyeogUpgrade: 0
-  malyeogUpgradeText: {fileID: 1288205245}
-  BodyOpen_Check: 0
-  MagicOpen_Check: 0
+  malyeogUpgradeText: {fileID: 1647357649}
+  isBodyOpenCheck: 0
+  isMagicOpenCheck: 0
 --- !u!114 &242195660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5936,6 +5936,122 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ef4c340507288642babc8a69a957f69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  malyeog:
+  - name: "\uC2E4\uD53C\uB4DC\uC758 \uB3C4\uC57D"
+    upgradeExplanation:
+    - "\uC2E4\uD53C\uB4DC\uC758 \uB3C4\uC57D\uB825\uC73C\uB85C \uB300\uC26C\uD69F\uC218\uAC00
+      1 \uC99D\uAC00\uD558\uACE0 \uC774\uB3D9 \uC18D\uB3C4\uAC00 <color=#877D78>10%</color>
+      / <color=#877D78>20%</color> / <color=#877D78>30%</color> / <color=#877D78>40%</color>
+      \uC0C1\uC2B9\uD55C\uB2E4."
+    - "\uC2E4\uD53C\uB4DC\uC758 \uB3C4\uC57D\uB825\uC73C\uB85C \uB300\uC26C\uD69F\uC218\uAC00
+      1 \uC99D\uAC00\uD558\uACE0 \uC774\uB3D9 \uC18D\uB3C4\uAC00 10% / <color=#877D78>20%</color>
+      / <color=#877D78>30%</color> / <color=#877D78>40%</color> \uC0C1\uC2B9\uD55C\uB2E4."
+    - "\uC2E4\uD53C\uB4DC\uC758 \uB3C4\uC57D\uB825\uC73C\uB85C \uB300\uC26C\uD69F\uC218\uAC00
+      1 \uC99D\uAC00\uD558\uACE0 \uC774\uB3D9 \uC18D\uB3C4\uAC00 <color=#877D78>10%</color>
+      / 20% / <color=#877D78>30%</color> / <color=#877D78>40%</color> \uC0C1\uC2B9\uD55C\uB2E4."
+    - "\uC2E4\uD53C\uB4DC\uC758 \uB3C4\uC57D\uB825\uC73C\uB85C \uB300\uC26C\uD69F\uC218\uAC00
+      1 \uC99D\uAC00\uD558\uACE0 \uC774\uB3D9 \uC18D\uB3C4\uAC00 <color=#877D78>10%</color>
+      / <color=#877D78>20%</color> / 30% / <color=#877D78>40%</color> \uC0C1\uC2B9\uD55C\uB2E4."
+    - "\uC2E4\uD53C\uB4DC\uC758 \uB3C4\uC57D\uB825\uC73C\uB85C \uB300\uC26C\uD69F\uC218\uAC00
+      1 \uC99D\uAC00\uD558\uACE0 \uC774\uB3D9 \uC18D\uB3C4\uAC00 <color=#877D78>10%</color>
+      / <color=#877D78>20%</color> / <color=#877D78>30%</color> / 40% \uC0C1\uC2B9\uD55C\uB2E4."
+  - name: "\uAC70\uC778\uC758 \uD798"
+    upgradeExplanation:
+    - "\uAC70\uC778\uC758 \uD798\uC744 \uBC1B\uC544 \uACF5\uACA9\uB825\uC774 <color=#877D78>15%</color>
+      / <color=#877D78>30%</color> / <color=#877D78>45%</color> / <color=#877D78>60%</color>
+      \uC0C1\uC2B9\uD55C\uB2E4."
+    - "\uAC70\uC778\uC758 \uD798\uC744 \uBC1B\uC544 \uACF5\uACA9\uB825\uC774 15%
+      / <color=#877D78>30%</color> / <color=#877D78>45%</color> / <color=#877D78>60%</color>
+      \uC0C1\uC2B9\uD55C\uB2E4."
+    - "\uAC70\uC778\uC758 \uD798\uC744 \uBC1B\uC544 \uACF5\uACA9\uB825\uC774 <color=#877D78>15%</color>
+      / 30% / <color=#877D78>45%</color> / <color=#877D78>60%</color> \uC0C1\uC2B9\uD55C\uB2E4."
+    - "\uAC70\uC778\uC758 \uD798\uC744 \uBC1B\uC544 \uACF5\uACA9\uB825\uC774 <color=#877D78>15%</color>
+      / <color=#877D78>30%</color> / 45% / <color=#877D78>60%</color> \uC0C1\uC2B9\uD55C\uB2E4."
+    - "\uAC70\uC778\uC758 \uD798\uC744 \uBC1B\uC544 \uACF5\uACA9\uB825\uC774 <color=#877D78>15%</color>
+      / <color=#877D78>30%</color> / <color=#877D78>45%</color> / 60% \uC0C1\uC2B9\uD55C\uB2E4."
+  - name: "\uAC15\uCCA0 \uD53C\uBD80"
+    upgradeExplanation:
+    - "\uAC15\uCCA0\uAC19\uC740 \uD53C\uBD80\uB97C \uC5BB\uC5B4 \uBC29\uC5B4\uB825\uC774
+      <color=#877D78>5</color> / <color=#877D78>10</color> / <color=#877D78>15</color>
+      / <color=#877D78>20</color> \uC0C1\uC2B9\uD55C\uB2E4."
+    - "\uAC15\uCCA0\uAC19\uC740 \uD53C\uBD80\uB97C \uC5BB\uC5B4 \uBC29\uC5B4\uB825\uC774
+      5 / <color=#877D78>10</color> / <color=#877D78>15</color> / <color=#877D78>20</color>
+      \uC0C1\uC2B9\uD55C\uB2E4."
+    - "\uAC15\uCCA0\uAC19\uC740 \uD53C\uBD80\uB97C \uC5BB\uC5B4 \uBC29\uC5B4\uB825\uC774
+      <color=#877D78>5</color> / 10 / <color=#877D78>15</color> / <color=#877D78>20</color>
+      \uC0C1\uC2B9\uD55C\uB2E4."
+    - "\uAC15\uCCA0\uAC19\uC740 \uD53C\uBD80\uB97C \uC5BB\uC5B4 \uBC29\uC5B4\uB825\uC774
+      <color=#877D78>5</color> / <color=#877D78>10</color> / 15 / <color=#877D78>20</color>
+      \uC0C1\uC2B9\uD55C\uB2E4."
+    - "\uAC15\uCCA0\uAC19\uC740 \uD53C\uBD80\uB97C \uC5BB\uC5B4 \uBC29\uC5B4\uB825\uC774
+      <color=#877D78>5</color> / <color=#877D78>10</color> / <color=#877D78>15</color>
+      / 20 \uC0C1\uC2B9\uD55C\uB2E4."
+  - name: "\uB9C8\uACF5\uD559 \uC2EC\uC7A5"
+    upgradeExplanation:
+    - "\uB9C8\uC815\uC11D \uC2EC\uC7A5\uC774 \uB450\uBC88\uC9F8 \uAE30\uD68C\uB97C
+      \uC918 \uCD5C\uB300\uCCB4\uB825\uC758\n<color=#877D78>20%</color> / <color=#877D78>50%</color>
+      \uC0C1\uC2B9\uD55C\uB2E4."
+    - "\uB9C8\uC815\uC11D \uC2EC\uC7A5\uC774 \uB450\uBC88\uC9F8 \uAE30\uD68C\uB97C
+      \uC918 \uCD5C\uB300\uCCB4\uB825\uC758 \n20% / <color=#877D78>50%</color> \uC0C1\uC2B9\uD55C\uB2E4."
+    - "\uB9C8\uC815\uC11D \uC2EC\uC7A5\uC774 \uB450\uBC88\uC9F8 \uAE30\uD68C\uB97C
+      \uC918 \uCD5C\uB300\uCCB4\uB825\uC758\n<color=#877D78>20%</color> / 50% \uC0C1\uC2B9\uD55C\uB2E4."
+  - name: "\uBCF4\uC774\uC9C0 \uC54A\uB294 \uC190"
+    upgradeExplanation:
+    - "\uBCF4\uC774\uC9C0 \uC54A\uB294 \uC190\uB4E4\uC774 \uD568\uAED8 \uACF5\uACA9\uD574
+      \uACF5\uACA9 \uC18D\uB3C4\uAC00\n<color=#877D78>10%</color> / <color=#877D78>20%</color>
+      / <color=#877D78>30%</color> / <color=#877D78>40%</color> \uC99D\uAC00\uD55C\uB2E4."
+    - "\uBCF4\uC774\uC9C0 \uC54A\uB294 \uC190\uB4E4\uC774 \uD568\uAED8 \uACF5\uACA9\uD574
+      \uACF5\uACA9 \uC18D\uB3C4\uAC00\n10% / <color=#877D78>20%</color> / <color=#877D78>30%</color>
+      / <color=#877D78>40%</color> \uC99D\uAC00\uD55C\uB2E4."
+    - "\uBCF4\uC774\uC9C0 \uC54A\uB294 \uC190\uB4E4\uC774 \uD568\uAED8 \uACF5\uACA9\uD574
+      \uACF5\uACA9 \uC18D\uB3C4\uAC00\n<color=#877D78>10%</color> / 20% / <color=#877D78>30%</color>
+      / <color=#877D78>40%</color> \uC99D\uAC00\uD55C\uB2E4."
+    - "\uBCF4\uC774\uC9C0 \uC54A\uB294 \uC190\uB4E4\uC774 \uD568\uAED8 \uACF5\uACA9\uD574
+      \uACF5\uACA9 \uC18D\uB3C4\uAC00\n<color=#877D78>10%</color> / <color=#877D78>20%</color>
+      / 30% / <color=#877D78>40%</color> \uC99D\uAC00\uD55C\uB2E4."
+    - "\uBCF4\uC774\uC9C0 \uC54A\uB294 \uC190\uB4E4\uC774 \uD568\uAED8 \uACF5\uACA9\uD574
+      \uACF5\uACA9 \uC18D\uB3C4\uAC00\n<color=#877D78>10%</color> / <color=#877D78>20%</color>
+      / <color=#877D78>30%</color> / 40% \uC99D\uAC00\uD55C\uB2E4."
+  - name: "\uAFF0\uB6AB\uC5B4\uBCF4\uB294 \uB208"
+    upgradeExplanation:
+    - "\uB208\uC73C\uB85C \uC0C1\uB300\uC758 \uC57D\uC810\uC744 \uAFF0\uB6AB\uC5B4\uBD10
+      \uCE58\uBA85\uD0C0 \uD655\uB960\uC774\n<color=#877D78>3%</color> / <color=#877D78>5%</color>
+      / <color=#877D78>7%</color> /  <color=#877D78>10%</color> \uC0C1\uC2B9\uD55C\uB2E4."
+    - "\uB208\uC73C\uB85C \uC0C1\uB300\uC758 \uC57D\uC810\uC744 \uAFF0\uB6AB\uC5B4\uBD10
+      \uCE58\uBA85\uD0C0 \uD655\uB960\uC774\n3% / <color=#877D78>5%</color> /  <color=#877D78>7%</color>
+      / <color=#877D78>10%</color> \uC0C1\uC2B9\uD55C\uB2E4."
+    - "\uB208\uC73C\uB85C \uC0C1\uB300\uC758 \uC57D\uC810\uC744 \uAFF0\uB6AB\uC5B4\uBD10
+      \uCE58\uBA85\uD0C0 \uD655\uB960\uC774\n<color=#877D78>3%</color> / 5% /  <color=#877D78>7%</color>
+      /  <color=#877D78>10%</color> \uC0C1\uC2B9\uD55C\uB2E4."
+    - "\uB208\uC73C\uB85C \uC0C1\uB300\uC758 \uC57D\uC810\uC744 \uAFF0\uB6AB\uC5B4\uBD10
+      \uCE58\uBA85\uD0C0 \uD655\uB960\uC774\n<color=#877D78>3%</color> /  <color=#877D78>5%</color>
+      / 7% / <color=#877D78>10%</color> \uC0C1\uC2B9\uD55C\uB2E4."
+    - "\uB208\uC73C\uB85C \uC0C1\uB300\uC758 \uC57D\uC810\uC744 \uAFF0\uB6AB\uC5B4\uBD10
+      \uCE58\uBA85\uD0C0 \uD655\uB960\uC774\n<color=#877D78>3%</color> /  <color=#877D78>5%</color>
+      /  <color=#877D78>7%</color> / 10% \uC0C1\uC2B9\uD55C\uB2E4."
+  - name: "\uC2DC\uAC04\uAC00\uC18D"
+    upgradeExplanation:
+    - "\uC2DC\uAC04\uC744 \uAC00\uC18D \uC2DC\uCF1C\uC11C \uCFE8\uD0C0\uC784\uC774\n<color=#877D78>5%</color>
+      / <color=#877D78>10%</color> / <color=#877D78>15%</color> / <color=#877D78>20%</color>
+      \uAC10\uC18C\uD55C\uB2E4."
+    - "\uC2DC\uAC04\uC744 \uAC00\uC18D \uC2DC\uCF1C\uC11C \uCFE8\uD0C0\uC784\uC774\n5%
+      / <color=#877D78>10%</color> / <color=#877D78>15%</color> / <color=#877D78>20%</color>
+      \uAC10\uC18C\uD55C\uB2E4."
+    - "\uC2DC\uAC04\uC744 \uAC00\uC18D \uC2DC\uCF1C\uC11C \uCFE8\uD0C0\uC784\uC774\n<color=#877D78>5%</color>
+      / 10% / <color=#877D78>15%</color> / <color=#877D78>20%</color> \uAC10\uC18C\uD55C\uB2E4."
+    - "\uC2DC\uAC04\uC744 \uAC00\uC18D \uC2DC\uCF1C\uC11C \uCFE8\uD0C0\uC784\uC774\n<color=#877D78>5%</color>
+      / <color=#877D78>10%</color> / 15% / <color=#877D78>20%</color> \uAC10\uC18C\uD55C\uB2E4."
+    - "\uC2DC\uAC04\uC744 \uAC00\uC18D \uC2DC\uCF1C\uC11C \uCFE8\uD0C0\uC784\uC774\n<color=#877D78>5%</color>
+      / <color=#877D78>10%</color> / <color=#877D78>15%</color> / 20% \uAC10\uC18C\uD55C\uB2E4."
+  - name: "\uC5F0\uAE08\uC220"
+    upgradeExplanation:
+    - "\uAE08\uB2E8\uC758 \uC5F0\uAE08\uC220\uC744 \uC0AC\uC6A9\uD574 \uD68D\uB4DD\uD558\uB294
+      \uACE8\uB4DC\uC758 \uC591\uC774\n<color=#877D78>5%</color> / <color=#877D78>10%</color>
+      \uAC10\uC18C\uD55C\uB2E4."
+    - "\uAE08\uB2E8\uC758 \uC5F0\uAE08\uC220\uC744 \uC0AC\uC6A9\uD574 \uD68D\uB4DD\uD558\uB294
+      \uACE8\uB4DC\uC758 \uC591\uC774 \n5% / <color=#877D78>10%</color> \uAC10\uC18C\uD55C\uB2E4."
+    - "\uAE08\uB2E8\uC758 \uC5F0\uAE08\uC220\uC744 \uC0AC\uC6A9\uD574 \uD68D\uB4DD\uD558\uB294
+      \uACE8\uB4DC\uC758 \uC591\uC774 <color=#877D78>5%</color> / 10% \uAC10\uC18C\uD55C\uB2E4."
   magicCircle: {fileID: 717887002}
   fBtn: {fileID: 806538701}
   upGrade: {fileID: 225275279}
@@ -5945,12 +6061,12 @@ MonoBehaviour:
   downBar: {fileID: 1330401458}
   foundationWindow: {fileID: 1335728407}
   foundationRect: {fileID: 207110226}
-  closeBtn: {fileID: 1001446933}
+  closeBtn: {fileID: 1001446935}
   fadeInOut: {fileID: 627674985}
-  Title: {fileID: 441326551}
-  Explanation: {fileID: 1288205245}
+  title: {fileID: 441326551}
+  explanation: {fileID: 1288205245}
   purchase: {fileID: 535428129}
-  Dimensional_Price: {fileID: 1436679608}
+  dimensionalPrice: {fileID: 1436679608}
   Magic_Open: 0
   Body_Open: 0
 --- !u!61 &733044160
@@ -6097,11 +6213,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   malyeog: 0
-  malyeogNum: 2
+  malyeogNum: 6
   malyeogUpgrade: 0
-  malyeogUpgradeText: {fileID: 1288205245}
-  BodyOpen_Check: 0
-  MagicOpen_Check: 0
+  malyeogUpgradeText: {fileID: 319092040}
+  isBodyOpenCheck: 0
+  isMagicOpenCheck: 0
 --- !u!114 &737903163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7831,11 +7947,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   malyeog: 0
-  malyeogNum: 1
+  malyeogNum: 5
   malyeogUpgrade: 0
-  malyeogUpgradeText: {fileID: 1288205245}
-  BodyOpen_Check: 0
-  MagicOpen_Check: 0
+  malyeogUpgradeText: {fileID: 950157560}
+  isBodyOpenCheck: 0
+  isMagicOpenCheck: 0
 --- !u!114 &928888480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8600,9 +8716,9 @@ MonoBehaviour:
   malyeog: 1
   malyeogNum: 3
   malyeogUpgrade: 0
-  malyeogUpgradeText: {fileID: 1288205245}
-  BodyOpen_Check: 0
-  MagicOpen_Check: 0
+  malyeogUpgradeText: {fileID: 612221574}
+  isBodyOpenCheck: 0
+  isMagicOpenCheck: 0
 --- !u!114 &995056723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13178,9 +13294,9 @@ MonoBehaviour:
   malyeog: 1
   malyeogNum: 2
   malyeogUpgrade: 0
-  malyeogUpgradeText: {fileID: 1288205245}
-  BodyOpen_Check: 0
-  MagicOpen_Check: 0
+  malyeogUpgradeText: {fileID: 1952688467}
+  isBodyOpenCheck: 0
+  isMagicOpenCheck: 0
 --- !u!114 &1578202526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14587,11 +14703,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   malyeog: 0
-  malyeogNum: 0
+  malyeogNum: 4
   malyeogUpgrade: 0
-  malyeogUpgradeText: {fileID: 1288205245}
-  BodyOpen_Check: 0
-  MagicOpen_Check: 0
+  malyeogUpgradeText: {fileID: 801680820}
+  isBodyOpenCheck: 0
+  isMagicOpenCheck: 0
 --- !u!114 &1740663108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15435,11 +15551,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   malyeog: 0
-  malyeogNum: 3
+  malyeogNum: 7
   malyeogUpgrade: 0
-  malyeogUpgradeText: {fileID: 1288205245}
-  BodyOpen_Check: 0
-  MagicOpen_Check: 0
+  malyeogUpgradeText: {fileID: 2041747448}
+  isBodyOpenCheck: 0
+  isMagicOpenCheck: 0
 --- !u!114 &1894730033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16528,9 +16644,9 @@ MonoBehaviour:
   malyeog: 1
   malyeogNum: 0
   malyeogUpgrade: 0
-  malyeogUpgradeText: {fileID: 1288205245}
-  BodyOpen_Check: 0
-  MagicOpen_Check: 0
+  malyeogUpgradeText: {fileID: 414635762}
+  isBodyOpenCheck: 0
+  isMagicOpenCheck: 0
 --- !u!114 &2052249130
 MonoBehaviour:
   m_ObjectHideFlags: 0

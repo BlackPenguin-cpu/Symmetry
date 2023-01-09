@@ -4,12 +4,23 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
-using System.Runtime.InteropServices;
+
+[System.Serializable]
+public class Malyeog
+{
+    public string name;
+
+    [TextArea(5,10)]
+    public List<string> upgradeExplanation = new List<string>();
+}
+
 
 public class Foundation : MonoBehaviour
 {
     public static Foundation instance { get; private set; }
     void Awake() => instance = this;
+
+    public List<Malyeog> malyeog = new List<Malyeog>();
 
     [Header("제단")]
     const float speed = -10; // 마법진 돌아가는 속도
@@ -39,11 +50,12 @@ public class Foundation : MonoBehaviour
     const int windowWidth = 1675;
     const int windowHeight = 885;
 
+    [Space(10)]
     [SerializeField] Image fadeInOut;
-    public Text Title; // 마력 이름
-    public Text Explanation; // 마력 설명
+    public Text title; // 마력 이름
+    public Text explanation; // 마력 설명
     public GameObject purchase;
-    public Text Dimensional_Price; // 마력 가격
+    public Text dimensionalPrice; // 마력 가격
 
     public int Magic_Open;
     public int Body_Open;
