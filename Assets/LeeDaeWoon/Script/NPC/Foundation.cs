@@ -8,8 +8,8 @@ using System.Runtime.InteropServices;
 
 public class Foundation : MonoBehaviour
 {
-    public static Foundation Inst { get; private set; }
-    void Awake() => Inst = this;
+    public static Foundation instance { get; private set; }
+    void Awake() => instance = this;
 
     [Header("제단")]
     const float speed = -10; // 마법진 돌아가는 속도
@@ -20,21 +20,29 @@ public class Foundation : MonoBehaviour
     [SerializeField] GameObject upGrade; // 상호작용 오브젝트
     [SerializeField] Text upGradeText; // 상호작용 텍스트
     [SerializeField] bool isCollisionCheck = true; // 충돌 했는지 체크
-    
+
     [Header("마력강화 창")]
-    float timer; // 창 열리는 속도
-    [SerializeField] GameObject pole01; // 봉_01
-    [SerializeField] GameObject pole02; // 봉_02
-    [SerializeField] GameObject malyeogWindow; // 창 오브젝트
-    [SerializeField] RectTransform malyeogRectWindow; // 창2
+    [SerializeField] GameObject upBar;
+    [SerializeField] GameObject downBar;
+    [SerializeField] GameObject foundationWindow;
+    [SerializeField] RectTransform foundationRect;
+    [SerializeField] Button closeBtn;
+    float timer;
     bool iswindowOpenCheck = false;
 
-    [SerializeField] Image fadeInOut;
+    const int openBar = 452;
+    const int closeBar = 30;
 
+    const float openSpeed = 0.25f;
+    const float closeSpeed = 0.32f;
+
+    const int windowWidth = 1675;
+    const int windowHeight = 885;
+
+    [SerializeField] Image fadeInOut;
     public Text Title; // 마력 이름
     public Text Explanation; // 마력 설명
-    public GameObject Close_Btn; // 닫기 버튼
-    public GameObject Price_obj; // 가격 오브젝트
+    public GameObject purchase;
     public Text Dimensional_Price; // 마력 가격
 
     public int Magic_Open;
@@ -42,8 +50,10 @@ public class Foundation : MonoBehaviour
 
     void Start()
     {
-        upGradeText.DOFade(0f, 0f);
-        fBtn.DOFade(0f, 0f);
+        CloseBtn();
+
+        upGradeText.DOFade(0, 0f);
+        fBtn.DOFade(0, 0);
     }
 
     void Update()
@@ -64,10 +74,11 @@ public class Foundation : MonoBehaviour
     private void UpgradeTransformChange(Vector3 vec) => upGrade.transform.localPosition = Camera.main.WorldToScreenPoint(gameObject.transform.localPosition + vec);
 
     private bool SceneNameEquals(string name) => SceneManager.GetActiveScene().name.Equals(name);
+
     public void MagicCircle_Rotation()
     {
         if (SceneManager.GetActiveScene().name.Equals("Main"))
-            magicCircle.DOFade(1f, 1f);
+            magicCircle.DOFade(1, 1).SetEase(Ease.Linear);
 
         magicCircle.transform.Rotate(new Vector3(0, 0, speed * Time.deltaTime));
     }
@@ -76,72 +87,82 @@ public class Foundation : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F) && isCollisionCheck == false && iswindowOpenCheck == false)
         {
-            fadeInOut.DOFade(0.5f, 1f);
+            fadeInOut.DOFade(0.5f, 1).SetEase(Ease.Linear);
             UIManager.instance.isPlayerControl = true;
-            StartCoroutine(Open_Window());
+            StartCoroutine(OpenWindow());
             iswindowOpenCheck = true;
         }
     }
 
     #region 창 연출
-    public void Close() => StartCoroutine(Close_Window());
-
-    public IEnumerator Open_Window()
+    void CloseBtn()
     {
-        SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX);
-        UIManager.instance.isCursorFade = true;
-        malyeogWindow.SetActive(true);
+        closeBtn.onClick.AddListener(() =>
+        {
+            StartCoroutine(CloseWindow());
+        });
+    }
+
+    public void Close() => StartCoroutine(CloseWindow());
+
+    public IEnumerator OpenWindow()
+    {
         timer = 0f;
-        pole01.transform.DOLocalMoveY(452, 0.5f);
-        pole02.transform.DOLocalMoveY(-452, 0.5f);
+        SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX);
+        foundationWindow.SetActive(true);
+
+        upBar.transform.DOLocalMoveY(openBar, openSpeed).SetEase(Ease.Linear);
+        downBar.transform.DOLocalMoveY(-openBar, openSpeed).SetEase(Ease.Linear);
 
         while (timer < 1)
         {
-            malyeogRectWindow.sizeDelta = new Vector2(1696.425f, Mathf.Lerp(0, 931.6482f, timer));
-            timer += Time.deltaTime * 3f;
+            foundationRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(0, windowHeight, timer));
+            timer += Time.deltaTime * 4;
             yield return null;
         }
     }
 
-    public IEnumerator Close_Window()
+    public IEnumerator CloseWindow()
     {
-        SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX);
-        UIManager.instance.isCursorFade = false;
         timer = 0f;
-        pole01.transform.DOLocalMoveY(30, 0.5f);
-        pole02.transform.DOLocalMoveY(-30, 0.5f);
-        fadeInOut.DOFade(0f, 1f);
+        SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX);
+
+        upBar.transform.DOLocalMoveY(closeBar, closeSpeed);
+        downBar.transform.DOLocalMoveY(-closeBar, closeSpeed).OnComplete(() =>
+        {
+            fadeInOut.DOFade(0, 1).SetEase(Ease.Linear);
+
+            UIManager.instance.isPlayerControl = false;
+            foundationWindow.SetActive(false);
+            iswindowOpenCheck = false;
+        });
+
         while (timer < 1)
         {
-            malyeogRectWindow.sizeDelta = new Vector2(1696.425f, Mathf.Lerp(931.6482f, 0, timer));
-            timer += Time.deltaTime * 3f;
+            foundationRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(windowHeight, 0, timer));
+            timer += Time.deltaTime * 4;
             yield return null;
         }
-        UIManager.instance.isPlayerControl = false;
-        malyeogWindow.SetActive(false);
-        iswindowOpenCheck = false;
     }
     #endregion
 
-    #region 충돌 체크
-    private void OnTriggerStay2D(Collider2D collision)
+    void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null)
         {
             isCollisionCheck = false;
-            upGradeText.DOFade(1f, 0.5f);
-            fBtn.DOFade(1f, 0.5f);
+            upGradeText.DOFade(1, 0.5f).SetEase(Ease.Linear);
+            fBtn.DOFade(1, 0.5f).SetEase(Ease.Linear);
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null)
         {
             isCollisionCheck = true;
-            upGradeText.DOFade(0f, 0.5f);
-            fBtn.DOFade(0f, 0.5f);
+            upGradeText.DOFade(0, 0.5f).SetEase(Ease.Linear);
+            fBtn.DOFade(0, 0.5f).SetEase(Ease.Linear);
         }
     }
-    #endregion
 }

@@ -1058,8 +1058,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -2}
-  m_SizeDelta: {x: 1675, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1675, y: 885}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &207110227
 MonoBehaviour:
@@ -1451,9 +1451,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   malyeog: 1
-  Malyeog_Num: 1
-  Malyeog_Upgrade: 0
-  MalyeogUp_Text: {fileID: 1647357649}
+  malyeogNum: 1
+  malyeogUpgrade: 0
+  malyeogUpgradeText: {fileID: 1288205245}
   BodyOpen_Check: 0
   MagicOpen_Check: 0
 --- !u!114 &242195660
@@ -1469,7 +1469,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -2160,7 +2160,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -263, y: -56.784}
+  m_AnchoredPosition: {x: -617, y: -56.784}
   m_SizeDelta: {x: 340.7139, y: 63.8838}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &308306408
@@ -3716,9 +3716,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ac787599ae25f84ca74b544a8af2df3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  F_Button: {fileID: 25982789}
-  Move_Text: {fileID: 713642139}
-  Move: {fileID: 639716128}
+  upgrade: {fileID: 639716128}
+  FBtn: {fileID: 806538701}
+  upgradeText: {fileID: 713642139}
 --- !u!61 &432347594
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5941,15 +5941,15 @@ MonoBehaviour:
   upGrade: {fileID: 225275279}
   upGradeText: {fileID: 308306408}
   isCollisionCheck: 1
-  pole01: {fileID: 0}
-  pole02: {fileID: 0}
-  malyeogWindow: {fileID: 1335728407}
-  malyeogRectWindow: {fileID: 207110226}
+  upBar: {fileID: 173591831}
+  downBar: {fileID: 1330401458}
+  foundationWindow: {fileID: 1335728407}
+  foundationRect: {fileID: 207110226}
+  closeBtn: {fileID: 1001446933}
   fadeInOut: {fileID: 627674985}
   Title: {fileID: 441326551}
   Explanation: {fileID: 1288205245}
-  Close_Btn: {fileID: 1001446933}
-  Price_obj: {fileID: 1594466374}
+  purchase: {fileID: 535428129}
   Dimensional_Price: {fileID: 1436679608}
   Magic_Open: 0
   Body_Open: 0
@@ -6097,9 +6097,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   malyeog: 0
-  Malyeog_Num: 2
-  Malyeog_Upgrade: 0
-  MalyeogUp_Text: {fileID: 319092040}
+  malyeogNum: 2
+  malyeogUpgrade: 0
+  malyeogUpgradeText: {fileID: 1288205245}
   BodyOpen_Check: 0
   MagicOpen_Check: 0
 --- !u!114 &737903163
@@ -6115,7 +6115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -6900,7 +6900,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -460, y: -57}
+  m_AnchoredPosition: {x: -814, y: -57}
   m_SizeDelta: {x: 96.0956, y: 64.316}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &806538701
@@ -7831,9 +7831,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   malyeog: 0
-  Malyeog_Num: 1
-  Malyeog_Upgrade: 0
-  MalyeogUp_Text: {fileID: 950157560}
+  malyeogNum: 1
+  malyeogUpgrade: 0
+  malyeogUpgradeText: {fileID: 1288205245}
   BodyOpen_Check: 0
   MagicOpen_Check: 0
 --- !u!114 &928888480
@@ -7849,7 +7849,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -8598,9 +8598,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   malyeog: 1
-  Malyeog_Num: 3
-  Malyeog_Upgrade: 0
-  MalyeogUp_Text: {fileID: 612221574}
+  malyeogNum: 3
+  malyeogUpgrade: 0
+  malyeogUpgradeText: {fileID: 1288205245}
   BodyOpen_Check: 0
   MagicOpen_Check: 0
 --- !u!114 &995056723
@@ -8616,7 +8616,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -13176,9 +13176,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   malyeog: 1
-  Malyeog_Num: 2
-  Malyeog_Upgrade: 0
-  MalyeogUp_Text: {fileID: 1952688467}
+  malyeogNum: 2
+  malyeogUpgrade: 0
+  malyeogUpgradeText: {fileID: 1288205245}
   BodyOpen_Check: 0
   MagicOpen_Check: 0
 --- !u!114 &1578202526
@@ -13194,7 +13194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -14587,9 +14587,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   malyeog: 0
-  Malyeog_Num: 0
-  Malyeog_Upgrade: 0
-  MalyeogUp_Text: {fileID: 801680820}
+  malyeogNum: 0
+  malyeogUpgrade: 0
+  malyeogUpgradeText: {fileID: 1288205245}
   BodyOpen_Check: 0
   MagicOpen_Check: 0
 --- !u!114 &1740663108
@@ -14605,7 +14605,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -15435,9 +15435,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   malyeog: 0
-  Malyeog_Num: 3
-  Malyeog_Upgrade: 0
-  MalyeogUp_Text: {fileID: 2041747448}
+  malyeogNum: 3
+  malyeogUpgrade: 0
+  malyeogUpgradeText: {fileID: 1288205245}
   BodyOpen_Check: 0
   MagicOpen_Check: 0
 --- !u!114 &1894730033
@@ -15453,7 +15453,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -16526,9 +16526,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   malyeog: 1
-  Malyeog_Num: 0
-  Malyeog_Upgrade: 0
-  MalyeogUp_Text: {fileID: 414635762}
+  malyeogNum: 0
+  malyeogUpgrade: 0
+  malyeogUpgradeText: {fileID: 1288205245}
   BodyOpen_Check: 0
   MagicOpen_Check: 0
 --- !u!114 &2052249130
@@ -16544,7 +16544,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}

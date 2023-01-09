@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using DG.Tweening;
 
 public class King_Collision : MonoBehaviour
@@ -37,7 +36,7 @@ public class King_Collision : MonoBehaviour
         NextDialogue_F();
 
         if (king.isMagicCreation == true)
-            Foundation.Inst.MagicCircle_Rotation();
+            Foundation.instance.MagicCircle_Rotation();
     }
 
     public void NextDialogue_F()

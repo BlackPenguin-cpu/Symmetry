@@ -28,7 +28,7 @@ public class Salesman : MonoBehaviour
     void Start()
     {
         // 정상 웨이브 : 5 / 10 / 15
-        switch(WaveManager.instnace.m_WaveNum)
+        switch (WaveManager.instnace.m_WaveNum)
         {
             case 3:
                 goldNum = 600;
@@ -44,8 +44,11 @@ public class Salesman : MonoBehaviour
     }
     void Update()
     {
-        Re_Roll();
+        #region 월드 좌표를 스크린 좌표로 변경을 해준다.
         differentProduct.transform.localPosition = Camera.main.WorldToScreenPoint(transform.localPosition + new Vector3(-8, -4.9f, 0));
+        #endregion
+        Re_Roll();
+
     }
 
     private void Re_Roll()
@@ -87,7 +90,6 @@ public class Salesman : MonoBehaviour
         }
     }
 
-    #region 충돌체크
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null)
@@ -113,5 +115,4 @@ public class Salesman : MonoBehaviour
             goldImage.DOFade(0, waitTime).SetEase(Ease.Linear);
         }
     }
-    #endregion
 }
