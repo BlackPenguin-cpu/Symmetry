@@ -17,9 +17,8 @@ public class SkillWindow : MonoBehaviour
     const int openBar = 149;
     const int closeBar = 190;
 
-    const float windowSpeed = 0.25f;
-    const float openSpeed = 0.25f;
-    const float closeSpeed = 0.23f;
+    const float closeSpeed = 0.22f;
+    const float barSpeed = 0.24f;
 
     const int windowOpen = 34;
     const int windowClose = 240;
@@ -325,9 +324,9 @@ public class SkillWindow : MonoBehaviour
         }
 
         skillWindow.SetActive(true);
-        downBar.transform.DOLocalMoveY(-openBar, openSpeed).SetEase(Ease.Linear);
-        skillWindowRect.DOLocalMoveY(windowOpen, openSpeed).SetEase(Ease.Linear);
-        skillWindowRect.DOSizeDelta(new Vector2(windowWidth, windowHeight), windowSpeed).SetEase(Ease.Linear);
+        downBar.transform.DOLocalMoveY(-openBar, barSpeed).SetEase(Ease.Linear);
+        skillWindowRect.DOLocalMoveY(windowOpen, barSpeed).SetEase(Ease.Linear);
+        skillWindowRect.DOSizeDelta(new Vector2(windowWidth, windowHeight), barSpeed).SetEase(Ease.Linear);
     }
 
     public void CloseWindow(int skillNum)
@@ -363,7 +362,7 @@ public class SkillWindow : MonoBehaviour
             skillWindow.SetActive(false);
         });
         skillWindowRect.DOLocalMoveY(windowClose, closeSpeed).SetEase(Ease.Linear);
-        skillWindowRect.DOSizeDelta(new Vector2(windowWidth, 0), windowSpeed).SetEase(Ease.Linear);
+        skillWindowRect.DOSizeDelta(new Vector2(windowWidth, 0), barSpeed).SetEase(Ease.Linear);
 
         if (Purchase == false)
             AfterPurchase_Window.gameObject.SetActive(true);
