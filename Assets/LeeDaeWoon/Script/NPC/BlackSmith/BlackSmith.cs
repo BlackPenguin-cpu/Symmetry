@@ -42,22 +42,18 @@ public class BlackSmith : MonoBehaviour
 
     public List<Weapon> weapon = new List<Weapon>();
 
-
-
     [Header("상호작용 버튼")]
     [SerializeField] Image F_Button; // 상호작용 버튼
     [SerializeField] GameObject Upgrade; // 상호작용 오브젝트
     [SerializeField] Text Upgrade_Text; // 상호작용 텍스트
 
     [Header("무기 구매 및 강화 창")]
-    float timer;
     [SerializeField] GameObject upBar;
     [SerializeField] GameObject downBar;
     [SerializeField] GameObject weaponWindow;
     [SerializeField] RectTransform weaponRect; // 창
 
     [SerializeField] Image FadeInout;
-
 
     const int openBar = 447;
     const int closeBar = 30;
@@ -257,7 +253,7 @@ public class BlackSmith : MonoBehaviour
             UIManager.instance.isCursorFade = true;
             UIManager.instance.isPlayerControl = true;
             FadeInout.DOFade(0.5f, 1);
-            StartCoroutine(OpenWindow());
+            OpenWindow();
         }
 
         if (Input.GetKeyDown(KeyCode.Escape) && isWindowOpenCheck)
@@ -271,7 +267,7 @@ public class BlackSmith : MonoBehaviour
         //닫기 버튼을 눌렀을 때
         closeBtn.onClick.AddListener(() =>
         {
-            StartCoroutine(CloseWindow());
+            CloseWindow();
         });
 
         // 왼쪽 방향 버튼을 눌렀을 때
@@ -371,12 +367,13 @@ public class BlackSmith : MonoBehaviour
     #region 창 연출
     public void Close()
     {
-        StartCoroutine(CloseWindow());
+        CloseWindow();
     }
 
-    public IEnumerator OpenWindow()
+    public void OpenWindow()
     {
-        timer = 0f;
+        SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX);
+
         UIManager.instance.isCursorFade = true;
         weaponWindow.SetActive(true);
         upBar.transform.DOLocalMoveY(openBar, barSpeed).SetEase(Ease.Linear);
@@ -385,19 +382,15 @@ public class BlackSmith : MonoBehaviour
             isBlackSmithWindowClose = true;
         });
 
-        while (timer < 1)
-        {
-            weaponRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(0, windowHeight, timer));
-            timer += Time.deltaTime * 4;
-            yield return null;
-        }
+        weaponRect.DOSizeDelta(new Vector2(windowWidth, windowHeight), barSpeed).SetEase(Ease.Linear).SetUpdate(true);
     }
 
-    public IEnumerator CloseWindow()
+    public void CloseWindow()
     {
         if (isBlackSmithWindowClose)
         {
-            timer = 0f;
+            SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX);
+
             UIManager.instance.isCursorFade = false;
             isBlackSmithWindowClose = false;
             FadeInout.DOFade(0, 1);
@@ -410,12 +403,7 @@ public class BlackSmith : MonoBehaviour
                 isWindowOpenCheck = false;
             });
 
-            while (timer < 1)
-            {
-                weaponRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(windowHeight, 0, timer));
-                timer += Time.deltaTime * 4;
-                yield return null;
-            }
+            weaponRect.DOSizeDelta(new Vector2(windowWidth, 0), barSpeed).SetEase(Ease.Linear).SetUpdate(true);
         }
     }
     #endregion

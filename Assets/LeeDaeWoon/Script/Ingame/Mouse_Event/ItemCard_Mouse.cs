@@ -17,7 +17,6 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         Right
     }
     public EDirection eDirection;
-    float timer = 0;
 
     [Header("ºû")]
     public Image leftLight;
@@ -35,7 +34,6 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     [SerializeField] RectTransform rightRect;
 
     const int windowWidth = 545;
-    const int windowHeight = 890;
     const int windowClickPos = 1200;
 
     [Header("ºÀ")]

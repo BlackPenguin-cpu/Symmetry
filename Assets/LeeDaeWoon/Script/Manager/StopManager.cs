@@ -9,7 +9,6 @@ public class StopManager : MonoBehaviour
 {
     public static StopManager instnace { get; private set; }
 
-    float timer = 0f;
     [SerializeField] Image fadeBackGround;
     public bool inPause = false;
 
@@ -157,33 +156,33 @@ public class StopManager : MonoBehaviour
     {
         MainReset();
 
-        // ESC 키를 누르면 일시정지 창이 열린다.
-        //if (Input.GetKeyDown(KeyCode.Escape))
-        //{
-        //    if (isESC == false && isEscCheck == false)
-        //    {
-        //        isEscCheck = true;
-        //        StartCoroutine(PauseWindow());
-        //    }
+        //ESC 키를 누르면 일시정지 창이 열린다.
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (isESC == false && isEscCheck == false)
+            {
+                isEscCheck = true;
+                PauseWindow();
+            }
 
-        //    else if (isESC == true && isEscCheck == false)
-        //    {
-        //        isEscCheck = true;
+            else if (isESC == true && isEscCheck == false)
+            {
+                isEscCheck = true;
 
-        //        pauseBarUp.transform.DOLocalMoveY(pauseBarClose, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
-        //        pauseBarDown.transform.DOLocalMoveY(-pauseBarClose, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
-        //        {
-        //            isEscCheck = false;
-        //            isESC = false;
+                pauseBarUp.transform.DOLocalMoveY(pauseBarClose, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
+                pauseBarDown.transform.DOLocalMoveY(-pauseBarClose, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
+                {
+                    isEscCheck = false;
+                    isESC = false;
 
-        //            pauseWindow.SetActive(false);
-        //            Time.timeScale = 1f;
-        //        });
+                    pauseWindow.SetActive(false);
+                    Time.timeScale = 1f;
+                });
 
-        //        StartCoroutine(PauseWindowClose());
-        //    }
+                pauseRect.DOSizeDelta(new Vector2(pauseWidth, 0), pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
+            }
 
-        //}
+        }
     }
 
     void Awake()
@@ -240,7 +239,7 @@ public class StopManager : MonoBehaviour
                 Time.timeScale = 1f;
             });
 
-            StartCoroutine(PauseWindowClose());
+            pauseRect.DOSizeDelta(new Vector2(pauseWidth, 0), pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
         });
 
         // 설정 버튼을 눌렀을 때
@@ -256,9 +255,9 @@ public class StopManager : MonoBehaviour
 
                 settingBarUp.transform.DOLocalMoveY(settingBar, settingBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
                 settingBarDown.transform.DOLocalMoveY(-settingBar, settingBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
-                StartCoroutine(SettingWindow());
+                settingRect.DOSizeDelta(new Vector2(settingWidth, settingHeigh), settingBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
             });
-            StartCoroutine(PauseWindowClose());
+            pauseRect.DOSizeDelta(new Vector2(pauseWidth, 0), pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
         });
 
         // 설정닫기 버튼을 눌렀을 때
@@ -272,7 +271,7 @@ public class StopManager : MonoBehaviour
                 settingWindow.SetActive(false);
                 Time.timeScale = 1;
             });
-            StartCoroutine(SettingWindowClose());
+            settingRect.DOSizeDelta(new Vector2(settingWidth, 0), settingBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
         });
 
         // 플레이어 버튼을 눌렀을 때
@@ -290,9 +289,9 @@ public class StopManager : MonoBehaviour
 
                 playerBarUp.transform.DOLocalMoveY(playerBar, playerBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
                 playerBarDown.transform.DOLocalMoveY(-playerBar, playerBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
-                StartCoroutine(PlayerWindow());
+                playerRect.DOSizeDelta(new Vector2(playerWidth, playerHeigh), playerBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
             });
-            StartCoroutine(PauseWindowClose());
+            pauseRect.DOSizeDelta(new Vector2(pauseWidth, 0), pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
         });
 
         // 플레이어 닫기 버튼을 눌렀을 때
@@ -306,7 +305,7 @@ public class StopManager : MonoBehaviour
                 playerWindow.SetActive(false);
                 Time.timeScale = 1;
             });
-            StartCoroutine(PlayerWindowClose());
+            playerRect.DOSizeDelta(new Vector2(playerWidth, 0), playerBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
         });
 
         // 플레이어 창의 아이템 버튼을 눌렀을 때
@@ -328,9 +327,9 @@ public class StopManager : MonoBehaviour
 
                 playerBarUp.transform.DOLocalMoveY(playerBar, playerBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
                 playerBarDown.transform.DOLocalMoveY(-playerBar, playerBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
-                StartCoroutine(PlayerWindow());
+                playerRect.DOSizeDelta(new Vector2(playerWidth, playerHeigh), playerBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
             });
-            StartCoroutine(PlayerWindowClose());
+            playerRect.DOSizeDelta(new Vector2(playerWidth, 0), playerBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
         });
 
         // 플레이어 창의 무기 버튼을 눌렀을 때
@@ -346,9 +345,9 @@ public class StopManager : MonoBehaviour
 
                playerBarUp.transform.DOLocalMoveY(playerBar, playerBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
                playerBarDown.transform.DOLocalMoveY(-playerBar, playerBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
-               StartCoroutine(PlayerWindow());
+               playerRect.DOSizeDelta(new Vector2(playerWidth, playerHeigh), playerBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
            });
-           StartCoroutine(PlayerWindowClose());
+           playerRect.DOSizeDelta(new Vector2(playerWidth, 0), playerBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
        });
 
         // 메인화면 버튼을 눌렀을 때
@@ -364,9 +363,9 @@ public class StopManager : MonoBehaviour
 
                 mainBarUp.transform.DOLocalMoveY(mainBar, mainBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
                 mainBarDown.transform.DOLocalMoveY(-mainBar, mainBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
-                StartCoroutine(MainWindow());
+                mainRect.DOSizeDelta(new Vector2(mainWidth, mainHeigh), mainBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
             });
-            StartCoroutine(PauseWindowClose());
+            pauseRect.DOSizeDelta(new Vector2(pauseWidth, 0), pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
         });
 
         // 메인화면에서 예 버튼을 눌렀을 때
@@ -386,7 +385,7 @@ public class StopManager : MonoBehaviour
                 mainWindow.SetActive(false);
                 Time.timeScale = 1;
             });
-            StartCoroutine(MainWindowClose());
+            mainRect.DOSizeDelta(new Vector2(mainWidth, 0), mainBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
         });
 
         // 나가기 버튼을 눌렀을 때
@@ -402,9 +401,9 @@ public class StopManager : MonoBehaviour
 
                 exitBarUp.transform.DOLocalMoveY(exitBar, exitBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
                 exitBarDown.transform.DOLocalMoveY(-exitBar, exitBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
-                StartCoroutine(ExitWindow());
+                exitRect.DOSizeDelta(new Vector2(exitWidth, exitHeigh), exitBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
             });
-            StartCoroutine(PauseWindowClose());
+            pauseRect.DOSizeDelta(new Vector2(pauseWidth, 0), pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
         });
 
         // 나가기 예 버튼을 눌렀을 때
@@ -425,19 +424,18 @@ public class StopManager : MonoBehaviour
                 exitWindow.SetActive(false);
                 Time.timeScale = 1;
             });
-            StartCoroutine(ExitWindowClose());
+            exitRect.DOSizeDelta(new Vector2(exitWidth, 0), exitBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
         });
     }
 
-    #region 일시정지 창
     // 일시정지 창 열기
-    IEnumerator PauseWindow()
+    void PauseWindow()
     {
+        SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
+
         Time.timeScale = 0f;
 
-        timer = 0;
         pauseWindow.SetActive(true);
-        SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
 
         pauseBarUp.transform.DOLocalMoveY(pauseBar, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
         pauseBarDown.transform.DOLocalMoveY(-pauseBar, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
@@ -445,143 +443,8 @@ public class StopManager : MonoBehaviour
             isESC = true;
             isEscCheck = false;
         });
-
-        while (timer < 1)
-        {
-            pauseRect.sizeDelta = new Vector2(pauseWidth, Mathf.Lerp(0, pauseHeight, timer));
-
-            timer += Time.unscaledDeltaTime * 3.3f;
-            yield return null;
-        }
-
+        pauseRect.DOSizeDelta(new Vector2(pauseWidth, pauseHeight), pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
     }
-
-    // 일시정지 창 닫기
-    IEnumerator PauseWindowClose()
-    {
-        timer = 0;
-
-        while (timer < 1)
-        {
-            pauseRect.sizeDelta = new Vector2(pauseWidth, Mathf.Lerp(pauseHeight, 0, timer));
-
-            timer += Time.unscaledDeltaTime * 2.8f;
-            yield return null;
-        }
-    }
-    #endregion
-
-    #region 설정 창
-    // 설정 창 열기
-    IEnumerator SettingWindow()
-    {
-        timer = 0;
-
-        while (timer < 1)
-        {
-            settingRect.sizeDelta = new Vector2(settingWidth, Mathf.Lerp(0, settingHeigh, timer));
-            timer += Time.unscaledDeltaTime * 3f;
-            yield return null;
-        }
-    }
-
-    // 설정 창 닫기
-    IEnumerator SettingWindowClose()
-    {
-        timer = 0;
-
-        while (timer < 1)
-        {
-            settingRect.sizeDelta = new Vector2(settingWidth, Mathf.Lerp(settingHeigh, 0, timer));
-            timer += Time.unscaledDeltaTime * 3f;
-            yield return null;
-        }
-    }
-    #endregion
-
-    #region 플레이어 창
-    // 플레이어 창 열기
-    IEnumerator PlayerWindow()
-    {
-        timer = 0;
-
-        while (timer < 1)
-        {
-            playerRect.sizeDelta = new Vector2(playerWidth, Mathf.Lerp(0, playerHeigh, timer));
-            timer += Time.unscaledDeltaTime * 3f;
-            yield return null;
-        }
-    }
-
-    // 플레이어 창 닫기
-    IEnumerator PlayerWindowClose()
-    {
-        timer = 0;
-
-        while (timer < 1)
-        {
-            playerRect.sizeDelta = new Vector2(playerWidth, Mathf.Lerp(playerHeigh, 0, timer));
-            timer += Time.unscaledDeltaTime * 3f;
-            yield return null;
-        }
-    }
-    #endregion
-
-    #region 메인 창
-    // 메인 창 열기
-    IEnumerator MainWindow()
-    {
-        timer = 0;
-
-        while (timer < 1)
-        {
-            mainRect.sizeDelta = new Vector2(mainWidth, Mathf.Lerp(0, mainHeigh, timer));
-            timer += Time.unscaledDeltaTime * 3f;
-            yield return null;
-        }
-    }
-
-    // 메인 창 닫기
-    IEnumerator MainWindowClose()
-    {
-        timer = 0;
-
-        while (timer < 1)
-        {
-            mainRect.sizeDelta = new Vector2(mainWidth, Mathf.Lerp(mainHeigh, 0, timer));
-            timer += Time.unscaledDeltaTime * 3f;
-            yield return null;
-        }
-    }
-    #endregion
-
-    #region 나가기 창
-    // 나가기 창 열기
-    IEnumerator ExitWindow()
-    {
-        timer = 0;
-
-        while (timer < 1)
-        {
-            exitRect.sizeDelta = new Vector2(exitWidth, Mathf.Lerp(0, exitHeigh, timer));
-            timer += Time.unscaledDeltaTime * 3f;
-            yield return null;
-        }
-    }
-
-    // 나가기 창 닫기
-    IEnumerator ExitWindowClose()
-    {
-        timer = 0;
-
-        while (timer < 1)
-        {
-            exitRect.sizeDelta = new Vector2(exitWidth, Mathf.Lerp(exitHeigh, 0, timer));
-            timer += Time.unscaledDeltaTime * 3f;
-            yield return null;
-        }
-    }
-    #endregion
 
     public void WeaponType()
     {

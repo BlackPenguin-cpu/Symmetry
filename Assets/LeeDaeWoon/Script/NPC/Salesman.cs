@@ -22,7 +22,6 @@ public class Salesman : MonoBehaviour
     bool isReRollCheck = true;
     bool isCollisionCheck = true;
 
-
     const float waitTime = 0.5f;
 
     void Start()
