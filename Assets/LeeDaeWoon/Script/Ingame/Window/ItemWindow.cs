@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 public class ItemWindow : MonoBehaviour
 {
@@ -30,8 +28,7 @@ public class ItemWindow : MonoBehaviour
 
     void Start()
     {
-        BarMove();
-        StartCoroutine(itemWindow());
+        OpenWindow();
     }
 
     void Update()
@@ -39,8 +36,12 @@ public class ItemWindow : MonoBehaviour
 
     }
 
-    void BarMove()
+    void OpenWindow()
     {
+        leftWindow.DOSizeDelta(new Vector2(windowWidth, windowHeight), barSpeed).SetEase(Ease.Linear).SetUpdate(true);
+        amongWindow.DOSizeDelta(new Vector2(windowWidth, windowHeight), barSpeed).SetEase(Ease.Linear).SetUpdate(true);
+        rightWindow.DOSizeDelta(new Vector2(windowWidth, windowHeight), barSpeed).SetEase(Ease.Linear).SetUpdate(true);
+
         leftBarUp.transform.DOLocalMoveY(barPos, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
         leftBarDown.transform.DOLocalMoveY(-barPos, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
 
@@ -52,18 +53,5 @@ public class ItemWindow : MonoBehaviour
         {
             CardManager.instance.isItemClick = true;
         });
-    }
-
-    IEnumerator itemWindow()
-    {
-        while (timer < 1)
-        {
-            leftWindow.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(0, windowHeight, timer));
-            amongWindow.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(0, windowHeight, timer));
-            rightWindow.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(0, windowHeight, timer));
-
-            timer += Time.unscaledDeltaTime * 3f;
-            yield return null;
-        }
     }
 }

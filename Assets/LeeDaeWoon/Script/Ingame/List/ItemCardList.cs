@@ -42,25 +42,25 @@ public class ItemCardList : MonoBehaviour
         switch (itemIndex)
         {
             case 0:
-                this.leftItem = item;
+                leftItem = item;
 
-                leftName.text = this.leftItem.name;
-                leftExplanation.text = this.leftItem.explanation;
-                leftIcon.sprite = this.leftItem.icon;
+                leftName.text = leftItem.name;
+                leftExplanation.text = leftItem.explanation;
+                leftIcon.sprite = leftItem.icon;
                 break;
             case 1:
-                this.amongItem = item;
+                amongItem = item;
 
-                amongName.text = this.amongItem.name;
-                amongExplanation.text = this.amongItem.explanation;
-                amongIcon.sprite = this.amongItem.icon;
+                amongName.text = amongItem.name;
+                amongExplanation.text = amongItem.explanation;
+                amongIcon.sprite = amongItem.icon;
                 break;
             case 2:
-                this.rightItem = item;
+                rightItem = item;
 
-                rightName.text = this.rightItem.name;
-                rightExplanation.text = this.rightItem.explanation;
-                rightIcon.sprite = this.rightItem.icon;
+                rightName.text = rightItem.name;
+                rightExplanation.text = rightItem.explanation;
+                rightIcon.sprite = rightItem.icon;
                 break;
 
         }
