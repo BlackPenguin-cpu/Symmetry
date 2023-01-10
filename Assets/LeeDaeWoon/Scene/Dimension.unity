@@ -701,7 +701,7 @@ RectTransform:
   m_Children:
   - {fileID: 1346817734}
   m_Father: {fileID: 1768918591}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -767,7 +767,7 @@ GameObject:
   - component: {fileID: 149831067}
   - component: {fileID: 149831066}
   m_Layer: 5
-  m_Name: Jang_cak
+  m_Name: select
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1112,7 +1112,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 256, y: -330}
-  m_SizeDelta: {x: 199.4022, y: 137.089}
+  m_SizeDelta: {x: 199.5, y: 137}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &212381893
 MonoBehaviour:
@@ -3181,7 +3181,7 @@ RectTransform:
   - {fileID: 1160573260}
   - {fileID: 1889309258}
   m_Father: {fileID: 1768918591}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5395,7 +5395,7 @@ GameObject:
   - component: {fileID: 652883125}
   - component: {fileID: 652883124}
   m_Layer: 5
-  m_Name: No_Soyu
+  m_Name: NoSoyu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6811,7 +6811,7 @@ GameObject:
   - component: {fileID: 805944997}
   - component: {fileID: 805945000}
   m_Layer: 5
-  m_Name: Jang_cak_Btn
+  m_Name: selectBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8737,7 +8737,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000032985}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -12.6622}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2141256635}
@@ -8746,7 +8746,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -511.6, y: 364}
+  m_AnchoredPosition: {x: -550, y: 360}
   m_SizeDelta: {x: 562.6558, y: 78.142}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1000032987
@@ -8771,10 +8771,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 43985f79d0b9c324a9bd638ef85f0139, type: 3}
-    m_FontSize: 53
+    m_FontSize: 43
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 4
     m_MaxSize: 68
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -8821,7 +8821,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1012596857}
-  m_RootOrder: 2
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9179,13 +9179,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1311583442}
+  - {fileID: 1338629730}
   - {fileID: 1647593647}
   - {fileID: 1101978224}
-  - {fileID: 1000793880}
-  - {fileID: 1338629730}
   - {fileID: 278567701}
+  - {fileID: 1000793880}
   - {fileID: 1104221160}
-  - {fileID: 1311583442}
   m_Father: {fileID: 1193204766}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9230,8 +9230,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 269, y: -327.11}
-  m_SizeDelta: {x: 190.9951, y: 131.31}
+  m_AnchoredPosition: {x: 256, y: -330}
+  m_SizeDelta: {x: 191, y: 131}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1013867145
 MonoBehaviour:
@@ -9822,12 +9822,12 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1071609749}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -12.6622}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 337700072}
   m_Father: {fileID: 1768918591}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -10077,7 +10077,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1012596857}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -10117,7 +10117,7 @@ RectTransform:
   - {fileID: 1565233461}
   - {fileID: 221589970}
   m_Father: {fileID: 1012596857}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -10893,7 +10893,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1768918591}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -314.53}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11436,16 +11436,16 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1311583441}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -12.6622}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 542554187}
   m_Father: {fileID: 1012596857}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -525, y: 360}
+  m_AnchoredPosition: {x: -530, y: 360}
   m_SizeDelta: {x: 562.6558, y: 78.142}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1311583443
@@ -11749,7 +11749,7 @@ RectTransform:
   - {fileID: 1024442214}
   - {fileID: 1167779150}
   m_Father: {fileID: 1012596857}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -12322,7 +12322,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1768918591}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -13664,7 +13664,7 @@ RectTransform:
   m_Children:
   - {fileID: 411791420}
   m_Father: {fileID: 1012596857}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -14306,7 +14306,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1768918591}
-  m_RootOrder: 0
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -14904,13 +14904,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1707946127}
+  - {fileID: 1071609750}
+  - {fileID: 1176611446}
   - {fileID: 79867157}
   - {fileID: 1446957612}
-  - {fileID: 1176611446}
   - {fileID: 329902697}
+  - {fileID: 1707946127}
   - {fileID: 382178493}
-  - {fileID: 1071609750}
   m_Father: {fileID: 1193204766}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16998,8 +16998,8 @@ MonoBehaviour:
     abilityUpgrade: {fileID: 1410590797}
     price: {fileID: 1707946124}
     requiredGold: {fileID: 79867156}
-    requiredPrice: {fileID: 411791421}
-    maxEnhance: {fileID: 1101978221}
+    requiredPrice: {fileID: 1346817732}
+    maxEnhance: {fileID: 1446957609}
     eWeapon: 2
     skillUpgrade:
     - "<color=#747474>\uBD80\uB52A\uD788\uAE30: \uB300\uC26C\uC5D0 \uACF5\uACA9\uD310\uC815\uC774
@@ -17022,27 +17022,22 @@ MonoBehaviour:
       2\uCD08\uB3D9\uC548 \uAE30\uC808\uD55C\uB2E4.\n\n\uBD84\uD654: 2\uBC88\uC9F8\uD0C0\uB97C
       \uACF5\uACA9 \uC2DC \uD654\uC5FC\uAD6C\uB4E4\uC774\n      \uC18C\uD658\uB3FC
       \uBAA8\uB450\uB97C \uACF5\uACA9"
-  BlackSmithWindow_Close: 0
   F_Button: {fileID: 1413887920}
   Upgrade: {fileID: 2020451373}
   Upgrade_Text: {fileID: 575341125}
-  Collision_Check: 1
   upBar: {fileID: 1046403637}
   downBar: {fileID: 372016079}
   weaponWindow: {fileID: 634678596}
   weaponRect: {fileID: 729121012}
   FadeInout: {fileID: 38998217}
-  WindowOpen_Check: 0
   closeBtn: {fileID: 618732581}
   purchaseBtn: {fileID: 1013867145}
   enhanceBtn: {fileID: 212381893}
   selectBtn: {fileID: 805944997}
   leftArrowBtn: {fileID: 1520165061}
   rightArrowBtn: {fileID: 500148429}
-  Jang_cak_Btn: {fileID: 805944995}
-  Jang_cak: {fileID: 149831064}
-  No_Soyu: {fileID: 652883122}
-  weaponObj: {fileID: 1193204765}
+  selcet: {fileID: 149831064}
+  noSoyu: {fileID: 652883122}
 --- !u!1 &2122599463
 GameObject:
   m_ObjectHideFlags: 0

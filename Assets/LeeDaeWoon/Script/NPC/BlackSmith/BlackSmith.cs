@@ -42,13 +42,12 @@ public class BlackSmith : MonoBehaviour
 
     public List<Weapon> weapon = new List<Weapon>();
 
-    public bool BlackSmithWindow_Close = false;
+
 
     [Header("상호작용 버튼")]
     [SerializeField] Image F_Button; // 상호작용 버튼
     [SerializeField] GameObject Upgrade; // 상호작용 오브젝트
     [SerializeField] Text Upgrade_Text; // 상호작용 텍스트
-    public bool Collision_Check = true; // 충돌 했는지 체크
 
     [Header("무기 구매 및 강화 창")]
     float timer;
@@ -59,7 +58,6 @@ public class BlackSmith : MonoBehaviour
 
     [SerializeField] Image FadeInout;
 
-    public bool WindowOpen_Check = false;
 
     const int openBar = 447;
     const int closeBar = 30;
@@ -78,14 +76,15 @@ public class BlackSmith : MonoBehaviour
     public Button leftArrowBtn;
     public Button rightArrowBtn;
 
-
     [Header("장착 확인")]
-    [SerializeField] GameObject Jang_cak_Btn;
-    [SerializeField] GameObject Jang_cak;
-    [SerializeField] GameObject No_Soyu;
+    [SerializeField] GameObject selcet;
+    [SerializeField] GameObject noSoyu;
 
-    public GameObject weaponObj;
+    bool isWindowOpenCheck = false;
+    bool isCollisionCheck = false;
+    bool isBlackSmithWindowClose = false;
 
+    const float fadeSpeed = 0.5f;
     const int maxLevel = 5;
 
     void Start()
@@ -111,6 +110,7 @@ public class BlackSmith : MonoBehaviour
     {
         if (weapon[0].level == maxLevel)
         {
+            Debug.Log("asdfasdf");
             weapon[0].levelText.text = "Max";
             weapon[0].maxEnhance.SetActive(true);
             weapon[0].requiredGold.SetActive(false);
@@ -132,19 +132,19 @@ public class BlackSmith : MonoBehaviour
                     weapon[0].requiredPrice.text = (400 + (200 * weapon[0].level)).ToString();
 
 
-                    No_Soyu.SetActive(false);
+                    noSoyu.SetActive(false);
                     purchaseBtn.gameObject.SetActive(false);
                     enhanceBtn.gameObject.SetActive(true);
 
                     if (Player.Instance.stat.weaponType == PlayerWeaponType.Sword)
                     {
-                        Jang_cak.SetActive(true);
-                        Jang_cak_Btn.SetActive(false);
+                        selcet.SetActive(true);
+                        selectBtn.gameObject.SetActive(false);
                     }
                     else
                     {
-                        Jang_cak.SetActive(false);
-                        Jang_cak_Btn.SetActive(true);
+                        selcet.SetActive(false);
+                        selectBtn.gameObject.SetActive(true);
                     }
                     break;
                 #endregion
@@ -162,25 +162,25 @@ public class BlackSmith : MonoBehaviour
 
                     if (weapon[0].requiredGold.gameObject.activeSelf || weapon[0].maxEnhance.gameObject.activeSelf)
                     {
-                        No_Soyu.SetActive(false);
+                        noSoyu.SetActive(false);
                         if (Player.Instance.stat.weaponType == PlayerWeaponType.Dagger)
                         {
-                            Jang_cak.SetActive(true);
-                            Jang_cak_Btn.SetActive(false);
+                            selcet.SetActive(true);
+                            selectBtn.gameObject.SetActive(false);
                             purchaseBtn.gameObject.SetActive(false);
                             enhanceBtn.gameObject.SetActive(true);
                         }
                         else
                         {
-                            Jang_cak.SetActive(false);
-                            Jang_cak_Btn.SetActive(true);
+                            selcet.SetActive(false);
+                            selectBtn.gameObject.SetActive(true);
                         }
                     }
                     else
                     {
-                        No_Soyu.SetActive(true);
-                        Jang_cak.SetActive(false);
-                        Jang_cak_Btn.SetActive(false);
+                        noSoyu.SetActive(true);
+                        selcet.SetActive(false);
+                        selectBtn.gameObject.SetActive(false);
                         purchaseBtn.gameObject.SetActive(true);
                         enhanceBtn.gameObject.SetActive(false);
                     }
@@ -199,25 +199,25 @@ public class BlackSmith : MonoBehaviour
 
                     if (weapon[0].requiredGold.gameObject.activeSelf || weapon[0].maxEnhance.gameObject.activeSelf)
                     {
-                        No_Soyu.SetActive(false);
+                        noSoyu.SetActive(false);
                         if (Player.Instance.stat.weaponType == PlayerWeaponType.Axe)
                         {
-                            Jang_cak.SetActive(true);
-                            Jang_cak_Btn.SetActive(false);
+                            selcet.SetActive(true);
+                            selectBtn.gameObject.SetActive(false);
                             purchaseBtn.gameObject.SetActive(false);
                             enhanceBtn.gameObject.SetActive(true);
                         }
                         else
                         {
-                            Jang_cak.SetActive(false);
-                            Jang_cak_Btn.SetActive(true);
+                            selcet.SetActive(false);
+                            selectBtn.gameObject.SetActive(true);
                         }
                     }
                     else
                     {
-                        No_Soyu.SetActive(true);
-                        Jang_cak.SetActive(false);
-                        Jang_cak_Btn.SetActive(false);
+                        noSoyu.SetActive(true);
+                        selcet.SetActive(false);
+                        selectBtn.gameObject.SetActive(false);
                         purchaseBtn.gameObject.SetActive(true);
                         enhanceBtn.gameObject.SetActive(false);
                     }
@@ -251,16 +251,16 @@ public class BlackSmith : MonoBehaviour
 
     public void BlackSmith_Click()
     {
-        if (Input.GetKeyDown(KeyCode.F) && Collision_Check == false && WindowOpen_Check == false)
+        if (Input.GetKeyDown(KeyCode.F) && isCollisionCheck && !isWindowOpenCheck)
         {
+            isWindowOpenCheck = true;
             UIManager.instance.isCursorFade = true;
             UIManager.instance.isPlayerControl = true;
-            FadeInout.DOFade(0.5f, 1f);
+            FadeInout.DOFade(0.5f, 1);
             StartCoroutine(OpenWindow());
-            WindowOpen_Check = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape) && BlackSmithWindow_Close == true)
+        if (Input.GetKeyDown(KeyCode.Escape) && isWindowOpenCheck)
         {
             Close();
         }
@@ -380,7 +380,10 @@ public class BlackSmith : MonoBehaviour
         UIManager.instance.isCursorFade = true;
         weaponWindow.SetActive(true);
         upBar.transform.DOLocalMoveY(openBar, barSpeed).SetEase(Ease.Linear);
-        downBar.transform.DOLocalMoveY(-openBar, barSpeed).SetEase(Ease.Linear);
+        downBar.transform.DOLocalMoveY(-openBar, barSpeed).SetEase(Ease.Linear).OnComplete(() =>
+        {
+            isBlackSmithWindowClose = true;
+        });
 
         while (timer < 1)
         {
@@ -388,24 +391,23 @@ public class BlackSmith : MonoBehaviour
             timer += Time.deltaTime * 4;
             yield return null;
         }
-        BlackSmithWindow_Close = true;
     }
 
     public IEnumerator CloseWindow()
     {
-        if (BlackSmithWindow_Close == true)
+        if (isBlackSmithWindowClose)
         {
             timer = 0f;
             UIManager.instance.isCursorFade = false;
-            BlackSmithWindow_Close = false;
-            FadeInout.DOFade(0f, 1f);
+            isBlackSmithWindowClose = false;
+            FadeInout.DOFade(0, 1);
 
             upBar.transform.DOLocalMoveY(closeBar, barSpeed).SetEase(Ease.Linear);
             downBar.transform.DOLocalMoveY(-closeBar, barSpeed).SetEase(Ease.Linear).OnComplete(() =>
             {
                 UIManager.instance.isPlayerControl = false;
                 weaponWindow.SetActive(false);
-                WindowOpen_Check = false;
+                isWindowOpenCheck = false;
             });
 
             while (timer < 1)
@@ -418,25 +420,23 @@ public class BlackSmith : MonoBehaviour
     }
     #endregion
 
-    #region 충돌 체크
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.GetComponent<ITypePlayer>() != null)
+        if (collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null)
         {
-            Collision_Check = false;
-            Upgrade_Text.DOFade(1f, 0.5f);
-            F_Button.DOFade(1f, 0.5f);
+            isCollisionCheck = true;
+            Upgrade_Text.DOFade(1, fadeSpeed);
+            F_Button.DOFade(1, fadeSpeed);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.GetComponent<ITypePlayer>() != null)
+        if (collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null)
         {
-            Collision_Check = true;
-            Upgrade_Text.DOFade(0f, 0.5f);
-            F_Button.DOFade(0f, 0.5f);
+            isCollisionCheck = false;
+            Upgrade_Text.DOFade(0, fadeSpeed);
+            F_Button.DOFade(0, fadeSpeed);
         }
     }
-    #endregion
 }

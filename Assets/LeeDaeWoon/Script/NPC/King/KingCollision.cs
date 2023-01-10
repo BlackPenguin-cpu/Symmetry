@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class King_Collision : MonoBehaviour
+public class KingCollision : MonoBehaviour
 {
     public enum Area
     {
@@ -23,6 +23,8 @@ public class King_Collision : MonoBehaviour
     public bool Dialogue_End;
 
     King king;
+
+    const float waitTime = 0.5f;
 
     void Start()
     {
@@ -44,7 +46,7 @@ public class King_Collision : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             king.fBtn.gameObject.SetActive(false);
-            StartCoroutine(NextDialogue());
+            NextDialogue();
         }
     }
 
@@ -54,7 +56,7 @@ public class King_Collision : MonoBehaviour
             king.fBtn.gameObject.SetActive(true);
     }
 
-    public IEnumerator NextDialogue()
+    public void NextDialogue()
     {
         switch (area)
         {
@@ -63,14 +65,15 @@ public class King_Collision : MonoBehaviour
                     if (rangeReach == true)
                     {
                         // 전문이 타이핑이 됬을 경우 && 대사가 7번 이하 나왔을 경우 && 대사가 아직 안 끝났을 경우
-                        if (king.dialogueText.text == king.Dialogue[king.sequenceText] && king.sequenceText <= 7 && Dialogue_End == false)
+                        if (king.dialogueText.text == king.Dialogue[king.sequenceText] && king.sequenceText <= 7 && !Dialogue_End)
                         {
                             if (king.sequenceText < 7)
                             {
                                 king.sequenceText++;
                                 king.dialogueText.text = "";
                                 king.dialogueText.DOKill();
-                                king.dialogueText.DOText(king.Dialogue[king.sequenceText], 3f, richTextEnabled = true, scrambleMode = ScrambleMode.None, scrambleChars_Tool = null);
+
+                                king.dialogueText.DOText(king.Dialogue[king.sequenceText], 3, richTextEnabled = true, scrambleMode = ScrambleMode.None, scrambleChars_Tool = null).SetEase(Ease.Linear);
                             }
 
                             else if (king.sequenceText == 7)
@@ -78,27 +81,25 @@ public class King_Collision : MonoBehaviour
                                 rangeReach = false;
                                 Dialogue_End = true;
                                 king.isDialogueExit = true;
-                                king.kingNPC.DOFade(0f, 1f);
                                 king.area01Box.enabled = false;
-                                yield return new WaitForSeconds(1.2f);
-
-                                king.kingNPC.transform.DOLocalMoveX(15f, 1f);
-
-                                yield return new WaitForSeconds(1f);
-                                king.sequenceText++;
-                                king.Zoom_Shrinking();
-                                king.dialogueText.text = "";
-                                king.kingNPC.DOFade(1f, 0.1f);
+                                king.kingNPC.DOFade(0, 1).SetEase(Ease.Linear).OnComplete(() =>
+                                {
+                                    king.kingNPC.transform.DOLocalMoveX(15, 1).SetEase(Ease.Linear).OnComplete(() =>
+                                    {
+                                        king.sequenceText++;
+                                        king.Zoom_Shrinking();
+                                        king.dialogueText.text = "";
+                                        king.kingNPC.DOFade(1, 0).SetEase(Ease.Linear);
+                                    });
+                                });
                             }
-
-
                         }
 
                         else // 전문이 다 출력되기전 F키를 눌렀을 시
                         {
                             // 치고 있던 타이핑은 멈추고, 바로 전문이 완성되도록 한다.
                             king.dialogueText.DOKill();
-                            king.dialogueText.DOText(king.Dialogue[king.sequenceText], 0, richTextEnabled = true, scrambleMode = ScrambleMode.None, scrambleChars_Tool = null);
+                            king.dialogueText.DOText(king.Dialogue[king.sequenceText], 0, richTextEnabled = true, scrambleMode = ScrambleMode.None, scrambleChars_Tool = null).SetEase(Ease.Linear);
                         }
                     }
                 }
@@ -110,13 +111,13 @@ public class King_Collision : MonoBehaviour
                     // 전문이 타이핑이 됬을 경우 && 대사가 7번 이하 나왔을 경우 && 대사가 아직 안 끝났을 경우
                     if (king.dialogueText.text == king.Dialogue[king.sequenceText] && king.sequenceText <= 12 && Dialogue_End == false)
                     {
-                        
+
                         if (king.sequenceText < 12)
                         {
                             king.sequenceText++;
                             king.dialogueText.text = "";
-                            king.dialogueText.DOPause();
-                            king.dialogueText.DOText(king.Dialogue[king.sequenceText], 3f, richTextEnabled = true, scrambleMode = ScrambleMode.None, scrambleChars_Tool = null);
+                            king.dialogueText.DOKill();
+                            king.dialogueText.DOText(king.Dialogue[king.sequenceText], 3, richTextEnabled = true, scrambleMode = ScrambleMode.None, scrambleChars_Tool = null).SetEase(Ease.Linear);
                         }
 
                         else if (king.sequenceText == 12)
@@ -124,25 +125,25 @@ public class King_Collision : MonoBehaviour
                             rangeReach = false;
                             Dialogue_End = true;
                             king.isDialogueExit = true;
-                            king.kingNPC.DOFade(0f, 1f);
                             king.area02Box.enabled = false;
-                            yield return new WaitForSeconds(1.2f);
-
-                            king.kingNPC.transform.DOLocalMoveX(23f, 1f);
-
-                            yield return new WaitForSeconds(1f);
-                            king.sequenceText++;
-                            king.Zoom_Shrinking();
-                            king.dialogueText.text = "";
-                            king.kingNPC.DOFade(1f, 0.1f);
+                            king.kingNPC.DOFade(0, 1).SetEase(Ease.Linear).OnComplete(() =>
+                            {
+                                king.kingNPC.transform.DOLocalMoveX(23, 1).SetEase(Ease.Linear).OnComplete(() =>
+                                {
+                                    king.sequenceText++;
+                                    king.Zoom_Shrinking();
+                                    king.dialogueText.text = "";
+                                    king.kingNPC.DOFade(1, 0).SetEase(Ease.Linear);
+                                });
+                            });
                         }
                     }
 
                     else // 전문이 다 출력되기전 F키를 눌렀을 시
                     {
                         // 치고 있던 타이핑은 멈추고, 바로 전문이 완성되도록 한다.
-                        king.dialogueText.DOPause();
-                        king.dialogueText.DOText(king.Dialogue[king.sequenceText], 0, richTextEnabled = true, scrambleMode = ScrambleMode.None, scrambleChars_Tool = null);
+                        king.dialogueText.DOKill();
+                        king.dialogueText.DOText(king.Dialogue[king.sequenceText], 0, richTextEnabled = true, scrambleMode = ScrambleMode.None, scrambleChars_Tool = null).SetEase(Ease.Linear);
                     }
                 }
                 break;
@@ -150,7 +151,6 @@ public class King_Collision : MonoBehaviour
             case Area.Area03:
                 if (rangeReach == true)
                 {
-
                     // 전문이 타이핑이 됬을 경우 && 대사가 7번 이하 나왔을 경우 && 대사가 아직 안 끝났을 경우
                     if (king.dialogueText.text == king.Dialogue[king.sequenceText] && king.sequenceText <= 18 && Dialogue_End == false)
                     {
@@ -158,8 +158,9 @@ public class King_Collision : MonoBehaviour
                         {
                             king.sequenceText++;
                             king.dialogueText.text = "";
-                            king.dialogueText.DOPause();
-                            king.dialogueText.DOText(king.Dialogue[king.sequenceText], 3f, richTextEnabled = true, scrambleMode = ScrambleMode.None, scrambleChars_Tool = null);
+                            king.dialogueText.DOKill();
+
+                            king.dialogueText.DOText(king.Dialogue[king.sequenceText], 3, richTextEnabled = true, scrambleMode = ScrambleMode.None, scrambleChars_Tool = null).SetEase(Ease.Linear);
                         }
 
                         else if (king.sequenceText == 18)
@@ -167,25 +168,25 @@ public class King_Collision : MonoBehaviour
                             rangeReach = false;
                             Dialogue_End = true;
                             king.isDialogueExit = true;
-                            king.kingNPC.DOFade(0f, 1f);
                             king.area03Box.enabled = false;
-                            yield return new WaitForSeconds(1.2f);
-
-                            king.kingNPC.transform.DOLocalMoveX(32f, 1f);
-
-                            yield return new WaitForSeconds(1f);
-                            king.sequenceText++;
-                            king.Zoom_Shrinking();
-                            king.dialogueText.text = "";
-                            king.kingNPC.DOFade(1f, 0.1f);
+                            king.kingNPC.DOFade(0, 1).SetEase(Ease.Linear).OnComplete(() =>
+                            {
+                                king.kingNPC.transform.DOLocalMoveX(32, 1).SetEase(Ease.Linear).OnComplete(() =>
+                                {
+                                    king.sequenceText++;
+                                    king.Zoom_Shrinking();
+                                    king.dialogueText.text = "";
+                                    king.kingNPC.DOFade(1, 0).SetEase(Ease.Linear);
+                                });
+                            });
                         }
                     }
 
                     else // 전문이 다 출력되기전 F키를 눌렀을 시
                     {
                         // 치고 있던 타이핑은 멈추고, 바로 전문이 완성되도록 한다.
-                        king.dialogueText.DOPause();
-                        king.dialogueText.DOText(king.Dialogue[king.sequenceText], 0, richTextEnabled = true, scrambleMode = ScrambleMode.None, scrambleChars_Tool = null);
+                        king.dialogueText.DOKill();
+                        king.dialogueText.DOText(king.Dialogue[king.sequenceText], 0, richTextEnabled = true, scrambleMode = ScrambleMode.None, scrambleChars_Tool = null).SetEase(Ease.Linear);
                     }
                 }
                 break;
@@ -202,7 +203,7 @@ public class King_Collision : MonoBehaviour
                             king.sequenceText++;
                             king.dialogueText.text = "";
                             king.dialogueText.DOPause();
-                            king.dialogueText.DOText(king.Dialogue[king.sequenceText], 3f, richTextEnabled = true, scrambleMode = ScrambleMode.None, scrambleChars_Tool = null);
+                            king.dialogueText.DOText(king.Dialogue[king.sequenceText], 3, richTextEnabled = true, scrambleMode = ScrambleMode.None, scrambleChars_Tool = null).SetEase(Ease.Linear);
                         }
 
                         else if (king.sequenceText == 23)
@@ -210,13 +211,13 @@ public class King_Collision : MonoBehaviour
                             rangeReach = false;
                             Dialogue_End = true;
                             king.isDialogueExit = true;
-                            king.kingNPC.DOFade(0f, 1f);
                             king.area04Box.enabled = false;
-
-                            yield return new WaitForSeconds(1f);
-                            king.isMagicCreation = true;
-                            king.Zoom_Shrinking();
-                            UIManager.instance.isKingCheck = true;
+                            king.kingNPC.DOFade(0, 1).SetEase(Ease.Linear).OnComplete(() =>
+                            {
+                                king.isMagicCreation = true;
+                                king.Zoom_Shrinking();
+                                UIManager.instance.isKingCheck = true;
+                            });
                         }
                     }
 
@@ -224,10 +225,8 @@ public class King_Collision : MonoBehaviour
                     {
                         // 치고 있던 타이핑은 멈추고, 바로 전문이 완성되도록 한다.
                         king.dialogueText.DOPause();
-                        king.dialogueText.DOText(king.Dialogue[king.sequenceText], 0, richTextEnabled = true, scrambleMode = ScrambleMode.None, scrambleChars_Tool = null);
+                        king.dialogueText.DOText(king.Dialogue[king.sequenceText], 0, richTextEnabled = true, scrambleMode = ScrambleMode.None, scrambleChars_Tool = null).SetEase(Ease.Linear);
                     }
-
-
                 }
                 break;
         }
@@ -236,49 +235,50 @@ public class King_Collision : MonoBehaviour
 
     public IEnumerator OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<ITypePlayer>() != null && UIManager.instance.isKingCheck == false)
+        if (collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null && UIManager.instance.isKingCheck == false)
         {
             king.Zoom_Expansion(); // 카메라 확대 시킨다.
+
             switch (area)
             {
                 case Area.Area01:
                     rangeReach = true;
                     king.cameraObj.GetComponent<CameraManager>().enabled = false;
-                    king.cameraObj.transform.DOLocalMoveX(0, 0.5f).SetEase(Ease.Linear);
+                    king.cameraObj.transform.DOLocalMoveX(0, waitTime).SetEase(Ease.Linear);
 
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(waitTime);
 
-                    king.dialogueText.DOText(king.Dialogue[king.sequenceText], 3f, richTextEnabled = true, scrambleMode = ScrambleMode.None, scrambleChars_Tool = null);
+                    king.dialogueText.DOText(king.Dialogue[king.sequenceText], 3, richTextEnabled = true, scrambleMode = ScrambleMode.None, scrambleChars_Tool = null).SetEase(Ease.Linear);
                     break;
 
                 case Area.Area02:
                     rangeReach = true;
                     king.cameraObj.GetComponent<CameraManager>().enabled = false;
-                    king.cameraObj.transform.DOLocalMoveX(9, 0.5f).SetEase(Ease.Linear);
+                    king.cameraObj.transform.DOLocalMoveX(9, waitTime).SetEase(Ease.Linear);
 
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(waitTime);
 
-                    king.dialogueText.DOText(king.Dialogue[king.sequenceText], 3f, richTextEnabled = true, scrambleMode = ScrambleMode.None, scrambleChars_Tool = null);
+                    king.dialogueText.DOText(king.Dialogue[king.sequenceText], 3, richTextEnabled = true, scrambleMode = ScrambleMode.None, scrambleChars_Tool = null).SetEase(Ease.Linear);
                     break;
 
                 case Area.Area03:
                     rangeReach = true;
                     king.cameraObj.GetComponent<CameraManager>().enabled = false;
-                    king.cameraObj.transform.DOLocalMoveX(17.82f, 0.5f).SetEase(Ease.Linear);
+                    king.cameraObj.transform.DOLocalMoveX(17.82f, waitTime).SetEase(Ease.Linear);
 
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(waitTime);
 
-                    king.dialogueText.DOText(king.Dialogue[king.sequenceText], 3f, richTextEnabled = true, scrambleMode = ScrambleMode.None, scrambleChars_Tool = null);
+                    king.dialogueText.DOText(king.Dialogue[king.sequenceText], 3f, richTextEnabled = true, scrambleMode = ScrambleMode.None, scrambleChars_Tool = null).SetEase(Ease.Linear);
                     break;
 
                 case Area.Area04:
                     rangeReach = true;
                     king.cameraObj.GetComponent<CameraManager>().enabled = false;
-                    king.cameraObj.transform.DOLocalMoveX(26.76f, 0.5f).SetEase(Ease.Linear);
+                    king.cameraObj.transform.DOLocalMoveX(26.76f, waitTime).SetEase(Ease.Linear);
 
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(waitTime);
 
-                    king.dialogueText.DOText(king.Dialogue[king.sequenceText], 3f, richTextEnabled = true, scrambleMode = ScrambleMode.None, scrambleChars_Tool = null);
+                    king.dialogueText.DOText(king.Dialogue[king.sequenceText], 3f, richTextEnabled = true, scrambleMode = ScrambleMode.None, scrambleChars_Tool = null).SetEase(Ease.Linear);
                     break;
             }
         }

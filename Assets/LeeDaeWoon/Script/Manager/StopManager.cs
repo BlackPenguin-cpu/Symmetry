@@ -158,32 +158,32 @@ public class StopManager : MonoBehaviour
         MainReset();
 
         // ESC 키를 누르면 일시정지 창이 열린다.
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (isESC == false && isEscCheck == false)
-            {
-                isEscCheck = true;
-                StartCoroutine(PauseWindow());
-            }
+        //if (Input.GetKeyDown(KeyCode.Escape))
+        //{
+        //    if (isESC == false && isEscCheck == false)
+        //    {
+        //        isEscCheck = true;
+        //        StartCoroutine(PauseWindow());
+        //    }
 
-            else if (isESC == true && isEscCheck == false)
-            {
-                isEscCheck = true;
+        //    else if (isESC == true && isEscCheck == false)
+        //    {
+        //        isEscCheck = true;
 
-                pauseBarUp.transform.DOLocalMoveY(pauseBarClose, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
-                pauseBarDown.transform.DOLocalMoveY(-pauseBarClose, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
-                {
-                    isEscCheck = false;
-                    isESC = false;
+        //        pauseBarUp.transform.DOLocalMoveY(pauseBarClose, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
+        //        pauseBarDown.transform.DOLocalMoveY(-pauseBarClose, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
+        //        {
+        //            isEscCheck = false;
+        //            isESC = false;
 
-                    pauseWindow.SetActive(false);
-                    Time.timeScale = 1f;
-                });
+        //            pauseWindow.SetActive(false);
+        //            Time.timeScale = 1f;
+        //        });
 
-                StartCoroutine(PauseWindowClose());
-            }
+        //        StartCoroutine(PauseWindowClose());
+        //    }
 
-        }
+        //}
     }
 
     void Awake()

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class BlackSmith_Btn : MonoBehaviour, IPointerEnterHandler
+public class OverBtnSound : MonoBehaviour, IPointerEnterHandler
 {
     public void OnPointerEnter(PointerEventData eventDatas)
     {
