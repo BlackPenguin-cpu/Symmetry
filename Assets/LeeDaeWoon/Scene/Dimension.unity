@@ -1157,19 +1157,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 212381894}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 212381896}
-        m_TargetAssemblyTypeName: BlackSmith_Btn, Assembly-CSharp
-        m_MethodName: Enhance_Click
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &212381894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1220,7 +1208,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2123617c0cd1c8d488b54cd0616df92a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseover_UI: 0
 --- !u!1 &221589969
 GameObject:
   m_ObjectHideFlags: 0
@@ -4079,19 +4066,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 500148430}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 500148432}
-        m_TargetAssemblyTypeName: BlackSmith_Btn, Assembly-CSharp
-        m_MethodName: Right_Arrow
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &500148430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4142,7 +4117,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2123617c0cd1c8d488b54cd0616df92a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseover_UI: 0
 --- !u!1 &502816917
 GameObject:
   m_ObjectHideFlags: 0
@@ -5038,19 +5012,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 618732582}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 618732584}
-        m_TargetAssemblyTypeName: BlackSmith_Btn, Assembly-CSharp
-        m_MethodName: Close
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &618732582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5101,7 +5063,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2123617c0cd1c8d488b54cd0616df92a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseover_UI: 0
 --- !u!1 &627674984
 GameObject:
   m_ObjectHideFlags: 0
@@ -6918,19 +6879,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 805944998}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 805945000}
-        m_TargetAssemblyTypeName: BlackSmith_Btn, Assembly-CSharp
-        m_MethodName: JangCak_Click
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &805944998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6981,7 +6930,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2123617c0cd1c8d488b54cd0616df92a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseover_UI: 0
 --- !u!1 &806538699
 GameObject:
   m_ObjectHideFlags: 0
@@ -9328,19 +9276,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1013867146}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1013867148}
-        m_TargetAssemblyTypeName: BlackSmith_Btn, Assembly-CSharp
-        m_MethodName: Purchase_Click
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1013867146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9391,7 +9327,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2123617c0cd1c8d488b54cd0616df92a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseover_UI: 0
 --- !u!1 &1016499526
 GameObject:
   m_ObjectHideFlags: 0
@@ -12765,19 +12700,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1520165062}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1520165064}
-        m_TargetAssemblyTypeName: BlackSmith_Btn, Assembly-CSharp
-        m_MethodName: Left_Arrow
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1520165062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12828,7 +12751,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2123617c0cd1c8d488b54cd0616df92a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseover_UI: 0
 --- !u!1 &1527811481
 GameObject:
   m_ObjectHideFlags: 0
@@ -16991,12 +16913,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon:
   - name: "\uC6A9\uC0AC\uC758 \uAC80"
-    level: {fileID: 2141256636}
+    level: 0
+    weaponSelect: {fileID: 1312466324}
+    levelText: {fileID: 2141256636}
     skill: {fileID: 817273019}
     attackDamage: {fileID: 868149130}
     attackDamageUpgrade: {fileID: 248888141}
     ability: {fileID: 982389767}
     abilityUpgrade: {fileID: 1034493638}
+    price: {fileID: 0}
+    requiredGold: {fileID: 1380030325}
+    requiredPrice: {fileID: 637711342}
+    maxEnhance: {fileID: 1875957470}
+    eWeapon: 0
     skillUpgrade:
     - "<color=#747474>\uAC15\uCCA0\uC758 \uB9C8\uC74C: \uACE0\uC815\uC801\uC73C\uB85C
       \uB370\uBBF8\uC9C0\uAC00 5\uAC10\uC18C\uD55C\uB2E4.</color>\n\n<color=#747474>\uC9D1\uB150:
@@ -17024,12 +16953,19 @@ MonoBehaviour:
       \uAC00\uD638: \uCCB4\uB825\uC774 0\uC774 \uB418\uB294 \uACF5\uACA9\uC744 \uBC1B\uC744
       \uB54C\n           \uD55C\uBC88 \uBC84\uD2F4\uB2E4. (1\uB9CC \uB0A8\uACE0 \uBC84\uD300)"
   - name: "\uD76C\uB9DD\uACFC \uC808\uB9DD"
-    level: {fileID: 542554188}
+    level: 0
+    weaponSelect: {fileID: 1012596856}
+    levelText: {fileID: 542554188}
     skill: {fileID: 1104221161}
     attackDamage: {fileID: 354909859}
     attackDamageUpgrade: {fileID: 1729992325}
     ability: {fileID: 683288397}
     abilityUpgrade: {fileID: 910124401}
+    price: {fileID: 1000793879}
+    requiredGold: {fileID: 1647593646}
+    requiredPrice: {fileID: 411791421}
+    maxEnhance: {fileID: 1101978221}
+    eWeapon: 1
     skillUpgrade:
     - "<color=#747474>\uC2E0\uC18D: \uC774\uB3D9\uC18D\uB3C4\uAC00 10% \uC99D\uAC00\uD558\uACE0
       \uB300\uC26C</color>\r\n<color=#747474>      \uD69F\uC218\uAC00 1\uD68C \uCD94\uAC00\uB41C\uB2E4.</color>\n\n<color=#747474>\uC5F0\uC1C4
@@ -17052,12 +16988,19 @@ MonoBehaviour:
       \uACF5\uACA9\uC18D\uB3C4 5%\uC99D\uAC00(\uCD5C\uB300 5\uC911\uCCA9)\n\n\uBE44\uC7A5\uC758
       \uD328: 3\uD0C0\uC5D0 \uD55C \uBC88\uC529 \uC218\uB9AC\uAC80\uC744 \uB358\uC9C4\uB2E4."
   - name: "\uC2EC\uD310\uC758 \uB0A0"
-    level: {fileID: 337700073}
+    level: 0
+    weaponSelect: {fileID: 1768918590}
+    levelText: {fileID: 337700073}
     skill: {fileID: 382178494}
     attackDamage: {fileID: 260967654}
     attackDamageUpgrade: {fileID: 1701240480}
     ability: {fileID: 1449065466}
     abilityUpgrade: {fileID: 1410590797}
+    price: {fileID: 1707946124}
+    requiredGold: {fileID: 79867156}
+    requiredPrice: {fileID: 411791421}
+    maxEnhance: {fileID: 1101978221}
+    eWeapon: 2
     skillUpgrade:
     - "<color=#747474>\uBD80\uB52A\uD788\uAE30: \uB300\uC26C\uC5D0 \uACF5\uACA9\uD310\uC815\uC774
       \uC0DD\uAE34\uB2E4.</color>\n\n<color=#747474>\uC9C0\uC9C4: \uACF5\uACA9\uC744
@@ -17090,45 +17033,16 @@ MonoBehaviour:
   weaponRect: {fileID: 729121012}
   FadeInout: {fileID: 38998217}
   WindowOpen_Check: 0
-  Purchase_Btn: {fileID: 1013867143}
-  Enhance_Btn: {fileID: 212381891}
+  closeBtn: {fileID: 618732581}
+  purchaseBtn: {fileID: 1013867145}
+  enhanceBtn: {fileID: 212381893}
+  selectBtn: {fileID: 805944997}
+  leftArrowBtn: {fileID: 1520165061}
+  rightArrowBtn: {fileID: 500148429}
   Jang_cak_Btn: {fileID: 805944995}
   Jang_cak: {fileID: 149831064}
   No_Soyu: {fileID: 652883122}
-  Weapon: {fileID: 1193204765}
-  BlackSmiths:
-  - {fileID: 1312466324}
-  - {fileID: 1012596856}
-  - {fileID: 1768918590}
-  AxeLevel_Text: {fileID: 337700073}
-  axeSkill: {fileID: 382178494}
-  Axe_AttackDamage: {fileID: 260967654}
-  Axe_AttackDamage_Upgrade: {fileID: 1701240480}
-  Axe_Defense: {fileID: 1449065466}
-  Axe_Defense_Upgrade: {fileID: 1410590797}
-  Axe_Price: {fileID: 1707946124}
-  Axe_Required_Gold: {fileID: 79867156}
-  Axe_Required_Gold_Price: {fileID: 1346817732}
-  Axe_MaxEnhance: {fileID: 1446957609}
-  SwordLevel_Text: {fileID: 2141256636}
-  swordSkill: {fileID: 817273019}
-  Sword_AttackDamage: {fileID: 868149130}
-  Sword_AttackDamage_Upgrade: {fileID: 248888141}
-  Sword_MaxHp: {fileID: 982389767}
-  Sword_MaxHp_Upgrade: {fileID: 1034493638}
-  Sword_Required_Gold: {fileID: 1380030325}
-  Sword_Required_Gold_Price: {fileID: 637711342}
-  Sword_MaxEnhance: {fileID: 1875957470}
-  DaggerLevel_Text: {fileID: 542554188}
-  daggerSkill: {fileID: 1104221161}
-  Dagger_AttackDamage: {fileID: 354909859}
-  Dagger_AttackDamage_Upgrade: {fileID: 1729992325}
-  Dagger_Critical: {fileID: 683288397}
-  Dagger_Critical_Upgrade: {fileID: 910124401}
-  Dagger_Price: {fileID: 1000793879}
-  Dagger_Required_Gold: {fileID: 1647593646}
-  Dagger_Required_Gold_Price: {fileID: 411791421}
-  Dagger_MaxEnhance: {fileID: 1101978221}
+  weaponObj: {fileID: 1193204765}
 --- !u!1 &2122599463
 GameObject:
   m_ObjectHideFlags: 0
