@@ -14,7 +14,6 @@ public class Malyeog
     public List<string> upgradeExplanation = new List<string>();
 }
 
-
 public class Foundation : MonoBehaviour
 {
     public static Foundation instance { get; private set; }
@@ -24,13 +23,13 @@ public class Foundation : MonoBehaviour
 
     [Header("제단")]
     const float speed = -10; // 마법진 돌아가는 속도
-    [SerializeField] SpriteRenderer magicCircle; // 마법진
+    [SerializeField] SpriteRenderer magicCircle;
 
     [Header("업그레이드 버튼")]
-    [SerializeField] Image fBtn; // 상호작용 버튼
-    [SerializeField] GameObject upGrade; // 상호작용 오브젝트
-    [SerializeField] Text upGradeText; // 상호작용 텍스트
-    [SerializeField] bool isCollisionCheck = true; // 충돌 했는지 체크
+    [SerializeField] Image fBtn;
+    [SerializeField] GameObject upGrade;
+    [SerializeField] Text upGradeText;
+    [SerializeField] bool isCollisionCheck = true;
 
     [Header("마력강화 창")]
     [SerializeField] GameObject upBar;
