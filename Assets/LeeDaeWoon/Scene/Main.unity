@@ -731,7 +731,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -775,11 +775,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   malyeog: 1
-  Malyeog_Num: 3
-  Malyeog_Upgrade: 0
-  MalyeogUp_Text: {fileID: 1816602765}
-  BodyOpen_Check: 0
-  MagicOpen_Check: 0
+  malyeogNum: 3
+  malyeogUpgrade: 0
+  malyeogUpgradeText: {fileID: 1816602765}
+  isBodyOpenCheck: 0
+  isMagicOpenCheck: 0
 --- !u!61 &185672974
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1024,21 +1024,137 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ef4c340507288642babc8a69a957f69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  malyeog:
+  - name: "\uC2E4\uD53C\uB4DC\uC758 \uB3C4\uC57D"
+    upgradeExplanation:
+    - "\uC2E4\uD53C\uB4DC\uC758 \uB3C4\uC57D\uB825\uC73C\uB85C \uB300\uC26C\uD69F\uC218\uAC00
+      1 \uC99D\uAC00\uD558\uACE0 \uC774\uB3D9 \uC18D\uB3C4\uAC00 <color=#877D78>10%</color>
+      / <color=#877D78>20%</color> / <color=#877D78>30%</color> / <color=#877D78>40%</color>
+      \uC0C1\uC2B9\uD55C\uB2E4."
+    - "\uC2E4\uD53C\uB4DC\uC758 \uB3C4\uC57D\uB825\uC73C\uB85C \uB300\uC26C\uD69F\uC218\uAC00
+      1 \uC99D\uAC00\uD558\uACE0 \uC774\uB3D9 \uC18D\uB3C4\uAC00 10% / <color=#877D78>20%</color>
+      / <color=#877D78>30%</color> / <color=#877D78>40%</color> \uC0C1\uC2B9\uD55C\uB2E4."
+    - "\uC2E4\uD53C\uB4DC\uC758 \uB3C4\uC57D\uB825\uC73C\uB85C \uB300\uC26C\uD69F\uC218\uAC00
+      1 \uC99D\uAC00\uD558\uACE0 \uC774\uB3D9 \uC18D\uB3C4\uAC00 <color=#877D78>10%</color>
+      / 20% / <color=#877D78>30%</color> / <color=#877D78>40%</color> \uC0C1\uC2B9\uD55C\uB2E4."
+    - "\uC2E4\uD53C\uB4DC\uC758 \uB3C4\uC57D\uB825\uC73C\uB85C \uB300\uC26C\uD69F\uC218\uAC00
+      1 \uC99D\uAC00\uD558\uACE0 \uC774\uB3D9 \uC18D\uB3C4\uAC00 <color=#877D78>10%</color>
+      / <color=#877D78>20%</color> / 30% / <color=#877D78>40%</color> \uC0C1\uC2B9\uD55C\uB2E4."
+    - "\uC2E4\uD53C\uB4DC\uC758 \uB3C4\uC57D\uB825\uC73C\uB85C \uB300\uC26C\uD69F\uC218\uAC00
+      1 \uC99D\uAC00\uD558\uACE0 \uC774\uB3D9 \uC18D\uB3C4\uAC00 <color=#877D78>10%</color>
+      / <color=#877D78>20%</color> / <color=#877D78>30%</color> / 40% \uC0C1\uC2B9\uD55C\uB2E4."
+  - name: "\uAC70\uC778\uC758 \uD798"
+    upgradeExplanation:
+    - "\uAC70\uC778\uC758 \uD798\uC744 \uBC1B\uC544 \uACF5\uACA9\uB825\uC774 <color=#877D78>15%</color>
+      / <color=#877D78>30%</color> / <color=#877D78>45%</color> / <color=#877D78>60%</color>
+      \uC0C1\uC2B9\uD55C\uB2E4."
+    - "\uAC70\uC778\uC758 \uD798\uC744 \uBC1B\uC544 \uACF5\uACA9\uB825\uC774 15%
+      / <color=#877D78>30%</color> / <color=#877D78>45%</color> / <color=#877D78>60%</color>
+      \uC0C1\uC2B9\uD55C\uB2E4."
+    - "\uAC70\uC778\uC758 \uD798\uC744 \uBC1B\uC544 \uACF5\uACA9\uB825\uC774 <color=#877D78>15%</color>
+      / 30% / <color=#877D78>45%</color> / <color=#877D78>60%</color> \uC0C1\uC2B9\uD55C\uB2E4."
+    - "\uAC70\uC778\uC758 \uD798\uC744 \uBC1B\uC544 \uACF5\uACA9\uB825\uC774 <color=#877D78>15%</color>
+      / <color=#877D78>30%</color> / 45% / <color=#877D78>60%</color> \uC0C1\uC2B9\uD55C\uB2E4."
+    - "\uAC70\uC778\uC758 \uD798\uC744 \uBC1B\uC544 \uACF5\uACA9\uB825\uC774 <color=#877D78>15%</color>
+      / <color=#877D78>30%</color> / <color=#877D78>45%</color> / 60% \uC0C1\uC2B9\uD55C\uB2E4."
+  - name: "\uAC15\uCCA0 \uD53C\uBD80"
+    upgradeExplanation:
+    - "\uAC15\uCCA0\uAC19\uC740 \uD53C\uBD80\uB97C \uC5BB\uC5B4 \uBC29\uC5B4\uB825\uC774
+      <color=#877D78>5</color> / <color=#877D78>10</color> / <color=#877D78>15</color>
+      / <color=#877D78>20</color> \uC0C1\uC2B9\uD55C\uB2E4."
+    - "\uAC15\uCCA0\uAC19\uC740 \uD53C\uBD80\uB97C \uC5BB\uC5B4 \uBC29\uC5B4\uB825\uC774
+      5 / <color=#877D78>10</color> / <color=#877D78>15</color> / <color=#877D78>20</color>
+      \uC0C1\uC2B9\uD55C\uB2E4."
+    - "\uAC15\uCCA0\uAC19\uC740 \uD53C\uBD80\uB97C \uC5BB\uC5B4 \uBC29\uC5B4\uB825\uC774
+      <color=#877D78>5</color> / 10 / <color=#877D78>15</color> / <color=#877D78>20</color>
+      \uC0C1\uC2B9\uD55C\uB2E4."
+    - "\uAC15\uCCA0\uAC19\uC740 \uD53C\uBD80\uB97C \uC5BB\uC5B4 \uBC29\uC5B4\uB825\uC774
+      <color=#877D78>5</color> / <color=#877D78>10</color> / 15 / <color=#877D78>20</color>
+      \uC0C1\uC2B9\uD55C\uB2E4."
+    - "\uAC15\uCCA0\uAC19\uC740 \uD53C\uBD80\uB97C \uC5BB\uC5B4 \uBC29\uC5B4\uB825\uC774
+      <color=#877D78>5</color> / <color=#877D78>10</color> / <color=#877D78>15</color>
+      / 20 \uC0C1\uC2B9\uD55C\uB2E4."
+  - name: "\uB9C8\uACF5\uD559 \uC2EC\uC7A5"
+    upgradeExplanation:
+    - "\uB9C8\uC815\uC11D \uC2EC\uC7A5\uC774 \uB450\uBC88\uC9F8 \uAE30\uD68C\uB97C
+      \uC918 \uCD5C\uB300\uCCB4\uB825\uC758\n<color=#877D78>20%</color> / <color=#877D78>50%</color>
+      \uC0C1\uC2B9\uD55C\uB2E4."
+    - "\uB9C8\uC815\uC11D \uC2EC\uC7A5\uC774 \uB450\uBC88\uC9F8 \uAE30\uD68C\uB97C
+      \uC918 \uCD5C\uB300\uCCB4\uB825\uC758 \n20% / <color=#877D78>50%</color> \uC0C1\uC2B9\uD55C\uB2E4."
+    - "\uB9C8\uC815\uC11D \uC2EC\uC7A5\uC774 \uB450\uBC88\uC9F8 \uAE30\uD68C\uB97C
+      \uC918 \uCD5C\uB300\uCCB4\uB825\uC758\n<color=#877D78>20%</color> / 50% \uC0C1\uC2B9\uD55C\uB2E4."
+  - name: "\uBCF4\uC774\uC9C0 \uC54A\uB294 \uC190"
+    upgradeExplanation:
+    - "\uBCF4\uC774\uC9C0 \uC54A\uB294 \uC190\uB4E4\uC774 \uD568\uAED8 \uACF5\uACA9\uD574
+      \uACF5\uACA9 \uC18D\uB3C4\uAC00\n<color=#877D78>10%</color> / <color=#877D78>20%</color>
+      / <color=#877D78>30%</color> / <color=#877D78>40%</color> \uC99D\uAC00\uD55C\uB2E4."
+    - "\uBCF4\uC774\uC9C0 \uC54A\uB294 \uC190\uB4E4\uC774 \uD568\uAED8 \uACF5\uACA9\uD574
+      \uACF5\uACA9 \uC18D\uB3C4\uAC00\n10% / <color=#877D78>20%</color> / <color=#877D78>30%</color>
+      / <color=#877D78>40%</color> \uC99D\uAC00\uD55C\uB2E4."
+    - "\uBCF4\uC774\uC9C0 \uC54A\uB294 \uC190\uB4E4\uC774 \uD568\uAED8 \uACF5\uACA9\uD574
+      \uACF5\uACA9 \uC18D\uB3C4\uAC00\n<color=#877D78>10%</color> / 20% / <color=#877D78>30%</color>
+      / <color=#877D78>40%</color> \uC99D\uAC00\uD55C\uB2E4."
+    - "\uBCF4\uC774\uC9C0 \uC54A\uB294 \uC190\uB4E4\uC774 \uD568\uAED8 \uACF5\uACA9\uD574
+      \uACF5\uACA9 \uC18D\uB3C4\uAC00\n<color=#877D78>10%</color> / <color=#877D78>20%</color>
+      / 30% / <color=#877D78>40%</color> \uC99D\uAC00\uD55C\uB2E4."
+    - "\uBCF4\uC774\uC9C0 \uC54A\uB294 \uC190\uB4E4\uC774 \uD568\uAED8 \uACF5\uACA9\uD574
+      \uACF5\uACA9 \uC18D\uB3C4\uAC00\n<color=#877D78>10%</color> / <color=#877D78>20%</color>
+      / <color=#877D78>30%</color> / 40% \uC99D\uAC00\uD55C\uB2E4."
+  - name: "\uAFF0\uB6AB\uC5B4\uBCF4\uB294 \uB208"
+    upgradeExplanation:
+    - "\uB208\uC73C\uB85C \uC0C1\uB300\uC758 \uC57D\uC810\uC744 \uAFF0\uB6AB\uC5B4\uBD10
+      \uCE58\uBA85\uD0C0 \uD655\uB960\uC774\n<color=#877D78>3%</color> / <color=#877D78>5%</color>
+      / <color=#877D78>7%</color> / <color=#877D78>10%</color> \uC0C1\uC2B9\uD55C\uB2E4."
+    - "\uB208\uC73C\uB85C \uC0C1\uB300\uC758 \uC57D\uC810\uC744 \uAFF0\uB6AB\uC5B4\uBD10
+      \uCE58\uBA85\uD0C0 \uD655\uB960\uC774\n3% / <color=#877D78>5%</color> / <color=#877D78>7%</color>
+      / <color=#877D78>10%</color> \uC0C1\uC2B9\uD55C\uB2E4."
+    - "\uB208\uC73C\uB85C \uC0C1\uB300\uC758 \uC57D\uC810\uC744 \uAFF0\uB6AB\uC5B4\uBD10
+      \uCE58\uBA85\uD0C0 \uD655\uB960\uC774\n<color=#877D78>3%</color> / 5% / <color=#877D78>7%</color>
+      / <color=#877D78>10%</color> \uC0C1\uC2B9\uD55C\uB2E4."
+    - "\uB208\uC73C\uB85C \uC0C1\uB300\uC758 \uC57D\uC810\uC744 \uAFF0\uB6AB\uC5B4\uBD10
+      \uCE58\uBA85\uD0C0 \uD655\uB960\uC774\n<color=#877D78>3%</color> / <color=#877D78>5%</color>
+      / 7% / <color=#877D78>10%</color> \uC0C1\uC2B9\uD55C\uB2E4."
+    - "\uB208\uC73C\uB85C \uC0C1\uB300\uC758 \uC57D\uC810\uC744 \uAFF0\uB6AB\uC5B4\uBD10
+      \uCE58\uBA85\uD0C0 \uD655\uB960\uC774\n<color=#877D78>3%</color> / <color=#877D78>5%</color>
+      / <color=#877D78>7%</color> / 10% \uC0C1\uC2B9\uD55C\uB2E4."
+  - name: "\uC2DC\uAC04\uAC00\uC18D"
+    upgradeExplanation:
+    - "\uC2DC\uAC04\uC744 \uAC00\uC18D \uC2DC\uCF1C\uC11C \uCFE8\uD0C0\uC784\uC774\n<color=#877D78>5%</color>
+      / <color=#877D78>10%</color> / <color=#877D78>15%</color> / <color=#877D78>20%</color>
+      \uAC10\uC18C\uD55C\uB2E4."
+    - "\uC2DC\uAC04\uC744 \uAC00\uC18D \uC2DC\uCF1C\uC11C \uCFE8\uD0C0\uC784\uC774\n5%
+      / <color=#877D78>10%</color> / <color=#877D78>15%</color> / <color=#877D78>20%</color>
+      \uAC10\uC18C\uD55C\uB2E4."
+    - "\uC2DC\uAC04\uC744 \uAC00\uC18D \uC2DC\uCF1C\uC11C \uCFE8\uD0C0\uC784\uC774\n<color=#877D78>5%</color>
+      / 10% / <color=#877D78>15%</color> / <color=#877D78>20%</color> \uAC10\uC18C\uD55C\uB2E4."
+    - "\uC2DC\uAC04\uC744 \uAC00\uC18D \uC2DC\uCF1C\uC11C \uCFE8\uD0C0\uC784\uC774\n<color=#877D78>5%</color>
+      / <color=#877D78>10%</color> / 15% / <color=#877D78>20%</color> \uAC10\uC18C\uD55C\uB2E4."
+    - "\uC2DC\uAC04\uC744 \uAC00\uC18D \uC2DC\uCF1C\uC11C \uCFE8\uD0C0\uC784\uC774\n<color=#877D78>5%</color>
+      / <color=#877D78>10%</color> / <color=#877D78>15%</color> / 20% \uAC10\uC18C\uD55C\uB2E4."
+  - name: "\uC5F0\uAE08\uC220"
+    upgradeExplanation:
+    - "\uAE08\uB2E8\uC758 \uC5F0\uAE08\uC220\uC744 \uC0AC\uC6A9\uD574 \uD68D\uB4DD\uD558\uB294
+      \uACE8\uB4DC\uC758 \uC591\uC774\n<color=#877D78>5%</color> / <color=#877D78>10%</color>
+      \uAC10\uC18C\uD55C\uB2E4."
+    - "\uAE08\uB2E8\uC758 \uC5F0\uAE08\uC220\uC744 \uC0AC\uC6A9\uD574 \uD68D\uB4DD\uD558\uB294
+      \uACE8\uB4DC\uC758 \uC591\uC774 \n5% / <color=#877D78>10%</color> \uAC10\uC18C\uD55C\uB2E4."
+    - "\uAE08\uB2E8\uC758 \uC5F0\uAE08\uC220\uC744 \uC0AC\uC6A9\uD574 \uD68D\uB4DD\uD558\uB294
+      \uACE8\uB4DC\uC758 \uC591\uC774\n<color=#877D78>5%</color> / 10% \uAC10\uC18C\uD55C\uB2E4."
   magicCircle: {fileID: 1758603494}
   fBtn: {fileID: 483930740}
   upGrade: {fileID: 1486527145}
   upGradeText: {fileID: 367366055}
   isCollisionCheck: 1
-  pole01: {fileID: 2072984338}
-  pole02: {fileID: 1639259046}
-  malyeogWindow: {fileID: 1887432763}
-  malyeogRectWindow: {fileID: 337622492}
+  upBar: {fileID: 2072984338}
+  downBar: {fileID: 1639259046}
+  foundationWindow: {fileID: 1887432763}
+  foundationRect: {fileID: 337622492}
+  closeBtn: {fileID: 1368036022}
   fadeInOut: {fileID: 1106004338}
-  Title: {fileID: 1069232668}
-  Explanation: {fileID: 648504052}
-  Close_Btn: {fileID: 1368036020}
-  Price_obj: {fileID: 773648537}
-  Dimensional_Price: {fileID: 639699827}
+  title: {fileID: 1069232668}
+  explanation: {fileID: 648504052}
+  purchase: {fileID: 14020680}
+  dimensionalPrice: {fileID: 639699827}
   Magic_Open: 0
   Body_Open: 0
 --- !u!4 &222911146
@@ -1351,8 +1467,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -2}
-  m_SizeDelta: {x: 1696.4246, y: 931.6482}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1675, y: 885}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &337622493
 MonoBehaviour:
@@ -1693,8 +1809,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -263, y: -56.784}
-  m_SizeDelta: {x: 340.7139, y: 63.8838}
+  m_AnchoredPosition: {x: 0, y: -20}
+  m_SizeDelta: {x: 340, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &367366054
 CanvasRenderer:
@@ -2018,8 +2134,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -460, y: -57}
-  m_SizeDelta: {x: 96.0956, y: 64.316}
+  m_AnchoredPosition: {x: -200, y: -20}
+  m_SizeDelta: {x: 96, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &483930739
 CanvasRenderer:
@@ -2188,7 +2304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -2232,11 +2348,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   malyeog: 1
-  Malyeog_Num: 1
-  Malyeog_Upgrade: 0
-  MalyeogUp_Text: {fileID: 1725665004}
-  BodyOpen_Check: 0
-  MagicOpen_Check: 0
+  malyeogNum: 1
+  malyeogUpgrade: 0
+  malyeogUpgradeText: {fileID: 1725665004}
+  isBodyOpenCheck: 0
+  isMagicOpenCheck: 0
 --- !u!61 &525521949
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2744,7 +2860,7 @@ GameObject:
   - component: {fileID: 648504053}
   - component: {fileID: 648504052}
   m_Layer: 5
-  m_Name: Explanation_01
+  m_Name: Explanation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2876,7 +2992,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -2920,11 +3036,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   malyeog: 0
-  Malyeog_Num: 3
-  Malyeog_Upgrade: 0
-  MalyeogUp_Text: {fileID: 1796260744}
-  BodyOpen_Check: 0
-  MagicOpen_Check: 0
+  malyeogNum: 7
+  malyeogUpgrade: 0
+  malyeogUpgradeText: {fileID: 1796260744}
+  isBodyOpenCheck: 0
+  isMagicOpenCheck: 0
 --- !u!61 &678276416
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3204,7 +3320,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &747280153
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4021,7 +4137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -4065,11 +4181,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   malyeog: 1
-  Malyeog_Num: 2
-  Malyeog_Upgrade: 0
-  MalyeogUp_Text: {fileID: 350235179}
-  BodyOpen_Check: 0
-  MagicOpen_Check: 0
+  malyeogNum: 2
+  malyeogUpgrade: 0
+  malyeogUpgradeText: {fileID: 350235179}
+  isBodyOpenCheck: 0
+  isMagicOpenCheck: 0
 --- !u!61 &1051439236
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4227,7 +4343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -4271,11 +4387,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   malyeog: 0
-  Malyeog_Num: 1
-  Malyeog_Upgrade: 0
-  MalyeogUp_Text: {fileID: 337422899}
-  BodyOpen_Check: 0
-  MagicOpen_Check: 0
+  malyeogNum: 5
+  malyeogUpgrade: 0
+  malyeogUpgradeText: {fileID: 337422899}
+  isBodyOpenCheck: 0
+  isMagicOpenCheck: 0
 --- !u!61 &1058429718
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4352,7 +4468,7 @@ GameObject:
   - component: {fileID: 1069232669}
   - component: {fileID: 1069232668}
   m_Layer: 5
-  m_Name: Title_01
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4959,7 +5075,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -5003,11 +5119,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   malyeog: 0
-  Malyeog_Num: 0
-  Malyeog_Upgrade: 0
-  MalyeogUp_Text: {fileID: 1512701684}
-  BodyOpen_Check: 0
-  MagicOpen_Check: 0
+  malyeogNum: 4
+  malyeogUpgrade: 0
+  malyeogUpgradeText: {fileID: 1512701684}
+  isBodyOpenCheck: 0
+  isMagicOpenCheck: 0
 --- !u!61 &1301677937
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5400,7 +5516,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 222911145}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Foundation, Assembly-CSharp
         m_MethodName: Close
         m_Mode: 1
@@ -6312,7 +6428,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -6356,11 +6472,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   malyeog: 0
-  Malyeog_Num: 2
-  Malyeog_Upgrade: 0
-  MalyeogUp_Text: {fileID: 1084084409}
-  BodyOpen_Check: 0
-  MagicOpen_Check: 0
+  malyeogNum: 6
+  malyeogUpgrade: 0
+  malyeogUpgradeText: {fileID: 1084084409}
+  isBodyOpenCheck: 0
+  isMagicOpenCheck: 0
 --- !u!61 &1539237741
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6479,7 +6595,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -6523,11 +6639,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   malyeog: 1
-  Malyeog_Num: 0
-  Malyeog_Upgrade: 0
-  MalyeogUp_Text: {fileID: 408349067}
-  BodyOpen_Check: 0
-  MagicOpen_Check: 0
+  malyeogNum: 0
+  malyeogUpgrade: 0
+  malyeogUpgradeText: {fileID: 408349067}
+  isBodyOpenCheck: 0
+  isMagicOpenCheck: 0
 --- !u!61 &1546603236
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6724,7 +6840,7 @@ GameObject:
   - component: {fileID: 1639259049}
   - component: {fileID: 1639259048}
   m_Layer: 5
-  m_Name: Pole_02
+  m_Name: DownBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6942,7 +7058,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1758603493}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.3, z: 0}
+  m_LocalPosition: {x: 0, y: 1.6, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children: []
   m_Father: {fileID: 222911146}
@@ -7146,7 +7262,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1830, y: 1155}
+  m_SizeDelta: {x: 1675, y: 885}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1853296335
 MonoBehaviour:
@@ -7168,7 +7284,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9a765b3bbddadf44f9f5b4fa5e8775e7, type: 3}
+  m_Sprite: {fileID: -4568118430110145414, guid: 9a765b3bbddadf44f9f5b4fa5e8775e7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7810,7 +7926,7 @@ GameObject:
   - component: {fileID: 2072984341}
   - component: {fileID: 2072984340}
   m_Layer: 5
-  m_Name: Pole_01
+  m_Name: UpBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

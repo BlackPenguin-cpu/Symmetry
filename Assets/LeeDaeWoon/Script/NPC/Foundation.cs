@@ -37,7 +37,6 @@ public class Foundation : MonoBehaviour
     [SerializeField] GameObject foundationWindow;
     [SerializeField] RectTransform foundationRect;
     [SerializeField] Button closeBtn;
-    float timer;
     bool iswindowOpenCheck = false;
 
     const int openBar = 452;
@@ -100,7 +99,7 @@ public class Foundation : MonoBehaviour
         {
             fadeInOut.DOFade(0.5f, 1).SetEase(Ease.Linear);
             UIManager.instance.isPlayerControl = true;
-            StartCoroutine(OpenWindow());
+            OpenWindow();
             iswindowOpenCheck = true;
         }
     }
@@ -110,36 +109,27 @@ public class Foundation : MonoBehaviour
     {
         closeBtn.onClick.AddListener(() =>
         {
-            StartCoroutine(CloseWindow());
+            CloseWindow();
         });
     }
 
-    public void Close() => StartCoroutine(CloseWindow());
-
-    public IEnumerator OpenWindow()
+    public void OpenWindow()
     {
-        timer = 0f;
         SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX);
         foundationWindow.SetActive(true);
 
         upBar.transform.DOLocalMoveY(openBar, openSpeed).SetEase(Ease.Linear);
         downBar.transform.DOLocalMoveY(-openBar, openSpeed).SetEase(Ease.Linear);
 
-        while (timer < 1)
-        {
-            foundationRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(0, windowHeight, timer));
-            timer += Time.deltaTime * 4;
-            yield return null;
-        }
+        foundationRect.DOSizeDelta(new Vector2(windowWidth, windowHeight), openSpeed).SetEase(Ease.Linear);
     }
 
-    public IEnumerator CloseWindow()
+    public void CloseWindow()
     {
-        timer = 0f;
         SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX);
 
-        upBar.transform.DOLocalMoveY(closeBar, closeSpeed);
-        downBar.transform.DOLocalMoveY(-closeBar, closeSpeed).OnComplete(() =>
+        upBar.transform.DOLocalMoveY(closeBar, closeSpeed).SetEase(Ease.Linear); 
+        downBar.transform.DOLocalMoveY(-closeBar, closeSpeed).SetEase(Ease.Linear).OnComplete(() =>
         {
             fadeInOut.DOFade(0, 1).SetEase(Ease.Linear);
 
@@ -148,12 +138,7 @@ public class Foundation : MonoBehaviour
             iswindowOpenCheck = false;
         });
 
-        while (timer < 1)
-        {
-            foundationRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(windowHeight, 0, timer));
-            timer += Time.deltaTime * 4;
-            yield return null;
-        }
+        foundationRect.DOSizeDelta(new Vector2(windowWidth, 0), closeSpeed).SetEase(Ease.Linear);
     }
     #endregion
 

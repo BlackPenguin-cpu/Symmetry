@@ -17,7 +17,6 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         Right
     }
     public EDirection eDirection;
-    float timer = 0;
 
     [Header("ºû")]
     public Image leftLight;
@@ -35,7 +34,6 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     [SerializeField] RectTransform rightRect;
 
     const int windowWidth = 545;
-    const int windowHeight = 890;
     const int windowClickPos = 1200;
 
     [Header("ºÀ")]
@@ -103,7 +101,7 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         switch (eDirection)
         {
             case EDirection.Left:
-                StartCoroutine(LeftClickWindow());
+                LeftClickWindow();
                 DaItemClick();
 
                 switch (ItemCardList.instance.leftItem.eItem)
@@ -174,7 +172,7 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
                 break;
 
             case EDirection.Among:
-                StartCoroutine(AmongClickWindow());
+                AmongClickWindow();
                 DaItemClick();
 
                 switch (ItemCardList.instance.amongItem.eItem)
@@ -245,7 +243,7 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
                 break;
 
             case EDirection.Right:
-                StartCoroutine(RightClickWindow());
+                RightClickWindow();
                 DaItemClick();
 
                 switch (ItemCardList.instance.rightItem.eItem)
@@ -350,7 +348,7 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         rightLight.DOKill();
     }
 
-    IEnumerator LeftClickWindow()
+    void LeftClickWindow()
     {
         leftWindow.transform.DOLocalMoveY(windowClickPos, barSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
         {
@@ -370,17 +368,11 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         rightBarUp.transform.DOLocalMoveY(barClose, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
         rightBarDown.transform.DOLocalMoveY(-barClose, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
 
-        while (timer < 1)
-        {
-            amongRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(windowHeight, 0, timer));
-            rightRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(windowHeight, 0, timer));
-
-            timer += Time.unscaledDeltaTime * 2.8f;
-            yield return null;
-        }
+        amongRect.DOSizeDelta(new Vector2(windowWidth, 0), barSpeed).SetEase(Ease.Linear).SetUpdate(true);
+        rightRect.DOSizeDelta(new Vector2(windowWidth, 0), barSpeed).SetEase(Ease.Linear).SetUpdate(true);
     }
 
-    IEnumerator AmongClickWindow()
+    void AmongClickWindow()
     {
         amongWindow.transform.DOLocalMoveY(windowClickPos, barSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
         {
@@ -400,17 +392,11 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         rightBarUp.transform.DOLocalMoveY(barClose, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
         rightBarDown.transform.DOLocalMoveY(-barClose, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
 
-        while (timer < 1)
-        {
-            leftRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(windowHeight, 0, timer));
-            rightRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(windowHeight, 0, timer));
-
-            timer += Time.unscaledDeltaTime * 2.8f;
-            yield return null;
-        }
+        leftRect.DOSizeDelta(new Vector2(windowWidth, 0), barSpeed).SetEase(Ease.Linear).SetUpdate(true);
+        rightRect.DOSizeDelta(new Vector2(windowWidth, 0), barSpeed).SetEase(Ease.Linear).SetUpdate(true);
     }
 
-    IEnumerator RightClickWindow()
+    void RightClickWindow()
     {
         rightWindow.transform.DOLocalMoveY(windowClickPos, barSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
         {
@@ -430,14 +416,8 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         amongBarUp.transform.DOLocalMoveY(barClose, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
         amongBarDown.transform.DOLocalMoveY(-barClose, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
 
-        while (timer < 1)
-        {
-            leftRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(windowHeight, 0, timer));
-            amongRect.sizeDelta = new Vector2(windowWidth, Mathf.Lerp(windowHeight, 0, timer));
-
-            timer += Time.unscaledDeltaTime * 2.8f;
-            yield return null;
-        }
+        leftRect.DOSizeDelta(new Vector2(windowWidth, 0), barSpeed).SetEase(Ease.Linear).SetUpdate(true);
+        amongRect.DOSizeDelta(new Vector2(windowWidth, 0), barSpeed).SetEase(Ease.Linear).SetUpdate(true);
     }
     #endregion
 }

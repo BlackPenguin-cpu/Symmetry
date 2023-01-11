@@ -58,8 +58,6 @@ public class Player_Vector : MonoBehaviour
 
             UIManager.instance.fadeInOut.DOFade(0f, 0f);
         }
-
-
     }
 
 
