@@ -53,7 +53,7 @@ public class Foundation : MonoBehaviour
     public Text title; 
     public Text explanation; 
     public GameObject purchase;
-    public Text dimensionalPrice; // 마력 가격
+    public Text dimensionalPrice;
 
     public int Magic_Open;
     public int Body_Open;
