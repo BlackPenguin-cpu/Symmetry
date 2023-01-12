@@ -50,8 +50,8 @@ public class Foundation : MonoBehaviour
 
     [Space(10)]
     [SerializeField] Image fadeInOut;
-    public Text title; // 마력 이름
-    public Text explanation; // 마력 설명
+    public Text title; 
+    public Text explanation; 
     public GameObject purchase;
     public Text dimensionalPrice; // 마력 가격
 
