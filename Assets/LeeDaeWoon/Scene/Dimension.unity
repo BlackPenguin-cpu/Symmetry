@@ -750,11 +750,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 79867156}
   m_CullTransparentMesh: 1
---- !u!1 &133263103 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4912608567439538580, guid: 261fff62e50a8c74c83c18777936fbc2, type: 3}
-  m_PrefabInstance: {fileID: 1687550451}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &149831064
 GameObject:
   m_ObjectHideFlags: 0
@@ -1016,11 +1011,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 191286337}
   m_CullTransparentMesh: 1
---- !u!224 &193583234 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 4912608567439538581, guid: 261fff62e50a8c74c83c18777936fbc2, type: 3}
-  m_PrefabInstance: {fileID: 1687550451}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &207110225
 GameObject:
   m_ObjectHideFlags: 0
@@ -2901,7 +2891,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 193583234}
+  - {fileID: 4912608566828056678}
   m_Father: {fileID: 274121526}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13999,6 +13989,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 341820414}
     m_Modifications:
+    - target: {fileID: 4912608566815399418, guid: 261fff62e50a8c74c83c18777936fbc2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4912608567439538580, guid: 261fff62e50a8c74c83c18777936fbc2, type: 3}
       propertyPath: m_Name
       value: After_Purchase
@@ -14069,11 +14063,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4912608567439538581, guid: 261fff62e50a8c74c83c18777936fbc2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 33
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4912608567439538581, guid: 261fff62e50a8c74c83c18777936fbc2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4912608567439538581, guid: 261fff62e50a8c74c83c18777936fbc2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -14085,6 +14079,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4912608567439538581, guid: 261fff62e50a8c74c83c18777936fbc2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4912608568212184707, guid: 261fff62e50a8c74c83c18777936fbc2, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -17269,7 +17267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   differentProduct: {fileID: 1619522735}
-  AfterObject: {fileID: 133263103}
+  AfterObject: {fileID: 4912608566828056679}
   differentProductText: {fileID: 309987430}
   goldText: {fileID: 5607036874220845023}
   goldImage: {fileID: 5607036873713822893}
@@ -17974,15 +17972,15 @@ MonoBehaviour:
   AfterPurchase_Skill: {fileID: 0}
   AfterPurchase_Window: {fileID: 0}
   AfterPurchase_Skill_Box: {fileID: 0}
-  AfterPurchase_LeftDirection: {fileID: 0}
+  leftDirection: {fileID: 0}
   Skill_Shop: {fileID: 2633791636960462780, guid: 383a5b3a80e82684c93fc07eb59e19fe, type: 3}
   AfterPurchase_Top_Light: {fileID: 0}
   AfterPurchase_Bottom_Light: {fileID: 0}
   SkillNum: 0
   UpDown: 1
-  Purchase: 1
+  isPurchase: 0
   UpDown_Limit: 1
-  SkillColider_Check: 0
+  isCollisionCheck: 0
   Skill01_Purchase: 1
   Skill02_Purchase: 1
   Skill03_Purchase: 1
@@ -19812,6 +19810,16 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!224 &4912608566828056678 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4912608567439538581, guid: 261fff62e50a8c74c83c18777936fbc2, type: 3}
+  m_PrefabInstance: {fileID: 1687550451}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4912608566828056679 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4912608567439538580, guid: 261fff62e50a8c74c83c18777936fbc2, type: 3}
+  m_PrefabInstance: {fileID: 1687550451}
+  m_PrefabAsset: {fileID: 0}
 --- !u!222 &5093737130575280744
 CanvasRenderer:
   m_ObjectHideFlags: 0
