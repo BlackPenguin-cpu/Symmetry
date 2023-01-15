@@ -30,7 +30,7 @@ public class SkillWindow : MonoBehaviour
     [SerializeField] Image basicsSkillS;
 
     [Header("구매 후 창")]
-    [SerializeField] GameObject AfterPurchase_Window_Prefab; // 스킬 적용 창 프리팹
+    [SerializeField] GameObject AfterPurchase_Window_Prefab; 
     [SerializeField] GameObject AfterPurchase_Key; // 선택 키 오브젝트
 
     [SerializeField] GameObject AfterPurchase_Skill; // 스킬 적용하기 전 스킬 이미지
