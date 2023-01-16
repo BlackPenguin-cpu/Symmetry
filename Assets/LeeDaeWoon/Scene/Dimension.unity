@@ -750,6 +750,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 79867156}
   m_CullTransparentMesh: 1
+--- !u!1 &142967247 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7113136141686407017, guid: 261fff62e50a8c74c83c18777936fbc2, type: 3}
+  m_PrefabInstance: {fileID: 1687550451}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &149831064
 GameObject:
   m_ObjectHideFlags: 0
@@ -4298,6 +4303,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 542554186}
   m_CullTransparentMesh: 1
+--- !u!1 &545089256 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4912608568370400658, guid: 261fff62e50a8c74c83c18777936fbc2, type: 3}
+  m_PrefabInstance: {fileID: 1687550451}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &551694199
 GameObject:
   m_ObjectHideFlags: 0
@@ -4663,6 +4673,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 578414872}
   m_CullTransparentMesh: 1
+--- !u!114 &583388471 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4912608568286560468, guid: 261fff62e50a8c74c83c18777936fbc2, type: 3}
+  m_PrefabInstance: {fileID: 1687550451}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &585402947
 GameObject:
   m_ObjectHideFlags: 0
@@ -11203,6 +11224,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1223390580 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4912608568242499834, guid: 261fff62e50a8c74c83c18777936fbc2, type: 3}
+  m_PrefabInstance: {fileID: 1687550451}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1250699447
 GameObject:
   m_ObjectHideFlags: 0
@@ -13989,13 +14015,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 341820414}
     m_Modifications:
-    - target: {fileID: 4912608566815399418, guid: 261fff62e50a8c74c83c18777936fbc2, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4912608567439538580, guid: 261fff62e50a8c74c83c18777936fbc2, type: 3}
       propertyPath: m_Name
-      value: After_Purchase
+      value: ApplySkillWindow
       objectReference: {fileID: 0}
     - target: {fileID: 4912608567439538581, guid: 261fff62e50a8c74c83c18777936fbc2, type: 3}
       propertyPath: m_Pivot.x
@@ -14079,10 +14101,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4912608567439538581, guid: 261fff62e50a8c74c83c18777936fbc2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4912608568212184707, guid: 261fff62e50a8c74c83c18777936fbc2, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -17967,23 +17985,22 @@ MonoBehaviour:
   skillWindowRect: {fileID: 2583938368564297775}
   basicsSkillA: {fileID: 2012252222}
   basicsSkillS: {fileID: 1162158979}
-  AfterPurchase_Window_Prefab: {fileID: 4912608567439538580, guid: 261fff62e50a8c74c83c18777936fbc2, type: 3}
-  AfterPurchase_Key: {fileID: 0}
-  AfterPurchase_Skill: {fileID: 0}
-  AfterPurchase_Window: {fileID: 0}
-  AfterPurchase_Skill_Box: {fileID: 0}
-  leftDirection: {fileID: 0}
+  applySkillWindow: {fileID: 4912608566828056679}
+  upBottomDirection: {fileID: 142967247}
+  applySkillBox: {fileID: 545089256}
+  leftDirection: {fileID: 1223390580}
+  applySkill: {fileID: 583388471}
   Skill_Shop: {fileID: 2633791636960462780, guid: 383a5b3a80e82684c93fc07eb59e19fe, type: 3}
   AfterPurchase_Top_Light: {fileID: 0}
   AfterPurchase_Bottom_Light: {fileID: 0}
   SkillNum: 0
-  UpDown: 1
+  isUpDown: 0
   isPurchase: 0
-  UpDown_Limit: 1
+  isUpDownLimit: 0
   isCollisionCheck: 0
-  Skill01_Purchase: 1
-  Skill02_Purchase: 1
-  Skill03_Purchase: 1
+  isSkill01Purchase: 0
+  isSkill02Purchase: 0
+  isSkill03Purchase: 0
   RandomTest: 0
   MoreThanOnce_Purchase: 1
 --- !u!1 &2583938369214937204

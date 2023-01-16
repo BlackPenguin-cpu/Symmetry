@@ -32,13 +32,11 @@ public class SkillWindow : MonoBehaviour
     [SerializeField] Image basicsSkillS;
 
     [Header("구매 후 창")]
-    [SerializeField] GameObject AfterPurchase_Window_Prefab;
-    [SerializeField] GameObject AfterPurchase_Key; // 선택 키 오브젝트
-
-    [SerializeField] GameObject AfterPurchase_Skill; // 스킬 적용하기 전 스킬 이미지
-    [SerializeField] GameObject AfterPurchase_Window; // 스킬적용 창
-    [SerializeField] GameObject AfterPurchase_Skill_Box; // 스킬 적용하기 전 스킬박스 이미지
+    [SerializeField] GameObject applySkillWindow; // 스킬적용 창
+    [SerializeField] GameObject upBottomDirection; // 선택 키 오브젝트
+    [SerializeField] GameObject applySkillBox; // 스킬 적용하기 전 스킬박스 이미지
     [SerializeField] GameObject leftDirection; // 왼쪽 화살표
+    [SerializeField] Image applySkill; // 스킬 적용하기 전 스킬 이미지
 
     [Header("스킬 좌표")]
     [SerializeField] GameObject Skill_Shop;
@@ -47,15 +45,15 @@ public class SkillWindow : MonoBehaviour
     public Image AfterPurchase_Bottom_Light;
 
     public int SkillNum; // 현재 몇 번째 구매 스킬과 충돌했는지 숫자 확인
-    public bool UpDown = true; // 현재 위 인지 아래 인지 확인
+    public bool isUpDown = false; // 현재 위 인지 아래 인지 확인
     public bool isPurchase = false; // 현재 구매중인지 아닌지 확인
-    public bool UpDown_Limit = true; // 위아래 제한
+    public bool isUpDownLimit = false; // 위아래 제한
     public bool isCollisionCheck = false; // 현재 구매 스킬들과 충돌 했는지 체크 확인
 
     // 몇 번째 스킬을 구매했는지 확인
-    public bool Skill01_Purchase = true;
-    public bool Skill02_Purchase = true;
-    public bool Skill03_Purchase = true;
+    public bool isSkill01Purchase = false;
+    public bool isSkill02Purchase = false;
+    public bool isSkill03Purchase = false;
 
     public int RandomTest;
 
@@ -65,16 +63,8 @@ public class SkillWindow : MonoBehaviour
 
     void Start()
     {
-        #region GameObject.Find
-        AfterPurchase_Window = GameObject.Find("After_Purchase");
-        AfterPurchase_Key = GameObject.Find("Direction_Key");
-        AfterPurchase_Skill = GameObject.Find("After_Skill_Image");
-        AfterPurchase_Skill_Box = GameObject.Find("After_Skill_Box");
-        leftDirection = GameObject.Find("Left_Direction");
-        #endregion
-
         LeftDirection();
-        AfterPurchase_Window.gameObject.SetActive(false);
+        applySkillWindow.gameObject.SetActive(false);
     }
 
     void Update()
@@ -96,10 +86,15 @@ public class SkillWindow : MonoBehaviour
             if (isPurchase == false && (GameManager.Instance._coin >= Skill_List.instance.leftSkill.gold || GameManager.Instance._coin >= Skill_List.instance.amongSkill.gold || GameManager.Instance._coin >= Skill_List.instance.rightSkill.gold))
             {
                 SoundManager.instance.PlaySoundClip("SFX_Buy", SoundType.SFX, 5f);
+
                 UIManager.instance.isPlayerControl = true;
 
+                for (int i = 0; i <= 1; i++)
+                    applySkillWindow.transform.GetChild(i).gameObject.SetActive(true);
+
                 SeletSkill = Skill_Manager.instance.Skill[SkillNum];
-                AfterPurchase_Skill.GetComponent<Image>().sprite = SeletSkill.sprite;
+                applySkill.sprite = SeletSkill.sprite;
+
                 GameManager.Instance._coin -= SeletSkill.price[0];
 
                 // 정상작동 웨이브 : 5 / 10 / 15
@@ -123,8 +118,8 @@ public class SkillWindow : MonoBehaviour
 
                 isPurchase = true; // 이것을 통하여 스킬구매 -> 스킬적용으로 넘겨준다.
 
-                transform.GetChild(SkillNum).GetChild(2).gameObject.SetActive(true);
-                transform.GetChild(SkillNum).GetChild(3).gameObject.SetActive(false);
+                transform.GetChild(SkillNum).GetChild(2).gameObject.SetActive(true); // soldOutText
+                transform.GetChild(SkillNum).GetChild(3).gameObject.SetActive(false); // shopSkillBox
 
                 // 스킬창을 닫아준다.
                 CloseWindow(SkillNum);
@@ -132,13 +127,13 @@ public class SkillWindow : MonoBehaviour
                 switch (SkillNum)
                 {
                     case 0:
-                        Skill01_Purchase = false;
+                        isSkill01Purchase = true;
                         break;
                     case 1:
-                        Skill02_Purchase = false;
+                        isSkill02Purchase = true;
                         break;
                     case 2:
-                        Skill03_Purchase = false;
+                        isSkill03Purchase = true;
                         break;
                 }
             }
@@ -146,9 +141,9 @@ public class SkillWindow : MonoBehaviour
             // 스킬적용
             else if (isPurchase)
             {
-                UIManager.instance.isPlayerControl = false;
+                for (int i = 0; i <= 1; i++)
+                    applySkillWindow.transform.GetChild(i).gameObject.SetActive(false);
 
-                AfterPurchase_Key.gameObject.SetActive(false);
                 SkillHave(); // SkillHave 함수를 실행시킨다.
                 isPurchase = false; // 이것을 통하여 스킬적용 -> 스킬구매로 넘겨준다.
             }
@@ -160,9 +155,9 @@ public class SkillWindow : MonoBehaviour
     void SkillHave()
     {
         // 윗 부분에 스킬을 적용할려 할 떄
-        if (UpDown && UpDown_Limit)
+        if (!isUpDown && !isUpDownLimit)
         {
-            UpDown_Limit = false;
+            isUpDownLimit = true;
 
             // 윗 부분에 있던 스킬은 상점에으로 보낸다.
             Skill_Manager.instance.SkillBuffer.Add(Skill_Manager.instance.Skill_Up[0]);
@@ -173,13 +168,15 @@ public class SkillWindow : MonoBehaviour
             Skill_Manager.instance.Skill_Have.RemoveAt(0);
 
             Vector3[] SaveSkillPos = new Vector3[2];
-            SaveSkillPos[0] = AfterPurchase_Skill.transform.position;
-            SaveSkillPos[1] = AfterPurchase_Skill_Box.transform.position;
+            SaveSkillPos[0] = applySkill.transform.position;
+            SaveSkillPos[1] = applySkillBox.transform.position;
 
             //스킬 적용 애니메이션
-            AfterPurchase_Skill.transform.DOLocalMove(basicsSkillA.transform.localPosition, 0.5f).SetEase(Ease.InOutQuad);
-            AfterPurchase_Skill_Box.transform.DOLocalMove(basicsSkillA.transform.localPosition, 0.5f).SetEase(Ease.InOutQuad).OnComplete(() =>
+            applySkill.transform.DOLocalMove(basicsSkillA.transform.localPosition, 0.5f).SetEase(Ease.InOutQuad);
+            applySkillBox.transform.DOLocalMove(basicsSkillA.transform.localPosition, 0.5f).SetEase(Ease.InOutQuad).OnComplete(() =>
             {
+                UIManager.instance.isPlayerControl = false;
+
                 // AS_Limit = Shift를 통한 스킬 전환 체크
                 if (Skill_Manager.instance.AS_Limit == true) // true일 경우 A스킬에 구매한 스킬을 적용시킨다.
                 {
@@ -188,29 +185,29 @@ public class SkillWindow : MonoBehaviour
                 else basicsSkillS.sprite = SeletSkill.sprite; // false일 경우 S스킬에 구매한 스킬을 적용시킨다.
 
                 // 한 번 미만 스킬을 적용시킬 시 실행시킨다.
-                AfterPurchase_Skill.transform.position = SaveSkillPos[0];
-                AfterPurchase_Skill_Box.transform.position = SaveSkillPos[1];
-                AfterPurchase_Key.gameObject.SetActive(true);
+                applySkill.transform.position = SaveSkillPos[0];
+                applySkillBox.transform.position = SaveSkillPos[1];
+                upBottomDirection.gameObject.SetActive(true);
                 if (MoreThanOnce_Purchase == true)
                 {
-                    AfterPurchase_Window.SetActive(false);
+                    applySkillWindow.SetActive(false);
                     MoreThanOnce_Purchase = false;
                 }
 
                 // 한 번 이상 스킬을 적용시킬 시 실행시킨다.
                 else
-                    AfterPurchase_Window.SetActive(false);
+                    applySkillWindow.SetActive(false);
 
-                UpDown_Limit = true;
+                isUpDownLimit = false;
             });
 
 
         }
 
         // 아랫 부분에 스킬을 적용할려 할 떄
-        else if (UpDown == false && UpDown_Limit == true)
+        else if (isUpDown && !isUpDownLimit)
         {
-            UpDown_Limit = false;
+            isUpDownLimit = true;
 
             // 아랫 부분에 있던 스킬은 상점으로 보낸다.
             Skill_Manager.instance.SkillBuffer.Add(Skill_Manager.instance.Skill_Down[0]);
@@ -221,34 +218,36 @@ public class SkillWindow : MonoBehaviour
             Skill_Manager.instance.Skill_Have.RemoveAt(0);
 
             Vector3[] SaveSkillPos = new Vector3[2];
-            SaveSkillPos[0] = AfterPurchase_Skill.transform.position;
-            SaveSkillPos[1] = AfterPurchase_Skill_Box.transform.position;
+            SaveSkillPos[0] = applySkill.transform.position;
+            SaveSkillPos[1] = applySkillBox.transform.position;
 
             //스킬 적용 애니메이션
-            AfterPurchase_Skill.transform.DOLocalMove(basicsSkillS.transform.localPosition, 0.5f).SetEase(Ease.InOutQuad);
-            AfterPurchase_Skill_Box.transform.DOLocalMove(basicsSkillS.transform.localPosition, 0.5f).SetEase(Ease.InOutQuad).OnComplete(() =>
+            applySkill.transform.DOLocalMove(basicsSkillS.transform.localPosition, 0.5f).SetEase(Ease.InOutQuad);
+            applySkillBox.transform.DOLocalMove(basicsSkillS.transform.localPosition, 0.5f).SetEase(Ease.InOutQuad).OnComplete(() =>
             {
-                //// AS_Limit = Shift를 통한 스킬 전환 체크
-                //if (Skill_Manager.instance.AS_Limit_02 == true) // true일 경우 S스킬에 구매한 스킬을 적용시킨다.
-                //    basicsSkillS.sprite = SeletSkill.sprite;
-                //else
-                //    basicsSkillA.sprite = SeletSkill.sprite;
+                UIManager.instance.isPlayerControl = false;
 
-                //// 한 번 미만 스킬을 적용시킬 시 실행시킨다.
-                //AfterPurchase_Skill.transform.position = SaveSkillPos[0];
-                //AfterPurchase_Skill_Box.transform.position = SaveSkillPos[1];
-                //AfterPurchase_Key.gameObject.SetActive(true);
-                //if (MoreThanOnce_Purchase == true)
-                //{
-                //    AfterPurchase_Window.SetActive(false);
-                //    MoreThanOnce_Purchase = false;
-                //}
+                // AS_Limit = Shift를 통한 스킬 전환 체크
+                if (Skill_Manager.instance.AS_Limit_02 == true) // true일 경우 S스킬에 구매한 스킬을 적용시킨다.
+                    basicsSkillS.sprite = SeletSkill.sprite;
+                else
+                    basicsSkillA.sprite = SeletSkill.sprite;
 
-                //// 한 번 이상 스킬을 적용시킬 시 실행시킨다.
-                //else
-                //    AfterPurchase_Window.SetActive(false);
-                //UpDown_Limit = true;
+                // 한 번 미만 스킬을 적용시킬 시 실행시킨다.
+                applySkill.transform.position = SaveSkillPos[0];
+                applySkillBox.transform.position = SaveSkillPos[1];
+                upBottomDirection.gameObject.SetActive(true);
+                if (MoreThanOnce_Purchase == true)
+                {
+                    applySkillWindow.SetActive(false);
+                    MoreThanOnce_Purchase = false;
+                }
 
+                // 한 번 이상 스킬을 적용시킬 시 실행시킨다.
+                else
+                    applySkillWindow.SetActive(false);
+
+                isUpDownLimit = false;
             });
         }
     }
@@ -262,22 +261,22 @@ public class SkillWindow : MonoBehaviour
 
     void UpDownkey()
     {
-        if (isPurchase && UpDown_Limit)
+        if (isPurchase && !isUpDownLimit)
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow) && !UpDown)
+            if (Input.GetKeyDown(KeyCode.UpArrow) && isUpDown)
             {
-                UpDown = true;
+                isUpDown = false;
 
-                for(int i = 0; i < AfterPurchase_Window.transform.childCount; i++)
-                    AfterPurchase_Window.transform.GetChild(i).transform.DOLocalMoveY(basicsSkillA.transform.localPosition.y, 1).SetEase(Ease.OutBack);
+                for (int i = 0; i < applySkillWindow.transform.childCount; i++)
+                    applySkillWindow.transform.GetChild(i).transform.DOLocalMoveY(basicsSkillA.transform.localPosition.y, 1).SetEase(Ease.OutBack);
             }
 
-            else if (Input.GetKeyDown(KeyCode.DownArrow) && UpDown)
+            else if (Input.GetKeyDown(KeyCode.DownArrow) && !isUpDown)
             {
-                UpDown = false;
+                isUpDown = true;
 
-                for (int i = 0; i < AfterPurchase_Window.transform.childCount; i++)
-                    AfterPurchase_Window.transform.GetChild(i).transform.DOLocalMoveY(basicsSkillS.transform.localPosition.y, 1).SetEase(Ease.OutBack);
+                for (int i = 0; i < applySkillWindow.transform.childCount; i++)
+                    applySkillWindow.transform.GetChild(i).transform.DOLocalMoveY(basicsSkillS.transform.localPosition.y, 1).SetEase(Ease.OutBack);
             }
         }
     }
@@ -285,14 +284,13 @@ public class SkillWindow : MonoBehaviour
     #region 스킬 창
     public void OpenWindow(int skillNum)
     {
-        // 스킬 창을 열어주는 코루틴
         downBar.transform.DOKill();
         skillWindowRect.transform.DOKill();
 
         switch (skillNum)
         {
             case 0:
-                if (Skill01_Purchase)
+                if (!isSkill01Purchase)
                 {
                     int leftDistance = 220;
                     skillWindow.transform.DOLocalMoveX(-leftDistance, 0);
@@ -300,7 +298,7 @@ public class SkillWindow : MonoBehaviour
                 break;
 
             case 1:
-                if (Skill02_Purchase)
+                if (!isSkill02Purchase)
                 {
                     int amongDistance = 180;
                     skillWindow.transform.DOLocalMoveX(amongDistance, 0);
@@ -308,7 +306,7 @@ public class SkillWindow : MonoBehaviour
                 break;
 
             case 2:
-                if (Skill03_Purchase)
+                if (!isSkill03Purchase)
                 {
                     int rightDistance = 600;
                     skillWindow.transform.DOLocalMoveX(rightDistance, 0);
@@ -327,7 +325,7 @@ public class SkillWindow : MonoBehaviour
         switch (skillNum)
         {
             case 0:
-                if (Skill01_Purchase)
+                if (!isSkill01Purchase)
                 {
                     int leftDistance = 220;
                     skillWindow.transform.DOLocalMoveX(-leftDistance, 0);
@@ -335,7 +333,7 @@ public class SkillWindow : MonoBehaviour
                 break;
 
             case 1:
-                if (Skill02_Purchase)
+                if (!isSkill02Purchase)
                 {
                     int amongDistance = 180;
                     skillWindow.transform.DOLocalMoveX(amongDistance, 0);
@@ -343,13 +341,14 @@ public class SkillWindow : MonoBehaviour
                 break;
 
             case 2:
-                if (Skill03_Purchase)
+                if (!isSkill03Purchase)
                 {
                     int rightDistance = 600;
                     skillWindow.transform.DOLocalMoveX(rightDistance, 0);
                 }
                 break;
         }
+
         downBar.transform.DOLocalMoveY(closeBar, closeSpeed).SetEase(Ease.Linear).OnComplete(() =>
         {
             skillWindow.SetActive(false);
@@ -358,7 +357,7 @@ public class SkillWindow : MonoBehaviour
         skillWindowRect.DOSizeDelta(new Vector2(windowWidth, 0), barSpeed).SetEase(Ease.Linear);
 
         if (isPurchase)
-            AfterPurchase_Window.gameObject.SetActive(true);
+            applySkillWindow.gameObject.SetActive(true);
     }
     #endregion
 }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4912608566406367066}
   - component: {fileID: 4912608566406367061}
   m_Layer: 5
-  m_Name: Top_Direction
+  m_Name: TopDirection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 4912608567662202655}
   - component: {fileID: 4912608567662202654}
   m_Layer: 5
-  m_Name: Bottom_Direction
+  m_Name: BottomDirection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 4912608568242499833}
   - component: {fileID: 4912608568242499832}
   m_Layer: 5
-  m_Name: Left_Direction
+  m_Name: LeftDirection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -276,7 +276,7 @@ GameObject:
   - component: {fileID: 4912608568286560469}
   - component: {fileID: 4912608568286560468}
   m_Layer: 5
-  m_Name: After_Skill_Image
+  m_Name: ApplySkill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -351,7 +351,7 @@ GameObject:
   - component: {fileID: 4912608568370400657}
   - component: {fileID: 4912608568370400656}
   m_Layer: 5
-  m_Name: After_Skill_Box
+  m_Name: ApplySkillBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

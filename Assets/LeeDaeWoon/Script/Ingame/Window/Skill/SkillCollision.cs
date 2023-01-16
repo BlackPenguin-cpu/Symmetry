@@ -5,10 +5,11 @@ using UnityEngine;
 public class SkillCollision : MonoBehaviour
 {
     public int distanceNum;
+    SkillWindow skillWindow;
 
     void Start()
     {
-
+        skillWindow = SkillWindow.instance;
     }
 
     void Update()
@@ -22,11 +23,11 @@ public class SkillCollision : MonoBehaviour
         if ((collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null ) && !SkillWindow.instance.isPurchase)
         {
             SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
-            SkillWindow.instance.isCollisionCheck = true;
+            skillWindow.isCollisionCheck = true;
 
-            SkillWindow.instance.SkillNum = distanceNum;
+            skillWindow.SkillNum = distanceNum;
             Skill_List.instance.Skill_Num(distanceNum);
-            SkillWindow.instance.OpenWindow(distanceNum);
+            skillWindow.OpenWindow(distanceNum);
         }
     }
     
@@ -35,9 +36,9 @@ public class SkillCollision : MonoBehaviour
         if ((collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null))
         {
             SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
-            SkillWindow.instance.isCollisionCheck = false;
+            skillWindow.isCollisionCheck = false;
 
-            SkillWindow.instance.CloseWindow(distanceNum);
+            skillWindow.CloseWindow(distanceNum);
         }
     }
 

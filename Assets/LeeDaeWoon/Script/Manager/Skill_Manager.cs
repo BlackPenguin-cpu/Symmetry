@@ -53,6 +53,7 @@ public class Skill_Manager : MonoBehaviour
 
     public List<SkillScript> Skill_Up = new List<SkillScript>();
     public List<SkillScript> Skill_Down = new List<SkillScript>();
+
     public List<SkillScript> Skill_Have = new List<SkillScript>();
     public List<SkillScript> Skill = new List<SkillScript>();
     public List<SkillScript> Skill_Shop = new List<SkillScript>();
