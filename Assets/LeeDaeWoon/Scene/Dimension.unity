@@ -17990,19 +17990,17 @@ MonoBehaviour:
   applySkillBox: {fileID: 545089256}
   leftDirection: {fileID: 1223390580}
   applySkill: {fileID: 583388471}
-  Skill_Shop: {fileID: 2633791636960462780, guid: 383a5b3a80e82684c93fc07eb59e19fe, type: 3}
-  AfterPurchase_Top_Light: {fileID: 0}
-  AfterPurchase_Bottom_Light: {fileID: 0}
-  SkillNum: 0
-  isUpDown: 0
+  SalesmanNpc: {fileID: 2633791636960462780, guid: 383a5b3a80e82684c93fc07eb59e19fe, type: 3}
+  topDirectionLight: {fileID: 0}
+  bottomDirectionLight: {fileID: 0}
+  skillNum: 0
   isPurchase: 0
+  isUpDown: 0
   isUpDownLimit: 0
-  isCollisionCheck: 0
   isSkill01Purchase: 0
   isSkill02Purchase: 0
   isSkill03Purchase: 0
-  RandomTest: 0
-  MoreThanOnce_Purchase: 1
+  isCollisionCheck: 0
 --- !u!1 &2583938369214937204
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,12 +20,12 @@ public class SkillCollision : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if ((collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null ) && !SkillWindow.instance.isPurchase)
+        if ((collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null )/* && !SkillWindow.instance.isPurchase*/)
         {
             SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
             skillWindow.isCollisionCheck = true;
+            skillWindow.skillNum = distanceNum;
 
-            skillWindow.SkillNum = distanceNum;
             Skill_List.instance.Skill_Num(distanceNum);
             skillWindow.OpenWindow(distanceNum);
         }

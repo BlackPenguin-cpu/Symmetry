@@ -26,7 +26,13 @@ public class Skill_List : MonoBehaviour
     public SkillScript Left_Skill;
     public SkillScript Among_Skill;
     public SkillScript Right_Skill;
+
     void Start()
+    {
+
+    }
+
+    void Update()
     {
 
     }
@@ -52,10 +58,6 @@ public class Skill_List : MonoBehaviour
                 break;
         }
         return;
-    }
-    void Update()
-    {
-
     }
 
     public void SkillCard(SkillScript skill, int skillIndex)

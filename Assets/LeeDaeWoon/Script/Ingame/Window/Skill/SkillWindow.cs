@@ -39,38 +39,36 @@ public class SkillWindow : MonoBehaviour
     [SerializeField] Image applySkill; // 스킬 적용하기 전 스킬 이미지
 
     [Header("스킬 좌표")]
-    [SerializeField] GameObject Skill_Shop;
+    [SerializeField] GameObject SalesmanNpc;
 
-    public Image AfterPurchase_Top_Light;
-    public Image AfterPurchase_Bottom_Light;
+    [SerializeField] Image topDirectionLight;
+    [SerializeField] Image bottomDirectionLight;
 
-    public int SkillNum; // 현재 몇 번째 구매 스킬과 충돌했는지 숫자 확인
-    public bool isUpDown = false; // 현재 위 인지 아래 인지 확인
+    public int skillNum; // 현재 몇 번째 구매 스킬과 충돌했는지 숫자 확인
     public bool isPurchase = false; // 현재 구매중인지 아닌지 확인
+    public bool isUpDown = false; // 현재 위 인지 아래 인지 확인
     public bool isUpDownLimit = false; // 위아래 제한
-    public bool isCollisionCheck = false; // 현재 구매 스킬들과 충돌 했는지 체크 확인
 
     // 몇 번째 스킬을 구매했는지 확인
     public bool isSkill01Purchase = false;
     public bool isSkill02Purchase = false;
     public bool isSkill03Purchase = false;
 
-    public int RandomTest;
+    public bool isCollisionCheck = false; // 현재 구매 스킬들과 충돌 했는지 체크 확인
 
-    public bool MoreThanOnce_Purchase = true; // 1번 이상 스킬을 구매할 시
-
-    SkillScript SeletSkill;
+    SkillScript seletSkill;
 
     void Start()
     {
-        LeftDirection();
         applySkillWindow.gameObject.SetActive(false);
+
+        LeftDirection();
     }
 
     void Update()
     {
         #region 월드 좌표를 스크린 좌표로 변경을 해준다.
-        transform.localPosition = Camera.main.WorldToScreenPoint(Skill_Shop.gameObject.transform.position + new Vector3(-17.5f, -4.4f, 0));
+        transform.localPosition = Camera.main.WorldToScreenPoint(SalesmanNpc.gameObject.transform.position + new Vector3(-17.5f, -4.4f, 0));
         #endregion
 
         UpDownkey();
@@ -83,7 +81,7 @@ public class SkillWindow : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F) && isCollisionCheck)
         {
             // 스킬구매
-            if (isPurchase == false && (GameManager.Instance._coin >= Skill_List.instance.leftSkill.gold || GameManager.Instance._coin >= Skill_List.instance.amongSkill.gold || GameManager.Instance._coin >= Skill_List.instance.rightSkill.gold))
+            if (!isPurchase && (GameManager.Instance._coin >= Skill_List.instance.leftSkill.gold || GameManager.Instance._coin >= Skill_List.instance.amongSkill.gold || GameManager.Instance._coin >= Skill_List.instance.rightSkill.gold))
             {
                 SoundManager.instance.PlaySoundClip("SFX_Buy", SoundType.SFX, 5f);
 
@@ -92,39 +90,39 @@ public class SkillWindow : MonoBehaviour
                 for (int i = 0; i <= 1; i++)
                     applySkillWindow.transform.GetChild(i).gameObject.SetActive(true);
 
-                SeletSkill = Skill_Manager.instance.Skill[SkillNum];
-                applySkill.sprite = SeletSkill.sprite;
+                seletSkill = Skill_Manager.instance.Skill[skillNum];
+                applySkill.sprite = seletSkill.sprite;
 
-                GameManager.Instance._coin -= SeletSkill.price[0];
+                GameManager.Instance._coin -= seletSkill.price[0];
 
                 // 정상작동 웨이브 : 5 / 10 / 15
                 //switch(WaveManager.Instance.m_WaveNum)
                 //{
                 //    case 3:
-                //        GameManager.Instance._coin -= SeletSkill.price[0];
+                //        GameManager.Instance._coin -= seletSkill.price[0];
                 //        break;
 
                 //    case 5:
-                //        GameManager.Instance._coin -= SeletSkill.price[1];
+                //        GameManager.Instance._coin -= seletSkill.price[1];
                 //        break;
 
                 //    case 15:
-                //        GameManager.Instance._coin -= SeletSkill.price[2];
+                //        GameManager.Instance._coin -= seletSkill.price[2];
                 //        break;
                 //}
 
-                Skill_Manager.instance.Skill_Have.Add(SeletSkill);
-                Skill_Manager.instance.Skill_Shop.Add(SeletSkill);
+                Skill_Manager.instance.Skill_Have.Add(seletSkill);
+                Skill_Manager.instance.Skill_Shop.Add(seletSkill);
 
                 isPurchase = true; // 이것을 통하여 스킬구매 -> 스킬적용으로 넘겨준다.
 
-                transform.GetChild(SkillNum).GetChild(2).gameObject.SetActive(true); // soldOutText
-                transform.GetChild(SkillNum).GetChild(3).gameObject.SetActive(false); // shopSkillBox
+                transform.GetChild(skillNum).GetChild(2).gameObject.SetActive(true); // soldOutText
+                transform.GetChild(skillNum).GetChild(3).gameObject.SetActive(false); // shopSkillBox
 
                 // 스킬창을 닫아준다.
-                CloseWindow(SkillNum);
+                CloseWindow(skillNum);
 
-                switch (SkillNum)
+                switch (skillNum)
                 {
                     case 0:
                         isSkill01Purchase = true;
@@ -177,26 +175,17 @@ public class SkillWindow : MonoBehaviour
             {
                 UIManager.instance.isPlayerControl = false;
 
-                // AS_Limit = Shift를 통한 스킬 전환 체크
-                if (Skill_Manager.instance.AS_Limit == true) // true일 경우 A스킬에 구매한 스킬을 적용시킨다.
-                {
-                    basicsSkillA.sprite = SeletSkill.sprite;
-                }
-                else basicsSkillS.sprite = SeletSkill.sprite; // false일 경우 S스킬에 구매한 스킬을 적용시킨다.
+                // 스킬 전환한데로 구매한 스킬을 적용시킨다.
+                if (!Skill_Manager.instance.isASLimit) 
+                    basicsSkillA.sprite = seletSkill.sprite;
+                else 
+                    basicsSkillS.sprite = seletSkill.sprite; 
 
-                // 한 번 미만 스킬을 적용시킬 시 실행시킨다.
                 applySkill.transform.position = SaveSkillPos[0];
                 applySkillBox.transform.position = SaveSkillPos[1];
-                upBottomDirection.gameObject.SetActive(true);
-                if (MoreThanOnce_Purchase == true)
-                {
-                    applySkillWindow.SetActive(false);
-                    MoreThanOnce_Purchase = false;
-                }
 
-                // 한 번 이상 스킬을 적용시킬 시 실행시킨다.
-                else
-                    applySkillWindow.SetActive(false);
+                upBottomDirection.gameObject.SetActive(true);
+                applySkillWindow.SetActive(false);
 
                 isUpDownLimit = false;
             });
@@ -227,25 +216,17 @@ public class SkillWindow : MonoBehaviour
             {
                 UIManager.instance.isPlayerControl = false;
 
-                // AS_Limit = Shift를 통한 스킬 전환 체크
-                if (Skill_Manager.instance.AS_Limit_02 == true) // true일 경우 S스킬에 구매한 스킬을 적용시킨다.
-                    basicsSkillS.sprite = SeletSkill.sprite;
+                // 스킬 전환한데로 구매한 스킬을 적용시킨다.
+                if (Skill_Manager.instance.AS_Limit_02 == true)
+                    basicsSkillS.sprite = seletSkill.sprite;
                 else
-                    basicsSkillA.sprite = SeletSkill.sprite;
+                    basicsSkillA.sprite = seletSkill.sprite;
 
-                // 한 번 미만 스킬을 적용시킬 시 실행시킨다.
                 applySkill.transform.position = SaveSkillPos[0];
                 applySkillBox.transform.position = SaveSkillPos[1];
-                upBottomDirection.gameObject.SetActive(true);
-                if (MoreThanOnce_Purchase == true)
-                {
-                    applySkillWindow.SetActive(false);
-                    MoreThanOnce_Purchase = false;
-                }
 
-                // 한 번 이상 스킬을 적용시킬 시 실행시킨다.
-                else
-                    applySkillWindow.SetActive(false);
+                upBottomDirection.gameObject.SetActive(true);
+                applySkillWindow.SetActive(false);
 
                 isUpDownLimit = false;
             });

@@ -50,13 +50,13 @@ public class Player_Vector : MonoBehaviour
         // TODO : ÀÏ°ü¼º.
         if (SceneManager.GetActiveScene().name == "Dimension")
         {
-            Potal.Inst.Player.DOFade(1f, 0f);
-            Potal.Inst.Dark_Player.DOFade(1f, 0f);
+            Potal.Inst.Player.DOFade(1, 0f);
+            Potal.Inst.Dark_Player.DOFade(1, 0f);
 
-            Skill_Manager.instance.Skill_PotalMove = false;
+            Skill_Manager.instance.isPotalMove = false;
             UIManager.instance.isPlayerControl = false;
 
-            UIManager.instance.fadeInOut.DOFade(0f, 0f);
+            UIManager.instance.fadeInOut.DOFade(0, 0);
         }
     }
 
