@@ -1199,6 +1199,11 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5.44, y: 1.13}
   m_EdgeRadius: 0
+--- !u!1 &255756136 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4992396103942331758, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
+  m_PrefabInstance: {fileID: 701185870}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &284459538
 GameObject:
   m_ObjectHideFlags: 0
@@ -1854,11 +1859,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\uB9C8\uB825 \uAC15\uD654\n"
---- !u!1 &382121408 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4992396104981699406, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
-  m_PrefabInstance: {fileID: 701185870}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &395440930
 GameObject:
   m_ObjectHideFlags: 0
@@ -2430,11 +2430,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1738952378417045457, guid: 019d3c36a78132c44aecc53c1dc577cf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.899998
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 1738952378417045457, guid: 019d3c36a78132c44aecc53c1dc577cf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.39
+      value: -1.4
       objectReference: {fileID: 0}
     - target: {fileID: 1738952378417045457, guid: 019d3c36a78132c44aecc53c1dc577cf, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2927,17 +2927,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 648504050}
   m_CullTransparentMesh: 1
---- !u!114 &667705690 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1013090642909467091, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
-  m_PrefabInstance: {fileID: 701185870}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &678276412
 GameObject:
   m_ObjectHideFlags: 0
@@ -3160,18 +3149,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7631395407191935381, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
-      propertyPath: ItemDA_Have.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7631395408150755461, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
-      propertyPath: fade
-      value: 
-      objectReference: {fileID: 667705690}
-    - target: {fileID: 7631395408150755461, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
-      propertyPath: cardPrefab
-      value: 
-      objectReference: {fileID: 6711820591797814597, guid: eba2a774be07be9448f54aba063df576, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
 --- !u!1 &701829837
@@ -3256,53 +3233,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &735118151
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 735118153}
-  - component: {fileID: 735118152}
-  m_Layer: 0
-  m_Name: Player_Vector
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &735118152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 735118151}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b948924b60a936469d49f9d4a2af80c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerObj: {fileID: 0}
-  M_VectorCheck: 0
-  I_VectorCheck: 0
-  D_VectorCheck: 0
---- !u!4 &735118153
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 735118151}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.9825, y: -0.98, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &747280152
 GameObject:
   m_ObjectHideFlags: 0
@@ -7855,7 +7785,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kingNPC: {fileID: 1976985716}
   playerHP: {fileID: 1807762486}
-  playerSkill: {fileID: 382121408}
+  playerSkill: {fileID: 255756136}
   creditBar: {fileID: 980068956}
   cameraObj: {fileID: 1198551566}
   fBtn: {fileID: 1570651355}
@@ -8026,3 +7956,47 @@ RectTransform:
   m_AnchoredPosition: {x: -294.02728, y: 245}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &2531421641125524228
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2531421641125524234}
+  - component: {fileID: 2531421641125524235}
+  m_Layer: 0
+  m_Name: PlayerVector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2531421641125524234
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2531421641125524228}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -10.9825, y: -0.98, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2531421641125524235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2531421641125524228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b948924b60a936469d49f9d4a2af80c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ePlayerPos: 0

@@ -371,7 +371,8 @@ public class StopManager : MonoBehaviour
         // 메인화면에서 예 버튼을 눌렀을 때
         mainWindowYesBtn.onClick.AddListener(() =>
         {
-
+            Time.timeScale = 1;
+            SceneManager.LoadScene(1);
         });
 
         // 메인화면에서 아니요 버튼을 누렀을 때

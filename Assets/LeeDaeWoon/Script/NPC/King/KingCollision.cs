@@ -233,7 +233,7 @@ public class KingCollision : MonoBehaviour
     }
 
 
-    public IEnumerator OnTriggerEnter2D(Collider2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null && UIManager.instance.isKingCheck == false)
         {
@@ -244,41 +244,37 @@ public class KingCollision : MonoBehaviour
                 case Area.Area01:
                     rangeReach = true;
                     king.cameraObj.GetComponent<CameraManager>().enabled = false;
-                    king.cameraObj.transform.DOLocalMoveX(0, waitTime).SetEase(Ease.Linear);
-
-                    yield return new WaitForSeconds(waitTime);
-
-                    king.dialogueText.DOText(king.Dialogue[king.sequenceText], 3, richTextEnabled = true, scrambleMode = ScrambleMode.None, scrambleChars_Tool = null).SetEase(Ease.Linear);
+                    king.cameraObj.transform.DOLocalMoveX(0, waitTime).SetEase(Ease.Linear).OnComplete(() =>
+                    {
+                        king.dialogueText.DOText(king.Dialogue[king.sequenceText], 3, richTextEnabled = true, scrambleMode = ScrambleMode.None, scrambleChars_Tool = null).SetEase(Ease.Linear);
+                    });
                     break;
 
                 case Area.Area02:
                     rangeReach = true;
                     king.cameraObj.GetComponent<CameraManager>().enabled = false;
-                    king.cameraObj.transform.DOLocalMoveX(9, waitTime).SetEase(Ease.Linear);
-
-                    yield return new WaitForSeconds(waitTime);
-
-                    king.dialogueText.DOText(king.Dialogue[king.sequenceText], 3, richTextEnabled = true, scrambleMode = ScrambleMode.None, scrambleChars_Tool = null).SetEase(Ease.Linear);
+                    king.cameraObj.transform.DOLocalMoveX(9, waitTime).SetEase(Ease.Linear).OnComplete(() =>
+                    {
+                        king.dialogueText.DOText(king.Dialogue[king.sequenceText], 3, richTextEnabled = true, scrambleMode = ScrambleMode.None, scrambleChars_Tool = null).SetEase(Ease.Linear);
+                    });
                     break;
 
                 case Area.Area03:
                     rangeReach = true;
                     king.cameraObj.GetComponent<CameraManager>().enabled = false;
-                    king.cameraObj.transform.DOLocalMoveX(17.82f, waitTime).SetEase(Ease.Linear);
-
-                    yield return new WaitForSeconds(waitTime);
-
-                    king.dialogueText.DOText(king.Dialogue[king.sequenceText], 3f, richTextEnabled = true, scrambleMode = ScrambleMode.None, scrambleChars_Tool = null).SetEase(Ease.Linear);
+                    king.cameraObj.transform.DOLocalMoveX(17.82f, waitTime).SetEase(Ease.Linear).OnComplete(() =>
+                    {
+                        king.dialogueText.DOText(king.Dialogue[king.sequenceText], 3f, richTextEnabled = true, scrambleMode = ScrambleMode.None, scrambleChars_Tool = null).SetEase(Ease.Linear);
+                    });
                     break;
 
                 case Area.Area04:
                     rangeReach = true;
                     king.cameraObj.GetComponent<CameraManager>().enabled = false;
-                    king.cameraObj.transform.DOLocalMoveX(26.76f, waitTime).SetEase(Ease.Linear);
-
-                    yield return new WaitForSeconds(waitTime);
-
-                    king.dialogueText.DOText(king.Dialogue[king.sequenceText], 3f, richTextEnabled = true, scrambleMode = ScrambleMode.None, scrambleChars_Tool = null).SetEase(Ease.Linear);
+                    king.cameraObj.transform.DOLocalMoveX(26.76f, waitTime).SetEase(Ease.Linear).OnComplete(() =>
+                    {
+                        king.dialogueText.DOText(king.Dialogue[king.sequenceText], 3f, richTextEnabled = true, scrambleMode = ScrambleMode.None, scrambleChars_Tool = null).SetEase(Ease.Linear);
+                    });
                     break;
             }
         }

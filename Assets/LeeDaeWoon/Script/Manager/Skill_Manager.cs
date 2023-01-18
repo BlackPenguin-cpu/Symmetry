@@ -71,10 +71,11 @@ public class Skill_Manager : MonoBehaviour
     {
         AddSkill();
 
-        Skill_CoolTime_A();
-        Skill_CoolTime_S();
-        SkillHave_Check();
-        AS_Location();
+        SkillCoolTimeA();
+        SkillCoolTimeS();
+
+        SkillHaveCheck();
+        SkillChangeClick();
     }
 
     void AddList()
@@ -143,7 +144,7 @@ public class Skill_Manager : MonoBehaviour
         //}
     }
 
-    public void SkillHave_Check()
+    void SkillHaveCheck()
     {
         SkillScript[] skills = haveSkillInfo.Keys.ToArray();
         for (int i = 0; i < haveSkillInfo.Count; i++)
@@ -179,7 +180,7 @@ public class Skill_Manager : MonoBehaviour
     #endregion
 
     #region A_스킬 쿨타임
-    public void Skill_CoolTime_A() // 스킬 A의 쿨타임
+    void SkillCoolTimeA() // 스킬 A의 쿨타임
     {
         // 현재 씬이 Main이 아닐 경우 스킬을 사용할 수 있다.
         if (SceneManager.GetActiveScene().name != "Main")
@@ -190,11 +191,11 @@ public class Skill_Manager : MonoBehaviour
                 coolTimeAObj.SetActive(true);
                 fillAmountA.fillAmount = 1f;
                 currentCoolTimeA = coolTimeA;
-                StartCoroutine(A_CoolTime());
+                StartCoroutine(CoolTimeA());
 
                 coolTimeAText.text = currentCoolTimeA.ToString();
 
-                StartCoroutine(A_CoolTimeCounter());
+                StartCoroutine(CoolTimeCounterA());
 
                 skillManager.UseSkill(Skill_Up[0].name, DimensionType.OVER);
 
@@ -207,11 +208,11 @@ public class Skill_Manager : MonoBehaviour
                 coolTimeAObj.SetActive(true);
                 fillAmountA.fillAmount = 1f;
                 currentCoolTimeA = coolTimeS;
-                StartCoroutine(A_CoolTime());
+                StartCoroutine(CoolTimeA());
 
                 coolTimeAText.text = currentCoolTimeA.ToString();
 
-                StartCoroutine(A_CoolTimeCounter());
+                StartCoroutine(CoolTimeCounterA());
 
                 skillManager.UseSkill(Skill_Down[0].name, DimensionType.UNDER);
                 isCoolDown01 = true;
@@ -219,7 +220,7 @@ public class Skill_Manager : MonoBehaviour
         }
     }
 
-    public IEnumerator A_CoolTime() // 쿨타임
+    IEnumerator CoolTimeA() // 쿨타임
     {
         while (fillAmountA.fillAmount > 0)
         {
@@ -232,7 +233,7 @@ public class Skill_Manager : MonoBehaviour
         yield break;
     }
 
-    public IEnumerator A_CoolTimeCounter() // 남은 쿨타임을 계산할 코르틴을 만든다.
+    IEnumerator CoolTimeCounterA() // 남은 쿨타임을 계산할 코르틴을 만든다.
     {
         WaitForSeconds waitSec = new WaitForSeconds(1);
         while (currentCoolTimeA > 0)
@@ -246,23 +247,24 @@ public class Skill_Manager : MonoBehaviour
     #endregion
 
     #region S_스킬 쿨타임
-    public void Skill_CoolTime_S() // 스킬 S의 쿨타임
+    void SkillCoolTimeS() // 스킬 S의 쿨타임
     {
         // 현재 씬이 Main이 아닐 경우 스킬을 사용할 수 있다.
         if (SceneManager.GetActiveScene().name != "Main")
         {
             if (Input.GetKeyDown(KeyCode.S) && isCoolDown02 == false && AS_Limit_02 == true)
             {
-                coolTimeS = Skill_Down[0]._cooldown;
                 coolTimeSObj.SetActive(true);
-                fillAmountS.fillAmount = 1f;
+
+                coolTimeS = Skill_Down[0]._cooldown;
+                fillAmountS.fillAmount = 1;
                 currentCoolTimeS = coolTimeS;
-                StartCoroutine(S_CoolTime());
+                StartCoroutine(CoolTimeS());
 
                 coolTimeSText.text = currentCoolTimeS.ToString();
 
                 skillManager.UseSkill(Skill_Down[0].name, DimensionType.UNDER);
-                StartCoroutine(S_CoolTimeCounter());
+                StartCoroutine(CoolTimeCounterS());
 
                 isCoolDown02 = true;
             }
@@ -273,20 +275,19 @@ public class Skill_Manager : MonoBehaviour
                 coolTimeSObj.SetActive(true);
                 fillAmountS.fillAmount = 1f;
                 currentCoolTimeS = coolTimeA;
-                StartCoroutine(S_CoolTime());
+                StartCoroutine(CoolTimeS());
 
                 coolTimeSText.text = currentCoolTimeS.ToString();
 
                 skillManager.UseSkill(Skill_Up[0].name, DimensionType.OVER);
-                StartCoroutine(S_CoolTimeCounter());
+                StartCoroutine(CoolTimeCounterS());
 
                 isCoolDown02 = true;
             }
         }
-
-
     }
-    public IEnumerator S_CoolTime() // 쿨타임
+
+    IEnumerator CoolTimeS() // 쿨타임
     {
         while (fillAmountS.fillAmount > 0)
         {
@@ -299,7 +300,7 @@ public class Skill_Manager : MonoBehaviour
         yield break;
     }
 
-    public IEnumerator S_CoolTimeCounter() // 남은 쿨타임을 계산할 코르틴을 만든다.
+    IEnumerator CoolTimeCounterS() // 남은 쿨타임을 계산할 코르틴을 만든다.
     {
         while (currentCoolTimeS > 0)
         {
@@ -312,7 +313,7 @@ public class Skill_Manager : MonoBehaviour
     #endregion
 
     #region 스킬 A, S키 위치 설정
-    public void AS_Location()
+    void SkillChangeClick()
     {
         // 왼쪽 쉬프트를 누르고, Potal을 통하여 이동을 하지 않을 경우 이 함수를 실행할 수 있다.
         if (Input.GetKeyDown(KeyCode.LeftShift) && isPotalMove == false)
@@ -322,7 +323,7 @@ public class Skill_Manager : MonoBehaviour
     void SkillChange()
     {
         int skillPosY = 134;
-        float waitTime = 0.5f;
+        float ChangeSkill = 0.4f;
 
         Skill_Up.Add(Skill_Down[0]);
         Skill_Down.Add(Skill_Up[0]);
@@ -334,8 +335,8 @@ public class Skill_Manager : MonoBehaviour
             SoundManager.instance.PlaySoundClip("SFX_Skill_Swap", SoundType.SFX);
 
             isLimit = true;
-            upSkill.transform.DOLocalMoveY(-skillPosY, waitTime).SetEase(Ease.Linear);
-            downSkill.transform.DOLocalMoveY(skillPosY, waitTime).SetEase(Ease.Linear).OnComplete(() =>
+            upSkill.transform.DOLocalMoveY(-skillPosY, ChangeSkill).SetEase(Ease.OutBack);
+            downSkill.transform.DOLocalMoveY(skillPosY, ChangeSkill).SetEase(Ease.OutBack).OnComplete(() =>
             {
                 AS_Limit_02 = false;
                 isASLimit = true;
@@ -347,8 +348,8 @@ public class Skill_Manager : MonoBehaviour
             SoundManager.instance.PlaySoundClip("SFX_Skill_Swap", SoundType.SFX);
 
             isLimit = false;
-            upSkill.transform.DOLocalMoveY(0, waitTime).SetEase(Ease.Linear);
-            downSkill.transform.DOLocalMoveY(0, waitTime).SetEase(Ease.Linear).OnComplete(() =>
+            upSkill.transform.DOLocalMoveY(0, ChangeSkill).SetEase(Ease.OutBack);
+            downSkill.transform.DOLocalMoveY(0, ChangeSkill).SetEase(Ease.OutBack).OnComplete(() =>
             {
                 AS_Limit_02 = true;
                 isASLimit = false;

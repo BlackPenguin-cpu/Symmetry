@@ -2,91 +2,67 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using UnityEngine.SceneManagement;
+
+public enum EPlayerPos
+{
+    Main,
+    Ingame,
+    Dimension
+}
 
 public class Player_Vector : MonoBehaviour
 {
-    public static Player_Vector Inst;
-    public GameObject PlayerObj;
-
-    public bool M_VectorCheck = false;
-    public bool I_VectorCheck = false;
-    public bool D_VectorCheck = false;
+    public EPlayerPos ePlayerPos;
 
     void Start()
     {
-
-        PlayerObj = Player.Instance.gameObject;
+        SceneVector();
     }
 
     void Update()
     {
-        Scene_Vector();
-    }
 
-    private void Awake()
-    {
-        if (Inst == null)
-        {
-            Inst = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
     }
-
 
     private void OnLevelWasLoaded(int level)
     {
-        DOTween.PauseAll();
+        //DOTween.PauseAll();
+        //switch(SceneManager.GetActiveScene().buildIndex)
+        //{
+        //    case 0: // Title
+        //        UIManager.instance.fadeInOut.DOFade(0, 0);
+        //        break;
 
-        if (SceneManager.GetActiveScene().name.Equals("title"))
-        {
-            UIManager.instance.fadeInOut.DOFade(0f, 0f);
-        }
+        //    case 3: // Dimension
+        //        Potal.Inst.Player.DOFade(1, 0);
+        //        Potal.Inst.Dark_Player.DOFade(1, 0);
 
-        // TODO : ÀÏ°ü¼º.
-        if (SceneManager.GetActiveScene().name == "Dimension")
-        {
-            Potal.Inst.Player.DOFade(1, 0f);
-            Potal.Inst.Dark_Player.DOFade(1, 0f);
+        //        Skill_Manager.instance.isPotalMove = false;
+        //        UIManager.instance.isPlayerControl = false;
 
-            Skill_Manager.instance.isPotalMove = false;
-            UIManager.instance.isPlayerControl = false;
-
-            UIManager.instance.fadeInOut.DOFade(0, 0);
-        }
+        //        UIManager.instance.fadeInOut.DOFade(0, 0);
+        //        break;
+        //}
     }
 
-
-    public void Scene_Vector()
+    public void SceneVector()
     {
-        if (SceneManager.GetActiveScene().name == "Main" && M_VectorCheck == false)
+        switch (ePlayerPos)
         {
-            M_VectorCheck = true;
-            PlayerObj.transform.localPosition = new Vector3(-8.9f, -1.39f, 0f);
+            case EPlayerPos.Main:
+                Vector2 mainPos = new Vector2(-10, 1.4f);
+                Player.Instance.transform.DOLocalMove(mainPos, 0);
+                break;
+
+            case EPlayerPos.Ingame:
+                Vector2 ingamePos = new Vector2(1, 0);
+                Player.Instance.transform.DOLocalMove(ingamePos, 0);
+                break;
+
+            case EPlayerPos.Dimension:
+                Vector2 dimensionPos = new Vector2(1, 0);
+                Player.Instance.transform.DOLocalMove(dimensionPos, 0);
+                break;
         }
-        else if (SceneManager.GetActiveScene().name != "Main")
-            M_VectorCheck = false;
-
-
-        if (SceneManager.GetActiveScene().name == "test" && I_VectorCheck == false)
-        {
-            I_VectorCheck = true;
-            PlayerObj.transform.localPosition = new Vector3(0f, 1f, 0f);
-        }
-        else if (SceneManager.GetActiveScene().name != "test")
-            I_VectorCheck = false;
-
-
-        if (SceneManager.GetActiveScene().name == "Dimension" && D_VectorCheck == false)
-        {
-            D_VectorCheck = true;
-            PlayerObj.transform.localPosition = new Vector3(0f, 1f, 0f);
-        }
-        else if (SceneManager.GetActiveScene().name != "Dimension")
-            D_VectorCheck = false;
     }
 }
