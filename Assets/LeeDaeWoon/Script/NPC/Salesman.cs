@@ -20,7 +20,7 @@ public class Salesman : MonoBehaviour
 
     int goldNum;
     bool isReRollCheck = true;
-    bool isCollisionCheck = true;
+    bool isCollisionCheck = false;
 
     const float waitTime = 0.5f;
 
@@ -43,21 +43,19 @@ public class Salesman : MonoBehaviour
     }
     void Update()
     {
-        #region 월드 좌표를 스크린 좌표로 변경을 해준다.
-        differentProduct.transform.localPosition = Camera.main.WorldToScreenPoint(transform.localPosition + new Vector3(-8, -4.9f, 0));
-        #endregion
-        Re_Roll();
+        ScreenVector(new Vector3(-8, -4.9f, 0));
+        ReRoll();
 
     }
 
-    private void Re_Roll()
+    void ScreenVector(Vector3 vec) => differentProduct.transform.localPosition = Camera.main.WorldToScreenPoint(transform.localPosition + vec);
+
+    private void ReRoll()
     {
         if (GameManager.Instance._coin >= goldNum)
         {
-            if (Input.GetKeyDown(KeyCode.F) && isCollisionCheck == false)
+            if (Input.GetKeyDown(KeyCode.F) && isCollisionCheck)
             {
-                AfterObject.SetActive(true);
-                Destroy(GameObject.Find("Skill_Shop(Clone)"));
                 isApplyCheck = false;
                 GameManager.Instance._coin -= goldNum;
                 goldText.text = (goldNum += 200).ToString();
@@ -69,21 +67,30 @@ public class Salesman : MonoBehaviour
                     {
                         if (Skill_Manager.instance.Skill[i].name == Skill_Manager.instance.Skill_Shop[j].name)
                         {
-                            isReRollCheck = false;
                             Skill_Manager.instance.Skill.RemoveAt(i);
                             Skill_Manager.instance.Skill_Shop.RemoveAt(j--);
                         }
                     }
                 }
 
-                if (isReRollCheck == false)
+                for (int i = 0; i < Skill_Manager.instance.Skill.Count; i++)
                 {
-                    for (int i = 0; i < Skill_Manager.instance.Skill.Count; i++)
-                    {
-                        Skill_Manager.instance.SkillBuffer.Add(Skill_Manager.instance.Skill[i]);
-                        Skill_Manager.instance.Skill.RemoveAt(i--);
-                    }
+                    Skill_Manager.instance.SkillBuffer.Add(Skill_Manager.instance.Skill[i]);
+                    Skill_Manager.instance.Skill.RemoveAt(i--);
                 }
+
+                for (int i = 0; i < 3; i++)
+                {
+                    var soldOutText = SkillWindow.instance.transform.GetChild(i).GetChild(2).gameObject;
+                    var shopSkillBox = SkillWindow.instance.transform.GetChild(i).GetChild(3).gameObject;
+
+                    if (soldOutText.activeSelf)
+                        soldOutText.SetActive(false);
+                    if (!shopSkillBox.activeSelf)
+                        shopSkillBox.SetActive(true);
+                }
+
+                Skill_Manager.instance.isSummonSKill = false;
                 Skill_Manager.instance.AddSkill();
             }
         }
@@ -93,7 +100,7 @@ public class Salesman : MonoBehaviour
     {
         if (collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null)
         {
-            isCollisionCheck = false;
+            isCollisionCheck = true;
 
             differentProductText.DOFade(1, waitTime).SetEase(Ease.Linear);
             fBtn.DOFade(1, waitTime).SetEase(Ease.Linear);
@@ -106,7 +113,7 @@ public class Salesman : MonoBehaviour
     {
         if (collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null)
         {
-            isCollisionCheck = true;
+            isCollisionCheck = false;
 
             differentProductText.DOFade(0, waitTime).SetEase(Ease.Linear);
             fBtn.DOFade(0, waitTime).SetEase(Ease.Linear);

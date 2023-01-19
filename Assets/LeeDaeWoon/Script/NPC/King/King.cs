@@ -41,7 +41,6 @@ public class King : MonoBehaviour
     public bool isMagicCreation = false;
     public bool isDialogueSkip = false;
 
-
     void Start()
     {
     }
@@ -56,15 +55,15 @@ public class King : MonoBehaviour
     public void Zoom_Shrinking() => StartCoroutine(Shrinking());
 
 
-    public IEnumerator Expansion() // 줌 확대 
+    IEnumerator Expansion() // 줌 확대 
     {
         UIManager.instance.isPlayerControl = true; // 플레이어의 움직임을 멈춘다.
         Player.Instance.state = PlayerState.Idle; // 플레이어의 움직임을 서있는 상태로 냅둔다.
         cameraObj.GetComponent<CameraManager>().enabled = false; // CameraManager를 꺼둔다.
 
         // 플레이어 UI는 왼쪽으로 치운다.
-        playerHP.transform.DOLocalMoveX(-260f, 0.7f).SetEase(Ease.Linear);
-        playerSkill.transform.DOLocalMoveX(-1221f, 0.7f).SetEase(Ease.Linear);
+        playerHP.transform.DOLocalMoveX(-260, zoomTime).SetEase(Ease.Linear);
+        playerSkill.transform.DOLocalMoveX(-260, zoomTime).SetEase(Ease.Linear);
 
         // 크레딧바는 위와 아래에서 나온다.
         creditBar.transform.GetChild(0).transform.DOLocalMoveY(creditExpansionPos, zoomTime).SetEase(Ease.Linear);
@@ -77,11 +76,11 @@ public class King : MonoBehaviour
         }
     }
 
-    public IEnumerator Shrinking() // 줌 축소
+    IEnumerator Shrinking() // 줌 축소
     {
         // 플레이어 UI는 제자리로 돌려준다.
-        playerHP.transform.DOLocalMoveX(-6f, zoomTime).SetEase(Ease.Linear);
-        playerSkill.transform.DOLocalMoveX(-967f, zoomTime).SetEase(Ease.Linear);
+        playerHP.transform.DOLocalMoveX(-6, zoomTime).SetEase(Ease.Linear);
+        playerSkill.transform.DOLocalMoveX(0, zoomTime).SetEase(Ease.Linear);
 
         // 크레딧바는 위와 아래로 돌려준다.
         creditBar.transform.GetChild(0).transform.DOLocalMoveY(creditShrinkingPos, zoomTime).SetEase(Ease.Linear);

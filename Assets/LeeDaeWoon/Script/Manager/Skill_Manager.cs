@@ -11,7 +11,7 @@ public class Skill_Manager : MonoBehaviour
     public static Skill_Manager instance { get; private set; }
     void Awake() => instance = this;
 
-    bool isSummonSKill = false;
+    public bool isSummonSKill = false;
 
     [Header("A스킬, S스킬")]
     [SerializeField] RectTransform upSkill;
@@ -45,11 +45,10 @@ public class Skill_Manager : MonoBehaviour
 
     [Header("스킬 획득 체크")]
     public Dictionary<SkillScript, bool> haveSkillInfo = new Dictionary<SkillScript, bool>();
-    public int RandomTest;
-    private int SumPer = 0;
+    int randomSkill = 0;
+    int SumPer = 0;
 
     [SerializeField] SkillSo SkillSo;
-    [SerializeField] GameObject SkillPrefab;
 
     public List<SkillScript> Skill_Up = new List<SkillScript>();
     public List<SkillScript> Skill_Down = new List<SkillScript>();
@@ -59,7 +58,7 @@ public class Skill_Manager : MonoBehaviour
     public List<SkillScript> Skill_Shop = new List<SkillScript>();
     public List<SkillScript> SkillBuffer = new List<SkillScript>();
 
-    private SkillManager skillManager;
+    SkillManager skillManager;
 
     void Start()
     {
@@ -156,28 +155,32 @@ public class Skill_Manager : MonoBehaviour
         haveSkillInfo[Skill_Down[0]] = true;
     }
 
-    #region 스킬 소환
+    // 스킬 소환하는 함수
     public void AddSkill()
     {
-        if (SceneManager.GetActiveScene().name == "Dimension" && !isSummonSKill)
+        switch (CurrentScene.instance.eScene)
         {
-            // 스킬 소환
-            isSummonSKill = true;
-            int SkillIndex = 0;
+            case EScene.Dimension:
+                if (!isSummonSKill)
+                {
+                    int SkillIndex = 0;
+                    isSummonSKill = true;
 
-            Skill.Clear();
-            var card = SkillPrefab.GetComponent<Skill_List>();
+                    Skill.Clear();
 
-            for (int i = 0; i < 3; i++)
-            {
-                RandomTest = Skill_Percent(SkillBuffer);
-                Skill.Add(SkillBuffer[RandomTest]);
-                card.SkillCard(Skill[i], SkillIndex++);
-                SkillBuffer.RemoveAt(RandomTest);
-            }
+                    var card = GameObject.Find("Skill_Shop").GetComponent<Skill_List>();
+
+                    for (int i = 0; i < 3; i++)
+                    {
+                        randomSkill = Skill_Percent(SkillBuffer);
+                        Skill.Add(SkillBuffer[randomSkill]);
+                        card.SkillCard(Skill[i], SkillIndex++);
+                        SkillBuffer.RemoveAt(randomSkill);
+                    }
+                }
+                break;
         }
     }
-    #endregion
 
     #region A_스킬 쿨타임
     void SkillCoolTimeA() // 스킬 A의 쿨타임

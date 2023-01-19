@@ -57,8 +57,8 @@ public class CurrentScene : MonoBehaviour
         switch (eScene)
         {
             case EScene.Main:
-                Vector2 mainPos = new Vector2(-10, 1.4f);
-                Player.Instance.transform.DOLocalMove(mainPos, 0);
+                Vector2 mainPos = new Vector2(-10, -1.8f);
+                Player.Instance.transform.DOMove(mainPos, 0);
                 break;
 
             case EScene.Ingame:

@@ -21,7 +21,7 @@ public class Main_Potal : MonoBehaviour
         if (collision.GetComponent<ITypePlayer>() != null)
         {
             DOTween.KillAll();
-            SceneManager.LoadScene("test");
+            SceneManager.LoadScene(3);
         }
     }
 }

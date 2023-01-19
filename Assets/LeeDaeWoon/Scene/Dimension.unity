@@ -11342,6 +11342,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1279463526 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4912608567662202654, guid: 261fff62e50a8c74c83c18777936fbc2, type: 3}
+  m_PrefabInstance: {fileID: 1687550451}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1288205243
 GameObject:
   m_ObjectHideFlags: 0
@@ -14324,6 +14335,17 @@ RectTransform:
   m_AnchoredPosition: {x: 288.21118, y: 336.06995}
   m_SizeDelta: {x: 851.3207, y: 68.793}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1714773231 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4912608566406367061, guid: 261fff62e50a8c74c83c18777936fbc2, type: 3}
+  m_PrefabInstance: {fileID: 1687550451}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1719933134
 GameObject:
   m_ObjectHideFlags: 0
@@ -17986,8 +18008,8 @@ MonoBehaviour:
   leftDirection: {fileID: 1223390580}
   applySkill: {fileID: 583388471}
   SalesmanNpc: {fileID: 2633791636960462780, guid: 383a5b3a80e82684c93fc07eb59e19fe, type: 3}
-  topDirectionLight: {fileID: 0}
-  bottomDirectionLight: {fileID: 0}
+  topDirectionLight: {fileID: 1714773231}
+  bottomDirectionLight: {fileID: 1279463526}
   skillNum: 0
   isPurchase: 0
   isUpDown: 0
