@@ -7743,7 +7743,7 @@ MonoBehaviour:
   area03Box: {fileID: 349857122}
   area04Box: {fileID: 98934828}
   isMagicCreation: 0
-  isDialogueSkip: 1
+  isDialogueSkip: 0
 --- !u!1 &2072984338
 GameObject:
   m_ObjectHideFlags: 0

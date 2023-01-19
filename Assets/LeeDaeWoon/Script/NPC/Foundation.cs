@@ -23,7 +23,7 @@ public class Foundation : MonoBehaviour
 
     [Header("제단")]
     const float speed = -10; // 마법진 돌아가는 속도
-    [SerializeField] SpriteRenderer magicCircle;
+    public SpriteRenderer magicCircle;
 
     [Header("업그레이드 버튼")]
     [SerializeField] Image fBtn;
@@ -72,6 +72,7 @@ public class Foundation : MonoBehaviour
 
     public void MagicCircle()
     {
+        magicCircle.transform.Rotate(new Vector3(0, 0, speed * Time.deltaTime));
         switch (CurrentScene.instance.eScene)
         {
             case EScene.Main:
@@ -83,7 +84,6 @@ public class Foundation : MonoBehaviour
             case EScene.Dimension:
                 Vector2 dimension = new Vector2(-5.2f, -4.4f);
 
-                magicCircle.transform.Rotate(new Vector3(0, 0, speed * Time.deltaTime));
                 ScreenVector(dimension);
                 break;
         }

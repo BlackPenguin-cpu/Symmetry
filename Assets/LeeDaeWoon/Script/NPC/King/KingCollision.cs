@@ -37,8 +37,8 @@ public class KingCollision : MonoBehaviour
         DialogueBtn_FadeInOut();
         NextDialogue_F();
 
-        if (king.isMagicCreation == true)
-            Foundation.instance.MagicCircle();
+        if (king.isMagicCreation)
+            Foundation.instance.magicCircle.DOFade(1, 0);
     }
 
     public void NextDialogue_F()
