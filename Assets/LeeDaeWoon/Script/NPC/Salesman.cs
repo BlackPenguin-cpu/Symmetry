@@ -19,7 +19,6 @@ public class Salesman : MonoBehaviour
     public bool isApplyCheck = true;
 
     int goldNum;
-    bool isReRollCheck = true;
     bool isCollisionCheck = false;
 
     const float waitTime = 0.5f;

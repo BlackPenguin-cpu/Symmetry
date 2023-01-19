@@ -68,3 +68,6 @@ TagManager:
   - name: NPC_Effect
     uniqueID: 623282245
     locked: 0
+  - name: FadeInOut
+    uniqueID: 1669395893
+    locked: 0

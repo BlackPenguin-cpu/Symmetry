@@ -53,8 +53,6 @@ public class BlackSmith : MonoBehaviour
     [SerializeField] GameObject weaponWindow;
     [SerializeField] RectTransform weaponRect; // â
 
-    [SerializeField] Image FadeInout;
-
     const int openBar = 447;
     const int closeBar = 30;
     const float barSpeed = 0.23f;
@@ -252,7 +250,7 @@ public class BlackSmith : MonoBehaviour
             isWindowOpenCheck = true;
             UIManager.instance.isCursorFade = true;
             UIManager.instance.isPlayerControl = true;
-            FadeInout.DOFade(0.5f, 1);
+            Fade.instance.FadeIn();
             OpenWindow();
         }
 
@@ -393,7 +391,7 @@ public class BlackSmith : MonoBehaviour
 
             UIManager.instance.isCursorFade = false;
             isBlackSmithWindowClose = false;
-            FadeInout.DOFade(0, 1);
+            Fade.instance.FadeOut();
 
             upBar.transform.DOLocalMoveY(closeBar, barSpeed).SetEase(Ease.Linear);
             downBar.transform.DOLocalMoveY(-closeBar, barSpeed).SetEase(Ease.Linear).OnComplete(() =>

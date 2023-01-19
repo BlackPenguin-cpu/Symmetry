@@ -49,7 +49,6 @@ public class Foundation : MonoBehaviour
     const int windowHeight = 885;
 
     [Space(10)]
-    [SerializeField] Image fadeInOut;
     public Text title;
     public Text explanation;
     public GameObject purchase;
@@ -94,7 +93,7 @@ public class Foundation : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F) && isCollisionCheck == false && iswindowOpenCheck == false)
         {
-            fadeInOut.DOFade(0.5f, 1).SetEase(Ease.Linear);
+            Fade.instance.FadeIn();
             UIManager.instance.isPlayerControl = true;
             OpenWindow();
             iswindowOpenCheck = true;
@@ -128,7 +127,7 @@ public class Foundation : MonoBehaviour
         upBar.transform.DOLocalMoveY(closeBar, closeSpeed).SetEase(Ease.Linear);
         downBar.transform.DOLocalMoveY(-closeBar, closeSpeed).SetEase(Ease.Linear).OnComplete(() =>
         {
-            fadeInOut.DOFade(0, 1).SetEase(Ease.Linear);
+            Fade.instance.FadeOut();
 
             UIManager.instance.isPlayerControl = false;
             foundationWindow.SetActive(false);

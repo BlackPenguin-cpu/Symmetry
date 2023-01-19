@@ -31,6 +31,7 @@ public class StopManager : MonoBehaviour
     [SerializeField] Button exitWindowYesBtn;
     [SerializeField] Button exitWindowNoBtn;
 
+    #region 일시정지 창
     [Header("일시정지 창")]
     [SerializeField] GameObject pauseBarUp; // 일시정지 창의 윗 봉
     [SerializeField] GameObject pauseBarDown; // 일시정지 창의 아랫 봉 
@@ -43,7 +44,9 @@ public class StopManager : MonoBehaviour
 
     const int pauseWidth = 566;
     const int pauseHeight = 700;
+    #endregion
 
+    #region 설정 창
     [Header("설정 창")]
     [SerializeField] GameObject settingBarUp; // 설정 창의 윗 봉
     [SerializeField] GameObject settingBarDown; // 설정 창의 아랫 봉 
@@ -60,7 +63,9 @@ public class StopManager : MonoBehaviour
 
     const int settingWidth = 1675;
     const int settingHeigh = 885;
+    #endregion
 
+    #region 플레이어 창
     [Header("플레이어 창")]
     [SerializeField] GameObject playerBarUp; // 플레이어 창의 윗 봉
     [SerializeField] GameObject playerBarDown; // 플레이어 창의 아랫 봉 
@@ -113,7 +118,9 @@ public class StopManager : MonoBehaviour
     public Text itemName; // 아이템 이름
     public Image itemIcon; // 아이템 아이콘
     public Text itemExplanation; // 아이템 설명
+    #endregion
 
+    #region 메인화면 창
     [Header("메인화면 창")]
     [SerializeField] GameObject mainBarUp; // 메인 창의 윗 봉
     [SerializeField] GameObject mainBarDown; // 메인 창의 아랫 봉 
@@ -127,7 +134,9 @@ public class StopManager : MonoBehaviour
 
     const int mainWidth = 1585;
     const int mainHeigh = 395;
+    #endregion
 
+    #region 게임종료 창
     [Header("게임종료 창")]
     public GameObject exitBarUp; // 게임종료 창의 윗 봉
     public GameObject exitBarDown; // 게임종료 창의 아랫 봉 
@@ -140,6 +149,7 @@ public class StopManager : MonoBehaviour
 
     const int exitWidth = 1585;
     const int exitHeigh = 395;
+    #endregion
 
     const float waitTime = 0.5f;
 
@@ -162,6 +172,7 @@ public class StopManager : MonoBehaviour
             if (isESC == false && isEscCheck == false)
             {
                 isEscCheck = true;
+                Fade.instance.FadeIn();
                 PauseWindow();
             }
 
@@ -175,6 +186,7 @@ public class StopManager : MonoBehaviour
                     isEscCheck = false;
                     isESC = false;
 
+                    Fade.instance.FadeOut();
                     pauseWindow.SetActive(false);
                     Time.timeScale = 1f;
                 });
@@ -410,6 +422,7 @@ public class StopManager : MonoBehaviour
         // 나가기 예 버튼을 눌렀을 때
         exitWindowYesBtn.onClick.AddListener(() =>
         {
+            Fade.instance.FadeOut();
             DOTween.KillAll();
             Application.Quit();
         });
