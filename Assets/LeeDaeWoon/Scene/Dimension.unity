@@ -6039,8 +6039,6 @@ MonoBehaviour:
   explanation: {fileID: 1288205245}
   purchase: {fileID: 535428129}
   dimensionalPrice: {fileID: 1436679608}
-  Magic_Open: 0
-  Body_Open: 0
 --- !u!61 &733044160
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9998,7 +9996,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b948924b60a936469d49f9d4a2af80c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ePlayerPos: 0
+  eScene: 0
 --- !u!4 &1090934604
 Transform:
   m_ObjectHideFlags: 0
@@ -20104,7 +20102,7 @@ GameObject:
   - component: {fileID: 7445286509002058255}
   - component: {fileID: 7445286509002058254}
   m_Layer: 0
-  m_Name: PlayerVector
+  m_Name: CurrentScene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20122,7 +20120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b948924b60a936469d49f9d4a2af80c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ePlayerPos: 2
+  eScene: 2
 --- !u!4 &7445286509002058255
 Transform:
   m_ObjectHideFlags: 0

@@ -1155,8 +1155,6 @@ MonoBehaviour:
   explanation: {fileID: 648504052}
   purchase: {fileID: 14020680}
   dimensionalPrice: {fileID: 639699827}
-  Magic_Open: 0
-  Body_Open: 0
 --- !u!4 &222911146
 Transform:
   m_ObjectHideFlags: 0
@@ -7967,7 +7965,7 @@ GameObject:
   - component: {fileID: 2531421641125524234}
   - component: {fileID: 2531421641125524235}
   m_Layer: 0
-  m_Name: PlayerVector
+  m_Name: CurrentScene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

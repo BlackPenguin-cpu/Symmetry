@@ -38,7 +38,7 @@ public class KingCollision : MonoBehaviour
         NextDialogue_F();
 
         if (king.isMagicCreation == true)
-            Foundation.instance.MagicCircle_Rotation();
+            Foundation.instance.MagicCircle();
     }
 
     public void NextDialogue_F()

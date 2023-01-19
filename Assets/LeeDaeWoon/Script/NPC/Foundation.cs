@@ -10,7 +10,7 @@ public class Malyeog
 {
     public string name;
 
-    [TextArea(5,10)]
+    [TextArea(5, 10)]
     public List<string> upgradeExplanation = new List<string>();
 }
 
@@ -50,47 +50,44 @@ public class Foundation : MonoBehaviour
 
     [Space(10)]
     [SerializeField] Image fadeInOut;
-    public Text title; 
-    public Text explanation; 
+    public Text title;
+    public Text explanation;
     public GameObject purchase;
     public Text dimensionalPrice;
 
-    public int Magic_Open;
-    public int Body_Open;
-
     void Start()
     {
-        CloseBtn();
-
-        upGradeText.DOFade(0, 0f);
+        upGradeText.DOFade(0, 0);
         fBtn.DOFade(0, 0);
+
+        CloseBtn();
     }
 
     void Update()
     {
         Foundation_Click();
-        // 나였으면 이거 함수만들어서 했음
-        if (SceneNameEquals("Dimension"))
-            MagicCircle_Rotation();
-
-        #region 월드 좌표를 스크린 좌표로 변경을 해준다.
-        if (SceneNameEquals("Dimension"))
-            UpgradeTransformChange(new Vector3(-5.2f, -4.4f, 0));
-        if (SceneNameEquals("Main"))
-            UpgradeTransformChange(new Vector3(-10.8f, -7f, 0));
-        #endregion
+        MagicCircle();
     }
 
-    private void UpgradeTransformChange(Vector3 vec) => upGrade.transform.localPosition = Camera.main.WorldToScreenPoint(gameObject.transform.localPosition + vec);
+    private void ScreenVector(Vector3 vec) => upGrade.transform.localPosition = Camera.main.WorldToScreenPoint(gameObject.transform.localPosition + vec);
 
-    private bool SceneNameEquals(string name) => SceneManager.GetActiveScene().name.Equals(name);
-
-    public void MagicCircle_Rotation()
+    public void MagicCircle()
     {
-        if (SceneManager.GetActiveScene().name.Equals("Main"))
-            magicCircle.DOFade(1, 1).SetEase(Ease.Linear);
+        switch (CurrentScene.instance.eScene)
+        {
+            case EScene.Main:
+                Vector2 mainPos = new Vector2(-10.8f, -7);
 
-        magicCircle.transform.Rotate(new Vector3(0, 0, speed * Time.deltaTime));
+                ScreenVector(mainPos);
+                break;
+
+            case EScene.Dimension:
+                Vector2 dimension = new Vector2(-5.2f, -4.4f);
+
+                magicCircle.transform.Rotate(new Vector3(0, 0, speed * Time.deltaTime));
+                ScreenVector(dimension);
+                break;
+        }
     }
 
     public void Foundation_Click()
@@ -128,7 +125,7 @@ public class Foundation : MonoBehaviour
     {
         SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX);
 
-        upBar.transform.DOLocalMoveY(closeBar, closeSpeed).SetEase(Ease.Linear); 
+        upBar.transform.DOLocalMoveY(closeBar, closeSpeed).SetEase(Ease.Linear);
         downBar.transform.DOLocalMoveY(-closeBar, closeSpeed).SetEase(Ease.Linear).OnComplete(() =>
         {
             fadeInOut.DOFade(0, 1).SetEase(Ease.Linear);

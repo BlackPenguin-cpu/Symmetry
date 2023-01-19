@@ -3,25 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public enum EPlayerPos
+public enum EScene
 {
     Main,
     Ingame,
     Dimension
 }
 
-public class Player_Vector : MonoBehaviour
+public class CurrentScene : MonoBehaviour
 {
-    public EPlayerPos ePlayerPos;
+    public static CurrentScene instance;
+
+    public EScene eScene;
 
     void Start()
     {
-        SceneVector();
+        PlayerVector();
     }
 
     void Update()
     {
 
+    }
+
+    void Awake()
+    {
+        instance = this;
     }
 
     private void OnLevelWasLoaded(int level)
@@ -45,21 +52,21 @@ public class Player_Vector : MonoBehaviour
         //}
     }
 
-    public void SceneVector()
+    public void PlayerVector()
     {
-        switch (ePlayerPos)
+        switch (eScene)
         {
-            case EPlayerPos.Main:
+            case EScene.Main:
                 Vector2 mainPos = new Vector2(-10, 1.4f);
                 Player.Instance.transform.DOLocalMove(mainPos, 0);
                 break;
 
-            case EPlayerPos.Ingame:
+            case EScene.Ingame:
                 Vector2 ingamePos = new Vector2(1, 0);
                 Player.Instance.transform.DOLocalMove(ingamePos, 0);
                 break;
 
-            case EPlayerPos.Dimension:
+            case EScene.Dimension:
                 Vector2 dimensionPos = new Vector2(1, 0);
                 Player.Instance.transform.DOLocalMove(dimensionPos, 0);
                 break;
