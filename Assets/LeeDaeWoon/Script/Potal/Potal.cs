@@ -10,48 +10,85 @@ public class Potal : MonoBehaviour
     public static Potal Inst { get; private set; }
     void Awake() => Inst = this;
 
-    public GameObject Potal_obj;
-    public SpriteRenderer Player;
-    public SpriteRenderer Dark_Player;
+    [SerializeField] GameObject upgrade;
 
-    bool Potal_Check;
+    bool isCollisionCheck = false;
+    const float fadeSpeed = 0.5f;
 
     void Start()
     {
-        Player = GameObject.Find("Player").GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Keypad4))
-            Potal_M();
-    }
-
-    public void Potal_M() =>
-        StartCoroutine(Potal_Move());
-
-    public IEnumerator Potal_Move()
-    {
-        if (Potal_Check == false && SceneManager.GetActiveScene().name == "test")
+        switch (CurrentScene.instance.eScene)
         {
-            Potal_Check = true;
-
-            // 플레이어 이동 및 공격 과 스킬 전환을 멈추게 한다.
-            UIManager.instance.isPlayerControl = true;
-            Skill_Manager.instance.isPotalMove = true;
-
-            Potal_obj.SetActive(true);
-            Potal_obj.transform.localPosition = new Vector3(Player.transform.localPosition.x, 1, 0);
-            UIManager.instance.fadeInOut.DOFade(1f, 4f);
-            yield return new WaitForSeconds(1f);
-
-            Dark_Player.DOFade(0f, 2.5f);
-            Player.DOFade(0f, 2.5f);
-
-            yield return new WaitForSeconds(2f);
-            SoundManager.instance.PlaySoundClip("SFX_Potal", SoundType.SFX);
-            SceneManager.LoadScene("Dimension");
+            case EScene.Dimension:
+                ScreenVector(new Vector3(-3, -4.5f, 0));
+                FClick();
+                break;
         }
     }
 
+    void ScreenVector(Vector3 vec) => upgrade.transform.localPosition = Camera.main.WorldToScreenPoint(transform.localPosition + vec);
+
+    void FClick()
+    {
+        if (Input.GetKeyDown(KeyCode.F) && isCollisionCheck)
+            SceneManager.LoadScene(2);
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null)
+        {
+            switch (CurrentScene.instance.eScene)
+            {
+                case EScene.Main:
+                    DOTween.KillAll();
+                    SceneManager.LoadScene(3);
+                    break;
+
+                case EScene.Dimension:
+                    isCollisionCheck = true;
+
+                    for (int i = 0; i <= upgrade.transform.childCount; i++)
+                    {
+                        switch(i)
+                        {
+                            case 1:
+                                upgrade.transform.GetChild(i).GetComponent<Image>().DOFade(1, fadeSpeed).SetEase(Ease.Linear);
+                                break;
+                            case 2:
+                                upgrade.transform.GetChild(i).GetComponent<Text>().DOFade(1, fadeSpeed).SetEase(Ease.Linear);
+                                break;
+                        }
+                    }
+                    break;
+            }
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        switch (CurrentScene.instance.eScene)
+        {
+            case EScene.Dimension:
+                isCollisionCheck = false;
+
+                for (int i = 0; i <= upgrade.transform.childCount; i++)
+                {
+                    switch (i)
+                    {
+                        case 1:
+                            upgrade.transform.GetChild(i).GetComponent<Image>().DOFade(0, fadeSpeed).SetEase(Ease.Linear);
+                            break;
+                        case 2:
+                            upgrade.transform.GetChild(i).GetComponent<Text>().DOFade(0, fadeSpeed).SetEase(Ease.Linear);
+                            break;
+                    }
+                }
+                break;
+        }
+    }
 }

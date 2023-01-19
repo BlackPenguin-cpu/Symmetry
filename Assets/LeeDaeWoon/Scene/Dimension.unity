@@ -433,7 +433,7 @@ GameObject:
   - component: {fileID: 25982790}
   - component: {fileID: 25982789}
   m_Layer: 5
-  m_Name: F_Button
+  m_Name: BossPotal_FButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3597,12 +3597,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 432347589}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ac787599ae25f84ca74b544a8af2df3, type: 3}
+  m_Script: {fileID: 11500000, guid: e035eaefe4dc95040a2923766cca5530, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   upgrade: {fileID: 639716128}
-  FBtn: {fileID: 806538701}
-  upgradeText: {fileID: 713642139}
 --- !u!61 &432347594
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5135,7 +5133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 639716129}
   m_Layer: 5
-  m_Name: Upgrade
+  m_Name: BossPotal_Upgrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5361,7 +5359,7 @@ GameObject:
   - component: {fileID: 713642140}
   - component: {fileID: 713642139}
   m_Layer: 5
-  m_Name: Upgrade_Text
+  m_Name: BossPotal_UpgradeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
