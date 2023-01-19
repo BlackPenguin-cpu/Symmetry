@@ -18,6 +18,9 @@ public class CurrentScene : MonoBehaviour
 
     void Start()
     {
+        Fade.instance.fadeInOut.DOFade(1, 0);
+        Fade.instance.fadeInOut.DOFade(0, 1).SetEase(Ease.Linear).SetUpdate(true);
+
         PlayerVector();
     }
 

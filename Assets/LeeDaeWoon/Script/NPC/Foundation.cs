@@ -93,7 +93,8 @@ public class Foundation : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F) && isCollisionCheck == false && iswindowOpenCheck == false)
         {
-            Fade.instance.FadeIn();
+            Fade.instance.fadeInOut.DOFade(0.5f, 0.2f).SetEase(Ease.Linear).SetUpdate(true);
+
             UIManager.instance.isPlayerControl = true;
             OpenWindow();
             iswindowOpenCheck = true;
@@ -127,7 +128,7 @@ public class Foundation : MonoBehaviour
         upBar.transform.DOLocalMoveY(closeBar, closeSpeed).SetEase(Ease.Linear);
         downBar.transform.DOLocalMoveY(-closeBar, closeSpeed).SetEase(Ease.Linear).OnComplete(() =>
         {
-            Fade.instance.FadeOut();
+            Fade.instance.fadeInOut.DOFade(0, 0.2f).SetEase(Ease.Linear).SetUpdate(true);
 
             UIManager.instance.isPlayerControl = false;
             foundationWindow.SetActive(false);

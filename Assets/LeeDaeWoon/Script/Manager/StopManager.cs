@@ -172,7 +172,7 @@ public class StopManager : MonoBehaviour
             if (isESC == false && isEscCheck == false)
             {
                 isEscCheck = true;
-                Fade.instance.FadeIn();
+                Fade.instance.fadeInOut.DOFade(0.5f, 0.2f).SetEase(Ease.Linear).SetUpdate(true);
                 PauseWindow();
             }
 
@@ -186,7 +186,7 @@ public class StopManager : MonoBehaviour
                     isEscCheck = false;
                     isESC = false;
 
-                    Fade.instance.FadeOut();
+                    Fade.instance.fadeInOut.DOFade(0, 0.2f).SetEase(Ease.Linear).SetUpdate(true);
                     pauseWindow.SetActive(false);
                     Time.timeScale = 1f;
                 });
@@ -422,7 +422,7 @@ public class StopManager : MonoBehaviour
         // 나가기 예 버튼을 눌렀을 때
         exitWindowYesBtn.onClick.AddListener(() =>
         {
-            Fade.instance.FadeOut();
+            Fade.instance.fadeInOut.DOFade(0, 0.2f).SetEase(Ease.Linear).SetUpdate(true);
             DOTween.KillAll();
             Application.Quit();
         });

@@ -17,6 +17,7 @@ public class Potal : MonoBehaviour
 
     void Start()
     {
+
     }
 
     void Update()
@@ -35,7 +36,13 @@ public class Potal : MonoBehaviour
     void FClick()
     {
         if (Input.GetKeyDown(KeyCode.F) && isCollisionCheck)
-            SceneManager.LoadScene(2);
+        {
+            Fade.instance.fadeInOut.DOFade(1, 0.5f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
+            {
+                DOTween.KillAll();
+                SceneManager.LoadScene(2);
+            });
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -45,8 +52,11 @@ public class Potal : MonoBehaviour
             switch (CurrentScene.instance.eScene)
             {
                 case EScene.Main:
-                    DOTween.KillAll();
-                    SceneManager.LoadScene(3);
+                    Fade.instance.fadeInOut.DOFade(1, 0.5f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
+                    {
+                        DOTween.KillAll();
+                        SceneManager.LoadScene(3);
+                    });
                     break;
 
                 case EScene.Dimension:
@@ -54,7 +64,7 @@ public class Potal : MonoBehaviour
 
                     for (int i = 0; i <= upgrade.transform.childCount; i++)
                     {
-                        switch(i)
+                        switch (i)
                         {
                             case 1:
                                 upgrade.transform.GetChild(i).GetComponent<Image>().DOFade(1, fadeSpeed).SetEase(Ease.Linear);

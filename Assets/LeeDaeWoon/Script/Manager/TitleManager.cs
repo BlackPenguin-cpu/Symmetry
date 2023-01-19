@@ -40,7 +40,7 @@ public class TitleManager : MonoBehaviour
         {
             if (isCreditOut == false && isSkipCheck == false)
                 Change_Scene();
-            else if(isSkipCheck == true)
+            else if (isSkipCheck == true)
                 Credit_ESC();
         }
     }
@@ -49,8 +49,11 @@ public class TitleManager : MonoBehaviour
     {
         if (isTeamBackGround == true)
         {
-            DOTween.KillAll();
-            SceneManager.LoadScene("Main");
+            Fade.instance.fadeInOut.DOFade(1, 0.5f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
+            {
+                DOTween.KillAll();
+                SceneManager.LoadScene(1);
+            });
         }
     }
 

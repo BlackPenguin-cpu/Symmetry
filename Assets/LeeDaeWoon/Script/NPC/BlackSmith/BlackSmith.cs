@@ -250,7 +250,7 @@ public class BlackSmith : MonoBehaviour
             isWindowOpenCheck = true;
             UIManager.instance.isCursorFade = true;
             UIManager.instance.isPlayerControl = true;
-            Fade.instance.FadeIn();
+            Fade.instance.fadeInOut.DOFade(0.5f, 0.2f).SetEase(Ease.Linear).SetUpdate(true);
             OpenWindow();
         }
 
@@ -391,7 +391,7 @@ public class BlackSmith : MonoBehaviour
 
             UIManager.instance.isCursorFade = false;
             isBlackSmithWindowClose = false;
-            Fade.instance.FadeOut();
+            Fade.instance.fadeInOut.DOFade(0, 0.2f).SetEase(Ease.Linear).SetUpdate(true);
 
             upBar.transform.DOLocalMoveY(closeBar, barSpeed).SetEase(Ease.Linear);
             downBar.transform.DOLocalMoveY(-closeBar, barSpeed).SetEase(Ease.Linear).OnComplete(() =>
