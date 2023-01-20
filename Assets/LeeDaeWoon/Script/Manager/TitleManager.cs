@@ -38,16 +38,17 @@ public class TitleManager : MonoBehaviour
     {
         if (Input.anyKeyDown)
         {
-            if (isCreditOut == false && isSkipCheck == false)
-                Change_Scene();
-            else if (isSkipCheck == true)
-                Credit_ESC();
+            if (!isCreditOut && !isSkipCheck)
+                ChangeScene();
+
+            else
+                CreditESC();
         }
     }
 
-    public void Change_Scene()
+    public void ChangeScene()
     {
-        if (isTeamBackGround == true)
+        if (isTeamBackGround)
         {
             Fade.instance.fadeInOut.DOFade(1, 0.5f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
             {
@@ -57,19 +58,22 @@ public class TitleManager : MonoBehaviour
         }
     }
 
-    public void Credit_ESC()
+    public void CreditESC()
     {
         float waitTime = 0.5f;
         int creditTextPos = 4764;
 
-        creditText.transform.DOKill();
-        creditText.transform.DOLocalMoveY(-creditTextPos, 0).SetEase(Ease.Linear);
-        creditBackGround.DOFade(0f, waitTime).OnComplete(() =>
+        if (isSkipCheck)
         {
-            Debug.Log("adfasdf");
-            isSkipCheck = false;
-            creditBackGround.raycastTarget = false;
-        });
+            creditText.transform.DOKill();
+            creditText.transform.DOLocalMoveY(-creditTextPos, 0).SetEase(Ease.Linear);
+            creditBackGround.DOFade(0, waitTime).OnComplete(() =>
+            {
+                isSkipCheck = false;
+                isCreditCheck = false;
+                creditBackGround.raycastTarget = false;
+            });
+        }
     }
 
     void TitleDirector()

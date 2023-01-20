@@ -32,7 +32,8 @@ public class Credit_Click : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        titleManager.isCreditOut = false;
+        if (!titleManager.isCreditCheck)
+            titleManager.isCreditOut = false;
     }
 
     public void CreditBtn()
@@ -47,14 +48,14 @@ public class Credit_Click : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             SoundManager.instance.PlaySoundClip("BGM_Editor", SoundType.BGM);
 
             titleManager.creditBackGround.raycastTarget = true;
-            titleManager.creditBackGround.DOFade(1, waitTime).OnComplete(() =>
+            titleManager.creditBackGround.DOFade(1, 0.5f).OnComplete(() =>
             {
-                titleManager.isSkipCheck = true;
+                StartCoroutine(SkipTure());
             });
 
             titleManager.creditText.transform.DOLocalMoveY(creditTextPos, waitTime * 100).SetEase(Ease.Linear).OnComplete(() =>
             {
-                SoundManager.instance.PlaySoundClip(null , SoundType.BGM);
+                SoundManager.instance.PlaySoundClip(null, SoundType.BGM);
 
                 titleManager.creditBackGround.DOFade(0f, waitTime);
                 titleManager.creditText.transform.localPosition = new Vector3(0f, -4764f, 0f);
@@ -65,5 +66,11 @@ public class Credit_Click : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             });
 
         });
+    }
+
+    IEnumerator SkipTure()
+    {
+        yield return new WaitForSeconds(2);
+        titleManager.isSkipCheck = true;
     }
 }
