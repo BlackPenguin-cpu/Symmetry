@@ -1470,7 +1470,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1675, y: 885}
+  m_SizeDelta: {x: 1675, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &337622493
 MonoBehaviour:
@@ -3635,7 +3635,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!1 &949644462
 GameObject:
@@ -7529,7 +7529,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 100
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!1 &1951729265
 GameObject:
