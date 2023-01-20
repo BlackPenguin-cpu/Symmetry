@@ -188,9 +188,10 @@ public class ShadowMage : BaseEnemy
         onDie += () => _state = EnemyState.DIE;
         onDie += () => DropHealingOrbObj();
     }
+
     void OnDelete()
     {
         ObjectPool.Instance.DeleteObj(gameObject);
-        UIManager.instance.Die_System();
+        UIManager.instance.DieSystem();
     }
 }

@@ -10,6 +10,7 @@ public class Fade : MonoBehaviour
     private void Awake() => instance = this;
 
     public Image fadeInOut;
+    public Canvas fadeCanvas;
 
     void Start()
     {

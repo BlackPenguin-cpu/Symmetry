@@ -140,7 +140,7 @@ MonoBehaviour:
         enemyObj: {fileID: 9055143270326299191, guid: 52e1541e0d7580e4f8503545ce5c5aa7, type: 3}
       - time: 0
         posIndex: 0
-        enemyObj: {fileID: 0}
+        enemyObj: {fileID: 9068815753638589938, guid: 86989ff48d0abbc4c9d51bf78a71823d, type: 3}
     - EnemySpawnInfos:
       - time: 0
         posIndex: 2
@@ -455,5 +455,5 @@ MonoBehaviour:
       - time: 1.5
         posIndex: 3
         enemyObj: {fileID: 4367862497914151025, guid: 9dee328ee4f934245acb4cb78008ee3f, type: 3}
-  m_WaveNum: 1
+  m_WaveNum: 2
   middleBoss: {fileID: 7889676720889529069, guid: e00fdf5a45dfd6e44b00a2056cbd8b64, type: 3}

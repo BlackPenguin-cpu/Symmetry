@@ -30,18 +30,12 @@ public class UIManager : MonoBehaviour
     public float hp;
     [SerializeField] GameObject bar;
 
-    [SerializeField] Image fadeInOutDie;
-    [SerializeField] Text dieText;
-    [SerializeField] Text anyText;
-
-    public bool isOnceCheck = false;
+    [Header("죽음")]
+    bool isOnceCheck = false;
 
     [Header("마우스 포인터")]
     [SerializeField] Texture2D mousePointer;
     public bool isCursorFade = false;
-
-    [Header("페이드인아웃")]
-    public Image fadeInOut;
 
     public bool isKingCheck = false;
     public bool isDarkPlayerGetCheck = false;
@@ -55,18 +49,22 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        StartCoroutine(Die_System());
-
-        if (isDarkPlayerGetCheck == true && SceneManager.GetActiveScene().name == "Main")
+        switch (CurrentScene.instance.eScene)
         {
-            isDarkPlayerGetCheck = false;
-            Destroy(GameObject.Find("DarkPlayer"));
+            case EScene.Main:
+                if (isDarkPlayerGetCheck)
+                {
+                    isDarkPlayerGetCheck = false;
+                    Destroy(GameObject.Find("DarkPlayer"));
+                }
+                break;
         }
 
-        Timer();
-        Money_System();
-        HP_System();
         Wave();
+        Timer();
+        HPSystem();
+        DieSystem();
+        MoneySystem();
     }
 
     private void Awake()
@@ -101,10 +99,6 @@ public class UIManager : MonoBehaviour
             Player.Instance.stat._level[PlayerWeaponType.Sword] = 0;
             Player.Instance.stat._level[PlayerWeaponType.Dagger] = 0;
             Player.Instance.stat._level[PlayerWeaponType.Axe] = 0;
-
-            fadeInOutDie.color = new Color(0, 0, 0, 0);
-            dieText.color = new Color(255, 255, 255, 0);
-            anyText.color = new Color(255, 255, 255, 0);
         }
     }
 
@@ -123,11 +117,12 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    void Money_System()
+    void MoneySystem()
     {
         goldText.text = GameManager.Instance._coin.ToString();
         dimensionalText.text = GameManager.Instance.crystal.ToString();
 
+        // 치트
         if (Input.GetKeyDown(KeyCode.G))
             GameManager.Instance._coin += 1000;
         if (Input.GetKeyDown(KeyCode.M))
@@ -136,22 +131,23 @@ public class UIManager : MonoBehaviour
 
     void Wave()
     {
-        // 인게임
-        if (SceneManager.GetActiveScene().name == "test")
-            waveText.text = "Wave." + WaveManager.instnace.m_WaveNum;
+        switch (CurrentScene.instance.eScene)
+        {
+            case EScene.Main:
+                waveText.text = "폐허가된 성";
+                break;
 
-        // 차원의 틈새
-        else if (SceneManager.GetActiveScene().name == "Dimension")
-            waveText.text = "차원의 틈새";
+            case EScene.Dimension:
+                waveText.text = "차원의 틈새";
+                break;
 
-        // 폐허가된 성
-        else if (SceneManager.GetActiveScene().name == "Main")
-            waveText.text = "폐허가된 성";
+            case EScene.Ingame:
+                waveText.text = "Wave." + WaveManager.instnace.m_WaveNum;
+                break;
+        }
     }
 
-    #region 체력
-    
-    void HP_System()
+    void HPSystem()
     {
         hpBar = bar.transform.localScale.y;
         hp = Player.Instance.stat._hp / Player.Instance.stat._maxHp;
@@ -162,23 +158,24 @@ public class UIManager : MonoBehaviour
             bar.transform.localScale = new Vector3(1, Mathf.Lerp(hpBar, hp, Time.deltaTime * 20), 1);
     }
 
-    public IEnumerator Die_System()
+    public void DieSystem()
     {
-        if (Player.Instance.stat._hp == 0)
+        if (Player.Instance.stat._hp <= 0)
         {
-            if (Input.anyKeyDown && isOnceCheck == true)
-                SceneManager.LoadScene("Main");
+            if (Input.anyKeyDown && isOnceCheck)
+                SceneManager.LoadScene(1);
 
-            if (isOnceCheck == false)
+            if (!isOnceCheck)
             {
-                fadeInOutDie.DOFade(0.5f, 1f);
-                dieText.DOFade(1f, 1f);
-                anyText.DOFade(1f, 1f);
-                yield return new WaitForSeconds(1f);
                 isOnceCheck = true;
+                Fade.instance.fadeCanvas.sortingOrder = 10;
+                Fade.instance.fadeInOut.DOFade(1, 5).SetEase(Ease.Linear).OnComplete(() =>
+                {
+                    transform.GetChild(2).gameObject.SetActive(true);
+                    DieWindow.instance.OpenWindow();
+                });
             }
         }
 
     }
-    #endregion
 }

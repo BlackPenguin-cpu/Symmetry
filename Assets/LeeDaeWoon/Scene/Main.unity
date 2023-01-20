@@ -4902,6 +4902,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 151603624, guid: 3da9c3f6417b4694cb997564d60f2bb6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3157611432992786235, guid: 3da9c3f6417b4694cb997564d60f2bb6, type: 3}
       propertyPath: m_Name
       value: UIManager
@@ -8006,7 +8010,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26d793fe1603e314490c5734a15620e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeInOut: {fileID: 0}
+  fadeInOut: {fileID: 2132424458}
+  fadeCanvas: {fileID: 635666818}
 --- !u!114 &2132424458
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -15339,7 +15339,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26d793fe1603e314490c5734a15620e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeInOut: {fileID: 0}
+  fadeInOut: {fileID: 1891919833}
+  fadeCanvas: {fileID: 254134660}
 --- !u!114 &1891919833
 MonoBehaviour:
   m_ObjectHideFlags: 0
