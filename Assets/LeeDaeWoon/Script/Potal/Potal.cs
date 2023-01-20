@@ -61,19 +61,8 @@ public class Potal : MonoBehaviour
 
                 case EScene.Dimension:
                     isCollisionCheck = true;
-
-                    for (int i = 0; i <= upgrade.transform.childCount; i++)
-                    {
-                        switch (i)
-                        {
-                            case 1:
-                                upgrade.transform.GetChild(i).GetComponent<Image>().DOFade(1, fadeSpeed).SetEase(Ease.Linear);
-                                break;
-                            case 2:
-                                upgrade.transform.GetChild(i).GetComponent<Text>().DOFade(1, fadeSpeed).SetEase(Ease.Linear);
-                                break;
-                        }
-                    }
+                    upgrade.transform.GetChild(0).GetComponent<Image>().DOFade(1, fadeSpeed).SetEase(Ease.Linear);
+                    upgrade.transform.GetChild(1).GetComponent<Text>().DOFade(1, fadeSpeed).SetEase(Ease.Linear);
                     break;
             }
         }
@@ -81,24 +70,16 @@ public class Potal : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collision)
     {
-        switch (CurrentScene.instance.eScene)
+        if (collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null)
         {
-            case EScene.Dimension:
-                isCollisionCheck = false;
-
-                for (int i = 0; i <= upgrade.transform.childCount; i++)
-                {
-                    switch (i)
-                    {
-                        case 1:
-                            upgrade.transform.GetChild(i).GetComponent<Image>().DOFade(0, fadeSpeed).SetEase(Ease.Linear);
-                            break;
-                        case 2:
-                            upgrade.transform.GetChild(i).GetComponent<Text>().DOFade(0, fadeSpeed).SetEase(Ease.Linear);
-                            break;
-                    }
-                }
-                break;
+            switch (CurrentScene.instance.eScene)
+            {
+                case EScene.Dimension:
+                    isCollisionCheck = false;
+                    upgrade.transform.GetChild(0).GetComponent<Image>().DOFade(0, fadeSpeed).SetEase(Ease.Linear);
+                    upgrade.transform.GetChild(1).GetComponent<Text>().DOFade(0, fadeSpeed).SetEase(Ease.Linear);
+                    break;
+            }
         }
     }
 }

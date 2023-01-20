@@ -10,7 +10,12 @@ public class Fade : MonoBehaviour
     private void Awake() => instance = this;
 
     public Image fadeInOut;
-    float speed = 0.2f;
 
-    void Start() => fadeInOut = GetComponent<Image>();
+    void Start()
+    {
+        fadeInOut = GetComponent<Image>();
+
+        fadeInOut.DOFade(1, 0);
+        fadeInOut.DOFade(0, 1).SetEase(Ease.Linear).SetUpdate(true);
+    }
 }

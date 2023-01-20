@@ -13,25 +13,18 @@ public enum EScene : short
 public class CurrentScene : MonoBehaviour
 {
     public static CurrentScene instance;
+    void Awake() => instance = this;
 
     public EScene eScene;
 
     void Start()
     {
-        Fade.instance.fadeInOut.DOFade(1, 0);
-        Fade.instance.fadeInOut.DOFade(0, 1).SetEase(Ease.Linear).SetUpdate(true);
-
         PlayerVector();
     }
 
     void Update()
     {
 
-    }
-
-    void Awake()
-    {
-        instance = this;
     }
 
     public void PlayerVector()
