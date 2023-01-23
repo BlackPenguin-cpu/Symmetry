@@ -20,7 +20,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] Text waveText;
 
     [Header("Å¸ÀÌ¸Ó")]
-    [SerializeField] Text timerText;
+    public Text timerText;
     public bool timerCheck;
     public int min;
     public float sec;
@@ -169,7 +169,7 @@ public class UIManager : MonoBehaviour
             {
                 isOnceCheck = true;
                 Fade.instance.fadeCanvas.sortingOrder = 10;
-                Fade.instance.fadeInOut.DOFade(1, 5).SetEase(Ease.Linear).OnComplete(() =>
+                Fade.instance.fadeInOut.DOFade(1, 5).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
                 {
                     transform.GetChild(2).gameObject.SetActive(true);
                     DieWindow.instance.OpenWindow();
