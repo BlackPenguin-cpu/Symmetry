@@ -350,6 +350,8 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     void LeftClickWindow()
     {
+        Time.timeScale = 1;
+
         leftWindow.transform.DOLocalMoveY(windowClickPos, barSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
         {
             leftWindow.transform.DOKill();
@@ -374,6 +376,8 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     void AmongClickWindow()
     {
+        Time.timeScale = 1;
+
         amongWindow.transform.DOLocalMoveY(windowClickPos, barSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
         {
             amongWindow.transform.DOKill();
@@ -398,6 +402,8 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     void RightClickWindow()
     {
+        Time.timeScale = 1;
+
         rightWindow.transform.DOLocalMoveY(windowClickPos, barSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
         {
             rightWindow.transform.DOKill();

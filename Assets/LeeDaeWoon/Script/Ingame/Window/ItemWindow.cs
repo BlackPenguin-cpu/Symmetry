@@ -38,6 +38,8 @@ public class ItemWindow : MonoBehaviour
 
     void OpenWindow()
     {
+        Time.timeScale = 0;
+
         leftWindow.DOSizeDelta(new Vector2(windowWidth, windowHeight), barSpeed).SetEase(Ease.Linear).SetUpdate(true);
         amongWindow.DOSizeDelta(new Vector2(windowWidth, windowHeight), barSpeed).SetEase(Ease.Linear).SetUpdate(true);
         rightWindow.DOSizeDelta(new Vector2(windowWidth, windowHeight), barSpeed).SetEase(Ease.Linear).SetUpdate(true);

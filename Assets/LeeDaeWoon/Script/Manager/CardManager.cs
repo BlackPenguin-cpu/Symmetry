@@ -80,11 +80,10 @@ public class CardManager : MonoBehaviour
         return 0;
     }
 
+    // 아이템 카드 소환하는 함수
     public void AddCard()
     {
-        // 아이템 카드 소환
         SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
-        Time.timeScale = 0;
 
         int itemIndex = 0;
         List<Item> item = new List<Item>();

@@ -24,6 +24,8 @@ public class DieWindow : MonoBehaviour
     const int windowWidth = 1675;
     const int windowHeight = 885;
 
+    [SerializeField] GameObject itemContent;
+    [SerializeField] GameObject weaponLevel;
     [SerializeField] Button backBtn;
 
     void Start()
@@ -33,36 +35,72 @@ public class DieWindow : MonoBehaviour
 
     void Update()
     {
-        
+
     }
 
     void DieTimer() => timer.text = UIManager.instance.timerText.text;
+
+    void DieItem()
+    {
+        if (StopManager.instnace.itemDaHave.Count != 0)
+        {
+            for (int i = 0; i < itemContent.transform.childCount; i++)
+            {
+                var icon = itemContent.transform.GetChild(i).GetChild(0).GetComponent<Image>();
+                var name = itemContent.transform.GetChild(i).GetChild(1).GetComponent<Text>();
+                var explanation = itemContent.transform.GetChild(i).GetChild(2).GetComponent<Text>();
+
+                icon.sprite = StopManager.instnace.itemDaHave[i].icon;
+                name.text = StopManager.instnace.itemDaHave[i].name;
+                explanation.text = StopManager.instnace.itemDaHave[i].explanation;
+            }
+        }
+    }
+
+    void DieWeapon()
+    {
+        for (int i = 0; i <= StopManager.instnace.weapon.Count; i++)
+        {
+            if (StopManager.instnace.weapon[i].level != 0)
+                weaponLevel.transform.GetChild(i).GetChild(1).GetComponent<Text>().text = "Lv." + StopManager.instnace.weapon[i].level;
+            else
+            {
+                weaponLevel.transform.GetChild(i).GetChild(0).GetComponent<Image>().DOColor(Color.gray, 0);
+                weaponLevel.transform.GetChild(i).GetChild(1).gameObject.SetActive(false);
+            }
+
+        }
+    }
 
     public void OpenWindow()
     {
         SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX);
 
         UIManager.instance.isCursorFade = true;
-        DieTimer();
 
         upBar.transform.DOLocalMoveY(openBar, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
         downBar.transform.DOLocalMoveY(-openBar, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
         dieRect.DOSizeDelta(new Vector2(windowWidth, windowHeight), barSpeed).SetEase(Ease.Linear).SetUpdate(true);
+
+        DieTimer();
+        DieItem();
+        DieWeapon();
     }
 
     void CloseWindow()
     {
         backBtn.onClick.AddListener(() =>
         {
-            upBar.transform.DOLocalMoveY(closeBar, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
-            downBar.transform.DOLocalMoveY(-closeBar, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
             dieRect.DOSizeDelta(new Vector2(windowWidth, 0), barSpeed).SetEase(Ease.Linear).SetUpdate(true);
-
-            Fade.instance.fadeInOut.DOFade(1, barSpeed).SetEase(Ease.Linear).OnComplete(() =>
+            upBar.transform.DOLocalMoveY(closeBar, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
+            downBar.transform.DOLocalMoveY(-closeBar, barSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
             {
-                // 전체적으로 초기화시킨다.
-                DOTween.KillAll();
-                SceneManager.LoadScene(1);
+                Fade.instance.fadeInOut.DOFade(1, barSpeed).SetEase(Ease.Linear).OnComplete(() =>
+                {
+                    // 전체적으로 초기화시킨다.
+                    DOTween.KillAll();
+                    SceneManager.LoadScene(1);
+                });
             });
         });
     }

@@ -5,14 +5,21 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 
+[System.Serializable]
+public class CurrentWeapon
+{
+    public string name;
+    public int level;
+}
+
 public class StopManager : MonoBehaviour
 {
     public static StopManager instnace { get; private set; }
 
-    [SerializeField] Image fadeBackGround;
     public bool inPause = false;
 
     public List<Item> itemDaHave = new List<Item>();
+    public List<CurrentWeapon> weapon = new List<CurrentWeapon>();
 
     [Header("버튼")]
     [SerializeField] Button backBtn;
@@ -165,6 +172,7 @@ public class StopManager : MonoBehaviour
     void Update()
     {
         MainReset();
+        WeaponLevel();
 
         //ESC 키를 누르면 일시정지 창이 열린다.
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -210,29 +218,47 @@ public class StopManager : MonoBehaviour
 
     void MainReset()
     {
-        if (Reset_Check == true && SceneManager.GetActiveScene().name == "Main")
+        switch (CurrentScene.instance.eScene)
         {
-            Reset_Check = false;
+            case EScene.Main:
+                if(Reset_Check)
+                {
+                    Reset_Check = false;
 
-            itemDaHave.Clear(); // 소지한 아이템 초기화
-            GameManager.Instance._coin = 0; // 골드 초기화
-            WaveManager.instnace.m_WaveNum = 0; // Wave 초기화
-            Player.Instance.stat._hp = Player.Instance.stat._maxHp; // 플레이어 HP 초기화
+                    itemDaHave.Clear(); // 소지한 아이템 초기화
+                    GameManager.Instance._coin = 0; // 골드 초기화
+                    WaveManager.instnace.m_WaveNum = 0; // Wave 초기화
+                    Player.Instance.stat._hp = Player.Instance.stat._maxHp; // 플레이어 HP 초기화
 
-            // 타이머 초기화
-            UIManager.instance.sec = 0;
-            UIManager.instance.min = 0;
+                    // 타이머 초기화
+                    UIManager.instance.sec = 0;
+                    UIManager.instance.min = 0;
 
-            // 무기 강화수치 초기화
-            Player.Instance.stat._level[PlayerWeaponType.Sword] = 0;
-            Player.Instance.stat._level[PlayerWeaponType.Dagger] = 0;
-            Player.Instance.stat._level[PlayerWeaponType.Axe] = 0;
+                    // 무기 강화수치 초기화
+                    Player.Instance.stat._level[PlayerWeaponType.Sword] = 0;
+                    Player.Instance.stat._level[PlayerWeaponType.Dagger] = 0;
+                    Player.Instance.stat._level[PlayerWeaponType.Axe] = 0;
 
-            // 기본 스킬로 초기화
-            Skill_Manager.instance.Skill_Up.Add(SkillManager.Instance.SkillScriptList[6]);
-            Skill_Manager.instance.Skill_Down.Add(SkillManager.Instance.SkillScriptList[8]);
+                    // 기본 스킬로 초기화
+                    Skill_Manager.instance.Skill_Up.Add(SkillManager.Instance.SkillScriptList[6]);
+                    Skill_Manager.instance.Skill_Down.Add(SkillManager.Instance.SkillScriptList[8]);
 
-            CardManager.instance.AddList();
+                    CardManager.instance.AddList();
+                }
+                break;
+        }
+    }
+
+    void WeaponLevel()
+    {
+        switch(CurrentScene.instance.eScene)
+        {
+            case EScene.Dimension:
+                for(int i = 0; i <= weapon.Count; i++)
+                {
+                    weapon[i].level = BlackSmith.instnace.weapon[i].level;
+                }
+                break;
         }
     }
 
@@ -242,7 +268,7 @@ public class StopManager : MonoBehaviour
         backBtn.onClick.AddListener(() =>
         {
             SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
-            fadeBackGround.DOFade(0, waitTime).SetEase(Ease.Linear).SetUpdate(true);
+            Fade.instance.fadeInOut.DOFade(0, waitTime).SetEase(Ease.Linear).SetUpdate(true);
 
             pauseBarUp.transform.DOLocalMoveY(pauseBarClose, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
             pauseBarDown.transform.DOLocalMoveY(-pauseBarClose, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
