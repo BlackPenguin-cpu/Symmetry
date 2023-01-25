@@ -67,7 +67,7 @@ public class UIManager : MonoBehaviour
         MoneySystem();
     }
 
-    private void Awake()
+    void Awake()
     {
         if (instance == null)
         {
@@ -78,7 +78,7 @@ public class UIManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-    private void OnLevelWasLoaded(int level)
+    void OnLevelWasLoaded(int level)
     {
         if (isOnceCheck == true && SceneManager.GetActiveScene().name == "Main")
         {
@@ -162,8 +162,8 @@ public class UIManager : MonoBehaviour
     {
         if (Player.Instance.stat._hp <= 0)
         {
-            if (Input.anyKeyDown && isOnceCheck)
-                SceneManager.LoadScene(1);
+            //if (Input.anyKeyDown && isOnceCheck)
+            //    SceneManager.LoadScene(1);
 
             if (!isOnceCheck)
             {
