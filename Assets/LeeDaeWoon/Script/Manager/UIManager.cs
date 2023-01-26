@@ -162,9 +162,6 @@ public class UIManager : MonoBehaviour
     {
         if (Player.Instance.stat._hp <= 0)
         {
-            //if (Input.anyKeyDown && isOnceCheck)
-            //    SceneManager.LoadScene(1);
-
             if (!isOnceCheck)
             {
                 isOnceCheck = true;
