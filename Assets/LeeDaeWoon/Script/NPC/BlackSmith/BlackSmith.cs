@@ -104,7 +104,6 @@ public class BlackSmith : MonoBehaviour
     {
         if (weapon[0].level == maxLevel)
         {
-            Debug.Log("asdfasdf");
             weapon[0].levelText.text = "Max";
             weapon[0].maxEnhance.SetActive(true);
             weapon[0].requiredGold.SetActive(false);

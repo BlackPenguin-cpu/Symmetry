@@ -254,7 +254,7 @@ public class StopManager : MonoBehaviour
         switch(CurrentScene.instance.eScene)
         {
             case EScene.Dimension:
-                for(int i = 0; i <= weapon.Count; i++)
+                for(int i = 0; i < weapon.Count; i++)
                 {
                     weapon[i].level = BlackSmith.instnace.weapon[i].level;
                 }

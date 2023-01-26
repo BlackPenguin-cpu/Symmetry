@@ -30,7 +30,7 @@ public class DieWindow : MonoBehaviour
 
     void Start()
     {
-        CloseWindow();
+        //CloseWindow();
     }
 
     void Update()
@@ -59,38 +59,36 @@ public class DieWindow : MonoBehaviour
 
     void DieWeapon()
     {
-
-        for (int i = 0; i <= StopManager.instnace.weapon.Count; i++)
+        for (int i = 0; i < StopManager.instnace.weapon.Count; i++)
         {
             int maxLevel = 5;
-            var weaponIcon = weaponLevel.transform.GetChild(i);
 
             if (StopManager.instnace.weapon[i].level != 0)
             {
-                if (StopManager.instnace.weapon[i].level == maxLevel)
-                    weaponIcon.GetChild(i).GetComponent<Text>().text = "Max";
+                if (StopManager.instnace.weapon[i].level >= maxLevel)
+                    weaponLevel.transform.GetChild(i).GetChild(1).GetComponent<Text>().text = "Max";
                 else
-                    weaponIcon.GetChild(1).GetComponent<Text>().text = "Lv." + StopManager.instnace.weapon[i].level;
+                    weaponLevel.transform.GetChild(i).GetChild(1).GetComponent<Text>().text = "Lv." + StopManager.instnace.weapon[i].level;
             }
             else
             {
                 switch (i)
                 {
                     case 0:
-                        weaponIcon.GetChild(0).GetComponent<Image>().DOColor(Color.gray, 0);
+                        weaponLevel.transform.GetChild(i).GetChild(0).GetComponent<Image>().DOColor(Color.gray, 0);
                         break;
 
                     case 1:
-                        weaponIcon.GetChild(0).GetChild(0).GetComponent<Image>().DOColor(Color.gray, 0);
-                        weaponIcon.GetChild(0).GetChild(1).GetComponent<Image>().DOColor(Color.gray, 0);
+                        weaponLevel.transform.GetChild(i).GetChild(0).GetChild(0).GetComponent<Image>().DOColor(Color.gray, 0);
+                        weaponLevel.transform.GetChild(i).GetChild(0).GetChild(1).GetComponent<Image>().DOColor(Color.gray, 0);
                         break;
 
                     case 2:
-                        weaponIcon.GetChild(0).GetComponent<Image>().DOColor(Color.gray, 0);
+                        weaponLevel.transform.GetChild(i).GetChild(0).GetComponent<Image>().DOColor(Color.gray, 0);
                         break;
                 }
 
-                weaponIcon.GetChild(1).gameObject.SetActive(false);
+                weaponLevel.transform.GetChild(i).GetChild(1).gameObject.SetActive(false);
             }
         }
     }
@@ -101,9 +99,13 @@ public class DieWindow : MonoBehaviour
 
         UIManager.instance.isCursorFade = true;
 
-        upBar.transform.DOLocalMoveY(openBar, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
-        downBar.transform.DOLocalMoveY(-openBar, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
         dieRect.DOSizeDelta(new Vector2(windowWidth, windowHeight), barSpeed).SetEase(Ease.Linear).SetUpdate(true);
+        upBar.transform.DOLocalMoveY(openBar, barSpeed).SetEase(Ease.Linear).SetUpdate(true);
+        downBar.transform.DOLocalMoveY(-openBar, barSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
+        {
+            if(Input.anyKeyDown)
+                CloseWindow();
+        });
 
         DieTimer();
         DieItem();

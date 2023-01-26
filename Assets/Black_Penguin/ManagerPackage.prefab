@@ -1870,6 +1870,10 @@ PrefabInstance:
       propertyPath: weapon.Array.data[2].name
       value: "\uC2EC\uD310\uC758 \uB0A0"
       objectReference: {fileID: 0}
+    - target: {fileID: 8909996912513122985, guid: 47aa01e71bf14b4409c00008f07eb2bd, type: 3}
+      propertyPath: weapon.Array.data[0].level
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47aa01e71bf14b4409c00008f07eb2bd, type: 3}
 --- !u!1 &1319136107001221854 stripped

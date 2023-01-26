@@ -1399,22 +1399,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 246701473, guid: 3da9c3f6417b4694cb997564d60f2bb6, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 885
-      objectReference: {fileID: 0}
-    - target: {fileID: 473274481, guid: 3da9c3f6417b4694cb997564d60f2bb6, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 556344955, guid: 3da9c3f6417b4694cb997564d60f2bb6, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1415853103, guid: 3da9c3f6417b4694cb997564d60f2bb6, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3157611432992786235, guid: 3da9c3f6417b4694cb997564d60f2bb6, type: 3}
       propertyPath: m_Name
       value: UIManager
