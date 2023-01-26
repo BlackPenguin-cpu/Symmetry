@@ -59,16 +59,39 @@ public class DieWindow : MonoBehaviour
 
     void DieWeapon()
     {
+
         for (int i = 0; i <= StopManager.instnace.weapon.Count; i++)
         {
+            int maxLevel = 5;
+            var weaponIcon = weaponLevel.transform.GetChild(i);
+
             if (StopManager.instnace.weapon[i].level != 0)
-                weaponLevel.transform.GetChild(i).GetChild(1).GetComponent<Text>().text = "Lv." + StopManager.instnace.weapon[i].level;
+            {
+                if (StopManager.instnace.weapon[i].level == maxLevel)
+                    weaponIcon.GetChild(i).GetComponent<Text>().text = "Max";
+                else
+                    weaponIcon.GetChild(1).GetComponent<Text>().text = "Lv." + StopManager.instnace.weapon[i].level;
+            }
             else
             {
-                weaponLevel.transform.GetChild(i).GetChild(0).GetComponent<Image>().DOColor(Color.gray, 0);
-                weaponLevel.transform.GetChild(i).GetChild(1).gameObject.SetActive(false);
-            }
+                switch (i)
+                {
+                    case 0:
+                        weaponIcon.GetChild(0).GetComponent<Image>().DOColor(Color.gray, 0);
+                        break;
 
+                    case 1:
+                        weaponIcon.GetChild(0).GetChild(0).GetComponent<Image>().DOColor(Color.gray, 0);
+                        weaponIcon.GetChild(0).GetChild(1).GetComponent<Image>().DOColor(Color.gray, 0);
+                        break;
+
+                    case 2:
+                        weaponIcon.GetChild(0).GetComponent<Image>().DOColor(Color.gray, 0);
+                        break;
+                }
+
+                weaponIcon.GetChild(1).gameObject.SetActive(false);
+            }
         }
     }
 
