@@ -89,7 +89,6 @@ public class UIManager : MonoBehaviour
             Player.Instance.state = PlayerState.Idle; // 플레이어 행동
             WaveManager.instnace.m_WaveNum = 1; // Wave 초기화
 
-            // 타이머 초기화 
             sec = 0;
             min = 0;
 
