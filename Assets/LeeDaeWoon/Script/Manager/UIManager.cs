@@ -30,7 +30,9 @@ public class UIManager : MonoBehaviour
     public float hp;
     [SerializeField] GameObject bar;
 
-    [Header("죽음")]
+    [Header("게임 오버")]
+    [SerializeField] GameObject dieItemContent;
+    [SerializeField] GameObject dieItemBar;
     bool isOnceCheck = false;
 
     [Header("마우스 포인터")]
@@ -164,6 +166,10 @@ public class UIManager : MonoBehaviour
             if (!isOnceCheck)
             {
                 isOnceCheck = true;
+
+                for (int i = 0; i < StopManager.instnace.itemDaHave.Count; i++)
+                    Instantiate(dieItemBar, transform.position, Quaternion.identity, dieItemContent.transform);
+
                 Fade.instance.fadeCanvas.sortingOrder = 10;
                 Fade.instance.fadeInOut.DOFade(1, 5).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
                 {
