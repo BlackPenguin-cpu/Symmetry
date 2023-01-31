@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using DG.Tweening;
 
 public class CardManager : MonoBehaviour
 {
@@ -17,7 +17,6 @@ public class CardManager : MonoBehaviour
     public List<Item> daBuffer = new List<Item>();
 
     [Space(10)]
-    public Image fade;
     public bool isItemClick = false;
 
     [Header("시간의 마정석 제한")]
@@ -35,7 +34,7 @@ public class CardManager : MonoBehaviour
         AddList();
     }
 
-    private void Update()
+    void Update()
     {
         if (Input.GetKeyDown(KeyCode.Keypad1))
             AddCard();
@@ -47,7 +46,7 @@ public class CardManager : MonoBehaviour
         }
     }
 
-    private void Awake()
+    void Awake()
     {
         if (instance == null)
         {

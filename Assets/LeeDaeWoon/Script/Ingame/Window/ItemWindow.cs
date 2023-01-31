@@ -39,6 +39,7 @@ public class ItemWindow : MonoBehaviour
     void OpenWindow()
     {
         Time.timeScale = 0;
+        Fade.instance.fadeInOut.DOFade(0.5f, 0.2f).SetEase(Ease.Linear).SetUpdate(true);
 
         leftWindow.DOSizeDelta(new Vector2(windowWidth, windowHeight), barSpeed).SetEase(Ease.Linear).SetUpdate(true);
         amongWindow.DOSizeDelta(new Vector2(windowWidth, windowHeight), barSpeed).SetEase(Ease.Linear).SetUpdate(true);

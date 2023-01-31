@@ -1591,11 +1591,10 @@ MonoBehaviour:
   dimensionalText: {fileID: 3974177440768734973}
   waveText: {fileID: 4129189006980683382}
   timerText: {fileID: 296586128572278085}
-  timerCheck: 0
   min: 0
   sec: 0
-  hpBar: 1
   hp: 0
+  hpBar: 1
   bar: {fileID: 8098893948647789191}
   dieItemContent: {fileID: 2025344420}
   dieItemBar: {fileID: 31886253325201335, guid: bc5567d9d9ec3f04a8c86fe2d94938b1, type: 3}
