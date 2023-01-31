@@ -21,13 +21,12 @@ public class UIManager : MonoBehaviour
 
     [Header("타이머")]
     public Text timerText;
-    public bool timerCheck;
     public int min;
     public float sec;
 
     [Header("체력")]
-    public float hpBar;
     public float hp;
+    public float hpBar;
     [SerializeField] GameObject bar;
 
     [Header("게임 오버")]
@@ -45,7 +44,6 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         //Cursor.visible = false;
-        timerCheck = true;
         Cursor.SetCursor(mousePointer, Vector2.zero, CursorMode.ForceSoftware);
     }
 
@@ -105,16 +103,13 @@ public class UIManager : MonoBehaviour
 
     void Timer()
     {
-        if (timerCheck == true)
-        {
-            sec += Time.deltaTime;
-            timerText.text = string.Format("{0:D2}:{1:D2}", min, (int)sec);
+        sec += Time.deltaTime;
+        timerText.text = string.Format("{0:D2}:{1:D2}", min, (int)sec);
 
-            if ((int)sec > 59)
-            {
-                sec = 0;
-                min++;
-            }
+        if ((int)sec > 59)
+        {
+            sec = 0;
+            min++;
         }
     }
 
