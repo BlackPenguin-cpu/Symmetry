@@ -38,24 +38,15 @@ public class King : MonoBehaviour
     public BoxCollider2D area04Box;
 
     [Header("마법진 생성")]
-    public bool isMagicCreation = false;
     public bool isDialogueSkip = false;
-
-    void Start()
-    {
-    }
-
-    void Update()
-    {
-
-    }
+    public bool isMagicCreation = false;
 
     #region 카메라 확대 / 축소
     public void Zoom_Expansion() => StartCoroutine(Expansion());
     public void Zoom_Shrinking() => StartCoroutine(Shrinking());
 
-
-    IEnumerator Expansion() // 줌 확대 
+    // 줌 확대 함수
+    IEnumerator Expansion()
     {
         UIManager.instance.isPlayerControl = true; // 플레이어의 움직임을 멈춘다.
         Player.Instance.state = PlayerState.Idle; // 플레이어의 움직임을 서있는 상태로 냅둔다.
@@ -76,7 +67,8 @@ public class King : MonoBehaviour
         }
     }
 
-    IEnumerator Shrinking() // 줌 축소
+    // 줌 축소 함수
+    IEnumerator Shrinking()
     {
         // 플레이어 UI는 제자리로 돌려준다.
         playerHP.transform.DOLocalMoveX(-6, zoomTime).SetEase(Ease.Linear);
@@ -91,6 +83,7 @@ public class King : MonoBehaviour
             Camera.main.orthographicSize = i;
             yield return new WaitForSeconds(0.05f);
         }
+
         cameraObj.GetComponent<CameraManager>().enabled = true; // CameraManager를 켜둔다.
         yield return new WaitForSeconds(0.5f);
         UIManager.instance.isPlayerControl = false; // 플레이어의 움직임을 정상작동 시킨다.
