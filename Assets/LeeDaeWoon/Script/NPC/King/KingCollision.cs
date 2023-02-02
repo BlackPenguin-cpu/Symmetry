@@ -19,8 +19,8 @@ public class KingCollision : MonoBehaviour
     public bool richTextEnabled;
     public ScrambleMode scrambleMode;
 
-    bool rangeReach;
-    public bool Dialogue_End;
+    bool isRangeReach = false;
+    bool isDialogueEnd = false;
 
     King king;
 
@@ -52,7 +52,7 @@ public class KingCollision : MonoBehaviour
 
     public void DialogueBtn_FadeInOut()
     {
-        if ((king.dialogueText.text == king.Dialogue[king.sequenceText] && Dialogue_End == false))
+        if ((king.dialogueText.text == king.Dialogue[king.sequenceText] && !isDialogueEnd))
             king.fBtn.gameObject.SetActive(true);
     }
 
@@ -62,10 +62,10 @@ public class KingCollision : MonoBehaviour
         {
             case Area.Area01:
                 {
-                    if (rangeReach == true)
+                    if (isRangeReach)
                     {
                         // 전문이 타이핑이 됬을 경우 && 대사가 7번 이하 나왔을 경우 && 대사가 아직 안 끝났을 경우
-                        if (king.dialogueText.text == king.Dialogue[king.sequenceText] && king.sequenceText <= 7 && !Dialogue_End)
+                        if (king.dialogueText.text == king.Dialogue[king.sequenceText] && king.sequenceText <= 7 && !isDialogueEnd)
                         {
                             if (king.sequenceText < 7)
                             {
@@ -78,8 +78,8 @@ public class KingCollision : MonoBehaviour
 
                             else if (king.sequenceText == 7)
                             {
-                                rangeReach = false;
-                                Dialogue_End = true;
+                                isRangeReach = false;
+                                isDialogueEnd = true;
                                 king.isDialogueExit = true;
                                 king.area01Box.enabled = false;
                                 king.kingNPC.DOFade(0, 1).SetEase(Ease.Linear).OnComplete(() =>
@@ -106,10 +106,10 @@ public class KingCollision : MonoBehaviour
                 break;
 
             case Area.Area02:
-                if (rangeReach == true)
+                if (isRangeReach)
                 {
                     // 전문이 타이핑이 됬을 경우 && 대사가 7번 이하 나왔을 경우 && 대사가 아직 안 끝났을 경우
-                    if (king.dialogueText.text == king.Dialogue[king.sequenceText] && king.sequenceText <= 12 && Dialogue_End == false)
+                    if (king.dialogueText.text == king.Dialogue[king.sequenceText] && king.sequenceText <= 12 && !isDialogueEnd)
                     {
 
                         if (king.sequenceText < 12)
@@ -122,8 +122,8 @@ public class KingCollision : MonoBehaviour
 
                         else if (king.sequenceText == 12)
                         {
-                            rangeReach = false;
-                            Dialogue_End = true;
+                            isRangeReach = false;
+                            isDialogueEnd = true;
                             king.isDialogueExit = true;
                             king.area02Box.enabled = false;
                             king.kingNPC.DOFade(0, 1).SetEase(Ease.Linear).OnComplete(() =>
@@ -149,10 +149,10 @@ public class KingCollision : MonoBehaviour
                 break;
 
             case Area.Area03:
-                if (rangeReach == true)
+                if (isRangeReach)
                 {
                     // 전문이 타이핑이 됬을 경우 && 대사가 7번 이하 나왔을 경우 && 대사가 아직 안 끝났을 경우
-                    if (king.dialogueText.text == king.Dialogue[king.sequenceText] && king.sequenceText <= 18 && Dialogue_End == false)
+                    if (king.dialogueText.text == king.Dialogue[king.sequenceText] && king.sequenceText <= 18 && !isDialogueEnd)
                     {
                         if (king.sequenceText < 18)
                         {
@@ -165,8 +165,8 @@ public class KingCollision : MonoBehaviour
 
                         else if (king.sequenceText == 18)
                         {
-                            rangeReach = false;
-                            Dialogue_End = true;
+                            isRangeReach = false;
+                            isDialogueEnd = true;
                             king.isDialogueExit = true;
                             king.area03Box.enabled = false;
                             king.kingNPC.DOFade(0, 1).SetEase(Ease.Linear).OnComplete(() =>
@@ -192,11 +192,11 @@ public class KingCollision : MonoBehaviour
                 break;
 
             case Area.Area04:
-                if (rangeReach == true)
+                if (isRangeReach)
                 {
 
                     // 전문이 타이핑이 됬을 경우 && 대사가 7번 이하 나왔을 경우 && 대사가 아직 안 끝났을 경우
-                    if (king.dialogueText.text == king.Dialogue[king.sequenceText] && king.sequenceText <= 23 && Dialogue_End == false)
+                    if (king.dialogueText.text == king.Dialogue[king.sequenceText] && king.sequenceText <= 23 && !isDialogueEnd)
                     {
                         if (king.sequenceText < 23)
                         {
@@ -208,8 +208,8 @@ public class KingCollision : MonoBehaviour
 
                         else if (king.sequenceText == 23)
                         {
-                            rangeReach = false;
-                            Dialogue_End = true;
+                            isRangeReach = false;
+                            isDialogueEnd = true;
                             king.isDialogueExit = true;
                             king.area04Box.enabled = false;
                             king.kingNPC.DOFade(0, 1).SetEase(Ease.Linear).OnComplete(() =>
@@ -237,12 +237,12 @@ public class KingCollision : MonoBehaviour
     {
         if (collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null && UIManager.instance.isKingCheck == false)
         {
-            king.Zoom_Expansion(); // 카메라 확대 시킨다.
+            king.Zoom_Expansion(); // 줌을 확대시킨다.
 
             switch (area)
             {
                 case Area.Area01:
-                    rangeReach = true;
+                    isRangeReach = true;
                     king.cameraObj.GetComponent<CameraManager>().enabled = false;
                     king.cameraObj.transform.DOLocalMoveX(0, waitTime).SetEase(Ease.Linear).OnComplete(() =>
                     {
@@ -251,7 +251,7 @@ public class KingCollision : MonoBehaviour
                     break;
 
                 case Area.Area02:
-                    rangeReach = true;
+                    isRangeReach = true;
                     king.cameraObj.GetComponent<CameraManager>().enabled = false;
                     king.cameraObj.transform.DOLocalMoveX(9, waitTime).SetEase(Ease.Linear).OnComplete(() =>
                     {
@@ -260,7 +260,7 @@ public class KingCollision : MonoBehaviour
                     break;
 
                 case Area.Area03:
-                    rangeReach = true;
+                    isRangeReach = true;
                     king.cameraObj.GetComponent<CameraManager>().enabled = false;
                     king.cameraObj.transform.DOLocalMoveX(17.82f, waitTime).SetEase(Ease.Linear).OnComplete(() =>
                     {
@@ -269,7 +269,7 @@ public class KingCollision : MonoBehaviour
                     break;
 
                 case Area.Area04:
-                    rangeReach = true;
+                    isRangeReach = true;
                     king.cameraObj.GetComponent<CameraManager>().enabled = false;
                     king.cameraObj.transform.DOLocalMoveX(26.76f, waitTime).SetEase(Ease.Linear).OnComplete(() =>
                     {
