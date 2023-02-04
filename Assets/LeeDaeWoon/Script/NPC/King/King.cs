@@ -87,7 +87,6 @@ public class King : MonoBehaviour
         cameraObj.GetComponent<CameraManager>().enabled = true; // CameraManager를 켜둔다.
         yield return new WaitForSeconds(0.5f);
         UIManager.instance.isPlayerControl = false; // 플레이어의 움직임을 정상작동 시킨다.
-
     }
     #endregion
 }
