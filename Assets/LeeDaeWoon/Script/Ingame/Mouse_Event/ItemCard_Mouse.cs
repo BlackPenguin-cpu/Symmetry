@@ -5,9 +5,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using DG.Tweening;
 
-[System.Serializable]
-
-
 public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public enum EDirection
@@ -16,6 +13,7 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         Among,
         Right
     }
+
     public EDirection eDirection;
 
     [Header("ºû")]

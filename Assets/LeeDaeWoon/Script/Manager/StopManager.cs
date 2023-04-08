@@ -177,29 +177,32 @@ public class StopManager : MonoBehaviour
         //ESC 키를 누르면 일시정지 창이 열린다.
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (isESC == false && isEscCheck == false)
+            if (!isEscCheck)
             {
-                isEscCheck = true;
-                Fade.instance.fadeInOut.DOFade(0.5f, 0.2f).SetEase(Ease.Linear).SetUpdate(true);
-                PauseWindow();
-            }
-
-            else if (isESC == true && isEscCheck == false)
-            {
-                isEscCheck = true;
-
-                pauseBarUp.transform.DOLocalMoveY(pauseBarClose, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
-                pauseBarDown.transform.DOLocalMoveY(-pauseBarClose, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
+                if (!isESC)
                 {
-                    isEscCheck = false;
-                    isESC = false;
+                    isEscCheck = true;
+                    Fade.instance.fadeInOut.DOFade(0.5f, 0.2f).SetEase(Ease.Linear).SetUpdate(true);
+                    PauseWindow();
+                }
 
-                    Fade.instance.fadeInOut.DOFade(0, 0.2f).SetEase(Ease.Linear).SetUpdate(true);
-                    pauseWindow.SetActive(false);
-                    Time.timeScale = 1f;
-                });
+                else
+                {
+                    isEscCheck = true;
 
-                pauseRect.DOSizeDelta(new Vector2(pauseWidth, 0), pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
+                    pauseBarUp.transform.DOLocalMoveY(pauseBarClose, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
+                    pauseBarDown.transform.DOLocalMoveY(-pauseBarClose, pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
+                    {
+                        isEscCheck = false;
+                        isESC = false;
+
+                        Fade.instance.fadeInOut.DOFade(0, 0.2f).SetEase(Ease.Linear).SetUpdate(true);
+                        pauseWindow.SetActive(false);
+                        Time.timeScale = 1f;
+                    });
+
+                    pauseRect.DOSizeDelta(new Vector2(pauseWidth, 0), pauseBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
+                }
             }
 
         }
@@ -221,7 +224,7 @@ public class StopManager : MonoBehaviour
         switch (CurrentScene.instance.eScene)
         {
             case EScene.Main:
-                if(Reset_Check)
+                if (Reset_Check)
                 {
                     Reset_Check = false;
 
@@ -251,10 +254,10 @@ public class StopManager : MonoBehaviour
 
     void WeaponLevel()
     {
-        switch(CurrentScene.instance.eScene)
+        switch (CurrentScene.instance.eScene)
         {
             case EScene.Dimension:
-                for(int i = 0; i < weapon.Count; i++)
+                for (int i = 0; i < weapon.Count; i++)
                 {
                     weapon[i].level = BlackSmith.instnace.weapon[i].level;
                 }
