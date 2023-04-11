@@ -317,7 +317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  dimensionType: 0
+  dimensionType: 1
   maxHp: 100
   hp: 0
   DashShadow: {fileID: 6139106576006089876, guid: 97ca0f78f997ff14494060f2bfa2449f, type: 3}

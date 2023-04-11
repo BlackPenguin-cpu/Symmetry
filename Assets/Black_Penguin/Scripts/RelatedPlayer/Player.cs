@@ -424,6 +424,8 @@ public class Player : Entity, ITypePlayer
             base._hp = stat._hp = value;
         }
     }
+
+    private GameObject DmgText;
     private void Awake()
     {
         if (Instance == null)
@@ -438,6 +440,8 @@ public class Player : Entity, ITypePlayer
     }
     protected override void Start()
     {
+        dimensionType = DimensionType.OVER;
+        DmgText = Resources.Load<GameObject>("Player/DamageText");
         stat._level = stat._level;
         stat._hp = stat._maxHp;
         animator = GetComponent<Animator>();
@@ -654,7 +658,7 @@ public class Player : Entity, ITypePlayer
         }
         if (_stateOnAir == PlayerStateOnAir.NONE && state != PlayerState.Jump && _stateOnAir != PlayerStateOnAir.JUMPATTACK && _state != PlayerState.Attack)
             _state = PlayerState.Walk;
-        else if(_stateOnAir == PlayerStateOnAir.NONE)
+        else if (_stateOnAir == PlayerStateOnAir.NONE)
             return;
 
         PlayerDirFix();
@@ -705,8 +709,7 @@ public class Player : Entity, ITypePlayer
             atkDmg *= 1.5f;
         }
 
-        //TODO: 매니저에 넣어놔 Load 비용 ㅅㅂ
-        DamageText text = ObjectPool.Instance.CreateObj(Resources.Load<GameObject>("Player/DamageText"), target.transform.position
+        DamageText text = ObjectPool.Instance.CreateObj(DmgText, target.transform.position
             , Quaternion.Euler(0, 0, target.dimensionType == DimensionType.OVER ? 0 : 180)).GetComponent<DamageText>();
         text.damageValue = atkDmg;
         text.isCrit = isCrit;
