@@ -652,8 +652,10 @@ public class Player : Entity, ITypePlayer
         {
             PlayerDirFix();
         }
-        if (_stateOnAir == PlayerStateOnAir.NONE && state != PlayerState.Jump && _stateOnAir != PlayerStateOnAir.JUMPATTACK)
+        if (_stateOnAir == PlayerStateOnAir.NONE && state != PlayerState.Jump && _stateOnAir != PlayerStateOnAir.JUMPATTACK && _state != PlayerState.Attack)
             _state = PlayerState.Walk;
+        else if(_stateOnAir == PlayerStateOnAir.NONE)
+            return;
 
         PlayerDirFix();
 
