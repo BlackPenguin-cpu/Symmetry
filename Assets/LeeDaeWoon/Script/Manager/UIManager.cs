@@ -80,7 +80,7 @@ public class UIManager : MonoBehaviour
 
     void OnLevelWasLoaded(int level)
     {
-        if (isOnceCheck == true && SceneManager.GetActiveScene().name == "Main")
+        if (isOnceCheck && SceneManager.GetActiveScene().name == "Main")
         {
             isOnceCheck = false;
             isDarkPlayerGetCheck = true;
