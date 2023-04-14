@@ -5,12 +5,14 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public class Credit_Click : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class Credit : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    TitleManager titleManager;
+
+    [Header("크레딧")]
     Button creditBtn;
 
     const float waitTime = 0.5f;
-    TitleManager titleManager;
 
     void Start()
     {
@@ -22,43 +24,53 @@ public class Credit_Click : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     void Update()
     {
-
     }
+
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        titleManager.isCreditOut = true;
+        titleManager.isCredit = true;
+        SoundManager.instance.PlaySoundClip("SFX_Button_Over", SoundType.SFX);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         if (!titleManager.isCreditCheck)
-            titleManager.isCreditOut = false;
+            titleManager.isCredit = false;
     }
 
-    public void CreditBtn()
+    IEnumerator Skip()
     {
-        int creditTextPos = 4702;
+        yield return new WaitForSeconds(2);
+        titleManager.isSkipCheck = true;
+    }
 
+    void CreditBtn()
+    {
+        int creditTextPos = 4700;
+
+        // 크레딧 버튼을 클릭을 했을 경우
         creditBtn.onClick.AddListener(() =>
         {
             titleManager.isCreditCheck = true;
+            Vector3 creditPos = titleManager.creditText.transform.localPosition;
 
-            SoundManager.instance.PlaySoundClip("SFX_Button_Click", SoundType.SFX);
             SoundManager.instance.PlaySoundClip("BGM_Editor", SoundType.BGM);
+            SoundManager.instance.PlaySoundClip("SFX_Button_Click", SoundType.SFX);
 
             titleManager.creditBackGround.raycastTarget = true;
             titleManager.creditBackGround.DOFade(1, 0.5f).OnComplete(() =>
             {
-                StartCoroutine(SkipTure());
+                StartCoroutine(Skip());
             });
 
+            // 크레딧 이동이 지정한 만큼 이동했을 때
             titleManager.creditText.transform.DOLocalMoveY(creditTextPos, waitTime * 100).SetEase(Ease.Linear).OnComplete(() =>
             {
-                SoundManager.instance.PlaySoundClip(null, SoundType.BGM);
+                SoundManager.instance.PlaySoundClip("BGM_Title", SoundType.BGM);
 
-                titleManager.creditBackGround.DOFade(0f, waitTime);
-                titleManager.creditText.transform.localPosition = new Vector3(0f, -4764f, 0f);
+                titleManager.creditBackGround.DOFade(0f, waitTime).SetEase(Ease.Linear);
+                titleManager.creditText.transform.localPosition = creditPos;
 
                 titleManager.isSkipCheck = false;
                 titleManager.isCreditCheck = false;
@@ -66,11 +78,5 @@ public class Credit_Click : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             });
 
         });
-    }
-
-    IEnumerator SkipTure()
-    {
-        yield return new WaitForSeconds(2);
-        titleManager.isSkipCheck = true;
     }
 }

@@ -12,59 +12,58 @@ public class TitleManager : MonoBehaviour
 
     [Header("타이틀")]
     [SerializeField] GameObject circleBall;
+    [SerializeField] Image teamBackGround;
     [SerializeField] Text passAnyKey;
 
-    [SerializeField] Image teamBackGround;
     bool isTeamBackGround = false;
 
     [Header("크레딧")]
-    [SerializeField] Button creditBtn;
     public Image creditBackGround;
     public GameObject creditText;
 
-    public bool isCreditOut = false;
+    public bool isCredit = false;
     public bool isSkipCheck = false;
     public bool isCreditCheck = false;
 
-    const int timer = 3;
-
     void Start()
     {
-        TitleDirector();
-        StartCoroutine(TeamBackGround());
+
+        StartCoroutine(Director());
+        SoundManager.instance.PlaySoundClip("BGM_Title", SoundType.BGM);
     }
 
     void Update()
     {
+        ChangeScene();
+    }
+
+    void ChangeScene()
+    {
         if (Input.anyKeyDown)
         {
-            if (!isCreditOut && !isSkipCheck)
-                ChangeScene();
+            if (!isCredit && !isSkipCheck && isTeamBackGround)
+            {
+                Fade.instance.fadeInOut.DOFade(1, 0.5f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
+                {
+                    DOTween.KillAll();
+                    SceneManager.LoadScene(1);
+                });
+            }
 
             else
                 CreditESC();
         }
     }
 
-    public void ChangeScene()
-    {
-        if (isTeamBackGround)
-        {
-            Fade.instance.fadeInOut.DOFade(1, 0.5f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
-            {
-                DOTween.KillAll();
-                SceneManager.LoadScene(1);
-            });
-        }
-    }
-
-    public void CreditESC()
+    void CreditESC()
     {
         float waitTime = 0.5f;
         int creditTextPos = 4764;
 
         if (isSkipCheck)
         {
+            SoundManager.instance.PlaySoundClip("BGM_Title", SoundType.BGM);
+
             creditText.transform.DOKill();
             creditText.transform.DOLocalMoveY(-creditTextPos, 0).SetEase(Ease.Linear);
             creditBackGround.DOFade(0, waitTime).OnComplete(() =>
@@ -76,22 +75,20 @@ public class TitleManager : MonoBehaviour
         }
     }
 
-    void TitleDirector()
+    IEnumerator Director()
     {
-        int circlePos = 327;
+        int circlePos = 400;
 
-        // passAnyKey Director
+        // passAnyKey
         passAnyKey.DOFade(0, 1.5f).SetEase(Ease.Linear).SetLoops(-1, LoopType.Yoyo);
 
-        // circleBall Director
-        circleBall.transform.GetChild(0).transform.DOLocalMoveY(circlePos, timer).SetEase(Ease.InOutCubic).SetLoops(-1, LoopType.Yoyo);
-        circleBall.transform.GetChild(1).transform.DOLocalMoveY(-circlePos, timer).SetEase(Ease.InOutCubic).SetLoops(-1, LoopType.Yoyo);
-    }
+        // circleBall
+        circleBall.transform.GetChild(0).transform.DOLocalMoveY(circlePos, 3).SetEase(Ease.InOutCubic).SetLoops(-1, LoopType.Yoyo);
+        circleBall.transform.GetChild(1).transform.DOLocalMoveY(-circlePos, 3).SetEase(Ease.InOutCubic).SetLoops(-1, LoopType.Yoyo);
 
-    IEnumerator TeamBackGround()
-    {
-        yield return new WaitForSeconds(timer);
-        teamBackGround.DOFade(0, timer).OnComplete(() =>
+        // TeamBackGround
+        yield return new WaitForSeconds(3);
+        teamBackGround.DOFade(0, 3).OnComplete(() =>
         {
             teamBackGround.raycastTarget = false;
             isTeamBackGround = true;
