@@ -19,21 +19,23 @@ public class CurrentScene : MonoBehaviour
 
     void Start()
     {
-        PlayerVector();
+        SceneSetting();
     }
 
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.Q))
+            Player.Instance.transform.position = new Vector2(-10, -1.8f);
     }
 
-    public void PlayerVector()
+    public void SceneSetting()
     {
         switch (eScene)
         {
             case EScene.Main:
+                SoundManager.instance.PlaySoundClip("BGM_Main", SoundType.BGM);
                 Vector2 mainPos = new Vector2(-10, -1.8f);
-                Player.Instance.transform.DOMove(mainPos, 0);
+                Player.Instance.transform.DOLocalMove(mainPos, 0);
                 break;
 
             case EScene.Ingame:

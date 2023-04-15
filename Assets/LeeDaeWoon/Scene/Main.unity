@@ -368,7 +368,6 @@ MonoBehaviour:
   scrambleChars_Tool: 
   richTextEnabled: 0
   scrambleMode: 0
-  Dialogue_End: 0
 --- !u!61 &98934828
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1535,7 +1534,6 @@ MonoBehaviour:
   scrambleChars_Tool: 
   richTextEnabled: 0
   scrambleMode: 0
-  Dialogue_End: 0
 --- !u!61 &349857122
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2431,7 +2429,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1738952378417045457, guid: 019d3c36a78132c44aecc53c1dc577cf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.4
+      value: -1.8
       objectReference: {fileID: 0}
     - target: {fileID: 1738952378417045457, guid: 019d3c36a78132c44aecc53c1dc577cf, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2859,7 +2857,7 @@ RectTransform:
   m_Children:
   - {fileID: 2132424456}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3204,19 +3202,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5025156722862097626, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5025156722862097626, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.575146
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5025156722862097626, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.254653
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5025156722862097626, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.1338716
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5025156722862097626, guid: 6dca2c64dbfa11b46bb696ac29a0488c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3471,7 +3469,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &773648537
 GameObject:
@@ -3559,7 +3557,6 @@ MonoBehaviour:
   scrambleChars_Tool: 
   richTextEnabled: 0
   scrambleMode: 0
-  Dialogue_End: 0
 --- !u!61 &833574205
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4902,29 +4899,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 151603624, guid: 3da9c3f6417b4694cb997564d60f2bb6, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3157611432992786235, guid: 3da9c3f6417b4694cb997564d60f2bb6, type: 3}
       propertyPath: m_Name
       value: UIManager
       objectReference: {fileID: 0}
     - target: {fileID: 7837968097333178697, guid: 3da9c3f6417b4694cb997564d60f2bb6, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7837968097333178697, guid: 3da9c3f6417b4694cb997564d60f2bb6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 980.0148
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7837968097333178697, guid: 3da9c3f6417b4694cb997564d60f2bb6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 535.9365
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7837968097333178697, guid: 3da9c3f6417b4694cb997564d60f2bb6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -644.7719
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7837968097333178697, guid: 3da9c3f6417b4694cb997564d60f2bb6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5550,7 +5543,6 @@ MonoBehaviour:
   scrambleChars_Tool: 
   richTextEnabled: 0
   scrambleMode: 0
-  Dialogue_End: 0
 --- !u!61 &1372057785
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7846,8 +7838,8 @@ MonoBehaviour:
   area02Box: {fileID: 833574205}
   area03Box: {fileID: 349857122}
   area04Box: {fileID: 98934828}
-  isMagicCreation: 0
   isDialogueSkip: 0
+  isMagicCreation: 0
 --- !u!1 &2072984338
 GameObject:
   m_ObjectHideFlags: 0
@@ -8079,7 +8071,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2531421641125524235
 MonoBehaviour:
