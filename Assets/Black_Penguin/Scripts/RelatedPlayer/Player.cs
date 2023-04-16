@@ -757,6 +757,7 @@ public class Player : Entity, ITypePlayer
             }
         }
     }
+
     public void AttackSoundPlay()
     {
         switch (stat.weaponType)
