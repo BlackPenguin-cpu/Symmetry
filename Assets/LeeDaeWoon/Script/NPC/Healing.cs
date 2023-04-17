@@ -37,7 +37,6 @@ public class Healing : MonoBehaviour
 
     void Start()
     {
-        SoundManager.instance.PlaySoundClip("BGM_Store", SoundType.BGM);
         healingRectPos = healingWindow.GetComponent<RectTransform>();
 
         healingWindow.SetActive(false);

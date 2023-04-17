@@ -77,7 +77,6 @@ public class KingCollision : MonoBehaviour
                     isRangeReach = false;
                     isDialogueEnd = true;
                     king.isDialogueExit = true;
-                    king.area01Box.enabled = false;
                     king.kingNPC.DOFade(0, 1).SetEase(Ease.Linear).OnComplete(() =>
                     {
                         king.kingNPC.transform.DOLocalMoveX(kingPos, 1).SetEase(Ease.Linear).OnComplete(() =>
@@ -108,20 +107,28 @@ public class KingCollision : MonoBehaviour
         {
             case Area.Area01:
                 Dialogue(7, 15);
+
+                if (king.sequenceText == 7)
+                    king.area01Box.enabled = false;
                 break;
 
             case Area.Area02:
                 Dialogue(12, 23);
+
+                if (king.sequenceText == 12)
+                    king.area02Box.enabled = false;
                 break;
 
             case Area.Area03:
                 Dialogue(18, 32);
+
+                if (king.sequenceText == 18)
+                    king.area03Box.enabled = false;
                 break;
 
             case Area.Area04:
                 if (isRangeReach)
                 {
-
                     // 전문이 타이핑이 됬을 경우 && 대사가 7번 이하 나왔을 경우 && 대사가 아직 안 끝났을 경우
                     if (king.dialogueText.text == king.Dialogue[king.sequenceText] && king.sequenceText <= 23 && !isDialogueEnd)
                     {

@@ -161,7 +161,7 @@ public class StopManager : MonoBehaviour
     const float waitTime = 0.5f;
 
     bool isESC = false;
-    bool isEscCheck = false;
+    public bool isEscCheck = false;
 
     void Start()
     {

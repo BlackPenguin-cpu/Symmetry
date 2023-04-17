@@ -41,11 +41,19 @@ public class CurrentScene : MonoBehaviour
             case EScene.Ingame:
                 Vector2 ingamePos = new Vector2(1, 0);
                 Player.Instance.transform.DOLocalMove(ingamePos, 0);
+
+                if(WaveManager.instnace.m_WaveNum < 10)
+                    SoundManager.instance.PlaySoundClip("BGM_Ingame_01", SoundType.BGM);
+
+                else if(11 <= WaveManager.instnace.m_WaveNum && WaveManager.instnace.m_WaveNum >= 15)
+                    SoundManager.instance.PlaySoundClip("BGM_Ingame_02", SoundType.BGM);
+
                 break;
 
             case EScene.Dimension:
                 Vector2 dimensionPos = new Vector2(1, 0);
                 Player.Instance.transform.DOLocalMove(dimensionPos, 0);
+                SoundManager.instance.PlaySoundClip("BGM_Store", SoundType.BGM);
                 break;
         }
     }

@@ -249,6 +249,7 @@ public class BlackSmith : MonoBehaviour
             isWindowOpenCheck = true;
             UIManager.instance.isCursorFade = true;
             UIManager.instance.isPlayerControl = true;
+            StopManager.instnace.isEscCheck = true;
             Fade.instance.fadeInOut.DOFade(0.5f, 0.2f).SetEase(Ease.Linear).SetUpdate(true);
             OpenWindow();
         }
@@ -256,6 +257,7 @@ public class BlackSmith : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape) && isWindowOpenCheck)
         {
             Close();
+            StopManager.instnace.isEscCheck = false;
         }
     }
 
@@ -265,6 +267,7 @@ public class BlackSmith : MonoBehaviour
         closeBtn.onClick.AddListener(() =>
         {
             CloseWindow();
+            StopManager.instnace.isEscCheck = false;
         });
 
         // 왼쪽 방향 버튼을 눌렀을 때

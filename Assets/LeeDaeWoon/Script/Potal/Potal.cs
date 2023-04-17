@@ -37,6 +37,8 @@ public class Potal : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F) && isCollisionCheck)
         {
+            SoundManager.instance.PlaySoundClip("SFX_Potal", SoundType.SFX);
+
             Fade.instance.fadeInOut.DOFade(1, 0.5f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
             {
                 DOTween.KillAll();
@@ -54,6 +56,8 @@ public class Potal : MonoBehaviour
                 case EScene.Main:
                     Fade.instance.fadeInOut.DOFade(1, 0.5f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
                     {
+                        SoundManager.instance.PlaySoundClip("SFX_Potal", SoundType.SFX);
+
                         DOTween.KillAll();
                         SceneManager.LoadScene(3);
                     });

@@ -96,6 +96,7 @@ public class Foundation : MonoBehaviour
             Fade.instance.fadeInOut.DOFade(0.5f, 0.2f).SetEase(Ease.Linear).SetUpdate(true);
 
             UIManager.instance.isPlayerControl = true;
+            StopManager.instnace.isEscCheck = true;
             OpenWindow();
             iswindowOpenCheck = true;
         }
@@ -107,6 +108,7 @@ public class Foundation : MonoBehaviour
         closeBtn.onClick.AddListener(() =>
         {
             CloseWindow();
+            StopManager.instnace.isEscCheck = false;
         });
     }
 
