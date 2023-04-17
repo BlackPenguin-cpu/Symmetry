@@ -182,6 +182,7 @@ public class StopManager : MonoBehaviour
                 if (!isESC)
                 {
                     isEscCheck = true;
+                    Fade.instance.fadeInOut.DOKill();
                     Fade.instance.fadeInOut.DOFade(0.5f, 0.2f).SetEase(Ease.Linear).SetUpdate(true);
                     PauseWindow();
                 }
@@ -305,6 +306,7 @@ public class StopManager : MonoBehaviour
         settingCloseBtn.onClick.AddListener(() =>
         {
             SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
+            Fade.instance.fadeInOut.DOFade(0, waitTime).SetEase(Ease.Linear).SetUpdate(true);
 
             settingBarUp.transform.DOLocalMoveY(settingBarClose, settingBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
             settingBarDown.transform.DOLocalMoveY(-settingBarClose, settingBarSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
@@ -339,6 +341,7 @@ public class StopManager : MonoBehaviour
         playerCloseBtn.onClick.AddListener(() =>
         {
             SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
+            Fade.instance.fadeInOut.DOFade(0, waitTime).SetEase(Ease.Linear).SetUpdate(true);
 
             playerBarUp.transform.DOLocalMoveY(playerBarClose, playerBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
             playerBarDown.transform.DOLocalMoveY(-playerBarClose, playerBarSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
@@ -413,6 +416,7 @@ public class StopManager : MonoBehaviour
         mainWindowYesBtn.onClick.AddListener(() =>
         {
             Time.timeScale = 1;
+            Fade.instance.fadeInOut.DOFade(0, waitTime).SetEase(Ease.Linear).SetUpdate(true);
             SceneManager.LoadScene(1);
         });
 
@@ -420,6 +424,7 @@ public class StopManager : MonoBehaviour
         mainWindowNoBtn.onClick.AddListener(() =>
         {
             SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
+            Fade.instance.fadeInOut.DOFade(0, waitTime).SetEase(Ease.Linear).SetUpdate(true);
 
             mainBarUp.transform.DOLocalMoveY(mainBarClose, mainBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
             mainBarDown.transform.DOLocalMoveY(-mainBarClose, mainBarSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
@@ -460,6 +465,7 @@ public class StopManager : MonoBehaviour
         exitWindowNoBtn.onClick.AddListener(() =>
         {
             SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
+            Fade.instance.fadeInOut.DOFade(0, waitTime).SetEase(Ease.Linear).SetUpdate(true);
 
             exitBarUp.transform.DOLocalMoveY(exitBarClose, exitBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
             exitBarDown.transform.DOLocalMoveY(-exitBarClose, exitBarSpeed).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>

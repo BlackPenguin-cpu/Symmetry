@@ -32,14 +32,32 @@ public class King : MonoBehaviour
     public int sequenceText = 0;
 
     [Header("충돌 확인")]
-    public BoxCollider2D area01Box;
-    public BoxCollider2D area02Box;
-    public BoxCollider2D area03Box;
-    public BoxCollider2D area04Box;
+    public GameObject area;
 
     [Header("마법진 생성")]
     public bool isDialogueSkip = false;
     public bool isMagicCreation = false;
+
+    bool isCheck = false;
+
+    void Update()
+    {
+        KingCheck();
+    }
+
+    public void KingCheck()
+    {
+        if(UIManager.instance.isKingCheck && !isCheck)
+        {
+            isCheck = true;
+            isMagicCreation = true;
+
+            gameObject.SetActive(false);
+
+            for (int i = 0; i < area.transform.childCount; i++)
+                area.transform.GetChild(i).GetComponent<BoxCollider2D>().enabled = false;
+        }
+    }
 
     #region 카메라 확대 / 축소
     public void Zoom_Expansion() => StartCoroutine(Expansion());

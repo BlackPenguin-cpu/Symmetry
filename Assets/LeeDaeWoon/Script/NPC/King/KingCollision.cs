@@ -109,21 +109,22 @@ public class KingCollision : MonoBehaviour
                 Dialogue(7, 15);
 
                 if (king.sequenceText == 7)
-                    king.area01Box.enabled = false;
+                    king.area.transform.GetChild(0).GetComponent<BoxCollider2D>().enabled = false;
+
                 break;
 
             case Area.Area02:
                 Dialogue(12, 23);
 
                 if (king.sequenceText == 12)
-                    king.area02Box.enabled = false;
+                    king.area.transform.GetChild(1).GetComponent<BoxCollider2D>().enabled = false;
                 break;
 
             case Area.Area03:
                 Dialogue(18, 32);
 
                 if (king.sequenceText == 18)
-                    king.area03Box.enabled = false;
+                    king.area.transform.GetChild(2).GetComponent<BoxCollider2D>().enabled = false;
                 break;
 
             case Area.Area04:
@@ -142,10 +143,12 @@ public class KingCollision : MonoBehaviour
 
                         else if (king.sequenceText == 23)
                         {
+                            UIManager.instance.isKingCheck = true;
+
                             isRangeReach = false;
                             isDialogueEnd = true;
                             king.isDialogueExit = true;
-                            king.area04Box.enabled = false;
+                            king.area.transform.GetChild(3).GetComponent<BoxCollider2D>().enabled = false;
                             king.kingNPC.DOFade(0, 1).SetEase(Ease.Linear).OnComplete(() =>
                             {
                                 SoundManager.instance.PlaySoundClip("BGM_Main", SoundType.BGM);
@@ -180,7 +183,7 @@ public class KingCollision : MonoBehaviour
         });
     }
 
-    public void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null && UIManager.instance.isKingCheck == false)
         {

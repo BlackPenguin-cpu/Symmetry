@@ -42,7 +42,7 @@ public class Potal : MonoBehaviour
             Fade.instance.fadeInOut.DOFade(1, 0.5f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
             {
                 DOTween.KillAll();
-                SceneManager.LoadScene(2);
+                SceneManager.LoadScene("Dimension");
             });
         }
     }
@@ -59,7 +59,7 @@ public class Potal : MonoBehaviour
                         SoundManager.instance.PlaySoundClip("SFX_Potal", SoundType.SFX);
 
                         DOTween.KillAll();
-                        SceneManager.LoadScene(3);
+                        SceneManager.LoadScene("Test");
                     });
                     break;
 

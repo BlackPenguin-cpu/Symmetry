@@ -5796,7 +5796,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1444519966
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7834,10 +7834,7 @@ MonoBehaviour:
   - "\uBD80\uB514... \uCE74\uB860\uC744 \uB9C9\uC544\uC8FC\uAC8C... "
   dialogueText: {fileID: 1107078732}
   sequenceText: 0
-  area01Box: {fileID: 1372057785}
-  area02Box: {fileID: 833574205}
-  area03Box: {fileID: 349857122}
-  area04Box: {fileID: 98934828}
+  area: {fileID: 1876050207}
   isDialogueSkip: 0
   isMagicCreation: 0
 --- !u!1 &2072984338
