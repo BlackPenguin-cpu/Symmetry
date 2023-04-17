@@ -101,226 +101,125 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         {
             case EDirection.Left:
                 LeftClickWindow();
-                DaItemClick();
-
-                switch (ItemCardList.instance.leftItem.eItem)
-                {
-                    case Item.EItem.WindEarRing:
-                        Player.Instance.stat.PlayerDATypeList.WindEarRing = true;
-                        Debug.Log(Player.Instance.stat.PlayerDATypeList.WindEarRing);
-                        break;
-
-                    case Item.EItem.NeedleArmour:
-                        Player.Instance.stat.PlayerDATypeList.NeedleArmour = true;
-                        Debug.Log(Player.Instance.stat.PlayerDATypeList.NeedleArmour);
-                        break;
-
-                    case Item.EItem.KnifeCape:
-                        Player.Instance.stat.PlayerDATypeList.KnifeCape = true;
-                        Debug.Log(Player.Instance.stat.PlayerDATypeList.KnifeCape);
-                        break;
-
-                    case Item.EItem.CurseKnife:
-                        Player.Instance.stat.PlayerDATypeList.CurseKnife = true;
-                        Debug.Log(Player.Instance.stat.PlayerDATypeList.CurseKnife);
-                        break;
-
-                    case Item.EItem.BloodGauntlet:
-                        Player.Instance.stat.PlayerDATypeList.BloodGauntlet = true;
-                        Debug.Log(Player.Instance.stat.PlayerDATypeList.BloodGauntlet);
-                        break;
-
-                    case Item.EItem.CrystalOrb:
-                        Player.Instance.stat.PlayerDATypeList.CrystalOrb = true;
-                        Debug.Log(Player.Instance.stat.PlayerDATypeList.CrystalOrb);
-                        break;
-
-                    case Item.EItem.TheOneRing:
-                        Player.Instance.stat.PlayerDATypeList.TheOneRing = true;
-                        Debug.Log(Player.Instance.stat.PlayerDATypeList.TheOneRing);
-                        break;
-                }
-
-                switch (ItemCardList.instance.leftItem.eItem)
-                {
-                    case Item.EItem.POWER:
-                        ++Player.Instance.stat.Crystals[(int)CrystalsType.POWER];
-                        break;
-
-                    case Item.EItem.SPEED:
-                        ++Player.Instance.stat.Crystals[(int)CrystalsType.SPEED];
-                        break;
-
-                    case Item.EItem.ATTACKSPEED:
-                        ++Player.Instance.stat.Crystals[(int)CrystalsType.ATTACKSPEED];
-                        break;
-
-                    case Item.EItem.HEALTH:
-                        ++Player.Instance.stat.Crystals[(int)CrystalsType.HEALTH];
-                        break;
-
-                    case Item.EItem.TIME:
-                        ++Player.Instance.stat.Crystals[(int)CrystalsType.TIME];
-                        break;
-
-                    case Item.EItem.DEFFENCE:
-                        ++Player.Instance.stat.Crystals[(int)CrystalsType.DEFFENCE];
-                        break;
-                }
-
+                DaItemClick(0);
+                DirectionItem(0);
                 break;
 
             case EDirection.Among:
                 AmongClickWindow();
-                DaItemClick();
-
-                switch (ItemCardList.instance.amongItem.eItem)
-                {
-                    case Item.EItem.WindEarRing:
-                        Player.Instance.stat.PlayerDATypeList.WindEarRing = true;
-                        Debug.Log(Player.Instance.stat.PlayerDATypeList.WindEarRing);
-                        break;
-
-                    case Item.EItem.NeedleArmour:
-                        Player.Instance.stat.PlayerDATypeList.NeedleArmour = true;
-                        Debug.Log(Player.Instance.stat.PlayerDATypeList.NeedleArmour);
-                        break;
-
-                    case Item.EItem.KnifeCape:
-                        Player.Instance.stat.PlayerDATypeList.KnifeCape = true;
-                        Debug.Log(Player.Instance.stat.PlayerDATypeList.KnifeCape);
-                        break;
-
-                    case Item.EItem.CurseKnife:
-                        Player.Instance.stat.PlayerDATypeList.CurseKnife = true;
-                        Debug.Log(Player.Instance.stat.PlayerDATypeList.CurseKnife);
-                        break;
-
-                    case Item.EItem.BloodGauntlet:
-                        Player.Instance.stat.PlayerDATypeList.BloodGauntlet = true;
-                        Debug.Log(Player.Instance.stat.PlayerDATypeList.BloodGauntlet);
-                        break;
-
-                    case Item.EItem.CrystalOrb:
-                        Player.Instance.stat.PlayerDATypeList.CrystalOrb = true;
-                        Debug.Log(Player.Instance.stat.PlayerDATypeList.CrystalOrb);
-                        break;
-
-                    case Item.EItem.TheOneRing:
-                        Player.Instance.stat.PlayerDATypeList.TheOneRing = true;
-                        Debug.Log(Player.Instance.stat.PlayerDATypeList.TheOneRing);
-                        break;
-                }
-
-                switch (ItemCardList.instance.amongItem.eItem)
-                {
-                    case Item.EItem.POWER:
-                        ++Player.Instance.stat.Crystals[(int)CrystalsType.POWER];
-                        break;
-
-                    case Item.EItem.SPEED:
-                        ++Player.Instance.stat.Crystals[(int)CrystalsType.SPEED];
-                        break;
-
-                    case Item.EItem.ATTACKSPEED:
-                        ++Player.Instance.stat.Crystals[(int)CrystalsType.ATTACKSPEED];
-                        break;
-
-                    case Item.EItem.HEALTH:
-                        ++Player.Instance.stat.Crystals[(int)CrystalsType.HEALTH];
-                        break;
-
-                    case Item.EItem.TIME:
-                        ++Player.Instance.stat.Crystals[(int)CrystalsType.TIME];
-                        break;
-
-                    case Item.EItem.DEFFENCE:
-                        ++Player.Instance.stat.Crystals[(int)CrystalsType.DEFFENCE];
-                        break;
-                }
-
+                DaItemClick(1);
+                DirectionItem(1);
                 break;
 
             case EDirection.Right:
                 RightClickWindow();
-                DaItemClick();
+                DaItemClick(2);
+                DirectionItem(2);
+                break;
+        }
+    }
 
-                switch (ItemCardList.instance.rightItem.eItem)
-                {
-                    case Item.EItem.WindEarRing:
-                        Player.Instance.stat.PlayerDATypeList.WindEarRing = true;
-                        Debug.Log(Player.Instance.stat.PlayerDATypeList.WindEarRing);
-                        break;
+    void DirectionItem(int itemNum)
+    {
+        Item eItem = null;
 
-                    case Item.EItem.NeedleArmour:
-                        Player.Instance.stat.PlayerDATypeList.NeedleArmour = true;
-                        Debug.Log(Player.Instance.stat.PlayerDATypeList.NeedleArmour);
-                        break;
+        switch(itemNum)
+        {
+            case 0:
+                eItem = ItemCardList.instance.leftItem;
+                break;
 
-                    case Item.EItem.KnifeCape:
-                        Player.Instance.stat.PlayerDATypeList.KnifeCape = true;
-                        Debug.Log(Player.Instance.stat.PlayerDATypeList.KnifeCape);
-                        break;
+            case 1:
+                eItem = ItemCardList.instance.amongItem;
+                break;
 
-                    case Item.EItem.CurseKnife:
-                        Player.Instance.stat.PlayerDATypeList.CurseKnife = true;
-                        Debug.Log(Player.Instance.stat.PlayerDATypeList.CurseKnife);
-                        break;
+            case 2:
+                eItem = ItemCardList.instance.rightItem;
+                break;
+        }
 
-                    case Item.EItem.BloodGauntlet:
-                        Player.Instance.stat.PlayerDATypeList.BloodGauntlet = true;
-                        Debug.Log(Player.Instance.stat.PlayerDATypeList.BloodGauntlet);
-                        break;
+        switch (eItem.eItem)
+        {
+            // 아이템
+            case Item.EItem.WindEarRing:
+                Player.Instance.stat.PlayerDATypeList.WindEarRing = true;
+                break;
 
-                    case Item.EItem.CrystalOrb:
-                        Player.Instance.stat.PlayerDATypeList.CrystalOrb = true;
-                        Debug.Log(Player.Instance.stat.PlayerDATypeList.CrystalOrb);
-                        break;
+            case Item.EItem.NeedleArmour:
+                Player.Instance.stat.PlayerDATypeList.NeedleArmour = true;
+                break;
 
-                    case Item.EItem.TheOneRing:
-                        Player.Instance.stat.PlayerDATypeList.TheOneRing = true;
-                        Debug.Log(Player.Instance.stat.PlayerDATypeList.TheOneRing);
-                        break;
-                }
+            case Item.EItem.KnifeCape:
+                Player.Instance.stat.PlayerDATypeList.KnifeCape = true;
+                break;
 
-                switch (ItemCardList.instance.rightItem.eItem)
-                {
-                    case Item.EItem.POWER:
-                        ++Player.Instance.stat.Crystals[(int)CrystalsType.POWER];
-                        break;
+            case Item.EItem.CurseKnife:
+                Player.Instance.stat.PlayerDATypeList.CurseKnife = true;
+                break;
 
-                    case Item.EItem.SPEED:
-                        ++Player.Instance.stat.Crystals[(int)CrystalsType.SPEED];
-                        break;
+            case Item.EItem.BloodGauntlet:
+                Player.Instance.stat.PlayerDATypeList.BloodGauntlet = true;
+                break;
 
-                    case Item.EItem.ATTACKSPEED:
-                        ++Player.Instance.stat.Crystals[(int)CrystalsType.ATTACKSPEED];
-                        break;
+            case Item.EItem.CrystalOrb:
+                Player.Instance.stat.PlayerDATypeList.CrystalOrb = true;
+                break;
 
-                    case Item.EItem.HEALTH:
-                        ++Player.Instance.stat.Crystals[(int)CrystalsType.HEALTH];
-                        break;
+            case Item.EItem.TheOneRing:
+                Player.Instance.stat.PlayerDATypeList.TheOneRing = true;
+                break;
 
-                    case Item.EItem.TIME:
-                        ++Player.Instance.stat.Crystals[(int)CrystalsType.TIME];
-                        break;
+            case Item.EItem.POWER:
+                ++Player.Instance.stat.Crystals[(int)CrystalsType.POWER];
+                break;
 
-                    case Item.EItem.DEFFENCE:
-                        ++Player.Instance.stat.Crystals[(int)CrystalsType.DEFFENCE];
-                        break;
-                }
+            // 마정석
+            case Item.EItem.SPEED:
+                ++Player.Instance.stat.Crystals[(int)CrystalsType.SPEED];
+                break;
 
+            case Item.EItem.ATTACKSPEED:
+                ++Player.Instance.stat.Crystals[(int)CrystalsType.ATTACKSPEED];
+                break;
+
+            case Item.EItem.HEALTH:
+                ++Player.Instance.stat.Crystals[(int)CrystalsType.HEALTH];
+                break;
+
+            case Item.EItem.TIME:
+                ++Player.Instance.stat.Crystals[(int)CrystalsType.TIME];
+                break;
+
+            case Item.EItem.DEFFENCE:
+                ++Player.Instance.stat.Crystals[(int)CrystalsType.DEFFENCE];
                 break;
         }
     }
 
     #region 얻을 마정석과 장신구 선택
-    void DaItemClick()
+    void DaItemClick(int itemNum)
     {
+        string name = null;
+
+        switch(itemNum)
+        {
+            case 0:
+                name = ItemCardList.instance.leftItem.name;
+                break;
+
+            case 1:
+                name = ItemCardList.instance.amongItem.name;
+                break;
+
+            case 2:
+                name = ItemCardList.instance.rightItem.name;
+                break;
+        }
+
         // 장신구
         for (int i = 0; i < CardManager.instance.daBuffer.Count; i++)
         {
-            if (CardManager.instance.daBuffer[i].name.Contains(ItemCardList.instance.leftItem.name))
+            if (CardManager.instance.daBuffer[i].name.Contains(name))
             {
                 StopManager.instnace.itemDaHave.Add(CardManager.instance.daBuffer[i]);
                 CardManager.instance.daBuffer.RemoveAt(i);
@@ -330,7 +229,7 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         // 마정석
         for (int i = 0; i < CardManager.instance.itemBuffer.Count; i++)
         {
-            if (CardManager.instance.itemBuffer[i].name.Contains(ItemCardList.instance.leftItem.name))
+            if (CardManager.instance.itemBuffer[i].name.Contains(name))
             {
                 StopManager.instnace.itemDaHave.Add(CardManager.instance.itemBuffer[i]);
                 CardManager.instance.itemBuffer.RemoveAt(i);
