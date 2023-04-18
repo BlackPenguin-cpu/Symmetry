@@ -169,11 +169,12 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
                 Player.Instance.stat.PlayerDATypeList.TheOneRing = true;
                 break;
 
+
+            // 마정석
             case Item.EItem.POWER:
                 ++Player.Instance.stat.Crystals[(int)CrystalsType.POWER];
                 break;
 
-            // 마정석
             case Item.EItem.SPEED:
                 ++Player.Instance.stat.Crystals[(int)CrystalsType.SPEED];
                 break;
@@ -232,7 +233,7 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             if (CardManager.instance.itemBuffer[i].name.Contains(name))
             {
                 StopManager.instnace.itemDaHave.Add(CardManager.instance.itemBuffer[i]);
-                CardManager.instance.itemBuffer.RemoveAt(i);
+                //CardManager.instance.itemBuffer.RemoveAt(i);
             }
         }
     }

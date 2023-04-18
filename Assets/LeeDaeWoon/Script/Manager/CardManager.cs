@@ -61,7 +61,7 @@ public class CardManager : MonoBehaviour
     {
         for (int i = 0; i < itemSo.Items.Count; i++)
             itemBuffer.Add(itemSo.Items[i]);
-        
+
         for (int i = 0; i < itemSo.DA.Count; i++)
             daBuffer.Add(itemSo.DA[i]);
     }
@@ -82,43 +82,46 @@ public class CardManager : MonoBehaviour
     // 아이템 카드 소환하는 함수
     public void AddCard()
     {
-        SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
-
-        int itemIndex = 0;
-        List<Item> item = new List<Item>();
-        var cardObject = Instantiate(cardPrefab, transform.position, Quaternion.identity,transform.GetChild(0));
-        var card = cardObject.GetComponent<ItemCardList>();
-
-        for (int i = 0; i < 3; i++)
+        if (StopManager.instnace.itemDaHave.Count < 15)
         {
-            randomMix = Random.Range(0, 101);
+            SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
 
-            // 마정석
-            if (randomMix <= 70 || daBuffer.Count == 0)
+            int itemIndex = 0;
+            List<Item> item = new List<Item>();
+            var cardObject = Instantiate(cardPrefab, transform.position, Quaternion.identity, transform.GetChild(0));
+            var card = cardObject.GetComponent<ItemCardList>();
+
+            for (int i = 0; i < 3; i++)
             {
-                itemRandomTest = Card_Percent(itemBuffer);
-                for (int j = 0; j < item.Count; j++)
+                randomMix = Random.Range(0, 101);
+
+                // 마정석
+                if (randomMix <= 70 || daBuffer.Count == 0)
                 {
-                    while (item[j] == itemBuffer[itemRandomTest])
-                        itemRandomTest = Card_Percent(itemBuffer);
+                    itemRandomTest = Card_Percent(itemBuffer);
+                    for (int j = 0; j < item.Count; j++)
+                    {
+                        while (item[j] == itemBuffer[itemRandomTest])
+                            itemRandomTest = Card_Percent(itemBuffer);
+                    }
+
+                    item.Add(itemBuffer[itemRandomTest]);
+                    card.ItemCard(itemBuffer[itemRandomTest], itemIndex++);
                 }
 
-                item.Add(itemBuffer[itemRandomTest]);
-                card.ItemCard(itemBuffer[itemRandomTest], itemIndex++);
-            }
-
-            // 방어구 및 장신구
-            else
-            {
-                dARandomTest = Card_Percent(daBuffer);
-                for (int j = 0; j < item.Count; j++)
+                // 방어구 및 장신구
+                else
                 {
-                    while (item[j] == daBuffer[dARandomTest])
-                        dARandomTest = Card_Percent(daBuffer);
-                }
+                    dARandomTest = Card_Percent(daBuffer);
+                    for (int j = 0; j < item.Count; j++)
+                    {
+                        while (item[j] == daBuffer[dARandomTest])
+                            dARandomTest = Card_Percent(daBuffer);
+                    }
 
-                item.Add(daBuffer[dARandomTest]);
-                card.ItemCard(daBuffer[dARandomTest], itemIndex++);
+                    item.Add(daBuffer[dARandomTest]);
+                    card.ItemCard(daBuffer[dARandomTest], itemIndex++);
+                }
             }
         }
     }

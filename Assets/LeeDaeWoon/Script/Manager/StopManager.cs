@@ -328,6 +328,9 @@ public class StopManager : MonoBehaviour
                 pauseWindow.SetActive(false);
                 playerWindow.SetActive(true);
 
+                playerWeaponWindow.SetActive(true);
+                playerItemWindow.SetActive(false);
+
                 WeaponType();
 
                 playerBarUp.transform.DOLocalMoveY(playerBar, playerBarSpeed).SetEase(Ease.Linear).SetUpdate(true);
