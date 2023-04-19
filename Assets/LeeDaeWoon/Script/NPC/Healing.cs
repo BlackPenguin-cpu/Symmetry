@@ -77,37 +77,39 @@ public class Healing : MonoBehaviour
 
     IEnumerator Healing_Purchase()
     {
-        if (Input.GetKeyDown(KeyCode.F) && GameManager.Instance._coin >= healGold && !isPurchaseCheck && isColliderCheck)
+        if (!StopManager.instnace.isEscCheck)
         {
-            SoundManager.instance.PlaySoundClip("SFX_God_healling", SoundType.SFX);
+            if (Input.GetKeyDown(KeyCode.F) && GameManager.Instance._coin >= healGold && !isPurchaseCheck && isColliderCheck)
+            {
+                SoundManager.instance.PlaySoundClip("SFX_God_healling", SoundType.SFX);
 
-            GameManager.Instance._coin -= healGold;
-            UIManager.instance.isPlayerControl = true;
-            isPurchaseCheck = true;
+                GameManager.Instance._coin -= healGold;
+                UIManager.instance.isPlayerControl = true;
+                isPurchaseCheck = true;
 
-            CloseWindow();
+                CloseWindow();
 
-            StartCoroutine(HealingEffect());
-            transform.GetChild(0).gameObject.SetActive(false);
-            transform.GetChild(1).gameObject.SetActive(true);
-            yield return new WaitForSeconds(2f);
-            transform.GetChild(1).gameObject.SetActive(false);
-            transform.GetChild(2).gameObject.SetActive(true);
+                StartCoroutine(HealingEffect());
+                transform.GetChild(0).gameObject.SetActive(false);
+                transform.GetChild(1).gameObject.SetActive(true);
+                yield return new WaitForSeconds(2f);
+                transform.GetChild(1).gameObject.SetActive(false);
+                transform.GetChild(2).gameObject.SetActive(true);
 
-            if (Player.Instance.stat._hp + heal <= Player.Instance.stat._maxHp)
-                Player.Instance.stat._hp += heal;
-            else
-                Player.Instance.stat._hp = Player.Instance.stat._maxHp;
-
-
+                if (Player.Instance.stat._hp + heal <= Player.Instance.stat._maxHp)
+                    Player.Instance.stat._hp += heal;
+                else
+                    Player.Instance.stat._hp = Player.Instance.stat._maxHp;
+            }
         }
     }
 
     IEnumerator HealingEffect()
     {
         healingEffect.SetActive(true);
-        healingEffect.transform.DOLocalMove(new Vector2(Player.Instance.transform.position.x, -0.3f), 0);
-        yield return new WaitForSeconds(2f);
+        healingEffect.transform.localPosition = new Vector2(Player.Instance.transform.position.x, -0.3f);
+        //healingEffect.transform.DOLocalMove(new Vector2(Player.Instance.transform.position.x, -0.3f), 0);
+        yield return new WaitForSeconds(2);
 
         healingEffect.SetActive(false);
         UIManager.instance.isPlayerControl = false;
@@ -140,7 +142,7 @@ public class Healing : MonoBehaviour
     }
     #endregion
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if ((collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null) && !isPurchaseCheck)
         {
@@ -150,7 +152,7 @@ public class Healing : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    void OnTriggerExit2D(Collider2D collision)
     {
         if ((collision.CompareTag("Player") || collision.GetComponent<ITypePlayer>() != null) && !isPurchaseCheck)
         {

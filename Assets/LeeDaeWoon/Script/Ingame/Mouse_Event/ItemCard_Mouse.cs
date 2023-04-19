@@ -260,6 +260,7 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             rightBarDown.transform.DOKill();
             LightDoKill();
 
+            StopManager.instnace.isEscCheck = false;
             Destroy(transform.parent.gameObject);
         });
 
@@ -286,6 +287,7 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             rightBarDown.transform.DOKill();
             LightDoKill();
 
+            StopManager.instnace.isEscCheck = false;
             Destroy(transform.parent.gameObject);
         });
 
@@ -312,6 +314,7 @@ public class ItemCard_Mouse : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             amongBarDown.transform.DOKill();
             LightDoKill();
 
+            StopManager.instnace.isEscCheck = false;
             Destroy(transform.parent.gameObject);
         });
 

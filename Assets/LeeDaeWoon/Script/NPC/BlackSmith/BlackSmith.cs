@@ -99,7 +99,6 @@ public class BlackSmith : MonoBehaviour
         #endregion
     }
 
-
     public void WeaponStat()
     {
         if (weapon[0].level == maxLevel)
@@ -244,21 +243,21 @@ public class BlackSmith : MonoBehaviour
 
     public void BlackSmith_Click()
     {
-        if (Input.GetKeyDown(KeyCode.F) && isCollisionCheck && !isWindowOpenCheck)
+        if (!StopManager.instnace.isEscCheck)
         {
-            isWindowOpenCheck = true;
-            UIManager.instance.isCursorFade = true;
-            UIManager.instance.isPlayerControl = true;
-            StopManager.instnace.isEscCheck = true;
-            Fade.instance.fadeInOut.DOFade(0.5f, 0.2f).SetEase(Ease.Linear).SetUpdate(true);
-            OpenWindow();
+            if (Input.GetKeyDown(KeyCode.F) && isCollisionCheck && !isWindowOpenCheck)
+            {
+                isWindowOpenCheck = true;
+                StopManager.instnace.isEscCheck = true;
+                UIManager.instance.isCursorFade = true;
+                UIManager.instance.isPlayerControl = true;
+                Fade.instance.fadeInOut.DOFade(0.5f, 0.2f).SetEase(Ease.Linear).SetUpdate(true);
+                OpenWindow();
+            }
         }
-
+        
         if (Input.GetKeyDown(KeyCode.Escape) && isWindowOpenCheck)
-        {
-            Close();
-            StopManager.instnace.isEscCheck = false;
-        }
+            CloseWindow();
     }
 
     void Btns()
@@ -365,11 +364,6 @@ public class BlackSmith : MonoBehaviour
     }
 
     #region Ã¢ ¿¬Ãâ
-    public void Close()
-    {
-        CloseWindow();
-    }
-
     public void OpenWindow()
     {
         SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX);
@@ -398,6 +392,7 @@ public class BlackSmith : MonoBehaviour
             upBar.transform.DOLocalMoveY(closeBar, barSpeed).SetEase(Ease.Linear);
             downBar.transform.DOLocalMoveY(-closeBar, barSpeed).SetEase(Ease.Linear).OnComplete(() =>
             {
+                StopManager.instnace.isEscCheck = false;
                 UIManager.instance.isPlayerControl = false;
                 weaponWindow.SetActive(false);
                 isWindowOpenCheck = false;

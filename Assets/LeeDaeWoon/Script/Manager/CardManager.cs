@@ -85,6 +85,7 @@ public class CardManager : MonoBehaviour
         if (StopManager.instnace.itemDaHave.Count < 15)
         {
             SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX, 1f);
+            StopManager.instnace.isEscCheck = true;
 
             int itemIndex = 0;
             List<Item> item = new List<Item>();
