@@ -68,9 +68,9 @@ public class Foundation : MonoBehaviour
         MagicCircle();
     }
 
-    private void ScreenVector(Vector3 vec) => upGrade.transform.localPosition = Camera.main.WorldToScreenPoint(gameObject.transform.localPosition + vec);
+    void ScreenVector(Vector3 vec) => upGrade.transform.localPosition = Camera.main.WorldToScreenPoint(gameObject.transform.localPosition + vec);
 
-    public void MagicCircle()
+    void MagicCircle()
     {
         magicCircle.transform.Rotate(new Vector3(0, 0, speed * Time.deltaTime));
         switch (CurrentScene.instance.eScene)
@@ -89,16 +89,24 @@ public class Foundation : MonoBehaviour
         }
     }
 
-    public void Foundation_Click()
+    void Foundation_Click()
     {
-        if (Input.GetKeyDown(KeyCode.F) && isCollisionCheck == false && iswindowOpenCheck == false)
+        if (!isCollisionCheck)
         {
-            Fade.instance.fadeInOut.DOFade(0.5f, 0.2f).SetEase(Ease.Linear).SetUpdate(true);
+            if (Input.GetKeyDown(KeyCode.F) && !iswindowOpenCheck)
+            {
+                Fade.instance.fadeInOut.DOFade(0.5f, 0.2f).SetEase(Ease.Linear).SetUpdate(true);
 
-            UIManager.instance.isPlayerControl = true;
-            StopManager.instnace.isEscCheck = true;
-            OpenWindow();
-            iswindowOpenCheck = true;
+                UIManager.instance.isPlayerControl = true;
+                StopManager.instnace.isEscCheck = true;
+                iswindowOpenCheck = true;
+                OpenWindow();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Escape) && iswindowOpenCheck)
+            {
+                CloseWindow();
+            }
         }
     }
 
@@ -108,11 +116,10 @@ public class Foundation : MonoBehaviour
         closeBtn.onClick.AddListener(() =>
         {
             CloseWindow();
-            StopManager.instnace.isEscCheck = false;
         });
     }
 
-    public void OpenWindow()
+    void OpenWindow()
     {
         SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX);
         foundationWindow.SetActive(true);
@@ -123,7 +130,7 @@ public class Foundation : MonoBehaviour
         foundationRect.DOSizeDelta(new Vector2(windowWidth, windowHeight), openSpeed).SetEase(Ease.Linear);
     }
 
-    public void CloseWindow()
+    void CloseWindow()
     {
         SoundManager.instance.PlaySoundClip("SFX_Window", SoundType.SFX);
 
@@ -133,6 +140,7 @@ public class Foundation : MonoBehaviour
             Fade.instance.fadeInOut.DOFade(0, 0.2f).SetEase(Ease.Linear).SetUpdate(true);
 
             UIManager.instance.isPlayerControl = false;
+            StopManager.instnace.isEscCheck = false;
             foundationWindow.SetActive(false);
             iswindowOpenCheck = false;
         });
