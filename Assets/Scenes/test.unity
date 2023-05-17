@@ -1399,25 +1399,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 151603624, guid: 3da9c3f6417b4694cb997564d60f2bb6, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 556344955, guid: 3da9c3f6417b4694cb997564d60f2bb6, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3157611432992786235, guid: 3da9c3f6417b4694cb997564d60f2bb6, type: 3}
       propertyPath: m_Name
       value: UIManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 3157611432992786235, guid: 3da9c3f6417b4694cb997564d60f2bb6, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3547976952710852030, guid: 3da9c3f6417b4694cb997564d60f2bb6, type: 3}
-      propertyPath: isKingCheck
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7837968097333178697, guid: 3da9c3f6417b4694cb997564d60f2bb6, type: 3}
       propertyPath: m_RootOrder
@@ -4635,6 +4619,7 @@ GameObject:
   - component: {fileID: 1958597112}
   - component: {fileID: 1958597113}
   - component: {fileID: 1958597114}
+  - component: {fileID: 1958597115}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4818,6 +4803,18 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   priority: 1
+--- !u!114 &1958597115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1958597107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c87a3645be5b4c478a9237cb2d73992, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1958820419
 GameObject:
   m_ObjectHideFlags: 0

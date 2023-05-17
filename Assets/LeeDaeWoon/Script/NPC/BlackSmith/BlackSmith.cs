@@ -205,6 +205,7 @@ public class BlackSmith : MonoBehaviour
                             selectBtn.gameObject.SetActive(true);
                         }
                     }
+
                     else
                     {
                         noSoyu.SetActive(true);

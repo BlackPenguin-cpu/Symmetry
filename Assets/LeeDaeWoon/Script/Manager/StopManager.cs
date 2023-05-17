@@ -260,8 +260,10 @@ public class StopManager : MonoBehaviour
             case EScene.Dimension:
                 for (int i = 0; i < weapon.Count; i++)
                 {
-                    weapon[i].level = BlackSmith.instnace.weapon[i].level;
+                    if (BlackSmith.instnace.weapon[0].name == weapon[i].name)
+                        weapon[i].level = BlackSmith.instnace.weapon[0].level;
                 }
+
                 break;
         }
     }

@@ -70,6 +70,7 @@ public class DieWindow : MonoBehaviour
                 else
                     weaponLevel.transform.GetChild(i).GetChild(1).GetComponent<Text>().text = "Lv." + StopManager.instnace.weapon[i].level;
             }
+
             else
             {
                 switch (i)

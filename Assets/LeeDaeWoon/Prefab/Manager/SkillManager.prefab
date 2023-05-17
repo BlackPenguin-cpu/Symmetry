@@ -58,7 +58,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 20
+  m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &2597886528526293839
 MonoBehaviour:
@@ -134,8 +134,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -774, y: 28.58}
-  m_SizeDelta: {x: 74.7396, y: 50.823}
+  m_AnchoredPosition: {x: -771, y: 37}
+  m_SizeDelta: {x: 75, y: 51}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2597886528544711448
 CanvasRenderer:
@@ -209,7 +209,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -774, y: -68.4}
+  m_AnchoredPosition: {x: -771, y: -60}
   m_SizeDelta: {x: 84, y: 84}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2597886528712179117
@@ -262,7 +262,7 @@ GameObject:
   - component: {fileID: 2597886528838289821}
   - component: {fileID: 2597886528838289820}
   m_Layer: 5
-  m_Name: CoolTime_Text
+  m_Name: CoolTimeTextDown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -284,8 +284,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -774.1, y: -67.4}
-  m_SizeDelta: {x: 211.0842, y: 104.9678}
+  m_AnchoredPosition: {x: -771, y: -60}
+  m_SizeDelta: {x: 211, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2597886528838289821
 CanvasRenderer:
@@ -374,26 +374,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0bb23624ca9ad84eadf0343c668f397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Instantiate_SkillCheck: 0
-  A_Skill: {fileID: 2597886530315166328}
-  S_Skill: {fileID: 2597886529824191742}
-  A_Skill_CoolTime: 5
-  A_Current_CoolTime: 0
-  FillAmount_Skill_A: {fileID: 2597886529730338807}
-  A_Skill_Text: {fileID: 2597886528970582862}
-  A_Skill_Text_Object: {fileID: 2597886528970582856}
-  S_Skill_CoolTime: 5
-  S_Current_CoolTime: 0
-  FillAmount_Skill_S: {fileID: 2597886529378047893}
-  S_Skill_Text: {fileID: 2597886528838289820}
-  S_Skill_Text_Object: {fileID: 2597886528838289822}
-  AS_Limit: 1
+  isSummonSKill: 0
+  upSkill: {fileID: 2597886530315166328}
+  downSkill: {fileID: 2597886529824191742}
+  coolTimeAObj: {fileID: 2597886528970582856}
+  coolTimeAText: {fileID: 2597886528970582862}
+  fillAmountA: {fileID: 2597886529730338807}
+  coolTimeSObj: {fileID: 2597886528838289822}
+  coolTimeSText: {fileID: 2597886528838289820}
+  fillAmountS: {fileID: 2597886529378047893}
+  isPotalMove: 0
+  isASLimit: 0
   AS_Limit_02: 1
-  Limit: 1
-  Skill_PotalMove: 0
-  RandomTest: 0
   SkillSo: {fileID: 11400000, guid: 8d468ff0d005a91428acefcbdfc86778, type: 2}
-  SkillPrefab: {fileID: 2583938370413519097, guid: 548ccebbac879ad449874255e02c2f91, type: 3}
   Skill_Up:
   - {fileID: 11400000, guid: d0fefc4c4bfc7d84595508500426998e, type: 2}
   Skill_Down:
@@ -439,7 +432,7 @@ GameObject:
   - component: {fileID: 2597886528970582863}
   - component: {fileID: 2597886528970582862}
   m_Layer: 5
-  m_Name: CoolTime_Text
+  m_Name: CoolTimeTextUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -461,8 +454,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -774.1, y: 71.4}
-  m_SizeDelta: {x: 211.0842, y: 104.9678}
+  m_AnchoredPosition: {x: -771, y: 74}
+  m_SizeDelta: {x: 211, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2597886528970582863
 CanvasRenderer:
@@ -540,7 +533,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -774, y: 66}
+  m_AnchoredPosition: {x: -771, y: 74}
   m_SizeDelta: {x: 115, y: 115}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2597886529320859802
@@ -615,8 +608,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -774.05334, y: -68.1}
-  m_SizeDelta: {x: 84.1201, y: 84.4614}
+  m_AnchoredPosition: {x: -771, y: -60}
+  m_SizeDelta: {x: 84, y: 84}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2597886529378047898
 CanvasRenderer:
@@ -690,7 +683,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -774, y: -68}
+  m_AnchoredPosition: {x: -771, y: -60}
   m_SizeDelta: {x: 115, y: 115}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2597886529409270292
@@ -765,8 +758,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -774.05334, y: 66.0067}
-  m_SizeDelta: {x: 84.1201, y: 84.4614}
+  m_AnchoredPosition: {x: -771, y: 74}
+  m_SizeDelta: {x: 84, y: 84}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2597886529730338804
 CanvasRenderer:
@@ -879,8 +872,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -772.9, y: -112.6}
-  m_SizeDelta: {x: 74.7396, y: 50.823}
+  m_AnchoredPosition: {x: -771, y: -104}
+  m_SizeDelta: {x: 75, y: 51}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2597886529925357997
 CanvasRenderer:
@@ -954,7 +947,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -774, y: 66}
+  m_AnchoredPosition: {x: -771, y: 74}
   m_SizeDelta: {x: 84, y: 84}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2597886530023664986
@@ -1031,8 +1024,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -67, y: 9}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2597886530315166331
 GameObject:
